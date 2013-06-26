@@ -11,14 +11,23 @@
     });
 
 
-    var patient1 = new glasswing.models.patient({firstname : "Bob", lastname: "Kraut"});
+    var patient1 = new glasswing.models.patient({first : "Bob", last: "Kraut"});
 
-    var patient2 = new glasswing.models.patient({first : "Bob", last: "Kraut"});
+    var patient2 = new glasswing.models.patient({first : "Ben", last: "Margines"});
 
 
-    glasswing.collections.Patients = Backbone.Collection.extend({
+    glasswing.collections.patients = Backbone.Collection.extend({
       model: glasswing.models.patient
     });
+
+    var patients = new glasswing.collections.patients([]);
+    patients.bind('add', function(model){
+        console.log('you added a patient');
+        console.log(model.getName());
+    });
+
+    patients.add(patient1);
+    patients.add(patient2);
 
     // Backbone.emulateJSON = true;
 
