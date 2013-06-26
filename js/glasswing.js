@@ -1,0 +1,4 @@
+window.glasswing = {
+	views : {},
+	models : {}
+};
