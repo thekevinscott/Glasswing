@@ -1,4 +1,3 @@
-var should = chai.should();
 describe("Patient Model", function() {
 	describe("Initialization", function() {
 		it("should attach itself to glasswing model", function () {
