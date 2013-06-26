@@ -1,7 +1,13 @@
 (function($){
 	glasswing.models.procedure = Backbone.Model.extend({
-	  initialize : function() {
-	  	console.log("I am a procedure");
+	  defaults : {
+	    // content : '',
+	  },
+	  initialize : function(attributes) {
+	  	//console.log(attributes);
+	    // we must have a patient
+	    if (! attributes || ! attributes.patient) {throw "No patient specified!";}
+	    // this.patient = options.patient;
 	  }
 	});
 })(jQuery);

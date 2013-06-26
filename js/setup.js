@@ -7,6 +7,11 @@
       alert("There was an error.");
     });
 
+
+    var patient1 = new glasswing.models.patient({firstname : "Bob", lastname: "Kraut"});
+
+    var patient2 = new glasswing.models.patient({first : "Bob", last: "Kraut"});
+
     // Backbone.emulateJSON = true;
 
     // Initialize Backbone views.
