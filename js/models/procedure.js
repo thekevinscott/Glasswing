@@ -1,4 +1,5 @@
 (function($){
+
 	glasswing.models.procedure = Backbone.Model.extend({
 	  defaults : {
 	    // content : '',

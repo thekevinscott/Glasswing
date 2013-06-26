@@ -1,0 +1,18 @@
+{
+  "framework": "mocha",
+  "src_files": [
+    "js/lib/jquery.2.0.2.min.js",
+    "js/lib/underscore.min.js",
+    "js/lib/backbone.min.js",
+
+    "js/glasswing.js",
+    "js/models/*.js",
+    "js/views/*.js",
+
+    "js/lib/chai.js",
+    "js/lib/sinon-chai.js",
+    "js/lib/sinon-1.5.2.js",
+
+    "js/test/*.js"
+  ]
+}
