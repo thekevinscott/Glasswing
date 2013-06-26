@@ -9,7 +9,7 @@
 	  	// console.log("I am a patient");
 	  },
 	  getName : function() {
-	  	return this.get("first") + " " + this.get("last");
+	  	return (this.get("first") + " " + this.get("last")).trim();
 	  }
 	});
 })(jQuery);
