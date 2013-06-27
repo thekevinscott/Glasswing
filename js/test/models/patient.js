@@ -5,9 +5,18 @@ describe("Patient Model", function() {
 		})
   		it("should return the correct name", function () {
 
-  			(new glasswing.models.patient()).getName().should.equal('');
-  			(new glasswing.models.patient({first:"Bob"})).getName().should.equal('Bob');
-  			(new glasswing.models.patient({last:"Barker"})).getName().should.equal('Barker');
+  			(function () {
+  			  new glasswing.models.patient();
+  			}).should.throw("First name must be specified");
+
+  			(function () {
+  			  new glasswing.models.patient({last : "Barker"});
+  			}).should.throw("First name must be specified");
+
+  			(function () {
+  			  new glasswing.models.patient({first : "Bob"});
+  			}).should.throw("Last name must be specified");
+
   			(new glasswing.models.patient({first:"Bob",last:"Barker"})).getName().should.equal('Bob Barker');
 
 		})

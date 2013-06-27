@@ -6,6 +6,8 @@
 	    // content : '',
 	  },
 	  initialize : function() {
+	  	if (! this.get("first")) { throw("First name must be specified"); }
+	  	if (! this.get("last")) { throw("Last name must be specified"); }
 	  	// console.log("I am a patient");
 	  },
 	  getName : function() {
