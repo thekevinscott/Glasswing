@@ -6,9 +6,10 @@ define([
 
 	'models/patient',
 	'models/procedure',
-	'collections/patients'
+	'collections/patients',
+	'views/patient'
 
-], function($, _, Backbone, patient, procedure, patients){
+], function($, _, Backbone, patient, procedure, patients, patientView){
 	var initialize = function(){
 
 		Backbone.sync = function(method, model, success, error){success();}
@@ -18,6 +19,9 @@ define([
 
 		patientCollection.add(new patient({first : "Bob", last: "Kraut"}));
 		patientCollection.add(new patient({first : "Steve", last: "Buscemi"}));
+
+
+
 	} ;
 
 	return {
