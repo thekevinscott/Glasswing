@@ -15,7 +15,7 @@ define([
 		Backbone.sync = function(method, model, success, error){success();}
 
 		var patientCollection = new patients();
-
+		// var patient = new patient({first : "Bob", last: "Kraut"});
 
 		patientCollection.add(new patient({first : "Bob", last: "Kraut"}));
 		patientCollection.add(new patient({first : "Steve", last: "Buscemi"}));

@@ -24,7 +24,6 @@ require.config({
 
 require([
 	'less',
-
 	'glasswing'
 ], function(less, glasswing) {
 	glasswing.initialize();
