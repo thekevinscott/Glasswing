@@ -2,6 +2,8 @@
   "framework": "mocha",
   "src_files": [
 
+    "js/lib/require.min.js",
+
     "js/lib/jquery.2.0.2.min.js",
     "js/lib/underscore.min.js",
     "js/lib/backbone.min.js",
@@ -14,8 +16,7 @@
     "js/lib/sinon-chai.js",
     "js/lib/sinon-1.5.2.js",
 
-    "js/test/*.js",
-    "js/test/models/*.js",
-    "js/test/views/*.js"
-  ]
+    "js/test/*.js"
+  ],
+  "test_page" : "js/test/index.html"
 }
