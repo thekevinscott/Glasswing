@@ -1,4 +1,4 @@
-require(['models/patient'],function(patient){
+define(['models/patient'],function(patient){
 	describe("Patient Model", function() {
 		describe("Initialization", function() {
 

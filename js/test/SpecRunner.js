@@ -44,8 +44,12 @@ require(['chai','chaiJquery'], function(chai, chaiJquery){
   mocha.setup('bdd');
   // console.log('2');
   require([
+  	// how do we specify a whole directory
     'test/glasswing',
-  ], function(require) {
+    'test/models/patient',
+    'test/models/procedure'
+    // 'test/models/*',
+  ], function(require,patient,procedure) {
 
     mocha.run();
   });
