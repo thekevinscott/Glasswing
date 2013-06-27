@@ -28,35 +28,3 @@ require([
 ], function(less, glasswing) {
 	glasswing.initialize();
 });
-/*
-define([
-	'jquery',
-	'underscore',
-	'backbone',
-	'easing',
-	'glasswing',
-	'models/patient',
-	'models/procedure',
-
-
-
-], function($, _, Backbone, easing, glasswing, patientModel, procedureModel, setup){
-
-
-
-	return {};
-});
-
-
-    /*
-    <!-- Our models and views -->
-	<script src="js/models/patient.js"></script>
-	<script src="js/models/procedure.js"></script>
-	<script src="js/views/worklist.js"></script>
-
-
-
-	<!-- Our setup functions -->
-	<script src="js/setup.js"></script>
- -->
- */
