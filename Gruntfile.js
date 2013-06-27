@@ -30,12 +30,23 @@ module.exports = function(grunt) {
           "css/style.css": "less/style.less"
         }
       }
-    }
+    },
+    watch: {
+        scripts: {
+          files: ['less/*.less'],
+          tasks: ['less'],
+          options: {
+            nospawn: true,
+          },
+        },
+      },
   });
 
   // Load the plugin that provides the "uglify" task.
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-less');
+  grunt.loadNpmTasks('grunt-contrib-watch');
+
   // Default task(s).
 
   grunt.registerTask('default', ['uglify']);
