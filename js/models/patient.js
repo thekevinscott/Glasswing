@@ -1,5 +1,9 @@
-(function($){
-	glasswing.models.patient = Backbone.Model.extend({
+define([
+	'underscore',
+	'backbone'
+], function(_, Backbone) {
+
+	return Backbone.Model.extend({
 		defaults : {
 			first : "",
 			last : ""
@@ -10,6 +14,14 @@
 	  },
 	  getName : function() {
 	  	return (this.get("first") + " " + this.get("last")).trim();
+	  },
+	  getID : function() {
+	  	return this.get('patient_id');
+	  },
+	  setID : function(patient_id) {
+	  	if (! this.get('patient_id')) {
+	  		this.set('patient_id',patient_id);
+	  	}
 	  }
 	});
-})(jQuery);
+});

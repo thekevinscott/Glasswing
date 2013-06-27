@@ -1,6 +1,8 @@
-(function($){
-
-	glasswing.models.procedure = Backbone.Model.extend({
+require([
+	'underscore',
+	'backbone'
+], function(_, Backbone) {
+	return Backbone.Model.extend({
 	  defaults : {
 	    // content : '',
 	  },
@@ -11,4 +13,4 @@
 	    // this.patient = options.patient;
 	  }
 	});
-})(jQuery);
+});
