@@ -12,9 +12,7 @@ define([
 			this.page = options.page;
 		},
 		render : function() {
-			console.log("tab model");
-			console.log(this.page);
-			console.log(this.page.name);
+			console.log('render page');
 			this.$el.html(_.template(this.template, {
 				// name : this.model.get('name')
 				name : this.page.name,

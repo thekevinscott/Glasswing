@@ -1,24 +1,94 @@
 define([
-	'jquery',
+
 	'underscore',
 	'backbone',
+	'collections/tabs',
+	'models/worklist',
+	'models/patient',
+	'models/procedure',
+	'views/worklist',
 	// other views would go here
-], function($, _, Backbone){
+], function(_, Backbone, tabs, worklist, patient, procedure, worklistView){
+	var tabManager, worklistModel;
+
 
 	var AppRouter = Backbone.Router.extend({
-		routes : {
+		routes: {
+			"procedure/:procedure_id" : 'procedure',
+			"worklist" : 'worklist',
+			"*actions": "defaultRoute" // matches http://example.com/#anything-here
+			}
+	}); // Initiate the router
+	tabManager = new tabs();
 
-		}
-	});
-	var initialize  = function() {
-		var app_router = new AppRouter;
-		app_router.on('defaultAction', function(actions){
-			console.log('No route:', actions);
+	worklistModel = new worklist();
+	//var worklist_view = new worklistView();
+
+
+	// should set ID automatically
+	worklistModel.add(new procedure({
+		id : 1,
+		patient : new patient({first : "Bob", last: "Kraut"})}));
+	worklistModel.add(new procedure({
+		id : 2,
+		patient : new patient({first : "Bob", last: "Kraut2"}),
+		referring_physician : 'Thompson'
+	}));
+
+	// we will always have a worklist
+	// tabManager.getPage(worklistModel, function(worklist_view){
+	// 	tabManager.add(worklist_view).show(worklist_view);
+	// });
+
+	// tabManager.add(worklist_view);
+
+	//var app_router = new AppRouter;
+	var initialize = function() {
+		var app_router = new AppRouter();
+		app_router.on('route:defaultRoute', function(actions) {
+			console.log(actions);
+		});
+		app_router.on('route:worklist', function(actions) {
+
+			tabManager.getPage(worklistModel, function(worklist_view){
+				tabManager.add(worklist_view).show(worklist_view);
+			});
+
+
+
+
+
+			// 	// procedure is the canonical worklist
+
+			// });
+		});
+		app_router.on('route:procedure', function(procedure_id) {
+
+			console.log('procedure: ' + procedure_id);
+
+			(function(procedure){
+
+				console.log('procedure cid: ' + procedure['cid']);
+				// pass in procedure directly
+				tabManager.getPage(procedure, function(report){
+					tabManager.add(report).show(report);
+				});
+				//console.log(report);
+
+			})(worklistModel.getProcedure(procedure_id));
+
+
+
 		});
 		Backbone.history.start();
 
 	};
 	return {
 		initialize : initialize
-	};
+	}
+
+
+	// Start Backbone history a necessary step for bookmarkable URL's
+	Backbone.history.start();
+
 });
