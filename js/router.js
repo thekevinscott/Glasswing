@@ -3,12 +3,13 @@ define([
 	'underscore',
 	'backbone',
 	'collections/tabs',
+	'collections/patients',
 	'models/worklist',
 	'models/patient',
 	'models/procedure',
 	'views/worklist',
 	// other views would go here
-], function(_, Backbone, tabs, worklist, patient, procedure, worklistView){
+], function(_, Backbone, tabs, patients, worklist, patient, procedure, worklistView){
 	var tabManager, worklistModel;
 
 
@@ -30,11 +31,11 @@ define([
 		id : 1,
 		patient : new patient({first : "Bob", last: "Kraut"})}));
 	worklistModel.add(new procedure({
-		id : 2,
+
 		patient : new patient({first : "Bob", last: "Kraut2"}),
 		referring_physician : 'Thompson'
 	}));
-
+	tabManager.showPage(worklistModel);
 	// we will always have a worklist
 	// tabManager.getPage(worklistModel, function(worklist_view){
 	// 	tabManager.add(worklist_view).show(worklist_view);
@@ -50,9 +51,7 @@ define([
 		});
 		app_router.on('route:worklist', function(actions) {
 
-			tabManager.getPage(worklistModel, function(worklist_view){
-				tabManager.add(worklist_view).show(worklist_view);
-			});
+			tabManager.showPage(worklistModel);
 
 
 
@@ -68,12 +67,7 @@ define([
 
 			(function(procedure){
 
-				console.log('procedure cid: ' + procedure['cid']);
-				// pass in procedure directly
-				tabManager.getPage(procedure, function(report){
-					tabManager.add(report).show(report);
-				});
-				//console.log(report);
+				tabManager.showPage(procedure);
 
 			})(worklistModel.getProcedure(procedure_id));
 

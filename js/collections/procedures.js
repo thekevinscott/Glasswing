@@ -10,11 +10,13 @@ define([
 		className : 'procedure',
 
 		initialize : function() {
-			//_(this).bindAll('add');
+			// _(this).bindAll('add');
 		},
 
 		// add : function(model) {
 		// 	console.log('added this model');
+		// 	console.log(model);
+		// 	if (this.model.get('id'))
 
 
 		// 	// console.log('added procedure model. this should update the associated worklsit view');
