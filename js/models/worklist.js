@@ -1,7 +1,7 @@
 define([
 	'underscore',
 	'backbone',
-	'collections/procedures'
+	'collections/procedures',
 ], function(_, Backbone, procedures) {
 
 	return Backbone.Model.extend({
@@ -28,6 +28,16 @@ define([
 	  	},
 	  	getProcedures : function() {
 	  		return this.collection.models;
+	  	},
+	  	getProceduresByModality : function() {
+
+	  		var procedures = {};
+	  		$(this.getProcedures()).each(function(){
+	  			var procedure_name = this.get('procedure_name');
+	  			if (! procedures[procedure_name]) { procedures[procedure_name] = []; }
+	  			procedures[procedure_name].push(this);
+	  		});
+	  		return procedures;
 	  	}
 	});
 

@@ -23,9 +23,14 @@ define([
 
 
 		},
+		setOptions : function(options) {
+
+		},
 
 		render : function() {
-			this.$el.html(_.template(this.template, {}));
+			this.$el.html(_.template(this.template, {
+				name : this.model.get('name')
+			}));
 			return this;
 		}
 
