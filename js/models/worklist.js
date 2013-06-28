@@ -1,8 +1,8 @@
 define([
 	'underscore',
 	'backbone',
-	'models/page'
-], function(_, Backbone, page) {
+
+], function(_, Backbone) {
 
 	return Backbone.Model.extend({
 

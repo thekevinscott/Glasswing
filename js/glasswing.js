@@ -7,15 +7,20 @@ define([
 
 
 	'models/patient',
-	'models/procedure',
+
 
 	'collections/patients',
+	'collections/worklist',
 	'collections/tabs',
 
 	'views/patient',
+	'models/procedure',
+
+], function($, _, Backbone, worklistView, patient, patients, worklistCollection, tabs, patientView, procedure){
 
 
-], function($, _, Backbone, worklistView, patient, procedure, patients, tabs, patientView){
+	// so actually. we should have a 'worklist' collection. this is our canonical worklist.
+	// worklist has an associated view
 
 	var initialize = function(){
 
@@ -24,15 +29,20 @@ define([
 
 		var tabManager = new tabs();
 
+		//var patientCollection = new patients();
 
-		var worklist_view = new worklistView();
-
-
+		var worklist_view = new worklistView({collection : new worklistCollection()});
 
 		tabManager.add(worklist_view);
 
+		// procedure is the canonical worklist
+		worklist_view.collection.add(new procedure({patient : new patient({first : "Bob", last: "Kraut"})}));
+		worklist_view.collection.add(new procedure({
+			patient : new patient({first : "Bob", last: "Kraut2"}),
+			referring_physician : 'Thompson'
+		}));
 
-		var patientCollection = new patients();
+
 		// var patient = new patient({first : "Bob", last: "Kraut"});
 
 		// patientCollection.add(new patient({first : "Bob", last: "Kraut"}));

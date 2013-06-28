@@ -1,12 +1,12 @@
 define([
     'underscore',
     'backbone',
-    'models/page',
+
     'views/tabs'
-], function(_, Backbone, page, tabView) {
+], function(_, Backbone, tabView) {
 
     return Backbone.Collection.extend({
-        model: page,
+
 
         initialize : function() {
             _(this).bindAll('add');
@@ -14,7 +14,7 @@ define([
         },
         add : function(page) {
 
-            $('.tabs').append((new tabView({model : page.model })).render().$el);
+            $('.tabs').append((new tabView({page : page })).render().$el);
 
             $('#glasswing').append(page.render().$el);
         }
