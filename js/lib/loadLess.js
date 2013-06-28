@@ -10,7 +10,7 @@
 		var link = document.createElement(options.element);
 	    link.type = options.type;
 	    link.rel = options.rel;
-	    link.href = options.url;
+	    link.href = options.url + '?bust='+(new Date()).getTime();
 	    document.getElementsByTagName("head")[0].appendChild(link);
 	};
 

@@ -1,24 +1,23 @@
 define([
 	'underscore',
 	'backbone',
-	'models/worklist',
-	'lib/text!templates/worklist.html'
-], function(_, Backbone, worklist, template) {
+	'lib/text!templates/tab.html'
+], function(_, Backbone, template) {
 
 	return Backbone.View.extend({
-		tagName : 'div',
-		className : 'worklist',
-		model : new worklist(),
+		tagName : 'li',
+		className : 'tab',
 		template : template,
 		initialize : function() {
 
 			this.model.view = this;
 
-
 		},
 		render : function() {
+			console.log(this.model);
+			console.log(this.model.get('name'));
 			this.$el.html(_.template(this.template, {
-				name : "Name: "
+				name : this.model.get('name')
 			}));
 			return this;
 		}
