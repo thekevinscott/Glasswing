@@ -22,9 +22,43 @@ define([
 			"*actions": "defaultRoute" // matches http://example.com/#anything-here
 			}
 	}); // Initiate the router
-	tabManager = new tabs();
+	var app_router = new AppRouter();
+	app_router.on('route:defaultRoute', function(actions) {
+		// console.log('defaults: ' + actions);
+		// console.log(actions);
+	});
+	app_router.on('route:worklist', function(layout) {
+
+		// tabManager.showPage(worklistModel,{layout : layout});
+		tabManager.showPage(worklistModel);
+
+
+
+
+
+		// 	// procedure is the canonical worklist
+
+		// });
+	});
+	app_router.on('route:procedure', function(procedure_id) {
+
+		console.log('procedure: ' + procedure_id);
+
+		(function(procedure){
+
+			tabManager.showPage(procedure);
+
+		})(worklistModel.getProcedure(procedure_id));
+
+
+
+	});
+
+
+
 
 	worklistModel = new worklist();
+	tabManager = new tabs({router : app_router, worklist : worklistModel});
 	//var worklist_view = new worklistView();
 
 
@@ -50,44 +84,8 @@ define([
 	// tabManager.add(worklist_view);
 
 	//var app_router = new AppRouter;
-	var initialize = function() {
-		var app_router = new AppRouter();
-		app_router.on('route:defaultRoute', function(actions) {
-			// console.log('defaults: ' + actions);
-			// console.log(actions);
-		});
-		app_router.on('route:worklist', function(layout) {
 
-			// tabManager.showPage(worklistModel,{layout : layout});
-			tabManager.showPage(worklistModel);
-
-
-
-
-
-			// 	// procedure is the canonical worklist
-
-			// });
-		});
-		app_router.on('route:procedure', function(procedure_id) {
-
-			console.log('procedure: ' + procedure_id);
-
-			(function(procedure){
-
-				tabManager.showPage(procedure);
-
-			})(worklistModel.getProcedure(procedure_id));
-
-
-
-		});
-		Backbone.history.start();
-
-	};
-	return {
-		initialize : initialize
-	}
+	Backbone.history.start();
 
 
 

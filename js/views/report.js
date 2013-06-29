@@ -45,7 +45,7 @@ define([
 			}
 
 			this.tabManager.closeTab(this);
-			window.location.hash = 'worklist';
+
 
 
 			// how do I access tab manager in this scenario?

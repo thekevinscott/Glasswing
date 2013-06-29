@@ -4,13 +4,17 @@ define([
     'views/tabs'
 ], function(_, Backbone, tabView) {
     return Backbone.Collection.extend({
-        initialize : function() {
+        initialize : function(attributes) {
             _(this).bindAll('add');
             this.pages = {};
+            this.router = attributes.router;
+            this.worklist = attributes.worklist;
         },
         showPage : function(model, options) {
             var self = this;
             this.getPage(model, function(page){
+                self.router.navigate(page.view.url,{trigger : false});
+
                 if (self.selected_tab != null) { self.selected_tab.deselect(); }
                 // console.log('show page: ');
                 // console.log(page);
@@ -32,7 +36,9 @@ define([
             return tab;
         },
         closeTab : function(page) {
-            console.log(page);
+            this.showPage(this.worklist);
+            //this.router.navigate('worklist',{trigger : true});
+
             var cid = page.model['cid'];
             var self = this;
             page = this.pages[cid];

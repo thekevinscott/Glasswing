@@ -13,7 +13,7 @@ define([
 
 	var initialize = function(){
 
-		Router.initialize();
+		//Router.initialize();
 		Backbone.sync = function(method, model, success, error){success();}
 
 
