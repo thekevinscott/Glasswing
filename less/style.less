@@ -17,6 +17,7 @@ table {
 td {
 	border: 1px solid #999;
 }
+
 .page {
 	border-top: 1px solid #333;
 	padding-left: 20px;
@@ -35,3 +36,23 @@ input[type=button].selected, input[type=button]:hover {
 	background: #555;
 	border: 1px solid #888;
 }
+
+/* Start of "Micro clearfix" */
+
+.three-col { zoom: 1; }
+.three-col:before,
+.three-col:after { content: ""; display: table; }
+.three-col:after { clear: both; }
+
+.three-col .col {
+	width: 31%;
+	float: left;
+	margin-right: 3%;
+	zoom: 1;
+	display: inline;
+}
+.three-col .col:last-child {
+	margin-right: 0;
+
+}
+
