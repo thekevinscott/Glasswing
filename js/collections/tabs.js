@@ -13,15 +13,10 @@ define([
         showPage : function(model, options) {
             var self = this;
             this.getPage(model, function(page){
-                self.router.navigate(page.view.url,{trigger : false});
+                self.router.navigate(page.view.url,options);
 
                 if (self.selected_tab != null) { self.selected_tab.deselect(); }
-                // console.log('show page: ');
-                // console.log(page);
-                // console.log(page.view);
-                // console.log(page.view.setOptions);
-                // console.log(page);
-                // console.log(page.view);
+
                 page.view.setOptions(options);
                 $('.page').html(page.view.render().$el);
                 self.selected_tab = page.tab.select();
@@ -36,7 +31,7 @@ define([
             return tab;
         },
         closeTab : function(page) {
-            this.showPage(this.worklist);
+            this.showPage(this.worklist,{trigger : true});
             //this.router.navigate('worklist',{trigger : true});
 
             var cid = page.model['cid'];
@@ -52,6 +47,8 @@ define([
         },
         getPage : function(model,callback) {
             // console.log('get page');
+            if (! model) { throw("You must pass in a model!");}
+
             if (this.pages[model['cid']] !== undefined && this.pages[model['cid']] !== null) {
                 callback(this.pages[model['cid']]);
             } else if (this.pages[model['cid']]===undefined) {

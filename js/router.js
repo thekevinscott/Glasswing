@@ -3,15 +3,15 @@ define([
 	'underscore',
 	'backbone',
 	'collections/tabs',
-	'collections/patients',
-	'collections/procedures',
-	'models/worklist',
+	'config',
 	'models/patient',
 	'models/procedure',
 	'views/worklist',
 	// other views would go here
-], function(_, Backbone, tabs, patients, procedures, worklist, patient, procedure, worklistView){
-	var tabManager, worklistModel;
+], function(_, Backbone, tabs, config, patient, procedure, worklistView){
+	var tabManager, worklist;
+
+	worklist = config.worklist;
 
 
 	var AppRouter = Backbone.Router.extend({
@@ -26,11 +26,12 @@ define([
 	app_router.on('route:defaultRoute', function(actions) {
 		// console.log('defaults: ' + actions);
 		// console.log(actions);
+		tabManager.showPage(worklist);
 	});
 	app_router.on('route:worklist', function(layout) {
 
 		// tabManager.showPage(worklistModel,{layout : layout});
-		tabManager.showPage(worklistModel);
+		tabManager.showPage(worklist);
 
 
 
@@ -43,12 +44,16 @@ define([
 	app_router.on('route:procedure', function(procedure_id) {
 
 		console.log('procedure: ' + procedure_id);
+		tabManager.getPage(worklist, function(page){
+		    //self.router.navigate(page.view.url,options);
+		    page.view.setOptions(options);
+		});
 
 		(function(procedure){
 
 			tabManager.showPage(procedure);
 
-		})(worklistModel.getProcedure(procedure_id));
+		})(worklist.getProcedure(procedure_id));
 
 
 
@@ -57,25 +62,19 @@ define([
 
 
 
-	worklistModel = new worklist();
-	tabManager = new tabs({router : app_router, worklist : worklistModel});
+
+
+
+
+	tabManager = new tabs({router : app_router, worklist : worklist});
 	//var worklist_view = new worklistView();
 
 
-	// generate a collection of random patients
-	var patientsCollection = new patients();
-	var proceduresCollection = new procedures();
-
-	var number_of_random_procedures = 50;
-	for (var i=0;i<number_of_random_procedures;i++) {
-		worklistModel.add(proceduresCollection.getRandomProcedure(patientsCollection.generateRandomPatient()));
-
-	}
 	//worklistModel.addRandomProcedure();
 	// should set ID automatically
 
 
-	tabManager.showPage(worklistModel);
+
 	// we will always have a worklist
 	// tabManager.getPage(worklistModel, function(worklist_view){
 	// 	tabManager.add(worklist_view).show(worklist_view);

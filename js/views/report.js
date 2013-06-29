@@ -15,11 +15,6 @@ define([
 		initialize : function(attributes) {
 			this.tabManager = attributes.tabManager;
 
-			console.log('view init code');
-			console.log(attributes);
-			console.log(this.tabManager);
-
-
 
 			//this.procedure = attributes.procedure; // do I have to explicitly set this? I thought backbone takes care of that automagically.
 			if (! this.model) { throw("You must specify a procedure"); }
