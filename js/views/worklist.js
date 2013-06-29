@@ -17,12 +17,12 @@ define([
 		return $(this).each(function(){
 			$(this).addClass('selected');
 		});
-	}
+	};
 	$.fn.deselect = function(){
 		return $(this).each(function(){
 			$(this).removeClass('selected');
 		});
-	}
+	};
 	return Backbone.View.extend({
 		tagName : 'div',
 		className : 'worklist',
@@ -110,7 +110,9 @@ define([
 				}
 			}
 		},
-		initialize : function(options) {
+		initialize : function(attributes) {
+
+			this.tabManager = attributes.tabManager;
 			// console.log('init the worklist');
 
 			this.name = 'Worklist';
@@ -123,9 +125,11 @@ define([
 		},
 		openProcedure : function(event) {
 			var model = $(event.currentTarget).data('model');
+			this.tabManager.showPage(model);
 
-			window.location.hash = 'procedure/' + model.get('id');
-			console.log("is it maybe a bit clunk to change the url directly?");
+
+			//window.location.hash = 'procedure/' + model.get('id');
+			//console.log("is it maybe a bit clunk to change the url directly?");
 			//Router.navigate('procedure/' + model.get('id'), {trigger: true, replace: true});
 			// I think the above'd be better
 
