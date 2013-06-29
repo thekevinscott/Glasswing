@@ -50,7 +50,7 @@ define([
             if (! model) { throw("You must pass in a model!");}
 
             if (this.pages[model['cid']] !== undefined && this.pages[model['cid']] !== null) {
-                callback(this.pages[model['cid']]);
+                if (callback) { callback(this.pages[model['cid']]); }
             } else if (this.pages[model['cid']]===undefined) {
 
                 this.pages[model['cid']] = null;
@@ -63,7 +63,7 @@ define([
                     // console.log('going into callback');
                     // console.log(model['cid']);
                     // console.log(self.pages);
-                    callback(self.pages[model['cid']]);
+                    if (callback) { callback(self.pages[model['cid']]); }
                 });
             }
 

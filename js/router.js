@@ -44,10 +44,7 @@ define([
 	app_router.on('route:procedure', function(procedure_id) {
 
 		console.log('procedure: ' + procedure_id);
-		tabManager.getPage(worklist, function(page){
-		    //self.router.navigate(page.view.url,options);
-		    page.view.setOptions(options);
-		});
+		tabManager.getPage(worklist); // get page SETS the page, creates a tab. that's confusing.
 
 		(function(procedure){
 
