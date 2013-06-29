@@ -90,7 +90,5 @@ define([
 	}
 
 
-	// Start Backbone history a necessary step for bookmarkable URL's
-	Backbone.history.start();
 
 });
