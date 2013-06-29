@@ -13,6 +13,12 @@ define([
 		  "click .actions input[type=button]" : "saveProcedure"
 		},
 		initialize : function(attributes) {
+			this.tabManager = attributes.tabManager;
+
+			console.log('view init code');
+			console.log(attributes);
+			console.log(this.tabManager);
+
 
 
 			//this.procedure = attributes.procedure; // do I have to explicitly set this? I thought backbone takes care of that automagically.
@@ -38,7 +44,10 @@ define([
 				break;
 			}
 
+			this.tabManager.closeTab(this);
 			window.location.hash = 'worklist';
+
+
 			// how do I access tab manager in this scenario?
 		},
 		render : function() {
@@ -58,6 +67,7 @@ define([
 				referring_physician : this.model.get('referring_physician'),
 
 			}));
+			this.delegateEvents();
 			return this;
 		}
 

@@ -16,8 +16,8 @@ define([
                 // console.log(page);
                 // console.log(page.view);
                 // console.log(page.view.setOptions);
-                console.log(page);
-                console.log(page.view);
+                // console.log(page);
+                // console.log(page.view);
                 page.view.setOptions(options);
                 $('.page').html(page.view.render().$el);
                 self.selected_tab = page.tab.select();
@@ -28,7 +28,21 @@ define([
         addTab : function(page) {
             var tab = new tabView({page : page });
             $('.tabs').append(tab.render().$el);
+            tab.show();
             return tab;
+        },
+        closeTab : function(page) {
+            console.log(page);
+            var cid = page.model['cid'];
+            var self = this;
+            page = this.pages[cid];
+            page.tab.close(function(tab){
+                tab.remove();
+                page.view.remove();
+                delete self.pages[cid];
+            });
+
+
         },
         getPage : function(model,callback) {
             // console.log('get page');
@@ -39,7 +53,8 @@ define([
                 this.pages[model['cid']] = null;
                 var self = this;
                 require(['views/'+model.get('associated_page_view')],function(view){
-                    var viewObj = new view({model : model});
+
+                    var viewObj = new view({model : model, tabManager : self});
 
                     self.pages[model['cid']] = { view : viewObj, tab : self.addTab(viewObj) };
                     // console.log('going into callback');
