@@ -1,6 +1,48 @@
-<html><head><title>Glasswing Interactive Prototype</title><script data-styles="style,tabs,worklist,report" type="text/javascript" src="js/lib/loadLess.min.js"></script><script data-main="js/main.js" src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.1.5/require.min.js"></script></head><body>
-	<div id="glasswing">
+<html><head><title>Glasswing Prototype</title><script data-styles="style,guide,tabs,worklist,report" type="text/javascript" src="js/lib/loadLess.min.js"></script><script data-main="js/main.js" src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.1.5/require.min.js"></script></head><body>
+
+<div id="guide">
+	<div id="introduction">
+		<div class="content">
+			<img src="images/logo-transparent.png" height="100px" />
+			<h1>Glasswing's RIS</h1>
+			<p>Our team has spent 8 months focused on redesigning GE's RIS experience from the ground up. We spent four months collecting contextual data and researching radiologists' workflow. From these, we've culled the most salient insights and developed a prototype demonstrating our collected visions.</p>
+			<p>We've focused on providing five/six/seven high level concepts that demonstrate improved focus on efficiency and speeding up workflow. We've implemented numerous smaller improvements as well.</p>
+			<p>Our prototype is fully functional and you can explore our prototype as is, or you can choose to take an interactive walkthrough where we'll explain each feature and our thinking behind it.</p>
+			<div class="pane inset">
+				<h2>Explore</h2>
+				<p>The prototype we've developed is fully functional and explorable.</p>
+				<p><a class="button">Explore</a></p>
+			</div>
+			<div class="pane inset">
+				<h2>Interactive Walkthrough</h2>
+				<p>We've developed a step by step guide to each feature.</p>
+				<p><a class="button">Use Interactive Walkthrough</a></p>
+			</div>
+		</div>
+	</div>
+	<div class="content">
+		<h1>Welcome to Glasswing</h1>
+		<div class="pane raised">
+			<h2>Tabs</h2>
+			<p>Our research indicated the desire to switch between cases. Radiologists need to handle interruptions more effectively and often need to switch contexts.</p>
+		</div>
+	</div>
+	<div id="glasswing" style="border-left: 1px solid #333">
 		<div class="tabs"></div>
 		<div class="page"></div>
 	</div>
+
+</div>
+
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+<script type="text/javascript">
+	setTimeout(function(){
+		//jQuery('#guide').hide().css({width: 0}).show().animate({width: '400'});
+		//jQuery('#glasswing').animate({marginLeft: '441'});
+	},400);
+
+</script>
+<link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+
 </body></html>

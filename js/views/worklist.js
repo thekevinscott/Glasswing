@@ -36,9 +36,9 @@ define([
 		current_layout : null,
 		buttons : {},
 		selected_button : null,
-		changeLayout : function(event) {
+		// changeLayout : function(event) {
 
-		},
+		// },
 		collectCategoriesBy : function(category) {
 			var cards = $('.cards .card');
 
@@ -85,10 +85,10 @@ define([
 					this.template = template_cards;
 					this.template_procedure = template_procedure_cards;
 					this.target_selector = '.cards';
-					var self = this;
-					setTimeout(function(){
-						self.collectCategoriesBy('modality');
-					},1000);
+					// var self = this;
+					// setTimeout(function(){
+					// 	self.collectCategoriesBy('modality');
+					// },1000);
 				break;
 				default :
 					this.template = template_table;
@@ -155,7 +155,6 @@ define([
 
 			}));
 			procedure_el.data('model',procedure);
-			procedure.view = procedure_el;
 			target.append(procedure_el);
 
 
@@ -163,11 +162,13 @@ define([
 
 		render : function() {
 			var self = this;
-			this.$el.html(_.template(this.template, {}));
-			this.$target = this.$el.find(this.target_selector);
 
-			var self = this;
-			_.each(this.model.getProcedures(),function(procedure, index){
+
+			self.$el.html(_.template(self.template, {}));
+			self.$target = this.$el.find(self.target_selector);
+
+
+			_.each(self.model.getProcedures(),function(procedure, index){
 
 				self.drawProcedure(procedure,self.$target);
 			});

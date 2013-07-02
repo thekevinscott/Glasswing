@@ -2,6 +2,7 @@ define([
     'underscore',
     'backbone',
     'views/tabs'
+
 ], function(_, Backbone, tabView) {
     return Backbone.Collection.extend({
         initialize : function(attributes) {

@@ -17,11 +17,6 @@ define([
 
         	view.prototype.initialize.apply(this, arguments);
 
-			//this.tabManager = attributes.tabManager;
-
-
-
-			//if (! this.model) { throw("You must specify a procedure"); }
 
 			this.name = this.model.get('name');
 

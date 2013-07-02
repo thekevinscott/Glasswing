@@ -18,28 +18,16 @@ define([
 		routes: {
 			"procedure/:procedure_id" : 'procedure',
 			"worklist" : 'worklist',
-			"worklist/:layout" : 'worklist',
-			"*actions": "defaultRoute" // matches http://example.com/#anything-here
+			// "worklist/:layout" : 'worklist',
+			"*actions": "worklist" // matches http://example.com/#anything-here
 			}
 	}); // Initiate the router
 	var app_router = new AppRouter();
 	app_router.on('route:defaultRoute', function(actions) {
-		// console.log('defaults: ' + actions);
-		// console.log(actions);
 		tabManager.showPage(worklist);
 	});
 	app_router.on('route:worklist', function(layout) {
-
-		// tabManager.showPage(worklistModel,{layout : layout});
 		tabManager.showPage(worklist);
-
-
-
-
-
-		// 	// procedure is the canonical worklist
-
-		// });
 	});
 	app_router.on('route:procedure', function(procedure_id) {
 
@@ -57,29 +45,7 @@ define([
 	});
 
 
-
-
-
-
-
-
 	tabManager = new tabs({router : app_router, worklist : worklist});
-	//var worklist_view = new worklistView();
-
-
-	//worklistModel.addRandomProcedure();
-	// should set ID automatically
-
-
-
-	// we will always have a worklist
-	// tabManager.getPage(worklistModel, function(worklist_view){
-	// 	tabManager.add(worklist_view).show(worklist_view);
-	// });
-
-	// tabManager.add(worklist_view);
-
-	//var app_router = new AppRouter;
 
 	Backbone.history.start();
 
