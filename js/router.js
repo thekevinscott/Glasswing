@@ -2,23 +2,6 @@ define([
 	'plugins',
 	'underscore',
 	'backbone',
-
-	'views/guide/guide', /*
-	'collections/tabs',
-	'config',
-	'models/patient',
-	'models/procedure',
-	'views/worklist',*/
-	// other views would go here
-], function(plugins, _, Backbone, guideView /*, guideView, tabs, config, patient, procedure, worklistView */){
-
-});
-
-/*
-define([
-	'plugins',
-	'underscore',
-	'backbone',
 	'views/guide/guide',
 	'collections/tabs',
 	'config',
@@ -130,4 +113,3 @@ define([
 
 
 });
-*/

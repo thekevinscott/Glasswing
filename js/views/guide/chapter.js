@@ -1,3 +1,4 @@
+
 define([
 	'underscore',
 	'backbone',
@@ -5,10 +6,13 @@ define([
 	'easing',
 	'audiojs',
 	'markdown',
-	'js/models/guide/chapter.js',
+
 	'js/views/guide/section.js',
+
+	'js/models/guide/chapter.js',
+
 	'lib/text!templates/guide/chapter.html',
-], function(_, Backbone, $, easing, audiojs, markdown, chapterModel, sectionView, template) {
+], function(_, Backbone, $, easing, audiojs, markdown , sectionView, chapterModel, template) {
 
 
 	// $.fn.open = function() {

@@ -1,4 +1,4 @@
-define(['views/guide/chapter'],function(chapterView){
+define(['./views/guide/chapter'],function(chapterView){
 
 
 	// describe("Chapter View Init", function() {

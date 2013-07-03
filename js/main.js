@@ -1,5 +1,6 @@
 require.config({
 	urlArgs: "bust=" + (new Date()).getTime(), // clear this from production
+	baseUrl : "js/",
 	paths: {
 		jquery: 'lib/jquery.2.0.2.min',
 		underscore: 'lib/underscore.min',
@@ -18,6 +19,16 @@ require.config({
 		mocha : 'lib/mocha',
 		chai : 'lib/chai',
 		chaiJquery : 'lib/chai-jquery',
+
+
+		// models : 'models/',
+		// views : 'views/',
+		// collections : 'collections/',
+
+		// sidebar : 'views/guide/sidebar',
+		// chapter : 'views/guide/chapter',
+		// section : 'views/guide/section',
+
 	},
 	shim: {
 	    'backbone': {
@@ -47,7 +58,16 @@ require.config({
         },
         'plugins' : {
         	exports : 'plugins'
-        }
+        },
+        // 'sidebar' : {
+        // 	exports 'sidebar'
+        // },
+        // 'chapter' : {
+        // 	exports 'chapter'
+        // },
+        // 'section' : {
+        // 	exports 'section'
+        // }
 	}
 });
 

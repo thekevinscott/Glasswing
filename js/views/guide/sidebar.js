@@ -6,16 +6,15 @@ define([
 	'audiojs',
 	'markdown',
 
-	// 'collections/guide/chapters',
-	'views/guide/chapter',
-	// 'lib/text!templates/guide/chapter.html',
+	'views/guide/chapter'
 ], function(_, Backbone, $, easing, audiojs, markdown, chapterView) {
+	console.log(chapterView);
 	return Backbone.View.extend({
 		bookmark : [],
 
 		initialize : function(attributes) {
 			// parse our chapters
-
+			console.log(attributes);
 
 			this.parent = attributes.parent;
 			this.chapters = attributes.chapters;
@@ -33,7 +32,10 @@ define([
 
 			// set the chapter id
 			for (var key in this.chapters) {
-				this.chapters[key].view = new chapterView({
+				console.log(key);
+				console.log(self.chapters);
+				console.log(self.chapters[key]);
+				self.chapters[key].view = new chapterView({
 					parent : this,
 					data : $.extend({key : key},this.chapters[key]),
 				});
