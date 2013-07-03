@@ -1,22 +1,13 @@
-define([
-	'plugins',
-	'underscore',
-	'backbone',
-	'views/guide/guide',
-	'collections/tabs',
-	'config',
-	'models/patient',
-	'models/procedure',
-	'views/worklist',
-	// other views would go here
-], function(plugins, _, Backbone, guideView, tabs, config, patient, procedure, worklistView){
 
+glasswing.router = function() {
+
+	Backbone.sync = function(method, model, success, error){success();}
 	var tabManager, worklist, guide;
 
 
 
 
-	worklist = config.worklist;
+	worklist = glasswing.config.worklist;
 
 
 	var AppRouter = Backbone.Router.extend({
@@ -55,7 +46,7 @@ define([
 		this.guide = obj;
 	}
 	app_router.initial_route = true;
-	guide = new guideView({router: app_router, chapters : config.chapters});
+	guide = new glasswing.views.guide.guide({router: app_router, chapters : glasswing.config.chapters});
 
 
 	app_router.on('route:titlePage', function() {
@@ -106,10 +97,13 @@ define([
 
 
 	// console.log('ready!');
-	tabManager = new tabs({router : app_router, worklist : worklist});
+	console.log('switch tabs collection to be contained by view');
+	tabManager = new glasswing.collections.tabs({router : app_router, worklist : worklist});
 
 	Backbone.history.start();
 
 
 
-});
+};
+
+//});

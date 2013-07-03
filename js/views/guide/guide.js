@@ -1,19 +1,15 @@
-define([
-	'underscore',
-	'backbone',
-	'easing',
-	'views/guide/sidebar',
-	'lib/text!templates/guide/titlePage.html',
-], function(_, Backbone, easing, sidebarView, template) {
-	// var active = true;
-	return Backbone.View.extend({
+//'lib/text!templates/guide/titlePage.html',
+
+(function($){
+	glasswing.views.guide.guide = glasswing.views.abstract.extend({
 		el : '#guide',
 		tagName : 'div',
 		animation : {
 			page : 1000
 		},
 		// model : new worklist(),
-		template : template,
+		// template : 'guide/titlePage.html',
+		template : $('#guide-titlePage').html(),
 		events : {
 		  "click #titlePage .button" : "click"
 		},
@@ -21,6 +17,7 @@ define([
 		current_view : null,
 
 		initialize : function(attributes) {
+			glasswing.views.abstract.prototype.initialize.apply(this, arguments);
 
 			// you scratch my back, I scratch yours
 			this.router = attributes.router;
@@ -31,18 +28,20 @@ define([
 			this.render();
 
 
+
 		},
 		render : function() {
 
 			this.$el.append($(_.template(this.template, {})));
 
 
-			this.sidebar = new sidebarView({
+			this.sidebar = new glasswing.views.guide.sidebar({
 				el : this.$el.find('#sidebar'),
 				parent : this,
 				chapters : this.attributes.chapters,
 				arguments : arguments
 			});
+
 
 			this.$titlePage = this.$el.find('#titlePage');
 			this.$glasswing = $('#glasswing');
@@ -63,7 +62,7 @@ define([
 		// this is the action corresponding to the title page.
 		// handles the positioning, and if not the initial view, the animation
 		titlePage : function() {
-
+			console.log(this.$titlePage);
 			// var self = this;
 
 			if (! this.router.initial_route) {
@@ -147,4 +146,5 @@ define([
 		}
 
 	});
-});
+
+})(jQuery);

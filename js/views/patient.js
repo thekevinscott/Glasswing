@@ -1,26 +1,26 @@
-define([
-	'underscore',
-	'backbone',
-	'models/patient',
-	'lib/text!templates/patient.html'
-], function(_, Backbone, patient, template) {
-
-	return Backbone.View.extend({
+//'lib/text!templates/patient.html'
+(function($){
+	glasswing.views.patient = glasswing.views.abstract.extend({
 		tagName : 'div',
 
-		template : template,
+		// template_html : 'patient.html',
+		template : $('#patient').html(),
 		initialize : function() {
+			glasswing.views.abstract.prototype.initialize.apply(this, arguments);
+			if (this.model) {
+				this.model.view = this;
+				this.$el.html(_.template(this.template, {
+					name : "Name: " + this.model.getName(),
 
-			this.model.view = this;
-			this.$el.html(_.template(this.template, {
-				name : "Name: " + this.model.getName(),
+				}));
+			}
 
-			}));
+
 		},
 		render : function() {
 			return this;
 		}
 
 	});
-});
 
+})(jQuery);

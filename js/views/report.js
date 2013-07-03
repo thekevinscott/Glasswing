@@ -1,21 +1,18 @@
-define([
-	'underscore',
-	'backbone',
-	'views/abstract',
-	'lib/text!templates/report/index.html',
-], function(_, Backbone, view, template) {
-
-	return view.extend({
+//'lib/text!templates/report/index.html',
+(function($){
+	glasswing.views.report = glasswing.views.abstract.extend({
 		tagName : 'div',
 		className : 'report',
 		// model : new worklist(),
-		template : template,
+
+		// template_html : 'report/index.html',
+		template : $('#report').html(),
 		events : {
 		  "click .actions input[type=button]" : "saveProcedure"
 		},
 		initialize : function(attributes) {
 
-        	view.prototype.initialize.apply(this, arguments);
+        	glasswing.views.abstract.prototype.initialize.apply(this, arguments);
 
 
 			this.name = this.model.get('name');
@@ -67,4 +64,5 @@ define([
 		}
 
 	});
-});
+
+})(jQuery);

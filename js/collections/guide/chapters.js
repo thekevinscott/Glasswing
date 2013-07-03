@@ -1,18 +1,11 @@
-define([
-	'underscore',
-	'backbone',
-	'models/guide/chapter',
-], function(_, Backbone, chapterModel) {
+glasswing.collections.guide.chapters = Backbone.Collection.extend({
+	model: glasswing.models.guide.chapter,
+	initialize : function(config) {
+		console.log(config);
+		_(this).bindAll('add');
 
-	return Backbone.Collection.extend({
-		model: chapterModel,
-		initialize : function(config) {
-			console.log(config);
-			_(this).bindAll('add');
+	},
+	add : function(model) {
 
-		},
-		add : function(model) {
-
-		},
-	});
+	},
 });

@@ -1,15 +1,10 @@
-define([
-	'underscore',
-	'backbone',
-
-], function(_, Backbone) {
-
-	return Backbone.View.extend({
+(function($){
+	glasswing.views.tabs = glasswing.views.abstract.extend({
 		tagName : 'li',
 		className : 'tab',
 
 		initialize : function(options) {
-
+			glasswing.views.abstract.prototype.initialize.apply(this, arguments);
 
 			this.page = options.page;
 			this.model = this.page.model;
@@ -68,4 +63,5 @@ define([
 		}
 
 	});
-});
+
+})(jQuery);

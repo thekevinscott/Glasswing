@@ -1,18 +1,9 @@
-define([
-	'underscore',
-	'backbone',
-	'jquery',
-	'easing',
-	'audiojs',
-	'markdown',
-
-	'views/guide/chapter'
-], function(_, Backbone, $, easing, audiojs, markdown, chapterView) {
-	console.log(chapterView);
-	return Backbone.View.extend({
+(function($){
+	glasswing.views.guide.sidebar = glasswing.views.abstract.extend({
 		bookmark : [],
 
 		initialize : function(attributes) {
+			glasswing.views.abstract.prototype.initialize.apply(this, arguments);
 			// parse our chapters
 			console.log(attributes);
 
@@ -35,7 +26,7 @@ define([
 				console.log(key);
 				console.log(self.chapters);
 				console.log(self.chapters[key]);
-				self.chapters[key].view = new chapterView({
+				self.chapters[key].view = new glasswing.views.guide.chapter({
 					parent : this,
 					data : $.extend({key : key},this.chapters[key]),
 				});
@@ -171,4 +162,5 @@ define([
 		}
 
 	});
-});
+
+})(jQuery);

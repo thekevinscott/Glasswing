@@ -1,17 +1,11 @@
-define([
-	'underscore',
-	'backbone',
-	'jquery',
-	'models/worklist',
-
-	'models/patient',
-	'models/procedure',
-	'lib/text!templates/worklist/table.html',
+/*
+'lib/text!templates/worklist/table.html',
 
 	'lib/text!templates/worklist/cards.html',
 	'lib/text!templates/worklist/row.html',
 	'lib/text!templates/worklist/card.html',
-], function(_, Backbone, $, worklist, patient, procedure, template_table, template_cards, template_procedure_table, template_procedure_cards) {
+	*/
+(function($){
 
 	$.fn.select = function(){
 		return $(this).each(function(){
@@ -23,7 +17,7 @@ define([
 			$(this).removeClass('selected');
 		});
 	};
-	return Backbone.View.extend({
+	glasswing.views.worklist = glasswing.views.abstract.extend({
 		tagName : 'div',
 		className : 'worklist',
 		// model : new worklist(),
@@ -39,6 +33,26 @@ define([
 		// changeLayout : function(event) {
 
 		// },
+
+		initialize : function(attributes) {
+
+
+			glasswing.views.abstract.prototype.initialize.apply(this, arguments);
+
+			this.collection = new glasswing.collections.procedures({view : this});
+
+			// this.tabManager = attributes.tabManager;
+			// console.log('init the worklist');
+
+			this.name = 'Worklist';
+			this.url = 'worklist';
+
+			// this.model = new glasswing.models.worklist({view : this});
+			// this.model.view = this;
+
+			this.setLayout(this.current_layout || 'grid');
+
+		},
 		collectCategoriesBy : function(category) {
 			var cards = $('.cards .card');
 
@@ -82,8 +96,8 @@ define([
 			switch(this.current_layout) {
 
 				case 'card' :
-					this.template = template_cards;
-					this.template_procedure = template_procedure_cards;
+					this.template = $('#worklist-cards').html();
+					this.template_procedure = $('#worklist-card').html();
 					this.target_selector = '.cards';
 					// var self = this;
 					// setTimeout(function(){
@@ -91,8 +105,8 @@ define([
 					// },1000);
 				break;
 				default :
-					this.template = template_table;
-					this.template_procedure = template_procedure_table;
+					this.template = $('#worklist-table').html();
+					this.template_procedure = $('#worklist-row').html();
 					this.target_selector = 'table tbody';
 				break;
 			}
@@ -110,19 +124,6 @@ define([
 				}
 			}
 		},
-		initialize : function(attributes) {
-
-			this.tabManager = attributes.tabManager;
-			// console.log('init the worklist');
-
-			this.name = 'Worklist';
-			this.url = 'worklist';
-
-			this.model.view = this;
-
-			this.setLayout(this.current_layout || 'grid');
-
-		},
 		openProcedure : function(event) {
 			var model = $(event.currentTarget).data('model');
 			this.tabManager.showPage(model);
@@ -131,31 +132,7 @@ define([
 
 
 		},
-		drawProcedure : function(procedure,target) {
 
-			var procedure_el = $(_.template(this.template_procedure, {
-				id : procedure.get('id'),
-				scanned_documents : procedure.get('scanned_documents'),
-				dob : procedure.get('patient').get('dob'),
-				first : procedure.get('patient').get('first'),
-				last : procedure.get('patient').get('last'),
-				gender : procedure.get('patient').get('gender'),
-				patient_id : procedure.get('patient').get('id'),
-				patient_risks : procedure.get('patient').get('risks'),
-				procedure_name : procedure.get('procedure_name'),
-				priority : procedure.get('priority'),
-				procedure_class : procedure.get('procedure_class'),
-				report_status : procedure.get('report_status'),
-				procedure_status : procedure.get('procedure_status'),
-				referring_physician : procedure.get('referring_physician'),
-				hospital_name : procedure.get('hospital_name'),
-
-			}));
-			procedure_el.data('model',procedure);
-			target.append(procedure_el);
-
-
-		},
 
 		render : function() {
 			var self = this;
@@ -164,10 +141,38 @@ define([
 			self.$el.html(_.template(self.template, {}));
 			self.$target = this.$el.find(self.target_selector);
 
+			console.log('collection:');
+			console.log(self.collection);
+			console.log(self.collection.getProcedures());
 
-			_.each(self.model.getProcedures(),function(procedure, index){
+			_.each(self.collection.getProcedures(),function(procedure, index){
+				console.log(procedure);
+				console.log(procedure.attributes);
+				console.log(procedure.get('cid'));
+				console.log(procedure.get('procedure_name'));
+				console.log(procedure.get('patient'));
+				var procedure_el = $(_.template(self.template_procedure, {
+					id : procedure.get('id'),
+					scanned_documents : procedure.get('scanned_documents'),
+					dob : procedure.get('patient').get('dob'),
+					first : procedure.get('patient').get('first'),
+					last : procedure.get('patient').get('last'),
+					gender : procedure.get('patient').get('gender'),
+					patient_id : procedure.get('patient').get('id'),
+					patient_risks : procedure.get('patient').get('risks'),
+					procedure_name : procedure.get('procedure_name'),
+					priority : procedure.get('priority'),
+					procedure_class : procedure.get('procedure_class'),
+					report_status : procedure.get('report_status'),
+					procedure_status : procedure.get('procedure_status'),
+					referring_physician : procedure.get('referring_physician'),
+					hospital_name : procedure.get('hospital_name'),
 
-				self.drawProcedure(procedure,self.$target);
+				}));
+				procedure_el.data('model',procedure);
+				self.$target.append(procedure_el);
+
+
 			});
 			this.delegateEvents();
 
@@ -177,8 +182,10 @@ define([
 				self.buttons[$(this).val().toLowerCase()] = $(this);
 			});
 
+
 			return this;
 		}
 
 	});
-});
+
+})(jQuery);

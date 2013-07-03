@@ -1,34 +1,4 @@
-
-define([
-	'underscore',
-	'backbone',
-	'jquery',
-	'easing',
-	'audiojs',
-	'markdown',
-
-	'js/views/guide/section.js',
-
-	'js/models/guide/chapter.js',
-
-	'lib/text!templates/guide/chapter.html',
-], function(_, Backbone, $, easing, audiojs, markdown , sectionView, chapterModel, template) {
-
-
-	// $.fn.open = function() {
-	// 	return $(this).each(function(){
-	// 		$('.pane.active').close();
-	// 		$(this).addClass('active');
-	// 		$(this).find('p').slideDown();
-	// 	});
-	// };
-	// $.fn.close = function() {
-	// 	return $(this).each(function(){
-
-	// 		$(this).removeClass('active');
-	// 		$(this).find('p').slideUp();
-	// 	});
-	// }
+(function($){
 	$.fn.audio = function(events){
 		return $(this).each(function(){
 			var audio = $(this)[0];
@@ -76,22 +46,24 @@ define([
 
 		});
 	}
-	return Backbone.View.extend({
+	glasswing.views.guide.chapter = glasswing.views.abstract.extend({
 
 
 		// model : new worklist(),
-		template : template,
+		// template_html : 'guide/chapter.html',
+		template : $('#guide-chapter').html(),
 		events : {
 		  "click #introduction .button" : "click"
 		},
 		bookmark : null,
 
 		initialize : function(options) {
+			glasswing.views.abstract.prototype.initialize.apply(this, arguments);
 
 			this.parent = options.parent;
 
 
-			this.model = new chapterModel(options.data);
+			this.model = new glasswing.models.guide.chapter(options.data);
 			this.panes = {};
 			this.render();
 		},
@@ -100,7 +72,7 @@ define([
 			var self = this;
 			//var chapter = new chapterView(this.chapters[key]);
 
-			self.$el.html(_.template(template,this.model));
+			self.$el.html(_.template(this.template,this.model));
 
 
 
@@ -111,7 +83,7 @@ define([
 
 			//console.log(self.model.panes.each);
 			_.each(self.model.panes,function(section){
-				section.view = new sectionView(section,self);
+				section.view = new glasswing.views.guide.section(section,self);
 
 
 				self.$sections.append(section.view.$el);
@@ -149,4 +121,5 @@ define([
 		}
 
 	});
-});
+
+})(jQuery);

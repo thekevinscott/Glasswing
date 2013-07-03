@@ -1,14 +1,9 @@
-define([
-	'underscore',
-	'backbone',
-	'jquery',
+//'lib/text!templates/guide/section.html',
+(function($){
+	glasswing.views.guide.section = glasswing.views.abstract.extend({
 
-	'easing',
-	'lib/text!templates/guide/section.html',
-], function(_, Backbone, $, easing, template) {
-	return Backbone.View.extend({
-
-		template : template,
+		// template_html : 'guide/section.html',
+		template : $('#guide-section').html(),
 		// model : new worklist(),
 
 		events : {
@@ -16,6 +11,7 @@ define([
 		},
 
 		initialize : function(data, parent) {
+			glasswing.views.abstract.prototype.initialize.apply(this, arguments);
 			this.$el.addClass('pane').addClass('inactive').addClass('raised');
 
 			this.data = data;
@@ -57,4 +53,5 @@ define([
 		}
 
 	});
-});
+
+})(jQuery);
