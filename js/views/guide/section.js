@@ -3,7 +3,8 @@
 	glasswing.views.guide.section = glasswing.views.abstract.extend({
 
 		// template_html : 'guide/section.html',
-		template : $('#guide-section').html(),
+
+		template : glasswing.template('guide/section.html'),
 		// model : new worklist(),
 
 		events : {

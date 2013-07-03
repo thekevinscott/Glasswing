@@ -9,7 +9,9 @@
 		},
 		// model : new worklist(),
 		// template : 'guide/titlePage.html',
-		template : $('#guide-titlePage').html(),
+		// template : $('#guide-titlePage').html(),
+		template : glasswing.template('guide/titlePage.html'),
+
 		events : {
 		  "click #titlePage .button" : "click"
 		},
@@ -31,8 +33,8 @@
 
 		},
 		render : function() {
-
 			this.$el.append($(_.template(this.template, {})));
+
 
 
 			this.sidebar = new glasswing.views.guide.sidebar({
@@ -62,8 +64,8 @@
 		// this is the action corresponding to the title page.
 		// handles the positioning, and if not the initial view, the animation
 		titlePage : function() {
-			console.log(this.$titlePage);
-			// var self = this;
+
+
 
 			if (! this.router.initial_route) {
 				// use a map function here
@@ -82,8 +84,6 @@
 		// this is the action corresponding to the rest of the app. i.e., not the title page.
 		// handles the positioning, and if not the initial view, the animation
 		begin : function(arguments) {
-			// console.log('begin!');
-			// console.log(this.sidebar.$el.data('width'));
 			if (! this.router.initial_route) {
 
 				this.$titlePage.animate({left: '-100%'},this.animation.page,'easeInOutQuad');

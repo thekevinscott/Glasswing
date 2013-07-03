@@ -3,8 +3,9 @@ glasswing.collections.procedures = Backbone.Collection.extend({
 	className : 'procedure',
 
 	initialize : function(attributes) {
+		console.log('*** we initialize our collection');
 		// this.view = attributes.view;
-		// _(this).bindAll('add');
+		_(this).bindAll('add');
 	},
 
 	ingredients : {
@@ -12,10 +13,21 @@ glasswing.collections.procedures = Backbone.Collection.extend({
 		last : ['Strosahen','Chen','Baldwin','Scott','Margines','Lew','Assaf','Chan','Aweida','Bossier','Kumar','Xao','Rogers','Block','Gebhardt','Mandel','Ticer','Butler'],
 		hospital : ['Mercy','Northwestern','Good Heart','Great Lake','Advocate','Shepherd','Good Shepherd','Murphy']
 	},
+	add : function(procedureModel) {
+
+		Backbone.Collection.prototype.add.call(this, procedureModel);
+		if (! procedureModel.get('id')) { procedureModel.set('id',this.models.length); }
+		procedureModel.view.render(true);
+		if (this.view.$target) {
+			// optionally, if our parent table is available, render to it
+			this.view.$target.append(procedureModel.view.render().$el);
+		}
+	},
 	getProcedure : function(procedure_id) {
 		return this.get(procedure_id);
 	},
 	getProcedures : function() {
+		// console.log('get procedure!');
 		return this.models;
 	},
 	getProceduresByModality : function() {
@@ -47,15 +59,4 @@ glasswing.collections.procedures = Backbone.Collection.extend({
 		return this.ingredients[key][Math.round(Math.random()* (this.ingredients[key].length-1) )];
 	}
 
-	// add : function(model) {
-	// 	console.log('added this model');
-	// 	console.log(model);
-	// 	if (this.model.get('id'))
-
-
-	// 	// console.log('added procedure model. this should update the associated worklsit view');
-	// 	// console.log(this.view);
-	// 	//this.view.addProcedure(model);
-
-	// }
 });

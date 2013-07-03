@@ -6,7 +6,8 @@
 		// model : new worklist(),
 
 		// template_html : 'report/index.html',
-		template : $('#report').html(),
+
+		template : glasswing.template('report/index.html'),
 		events : {
 		  "click .actions input[type=button]" : "saveProcedure"
 		},

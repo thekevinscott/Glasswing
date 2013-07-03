@@ -1,18 +1,23 @@
 //'lib/text!templates/guide/chapter1.md',
 (function($){
+
 	var number_of_random_procedures, worklist, patientsCollection, proceduresCollection;
 	number_of_random_procedures = 50;
 
-	worklist = new glasswing.views.worklist();
 
+	worklist = new glasswing.views.worklist();
 	// generate a collection of random patients
 	patientsCollection = new glasswing.collections.patients();
-	proceduresCollection = new glasswing.collections.procedures();
+
 
 
 	for (var i=0;i<number_of_random_procedures;i++) {
-		var procedure = proceduresCollection.getRandomProcedure(patientsCollection.generateRandomPatient());
-		worklist.collection.add(procedure);
+
+		var procedureModel = worklist.procedures.getRandomProcedure(patientsCollection.generateRandomPatient());
+
+		//var procedureView = new glasswing.views.procedure({model : procedureModel});
+
+		worklist.procedures.add(procedureModel);
 	}
 
 
@@ -53,10 +58,8 @@
 		return chapters;
 	}
 
-	$.get('js/templates/guide/chapter1.md',function(data){
-		glasswing.config = {worklist : worklist, chapters : parseChapters(data) };
-		glasswing.router();
-	})
+	glasswing.config = {worklist : worklist, chapters : parseChapters($('#guide-chapter1')) };
+
 
 
 })(jQuery);

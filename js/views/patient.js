@@ -4,7 +4,8 @@
 		tagName : 'div',
 
 		// template_html : 'patient.html',
-		template : $('#patient').html(),
+
+		template : glasswing.template('patient.html'),
 		initialize : function() {
 			glasswing.views.abstract.prototype.initialize.apply(this, arguments);
 			if (this.model) {

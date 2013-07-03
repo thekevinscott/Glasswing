@@ -23,21 +23,21 @@ glasswing.router = function() {
 			}
 	}); // Initiate the router
 	var app_router = new AppRouter();
+
 	app_router.url = function(url,options) {
 
 		if (this.guide && this.guide.isActive()) {
 
 			// if the guide is active, only allow URL requests that originate there.
 			if (options && options.hasOwnProperty('caller') && options.caller == guide) {
-				console.log('set url from guide: ' + url);
+				glasswing.notif('set url from guide: ' + url);
 				this.navigate(url,options);
 			} else {
-				console.log('worklist attempted to set url while guide is active: ' + url);
-				// console.log(options.caller);
+				glasswing.notif('worklist attempted to set url while guide is active: ' + url);
 			}
 
 		} else {
-			console.log('worklist attempted to set url and guide is inactive: ' + url);
+			glasswing.notif('worklist attempted to set url and guide is inactive: ' + url);
 			this.navigate(url,options);
 		}
 
@@ -50,8 +50,6 @@ glasswing.router = function() {
 
 
 	app_router.on('route:titlePage', function() {
-		// console.log('intro');
-		// console.log(config);
 
 		guide.titlePage();
 
@@ -59,7 +57,7 @@ glasswing.router = function() {
 		app_router.initial_route = false;
 	});
 	app_router.on('route:explore', function(chapter, section) {
-		// console.log('here');
+
 		guide.begin(arguments);
 		guide.setActive(true);
 
@@ -82,7 +80,7 @@ glasswing.router = function() {
 		guide.begin(arguments);
 
 
-		console.log('procedure: ' + procedure_id);
+		glasswing.notif('procedure: ' + procedure_id);
 		tabManager.getPage(worklist); // get page SETS the page, creates a tab. that's confusing.
 
 		(function(procedure){
@@ -96,14 +94,14 @@ glasswing.router = function() {
 	});
 
 
-	// console.log('ready!');
-	console.log('switch tabs collection to be contained by view');
+
+	glasswing.err('switch tabs collection to be contained by view');
 	tabManager = new glasswing.collections.tabs({router : app_router, worklist : worklist});
 
 	Backbone.history.start();
 
 
 
-};
+}();
 
 //});

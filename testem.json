@@ -2,21 +2,29 @@
   "framework": "mocha",
   "src_files": [
 
-    "js/lib/require.min.js",
-
     "js/lib/jquery.2.0.2.min.js",
     "js/lib/underscore.min.js",
     "js/lib/backbone.min.js",
+    "js/lib/jquery.easing.min.js",
+    "js/lib/less.min.js",
+
+    "js/lib/audiojs/audio.min.js",
+    "js/lib/markdown.js",
+    "js/lib/plugins.js",
 
     "js/glasswing.js",
+
     "js/models/*.js",
+    "js/collections/*.js",
     "js/views/*.js",
+    "js/config.js",
+    "js/router.js",
 
     "js/lib/chai.js",
     "js/lib/sinon-chai.js",
     "js/lib/sinon-1.5.2.js",
 
+    "js/test/glasswing.js",
     "js/test/*.js"
-  ],
-  "test_page" : "js/test/index.html"
+  ]
 }

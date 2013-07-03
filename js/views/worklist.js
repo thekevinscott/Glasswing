@@ -35,20 +35,17 @@
 		// },
 
 		initialize : function(attributes) {
-
-
+			console.log("*** initialize our worklist");
 			glasswing.views.abstract.prototype.initialize.apply(this, arguments);
 
-			this.collection = new glasswing.collections.procedures({view : this});
+			this.procedures = new glasswing.collections.procedures();
+			this.procedures.view = this;
 
 			// this.tabManager = attributes.tabManager;
 			// console.log('init the worklist');
 
 			this.name = 'Worklist';
 			this.url = 'worklist';
-
-			// this.model = new glasswing.models.worklist({view : this});
-			// this.model.view = this;
 
 			this.setLayout(this.current_layout || 'grid');
 
@@ -92,12 +89,14 @@
 
 		},
 		setLayout : function(event) {
+
 			this.current_layout = (typeof event == 'string') ? event : $(event.currentTarget).val().toLowerCase();;
 			switch(this.current_layout) {
 
 				case 'card' :
-					this.template = $('#worklist-cards').html();
-					this.template_procedure = $('#worklist-card').html();
+					this.template = glasswing.template('worklist/cards.html');
+					this.template_procedure = glasswing.template('worklist/card.html');
+
 					this.target_selector = '.cards';
 					// var self = this;
 					// setTimeout(function(){
@@ -105,8 +104,9 @@
 					// },1000);
 				break;
 				default :
-					this.template = $('#worklist-table').html();
-					this.template_procedure = $('#worklist-row').html();
+					this.template = glasswing.template('worklist/table.html');
+					this.template_procedure = glasswing.template('worklist/row.html');
+
 					this.target_selector = 'table tbody';
 				break;
 			}
@@ -141,36 +141,37 @@
 			self.$el.html(_.template(self.template, {}));
 			self.$target = this.$el.find(self.target_selector);
 
-			console.log('collection:');
-			console.log(self.collection);
-			console.log(self.collection.getProcedures());
 
-			_.each(self.collection.getProcedures(),function(procedure, index){
-				console.log(procedure);
-				console.log(procedure.attributes);
-				console.log(procedure.get('cid'));
-				console.log(procedure.get('procedure_name'));
-				console.log(procedure.get('patient'));
-				var procedure_el = $(_.template(self.template_procedure, {
-					id : procedure.get('id'),
-					scanned_documents : procedure.get('scanned_documents'),
-					dob : procedure.get('patient').get('dob'),
-					first : procedure.get('patient').get('first'),
-					last : procedure.get('patient').get('last'),
-					gender : procedure.get('patient').get('gender'),
-					patient_id : procedure.get('patient').get('id'),
-					patient_risks : procedure.get('patient').get('risks'),
-					procedure_name : procedure.get('procedure_name'),
-					priority : procedure.get('priority'),
-					procedure_class : procedure.get('procedure_class'),
-					report_status : procedure.get('report_status'),
-					procedure_status : procedure.get('procedure_status'),
-					referring_physician : procedure.get('referring_physician'),
-					hospital_name : procedure.get('hospital_name'),
+			_.each(self.procedures.models,function(procedure, index){
+				//self.$target.append('hi');
 
-				}));
-				procedure_el.data('model',procedure);
-				self.$target.append(procedure_el);
+				self.$target.append(procedure.view.render().$el);
+				// console.log(procedure);
+				// console.log(procedure.attributes);
+				// console.log(procedure.get('cid'));
+				// console.log(procedure.get('procedure_name'));
+				// console.log(procedure.get('patient'));
+
+				// var procedure_el = $(_.template(self.template_procedure, {
+				// 	id : procedure.get('id'),
+				// 	scanned_documents : procedure.get('scanned_documents'),
+				// 	dob : procedure.get('patient').get('dob'),
+				// 	first : procedure.get('patient').get('first'),
+				// 	last : procedure.get('patient').get('last'),
+				// 	gender : procedure.get('patient').get('gender'),
+				// 	patient_id : procedure.get('patient').get('id'),
+				// 	patient_risks : procedure.get('patient').get('risks'),
+				// 	procedure_name : procedure.get('procedure_name'),
+				// 	priority : procedure.get('priority'),
+				// 	procedure_class : procedure.get('procedure_class'),
+				// 	report_status : procedure.get('report_status'),
+				// 	procedure_status : procedure.get('procedure_status'),
+				// 	referring_physician : procedure.get('referring_physician'),
+				// 	hospital_name : procedure.get('hospital_name'),
+
+				// }));
+				// procedure_el.data('model',procedure);
+				// self.$target.append(procedure_el);
 
 
 			});

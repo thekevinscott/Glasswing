@@ -14,7 +14,7 @@ glasswing.collections.tabs = Backbone.Collection.extend({
             // self.router.url('',options);
 
             if (self.selected_tab != null) { self.selected_tab.deselect(); }
-
+            console.log(page.view.view);
             page.view.setOptions(options);
             $('.page').html(page.view.render().$el);
             self.selected_tab = page.tab.select();
@@ -27,7 +27,7 @@ glasswing.collections.tabs = Backbone.Collection.extend({
         $('.tabs').append(tab.render().$el);
         tab.show();
         $(tab.render.$el).click(function(e){
-            console.log('gotta figure out how to deal with this');
+            glasswing.err('gotta figure out how to deal with this');
         });
         return tab;
     },
@@ -47,7 +47,7 @@ glasswing.collections.tabs = Backbone.Collection.extend({
     },
     getPage : function(view,callback) {
 
-        // console.log('get page');
+
         if (! view) { throw("You must pass in a view!");}
 
         if (this.pages[view['cid']] !== undefined && this.pages[view['cid']] !== null) {
@@ -57,17 +57,14 @@ glasswing.collections.tabs = Backbone.Collection.extend({
             this.pages[view['cid']] = null;
             var self = this;
 
-            console.log('associated page view: ');
-            console.log(view);
+            glasswing.err('associated page view: ');
+            glasswing.err(view);
 
             //var view = view.get('associated_page_view');
-            console.log(view.constructor);
-            var viewObj = new view.constructor({view : view, tabManager : self});
+            glasswing.err(view.constructor);
+            view.tabManager = self;
 
-            self.pages[view['cid']] = { view : viewObj, tab : self.addTab(viewObj) };
-            // console.log('going into callback');
-            // console.log(view['cid']);
-            // console.log(self.pages);
+            self.pages[view['cid']] = { view : view, tab : self.addTab(view) };
             if (callback) { callback(self.pages[view['cid']]); }
 
         }

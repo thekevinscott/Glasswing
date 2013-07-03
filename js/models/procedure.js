@@ -4,11 +4,15 @@ glasswing.models.procedure = glasswing.models.abstract.extend({
 		associated_page_view : 'report'
 	},
 	initialize : function(attributes) {
-		//console.log(attributes);
-		// we must have a patient
-		// console.log(attributes);
+
 		if (! attributes || ! attributes.patient) {throw "No patient specified!";}
+		this.view = new glasswing.views.procedure({model : this});
 		// this.patient = options.patient;
+		this.on("change", function() {
+		  	if (this.hasChanged("title")) {
+		    	this.view.render();
+		  	}
+		});
 	},
 	// we overload our parent get function
 	get: function (attr) {

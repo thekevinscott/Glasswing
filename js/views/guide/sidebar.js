@@ -80,6 +80,7 @@
 		},
 		selectChapter : function(bookmark) {
 			console.log('select chapter: ' + bookmark[0]);
+
 			var view = this.chapters[bookmark[0]].view;
 				// console.log(view);
 			var section = view.panes[bookmark[1]];

@@ -14,8 +14,7 @@ glasswing.collections.patients = Backbone.Collection.extend({
 		Backbone.Collection.prototype.add.call(this, model);
 		if (! model.get('id')) {
 			model.set('id',this.id_offset+this.length);
-			// console.log(this.models);
-			// console.log(model.get('id'));
+
 		}
 	},
 	generateRandomPatient : function() {

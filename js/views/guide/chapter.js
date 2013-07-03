@@ -51,7 +51,8 @@
 
 		// model : new worklist(),
 		// template_html : 'guide/chapter.html',
-		template : $('#guide-chapter').html(),
+
+		template : glasswing.template('guide/chapter.html'),
 		events : {
 		  "click #introduction .button" : "click"
 		},
