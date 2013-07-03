@@ -24,7 +24,6 @@
     "js/lib/sinon-chai.js",
     "js/lib/sinon-1.5.2.js",
 
-    "js/test/glasswing.js",
-    "js/test/*.js"
+    "js/test/glasswing.js"
   ]
 }

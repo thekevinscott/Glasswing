@@ -23,8 +23,8 @@
 		// model : new worklist(),
 		// template : template,
 		events : {
-		  "click tbody tr" : "openProcedure",
-		  "click .cards .card" : "openProcedure",
+		  // "click tbody tr" : "openProcedure",
+		  // "click .cards .card" : "openProcedure",
 		  "click input[type=button]" : "setLayout"
 		},
 		current_layout : null,

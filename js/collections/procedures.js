@@ -16,12 +16,16 @@ glasswing.collections.procedures = Backbone.Collection.extend({
 	add : function(procedureModel) {
 
 		Backbone.Collection.prototype.add.call(this, procedureModel);
+
 		if (! procedureModel.get('id')) { procedureModel.set('id',this.models.length); }
-		procedureModel.view.render(true);
+
+		procedureModel.view.render();
+
 		if (this.view.$target) {
 			// optionally, if our parent table is available, render to it
 			this.view.$target.append(procedureModel.view.render().$el);
 		}
+
 	},
 	getProcedure : function(procedure_id) {
 		return this.get(procedure_id);

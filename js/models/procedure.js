@@ -7,6 +7,7 @@ glasswing.models.procedure = glasswing.models.abstract.extend({
 
 		if (! attributes || ! attributes.patient) {throw "No patient specified!";}
 		this.view = new glasswing.views.procedure({model : this});
+
 		// this.patient = options.patient;
 		this.on("change", function() {
 		  	if (this.hasChanged("title")) {

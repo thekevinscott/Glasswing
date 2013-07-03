@@ -15,9 +15,12 @@
 
 		var procedureModel = worklist.procedures.getRandomProcedure(patientsCollection.generateRandomPatient());
 
+		procedureModel.worklist = worklist;
+
 		//var procedureView = new glasswing.views.procedure({model : procedureModel});
 
 		worklist.procedures.add(procedureModel);
+
 	}
 
 
