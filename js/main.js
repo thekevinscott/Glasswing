@@ -1,11 +1,14 @@
 require.config({
 	urlArgs: "bust=" + (new Date()).getTime(), // clear this from production
 	paths: {
-		jquery: '//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.2/jquery.min',
-		underscore: '//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min',
-		backbone: '//cdnjs.cloudflare.com/ajax/libs/backbone.js/1.0.0/backbone-min',
-		easing : '//cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min',
-		less : '//cdnjs.cloudflare.com/ajax/libs/less.js/1.3.3/less.min',
+		jquery: 'lib/jquery.2.0.2.min',
+		underscore: 'lib/underscore.min',
+		backbone: 'lib/backbone.min',
+		easing : 'lib/jquery.easing.min',
+		less : 'lib/less.min',
+
+		audiojs : 'lib/audiojs/audio.min',
+		markdown : 'lib/markdown'
 	},
 	shim: {
 	    'backbone': {
@@ -18,13 +21,19 @@ require.config({
         'glasswing' : {
         	deps : ['backbone', 'collections/patients'],
         	exports : 'glasswing'
-        }
+        },
+        'audiojs' : {
+        	exports : 'audiojs'
+        },
+        'markdown' : {
+        	exports : 'markdown'
+        },
 	}
 });
 
 require([
 	'less',
-	'glasswing'
-], function(less, glasswing) {
-	glasswing.initialize();
+	'router'
+], function(less, router) {
+	Backbone.sync = function(method, model, success, error){success();}
 });

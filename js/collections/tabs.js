@@ -14,7 +14,9 @@ define([
         showPage : function(model, options) {
             var self = this;
             this.getPage(model, function(page){
-                self.router.navigate(page.view.url,options);
+
+                self.router.url(page.view.url,options);
+                // self.router.url('',options);
 
                 if (self.selected_tab != null) { self.selected_tab.deselect(); }
 
@@ -26,14 +28,16 @@ define([
         },
 
         addTab : function(page) {
-            var tab = new tabView({page : page });
+            var tab = new tabView({page : page, parent : this });
             $('.tabs').append(tab.render().$el);
             tab.show();
+            $(tab.render.$el).click(function(e){
+                console.log('gotta figure out how to deal with this');
+            });
             return tab;
         },
         closeTab : function(page) {
             this.showPage(this.worklist,{trigger : true});
-            //this.router.navigate('worklist',{trigger : true});
 
             var cid = page.model['cid'];
             var self = this;

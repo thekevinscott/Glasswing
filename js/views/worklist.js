@@ -128,10 +128,7 @@ define([
 			this.tabManager.showPage(model);
 
 
-			//window.location.hash = 'procedure/' + model.get('id');
-			//console.log("is it maybe a bit clunk to change the url directly?");
-			//Router.navigate('procedure/' + model.get('id'), {trigger: true, replace: true});
-			// I think the above'd be better
+
 
 		},
 		drawProcedure : function(procedure,target) {

@@ -7,24 +7,41 @@ define([
 	return Backbone.View.extend({
 		tagName : 'li',
 		className : 'tab',
+
 		initialize : function(options) {
-			// console.log(options);
+
+
 			this.page = options.page;
+			this.model = this.page.model;
+			this.parent = options.parent;
 			this.a = null;
 
 		},
 		render : function() {
+			var self = this;
 			// console.log('render page');
 			// console.log(this.page);
 			this.a = $("<a />");
 			this.a.attr('href','#'+this.page.url);
+
 			this.a.html(this.page.name);
+
+
 			this.$el.html(this.a);
 
+			this.$el.data('model',this.model);
 
+			// this cannot depend on the router to change; we must cpature the event regardless
+			this.a.click(function(e){
+				e.preventDefault();
+				self.parent.showPage($(this).parent().data('model'));
+				// self.router.url($(this).attr('href'));
+
+			});
 
 			return this;
 		},
+
 		select : function() {
 			this.$el.addClass('selected');
 			return this;
