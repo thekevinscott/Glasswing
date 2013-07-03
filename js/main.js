@@ -7,8 +7,17 @@ require.config({
 		easing : 'lib/jquery.easing.min',
 		less : 'lib/less.min',
 
+		text : 'lib/text',
+
 		audiojs : 'lib/audiojs/audio.min',
-		markdown : 'lib/markdown'
+		markdown : 'lib/markdown',
+
+		plugins : 'lib/plugins',
+
+
+		mocha : 'lib/mocha',
+		chai : 'lib/chai',
+		chaiJquery : 'lib/chai-jquery',
 	},
 	shim: {
 	    'backbone': {
@@ -17,6 +26,14 @@ require.config({
 	    },
         'underscore': {
             exports: '_'
+        },
+        'text' : {
+        	deps : ['underscore'],
+        	exports: 'text'
+        },
+        'easing' : {
+        	deps : ['jquery'],
+        	exports : 'easing'
         },
         'glasswing' : {
         	deps : ['backbone', 'collections/patients'],
@@ -28,6 +45,9 @@ require.config({
         'markdown' : {
         	exports : 'markdown'
         },
+        'plugins' : {
+        	exports : 'plugins'
+        }
 	}
 });
 

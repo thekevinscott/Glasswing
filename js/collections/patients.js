@@ -1,9 +1,9 @@
+
 define([
 	'underscore',
 	'backbone',
-	'models/patient',
-	'views/patient'
-], function(_, Backbone, patient, patientView) {
+	'models/patient'
+], function(_, Backbone, patient) {
 
 	return Backbone.Collection.extend({
 		model: patient,
@@ -45,3 +45,4 @@ define([
 
 	});
 });
+

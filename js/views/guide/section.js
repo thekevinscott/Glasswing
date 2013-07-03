@@ -2,10 +2,10 @@ define([
 	'underscore',
 	'backbone',
 	'jquery',
+
 	'easing',
 	'lib/text!templates/guide/section.html',
 ], function(_, Backbone, $, easing, template) {
-
 	return Backbone.View.extend({
 
 		template : template,
@@ -20,6 +20,7 @@ define([
 
 			this.data = data;
 			this.parent = parent;
+
 			this.render();
 
 			// this.close();
@@ -41,11 +42,15 @@ define([
 
 			this.$el.addClass('active');
 			this.$el.find('p').stop().slideDown();
-			this.parent.url(this.$el.data('url'));
+
+			// todo: remove this if statement, should always have a parent
+			if (this.parent) { this.parent.url(this.$el.data('url')); }
+			return this;
 		},
 		close : function() {
 			this.$el.removeClass('active');
 			this.$el.find('p').stop().slideUp();
+			return this;
 		},
 		click : function(callback) {
 			this.$el.click(callback);

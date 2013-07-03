@@ -14,7 +14,7 @@ define([
 			this.model.view = this;
 			this.$el.html(_.template(this.template, {
 				name : "Name: " + this.model.getName(),
-				supplies : ['1','2','3']
+
 			}));
 		},
 		render : function() {
@@ -23,3 +23,4 @@ define([
 
 	});
 });
+

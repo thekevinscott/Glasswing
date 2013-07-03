@@ -11,20 +11,20 @@ define([
 ], function(_, Backbone, $, easing, audiojs, markdown, chapterModel, sectionView, template) {
 
 
-	$.fn.open = function() {
-		return $(this).each(function(){
-			$('.pane.active').close();
-			$(this).addClass('active');
-			$(this).find('p').slideDown();
-		});
-	};
-	$.fn.close = function() {
-		return $(this).each(function(){
+	// $.fn.open = function() {
+	// 	return $(this).each(function(){
+	// 		$('.pane.active').close();
+	// 		$(this).addClass('active');
+	// 		$(this).find('p').slideDown();
+	// 	});
+	// };
+	// $.fn.close = function() {
+	// 	return $(this).each(function(){
 
-			$(this).removeClass('active');
-			$(this).find('p').slideUp();
-		});
-	}
+	// 		$(this).removeClass('active');
+	// 		$(this).find('p').slideUp();
+	// 	});
+	// }
 	$.fn.audio = function(events){
 		return $(this).each(function(){
 			var audio = $(this)[0];

@@ -1,3 +1,4 @@
+
 define([
 	'markdown',
 	'collections/patients',
@@ -5,8 +6,8 @@ define([
 	'models/worklist',
 	'lib/text!templates/guide/chapter1.md',
 	],
-function(markdown, patients, procedures, worklistModel, tabs) {
-	String.prototype.toURL = function() { return this.split(' ').join('-').toLowerCase();}
+function(markdown, patients, procedures, worklistModel, tabsChapter) {
+
 
 	var number_of_random_procedures, worklist, patientsCollection, proceduresCollection;
 	number_of_random_procedures = 50;
@@ -27,7 +28,7 @@ function(markdown, patients, procedures, worklistModel, tabs) {
 
 		}
 
-		_.each([tabs],function(chapter){
+		_.each([tabsChapter],function(chapter){
 			var key;
 			// var pane_count;
 			var pane_name;
