@@ -137,6 +137,7 @@
 			this.sidebar.close();
 		},
 		navigate : function(path, options) {
+
 			this.router.navigate(path,options);
 		}
 

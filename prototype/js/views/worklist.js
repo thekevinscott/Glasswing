@@ -47,75 +47,73 @@
 			this.name = 'Worklist';
 			this.url = 'worklist';
 
-			this.setLayout(this.current_layout || 'table');
+
+			this.setLayout(this.current_layout);
 
 		},
-		// collectCategoriesBy : function(category) {
-		// 	var cards = $('.cards .card');
 
-		// 	var modality_count = 0;
-		// 	var modalities = this.model.getProceduresByModality();
+		render : function() {
+			var self = this;
 
-		// 	var card_width = $('.cards .card').width() + 20;
+			// alert('render');
 
-		// 	for (var modality_type in modalities) {
-		// 		var modality = modalities[modality_type];
-		// 		this.$target.append("<p style='position: absolute; text-align: center; top: 160px; width: "+card_width+";left: "+(modality_count*card_width)+"'>"+modality_type+"</p>");
-		// 		(function(modality,modality_count){
-		// 			for (var i=0;i<modality.length;i++) {
-		// 				var el = modality[i];
-		// 				(function(card,position,i){
+			self.$el.html(_.template(self.template, {}));
+			self.$target = this.$el.find(self.target_selector);
 
 
-		// 					setTimeout(function(){
-		// 						$(card).css({
-		// 							position: 'absolute',
-		// 							top: position.top,
-		// 							left: position.left
-		// 						});
-		// 						var offset = i*2;
-		// 						if (offset > 20) { offset = 20;}
-		// 						$(card).animate({
-		// 							top: offset,
-		// 							left: offset + (modality_count*card_width)
-		// 						});
-		// 					},1);
+			_.each(self.procedures.models,function(procedure, index){
+				console.log(self.current_layout);
+				procedure.view.setLayout(self.current_layout);
 
-		// 				}(el.view,$(el.view).position(),i));
-		// 			}
-		// 		})(modality,modality_count);
-		// 		modality_count++;
-		// 	}
 
-		// },
-		setLayout : function(event) {
+				self.$target.append(procedure.view.render().$el);
 
-			this.current_layout = (typeof event == 'string') ? event : $(event.currentTarget).val().toLowerCase();
 
-			switch(this.current_layout) {
+			});
+			this.delegateEvents();
 
-				case 'card' :
-					this.template = glasswing.template('worklist/cards.html');
-					this.template_procedure = glasswing.template('worklist/card.html');
 
-					this.target_selector = '.cards';
-					// var self = this;
-					// setTimeout(function(){
-					// 	self.collectCategoriesBy('modality');
-					// },1000);
-				break;
-				default :
-					this.template = glasswing.template('worklist/table.html');
-					this.template_procedure = glasswing.template('worklist/row.html');
+			this.$el.find('input[type=button]').each(function(){
 
-					this.target_selector = 'table tbody';
-				break;
+				self.buttons[$(this).val().toLowerCase()] = $(this);
+			});
+
+
+			return this;
+		},
+		setLayout : function(layout) {
+
+			layout = (typeof layout == 'string') ? layout : $(layout.currentTarget).val().toLowerCase();
+			if (layout) {
+				this.current_layout = layout;
+
+
+				switch(this.current_layout) {
+
+					case 'card' :
+						this.template = glasswing.template('worklist/cards.html');
+						// this.template_procedure = glasswing.template('worklist/card.html');
+
+						this.target_selector = '.cards';
+						// var self = this;
+						// setTimeout(function(){
+						// 	self.collectCategoriesBy('modality');
+						// },1000);
+					break;
+					default :
+						this.template = glasswing.template('worklist/table.html');
+						// this.template_procedure = glasswing.template('worklist/row.html');
+
+						this.target_selector = 'table tbody';
+					break;
+				}
+				this.render();
+
+				if (this.selected_button != null) { this.selected_button.deselect(); }
+
+				this.selected_button = this.buttons[this.current_layout].select();
 			}
-			this.render();
 
-			if (this.selected_button != null) { this.selected_button.deselect(); }
-
-			this.selected_button = this.buttons[this.current_layout].select();
 
 		},
 		setOptions : function(options) {
@@ -136,34 +134,6 @@
 		},
 
 
-		render : function() {
-			var self = this;
-
-			// alert('render');
-
-			self.$el.html(_.template(self.template, {}));
-			self.$target = this.$el.find(self.target_selector);
-
-
-			_.each(self.procedures.models,function(procedure, index){
-				procedure.view.setLayout('table');
-
-
-				self.$target.append(procedure.view.render().$el);
-
-
-			});
-			this.delegateEvents();
-
-
-			this.$el.find('input[type=button]').each(function(){
-
-				self.buttons[$(this).val().toLowerCase()] = $(this);
-			});
-
-
-			return this;
-		}
 
 	});
 
