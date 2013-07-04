@@ -51,7 +51,6 @@
 				self.setupSection(section.view.$el);
 			});
 
-			self.audio = self.$el.find('audio');
 
 
 			return this;
@@ -66,11 +65,16 @@
 
 		},
 		play : function(file) {
-			this.audio.attr('src','audio/'+file+'.mp3');
-			this.audio[0].play();
+			//
+//			self.audio = self.$el.find('audio');
+
+			console.log(this.parent);
+			console.log(this.parent.audio);
+			this.parent.audio.attr('src','audio/'+file+'.mp3');
+			this.parent.audio[0].play();
 
 			var self = this;
-			this.audio.audio({
+			this.parent.audio.audio({
 				// 1.5 : function() {
 				// 	self.$el.find('.pane:first').open();
 				// },

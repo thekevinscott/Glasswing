@@ -72,9 +72,19 @@
 			var index = model.dot.index();
 			for (i=0;i<this.dots.length;i++) {
 				if (i<=index) {
-					this.dots[i].addClass('filled');
+					(function(dot){
+						setTimeout(function(){
+							dot.addClass('filled');
+						},50*i);
+					})(this.dots[i]);
+
 				} else {
-					this.dots[i].removeClass('filled');
+					(function(dot,mult){
+						setTimeout(function(){
+							dot.removeClass('filled');
+						},50*mult);
+					})(this.dots[i],(this.dots.length-i-index));
+
 				}
 			}
 			// lets rebuild this thing with canvas

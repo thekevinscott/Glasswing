@@ -36,6 +36,8 @@
 			}
 			this.$el.data('width',this.$el.width() / $('body').width() * 100);
 
+			this.$audio = $('<audio controls></audio>');
+			this.$el.prepend(this.$audio);
 			// var chapter_progress = $('<div class="chapter-progress" />');
 			// this.$el.prepend(chapter_progress);
 			// chapter_progress.progressBar({pages : chapter_count});
