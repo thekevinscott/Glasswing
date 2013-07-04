@@ -33,39 +33,17 @@
 
 			var self = this;
 
-			function glassQuery(){};
-			glassQuery.prototype = jQuery;
-			var gQ = new glassQuery();
 
-			var jQ = new jQuery();
-			// glassQuery.fn = jQuery.fn;
-			gQ.fn.data = function(attr,val) {
-
-				// console.log('data attr: '+ attr+ ' val: ' + val);
-				// if ($(this).data(attr)) {
-				// 	return $(this).data(attr);
-				// } else {
-					var contentWindow = self.$glasswing[0].contentWindow;
-					if (contentWindow && contentWindow['jQuery']) {
-						if (val) {
-							return contentWindow.jQ(this).data(attr,val);
-						} else {
-							return contentWindow['jQuery'](this).data(attr);
-						}
-					}
-
-				// }
-
-
-			}
-			// window['glassQuery'] = gQ;
 			window['$p'] = function(selector) {
 
-
 				var innerDoc = self.$glasswing[0].contentDocument || self.$glasswing[0].contentWindow.document;
-
-				return gQ(innerDoc).find(selector);
+				return $(innerDoc).find(selector);
 			}
+			window['$pd'] = function(selector,key,val) {
+				var contentWindow = self.$glasswing[0].contentWindow;
+				return contentWindow['jQuery'](selector,key,val);
+			}
+
 
 		},
 		render : function() {

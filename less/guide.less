@@ -75,6 +75,9 @@
     	font-size: 1.1em;
 
     }
+    audio {
+        margin: 20px;
+    }
     .button {
     	padding: 10px 20px;
     	font-size: 14px;
@@ -207,6 +210,10 @@
             margin: -4px 0 0 -4px;
             border-radius: 20px;
             cursor: pointer;
+            background: hsl(@hue, percentage(@saturation), percentage(@lightness+.09));
+
+            transition:         all 0.25s;
+            -webkit-transition: all 0.25s; /* Safari */
         }
 
     }

@@ -16,7 +16,7 @@
 
 
 		},
-		render : function(animate) {
+		render : function() {
 			var self = this;
 
 
@@ -36,6 +36,8 @@
 			}
 			this.$el.data('width',this.$el.width() / $('body').width() * 100);
 
+			this.$audio = $('<audio controls></audio>');
+			this.$el.prepend(this.$audio);
 			// var chapter_progress = $('<div class="chapter-progress" />');
 			// this.$el.prepend(chapter_progress);
 			// chapter_progress.progressBar({pages : chapter_count});
@@ -86,12 +88,16 @@
 			var view = this.chapters[bookmark[0]].view;
 			var section = view.panes[bookmark[1]];
 
+			//var duration = 200*Math.abs(view.index-chapter_view.index);
+			//if (duration > 1000) { duration = 1000; }
+			var duration = 620;
+
 			$('.chapter').each(function(){
 				var chapter = $(this);
 
 				var chapter_view = chapter.data('view');
 
-				$(this).stop().animate({marginLeft : (0-(100*(view.index-chapter_view.index)))+'%'});
+				$(this).stop().animate({marginLeft : (0-(100*(view.index-chapter_view.index)))+'%'},{duration: duration,easing: 'easeOutQuad'});
 
 			});
 			$(section).data('view').open();

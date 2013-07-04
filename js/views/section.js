@@ -44,7 +44,8 @@
 			// todo: remove this if statement, should always have a parent
 
 			if (this.parent) { this.parent.navigate(this.$el.data('url')); }
-			this.parent.play('tabs/'+this.title);
+
+			this.parent.play(this.title);
 			return this;
 		},
 		close : function() {
