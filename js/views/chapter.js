@@ -1,51 +1,4 @@
 (function($){
-	$.fn.audio = function(events){
-		return $(this).each(function(){
-			var audio = $(this)[0];
-			var currentTime = audio.currentTime;
-			var start_seek = null;
-
-			// audiojs.events.ready(function() {
-			//     var as = audiojs.createAll();
-			// });
-
-			// this is fucked on chrome
-			// this.addEventListener('progress',function(){
-			// 	console.log(this);
-			// });
-
-
-			var getCurrentTime = function() {
-				for (var time in events) {
-					time = parseFloat(time);
-
-					if (currentTime < time && audio.currentTime > time && typeof events[time] == 'function') {
-						events[time]();
-					}
-					if (time > audio.currentTime) { break; }
-				}
-
-
-				currentTime = audio.currentTime;
-
-				setTimeout(getCurrentTime,100);
-			}
-			getCurrentTime();
-
-
-			this.addEventListener('seeked',function(e){
-				start_seek = audio.currentTime;
-				console.log('seeked');
-				console.log(e);
-			});
-			this.addEventListener('seeking',function(e){
-
-				console.log('seeking');
-				console.log(e);
-			});
-
-		});
-	}
 	glasswing.views.chapter = glasswing.views.abstract.extend({
 
 
@@ -98,14 +51,7 @@
 				self.setupSection(section.view.$el);
 			});
 
-			self.$el.find('audio').audio({
-				// 1.5 : function() {
-				// 	self.$el.find('.pane:first').open();
-				// },
-				// 13.8 : function() {
-				// 	self.addOverlay($('table tr:first'));
-				// }
-			});
+			self.audio = self.$el.find('audio');
 
 
 			return this;
@@ -118,6 +64,36 @@
 
 			this.panes[title] = view_el;
 
+		},
+		play : function(file) {
+			this.audio.attr('src','audio/'+file+'.mp3');
+			this.audio[0].play();
+
+			var self = this;
+			this.audio.audio({
+				// 1.5 : function() {
+				// 	self.$el.find('.pane:first').open();
+				// },
+				1.0 : function() {
+					var tr = $p('table tbody tr:first');
+					//var view = $p('data',tr,'view')
+					tr.highlight();
+					tr.click(function(e){
+						$(this).unbind('click');
+						self.nextSection();
+						$.dehighlight();
+					});
+				}
+			});
+
+		},
+		nextSection : function() {
+
+			var section_index = this.$sections.find('.active').index();
+			var panes = this.$sections.find('.pane');
+			if (section_index+1 < panes.length) {
+				$(panes[section_index+1]).data('view').open();
+			}
 		},
 		navigate : function(path,options) {
 			// this.parent.navigate(this.$el.data('url')+'/'+path,options);

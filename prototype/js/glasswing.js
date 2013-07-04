@@ -15,3 +15,6 @@ var glasswing = {
 		return this.cache[path];
 	}
 };
+window['data'] = function(el,key) {
+	return $(el).data(key);
+}

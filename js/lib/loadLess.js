@@ -10,6 +10,7 @@
 		var link = document.createElement(options.element);
 	    link.type = options.type;
 	    link.rel = options.rel;
+
 	    link.href = options.url + '?bust='+(new Date()).getTime();
 	    document.getElementsByTagName("head")[0].appendChild(link);
 	};
@@ -23,6 +24,7 @@
 	dataStyles = dataStyles.split(',');
 
 	for (i=0;i<dataStyles.length;i += 1) {
+
 		loadFile({url : 'less/'+dataStyles[i].trim()+'.less', element : 'link', type : 'text/css', rel : 'stylesheet/less'});
 	}
 	loadFile({url : lessjs, element : 'script'});

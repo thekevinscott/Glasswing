@@ -1,6 +1,8 @@
 //'lib/text!templates/guide/titlePage.html',
 
 (function($){
+
+
 	glasswing.views.guide = glasswing.views.abstract.extend({
 		el : '#guide',
 		tagName : 'div',
@@ -29,7 +31,41 @@
 			// we create the view on load
 			this.render();
 
+			var self = this;
 
+			function glassQuery(){};
+			glassQuery.prototype = jQuery;
+			var gQ = new glassQuery();
+
+			var jQ = new jQuery();
+			// glassQuery.fn = jQuery.fn;
+			gQ.fn.data = function(attr,val) {
+
+				// console.log('data attr: '+ attr+ ' val: ' + val);
+				// if ($(this).data(attr)) {
+				// 	return $(this).data(attr);
+				// } else {
+					var contentWindow = self.$glasswing[0].contentWindow;
+					if (contentWindow && contentWindow['jQuery']) {
+						if (val) {
+							return contentWindow.jQ(this).data(attr,val);
+						} else {
+							return contentWindow['jQuery'](this).data(attr);
+						}
+					}
+
+				// }
+
+
+			}
+			// window['glassQuery'] = gQ;
+			window['$p'] = function(selector) {
+
+
+				var innerDoc = self.$glasswing[0].contentDocument || self.$glasswing[0].contentWindow.document;
+
+				return gQ(innerDoc).find(selector);
+			}
 
 		},
 		render : function() {
@@ -107,8 +143,7 @@
 			}
 
 
-			console.log('there an issue here. if you click the button, it wont automatically open up the tab. because when it calls route, the url hasnt been set yet');
-			console.log('route');
+
 			this.sidebar.route(arguments);
 		},
 		isActive : function() { return this.active; },

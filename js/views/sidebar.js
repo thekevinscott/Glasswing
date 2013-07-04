@@ -11,6 +11,7 @@
 
 			this.render();
 
+			console.log('todo: do this better');
 			this.bookmark = ['tabs','the-idea']; // set to first.
 
 
@@ -39,66 +40,48 @@
 			// this.$el.prepend(chapter_progress);
 			// chapter_progress.progressBar({pages : chapter_count});
 
-			this.progress = new glasswing.views.progress({sidebar : this});
+			this.progress = new glasswing.views.progress({sidebar : this });
 
 
 			return this;
 		},
 
-		route : function(arguments) {
-
-			// console.log('internal route');
-
-
-			var setChapter = function() {
-
-				if (arguments && arguments[0] && this.chapters[arguments[0]]) {
-					// console.log(this.chapters[arguments[0]]);
-					//this.bookmark = arguments[0] + '/' + this.chapters[arguments[0]];
-
+		// this function translates an arguments array (a collection of URL segments)
+		// into the internal bookmark that sidebar maintains
+		route : function(arguments, options) {
+			var self = this;
+			var setChapter = function(arguments) {
+				console.log(self.chapters);
+				console.log(arguments);
+				if (self.chapters[arguments[0]]) {
+					self.bookmark = [arguments[0],self.chapters[arguments[0]].panes_by_order[0].title.toURL()];
+					//setChapter();
 				}
-				// this.parent.router.navigate('suck');
 			}
 			// if (! arguments) { return; }
 			if (arguments) {
 				switch(arguments.length) {
 					case 1 :
-						if (this.chapters[arguments[0]]) {
-
-							this.bookmark = [arguments[0],this.chapters[arguments[0]].panes_by_order[0].title.toURL()];
-							setChapter();
-						}
-
-						// figure out the first section
+						setChapter(arguments);
 					break;
 					case 2 :
-
 						if (this.chapters[arguments[0]] && this.chapters[arguments[0]].panes[arguments[1]]) {
 							this.bookmark = [arguments[0],arguments[1]];
 						}
 						// if its not a valid route, lets try the first URL segment
 						else {
-							setChapter();
+							setChapter(arguments);
 						}
-
 					break;
 				}
 			}
+			this.selectChapterAndSection(this.bookmark);
 
-
-			// and now open the right chapter and pane.
-
-			// open chapter, and section
-			// console.log('select chapter');
-			this.parent.router.navigate(this.bookmark.join('/'));
-			this.selectChapter(this.bookmark);
-
+			this.progress.setRoute(this.chapters[this.bookmark[0]]);
 
 		},
-		selectChapter : function(bookmark) {
-			// if (typeof bookmark === 'string') { bookmark = [bookmark]; }
-
-
+		selectChapterAndSection : function(bookmark) {
+			this.parent.router.navigate(bookmark.join('/'));
 
 			var view = this.chapters[bookmark[0]].view;
 			var section = view.panes[bookmark[1]];
@@ -107,6 +90,7 @@
 				var chapter = $(this);
 
 				var chapter_view = chapter.data('view');
+
 				$(this).stop().animate({marginLeft : (0-(100*(view.index-chapter_view.index)))+'%'});
 
 			});
@@ -143,42 +127,6 @@
 		minimize : function() {
 			// $('#sidebar').animate({width: 160, height: 40, borderRadius: 5, zIndex: 10, bottom: '5%', left: '5%', top: 'none', boxShadow: '0 0 5px #000', opacity: 0.8});
 
-		},
-		addOverlay : function(el) {
-			var overlay = $('<div class="overlay" />');
-			$('#glasswing').append(overlay);
-
-			var x, y, w, h;
-
-			var blur = 10;
-
-			var parent = $('#glasswing');
-			// parent = $('table');
-
-			x = ($(el).position().left - (blur*1)) / parent.width() * 100;
-			//y = 29.5;
-			// y = jQuery('table tr:first').position().top;
-
-			y = ($(el).position().top - (blur*1)) / parent.height() * 100;
-			w = ($(el).width() + (blur*2)) / parent.width() * 100;
-			h = ($(el).height() + (blur*2)) / parent.height() * 100;
-
-
-
-			overlay.append('<div class="piece" style="top: 0; left: 0; width: '+x+'%; height: 100%; box-shadow: '+blur+'px 0 '+blur+'px #000"></div>');
-			overlay.append('<div class="piece" style="top: 0; left: '+(x+w)+'%; width: '+(100-x-w)+'%; height: 100%; box-shadow: -'+blur+'px 0 '+blur+'px #000"></div>');
-
-			overlay.append('<div class="piece" style="top: 0; left: '+x+'%; width: '+w+'%; height: '+y+'%; box-shadow: 0 '+blur+'px '+blur+'px #000"></div>');
-			overlay.append('<div class="piece" style="top: '+(y+h)+'%; left: '+x+'%; width: '+w+'%; height: '+(100-y-h)+'%; box-shadow: 0 -'+blur+'px '+blur+'px #000"></div>');
-			overlay.find('.piece').css({opacity :0}).animate({opacity: 1},1000);
-
-
-			$('#glasswing tr').click(function(e){
-				overlay.find('.piece').animate({opacity: 0},500);
-				$('.active').close();
-				$(active.parent().find('.pane')[1]).open();
-
-			});
 		},
 		navigate : function(path,options) {
 

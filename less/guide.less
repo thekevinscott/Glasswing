@@ -185,7 +185,7 @@
 
             box-shadow: inset 0 1px 2px hsl(@hue, percentage(@saturation+-0.03), percentage(@lightness+-0.10));
 
-    .page {
+    .dot-container {
         border-radius: 20px;
         padding: 0;
         height: 14px;
@@ -210,10 +210,10 @@
         }
 
     }
-    .page:hover .dot {
+    .dot-container:hover .dot {
         background: hsl(@hue, percentage(@saturation), percentage(@lightness+.25));
     }
-    .page.filled {
+    .dot-container.filled {
         background: hsl(@hue, percentage(@saturation), percentage(@lightness+.25));
         .dot {
             background: white;

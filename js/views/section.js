@@ -42,9 +42,9 @@
 			this.$el.find('p').stop().slideDown();
 
 			// todo: remove this if statement, should always have a parent
-			console.log(this.$el);
-			console.log(this.parent);
+
 			if (this.parent) { this.parent.navigate(this.$el.data('url')); }
+			this.parent.play('tabs/'+this.title);
 			return this;
 		},
 		close : function() {

@@ -41,11 +41,12 @@
 			var length = this.chapters.length - 1;
 
 			for (var i=0;i<this.chapters.length;i++) {
-				var dot = $('<div class="page"><a class="dot"></a></div>');
+				var dot = $('<div class="dot-container"><a href="'+this.chapters[i].title.toURL()+'" class="dot"></a></div>');
 				this.$pages.append(dot);
 				dot.data('model',this.chapters[i]);
-				// console.log(this.chapters[i]);
+
 				dot.data('url',this.chapters[i].title.toURL());
+
 				this.chapters[i].dot = dot;
 				this.dots.push(dot);
 				if (length >0) {
@@ -59,11 +60,14 @@
 			return this;
 		},
 		click : function(event) {
-			var chapter = $(event.currentTarget).parent();
-			this.sidebar.route([chapter.data('url')]);
-			this.setProgress(chapter.data('model'));
+
+			var dot = $(event.currentTarget);
+			event.preventDefault();
+
+
+			this.sidebar.route([dot.attr('href')]);
 		},
-		setProgress : function(model) {
+		setRoute : function(model) {
 
 			var index = model.dot.index();
 			for (i=0;i<this.dots.length;i++) {
