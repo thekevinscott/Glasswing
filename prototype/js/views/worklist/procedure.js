@@ -51,7 +51,8 @@
 			// var model = $(event.currentTarget).data('model');
 
 			//this.layout = 'report';
-			this.model.worklist.tabManager.showPage(new glasswing.views.report(this.model));
+			if (! this.report) { this.report = new glasswing.views.report(this.model); }
+			this.model.worklist.tabManager.showPage(this.report);
 
 		},
 		setLayout : function(layout) {
