@@ -10,7 +10,7 @@ glasswing.collections.tabs = Backbone.Collection.extend({
         var self = this;
         this.getPage(model, function(page){
 
-            //self.router.url(page.view.url,options);
+            self.router.url(page.view.url,options);
 
             if (self.selected_tab != null) { self.selected_tab.deselect(); }
             console.log(page.view.view);

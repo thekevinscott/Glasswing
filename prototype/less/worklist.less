@@ -6,11 +6,14 @@
 @six-across:    ~"only screen and (min-width: 1278px)";
 
 
-
+@filter_width : 300px;
 
 .worklist {
 	margin-top: 20px;
 	padding-right: 20px;
+	.container {
+		margin-right: @filter_width;
+	}
 	table {
 		width: 100%;
 	}
@@ -112,4 +115,23 @@
 			background: #333;
 		}
 	}
+
+
+	.layouts {
+		float: right;
+	}
+
+	.filters {
+		float: right;
+
+		width: @filter_width - 20px;
+
+		min-height: 100px;
+		margin-left: 20px;
+		select {
+			width: 100%;
+			margin: 10px 0;
+		}
+	}
 }
+

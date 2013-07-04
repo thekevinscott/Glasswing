@@ -1,24 +1,46 @@
-<input type="button" value="Table" class="table" />
-<input type="button" value="Card" class="card" />
-<input type="button" value="Auto" class="auto" />
-<table>
-	<thead><tr>
-		<td>PACS Images</td>
-		<td>Scanned Document</td>
-		<td>Last Name</td>
-		<td>First Name</td>
-		<td>Patient DOB</td>
-		<td>Gender</td>
-		<td>Patient ID</td>
-		<td>Patient Risks</td>
-		<td>Procedure Name</td>
-		<td>Priority</td>
-		<td>Class</td>
-		<td>Report Status</td>
-		<td>Procedure Status</td>
-		<td>Referring Physician</td>
-		<td>Hospital Name</td>
+<div class="clear"></div>
+<div class="filters">
+	<input type="text" />
+	<h3>Filter</h3>
+	<select>
+		<option>Filter by CT</option>
+	</select>
+	<select>
+		<option>Filter by Urgency</option>
+	</select>
+	<select>
+		<option>Sort by Recency</option>
+	</select>
+	<input type="button" value="Apply Filters" />
+</div>
+<div class="container">
 
-	</tr></thead>
-	<tbody></tbody>
-</table>
+	<div class="layouts">
+		Worklist Layout:
+		<input type="button" value="Table" class="table" />
+		<input type="button" value="Card" class="card" />
+		<input type="button" value="Auto" class="auto" />
+	</div>
+	<h1>Worklist: CT</h1>
+	<table>
+		<thead><tr>
+			<td>PACS Images</td>
+			<td>Scanned Document</td>
+			<td>Last Name</td>
+			<td>First Name</td>
+			<td>Patient DOB</td>
+			<td>Gender</td>
+			<td>Patient ID</td>
+			<td>Patient Risks</td>
+			<td>Procedure Name</td>
+			<td>Priority</td>
+			<td>Class</td>
+			<td>Report Status</td>
+			<td>Procedure Status</td>
+			<td>Referring Physician</td>
+			<td>Hospital Name</td>
+
+		</tr></thead>
+		<tbody></tbody>
+	</table>
+</div>
