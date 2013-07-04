@@ -9,11 +9,7 @@ glasswing.models.procedure = glasswing.models.abstract.extend({
 		this.view = new glasswing.views.procedure({model : this});
 
 		// this.patient = options.patient;
-		this.on("change", function() {
-		  	if (this.hasChanged("title")) {
-		    	this.view.render();
-		  	}
-		});
+
 	},
 	// we overload our parent get function
 	get: function (attr) {
@@ -26,5 +22,6 @@ glasswing.models.procedure = glasswing.models.abstract.extend({
 			break;
 		}
 
-	}
+	},
+
 });

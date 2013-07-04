@@ -10,10 +10,11 @@ glasswing.models.procedure = glasswing.models.abstract.extend({
 
 		// this.patient = options.patient;
 		this.on("change", function() {
-		  	if (this.hasChanged("title")) {
+		  	if (this.hasChanged()) {
 		    	this.view.render();
 		  	}
 		});
+
 	},
 	// we overload our parent get function
 	get: function (attr) {

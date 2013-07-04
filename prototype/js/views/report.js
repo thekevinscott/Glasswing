@@ -1,23 +1,36 @@
+//'lib/text!templates/report/index.html',
 (function($){
 	glasswing.views.report = glasswing.views.abstract.extend({
 		tagName : 'div',
 		className : 'report',
 		// model : new worklist(),
 
-
+		// template_html : 'report/index.html',
 
 		template : glasswing.template('report.html'),
 		events : {
 		  "click .actions input[type=button]" : "saveProcedure"
 		},
-		initialize : function(model) {
+		initialize : function(attributes) {
 
         	glasswing.views.abstract.prototype.initialize.apply(this, arguments);
 
-        	this.model = model;
+
 			this.name = this.model.get('name');
 
 			this.url = 'procedure/'+this.model.get('id');
+
+			var self = this;
+			setTimeout(function(){
+
+				self.model.set('images',10);
+				// console.log(self.model.get('images'));
+			},200);
+
+			this.model.on('change', function(){
+				console.log('this sucks, should go in the model code');
+				alert('change the view');
+			}); // attempt to bind to model change event
 
 
 		},
