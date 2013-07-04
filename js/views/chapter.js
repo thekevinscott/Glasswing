@@ -67,7 +67,7 @@
 
 
 			this.model = new glasswing.models.chapter(options.data);
-			this.$el.attr('id','chapter-'+this.model.title)
+			this.$el.attr('id','chapter-'+this.model.title.toURL())
 			this.panes = {};
 			this.render();
 		},

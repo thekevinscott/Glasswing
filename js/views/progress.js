@@ -1,4 +1,3 @@
-alert('1');
 (function($){
 	$.fn.progressBar = function(options) {
 		return $(this).each(function(){
@@ -17,32 +16,64 @@ alert('1');
 	}
 	glasswing.views.progress = glasswing.views.abstract.extend({
 
-		className : 'chapterProgress',
+		className : 'chapter-progress',
 		template : glasswing.template('progress.html'),
+		events : {
+			"click .dot" : "click"
+		},
 		initialize : function(attributes) {
 			glasswing.views.abstract.prototype.initialize.apply(this, attributes);
 			this.sidebar = attributes.sidebar;
+			this.chapters = [];
+			for (var key in this.sidebar.chapters) {
+				this.chapters.push(this.sidebar.chapters[key]);
+			}
 			this.render();
 
 
 		},
 		render : function(animate) {
+			this.$el.append($(_.template(this.template, {})));
+			this.dots = [];
 
 			this.$pages = this.$el.find('.pages');
-			var length = options.pages - 1;
+			var length = this.chapters.length - 1;
 
-			for (var i=0;i<options.pages;i++) {
-				var chapter = $('<div class="page"><div class="dot"></div></div>');
-				this.$pages.append(chapter);
-
+			for (var i=0;i<this.chapters.length;i++) {
+				var dot = $('<div class="page"><a class="dot"></a></div>');
+				this.$pages.append(dot);
+				dot.data('model',this.chapters[i]);
+				// console.log(this.chapters[i]);
+				dot.data('url',this.chapters[i].title.toURL());
+				this.chapters[i].dot = dot;
+				this.dots.push(dot);
 				if (length >0) {
-					chapter.css({left : (100 - ((100/length)*(length - i))  )+'%'});
+					dot.css({left : (100 - ((100/length)*(length - i))  )+'%'});
 				}
 			}
+
 			this.sidebar.$el.prepend(this.$el);
+
 
 			return this;
 		},
+		click : function(event) {
+			var chapter = $(event.currentTarget).parent();
+			this.sidebar.route([chapter.data('url')]);
+			this.setProgress(chapter.data('model'));
+		},
+		setProgress : function(model) {
+
+			var index = model.dot.index();
+			for (i=0;i<this.dots.length;i++) {
+				if (i<=index) {
+					this.dots[i].addClass('filled');
+				} else {
+					this.dots[i].removeClass('filled');
+				}
+
+			}
+		}
 
 
 	});

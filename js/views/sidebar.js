@@ -12,7 +12,7 @@
 			this.render();
 
 			this.bookmark = ['tabs','the-idea']; // set to first.
-			// this.selectChapter(this.bookmark);
+
 
 		},
 		render : function(animate) {
@@ -22,12 +22,13 @@
 
 			// set the chapter id
 			var chapter_count = 0;
+
 			for (var key in this.chapters) {
 				self.chapters[key].view = new glasswing.views.chapter({
 					parent : this,
 					data : $.extend({key : key},this.chapters[key]),
 				});
-
+				self.chapters[key].view.index = chapter_count;
 				this.$el.append(  this.chapters[key].view.$el );
 				this.chapters[key].view.$el.css({marginLeft: (chapter_count*100)+'%'});
 				chapter_count++;
@@ -62,7 +63,12 @@
 			if (arguments) {
 				switch(arguments.length) {
 					case 1 :
-						setChapter();
+						if (this.chapters[arguments[0]]) {
+
+							this.bookmark = [arguments[0],this.chapters[arguments[0]].panes_by_order[0].title.toURL()];
+							setChapter();
+						}
+
 						// figure out the first section
 					break;
 					case 2 :
@@ -90,14 +96,20 @@
 
 		},
 		selectChapter : function(bookmark) {
+			// if (typeof bookmark === 'string') { bookmark = [bookmark]; }
+
+
 
 			var view = this.chapters[bookmark[0]].view;
-
-				// console.log(view);
 			var section = view.panes[bookmark[1]];
-			// console.log('section');
-			// console.log(section);
 
+			$('.chapter').each(function(){
+				var chapter = $(this);
+
+				var chapter_view = chapter.data('view');
+				$(this).stop().animate({marginLeft : (0-(100*(view.index-chapter_view.index)))+'%'});
+
+			});
 			$(section).data('view').open();
 
 

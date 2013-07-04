@@ -46,13 +46,13 @@
 	}
 
 	glasswing.config = {chapters : parseChapters([
-		glasswing.template('guide/tabs.md'),
-		glasswing.template('guide/notifications.md'),
-		glasswing.template('guide/case-cards.md'),
-		glasswing.template('guide/following.md'),
-		glasswing.template('guide/timeline.md'),
-		glasswing.template('guide/side-by-side.md'),
-		glasswing.template('guide/caregivers.md'),
+		glasswing.template('pages/tabs.md'),
+		glasswing.template('pages/notifications.md'),
+		glasswing.template('pages/case-cards.md'),
+		glasswing.template('pages/following.md'),
+		glasswing.template('pages/timeline.md'),
+		glasswing.template('pages/side-by-side.md'),
+		glasswing.template('pages/caregivers.md'),
 	]) };
 
 
