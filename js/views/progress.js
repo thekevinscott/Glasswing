@@ -37,6 +37,7 @@
 			this.dots = [];
 
 			this.$pages = this.$el.find('.pages');
+			this.$progress = this.$el.find('.progress');
 			var length = this.chapters.length - 1;
 
 			for (var i=0;i<this.chapters.length;i++) {
@@ -71,8 +72,13 @@
 				} else {
 					this.dots[i].removeClass('filled');
 				}
-
 			}
+			// lets rebuild this thing with canvas
+
+			// console.log(this.$el.width());
+			// console.log(model.dot.position().left);
+			// this.$progress.animate({width: (model.dot.position().left / this.$el.width() * 100) + '%'});
+
 		}
 
 
