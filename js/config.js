@@ -1,8 +1,8 @@
-//'lib/text!templates/guide/chapter1.md',
+
 (function($){
 
-	var number_of_random_procedures, worklist, patientsCollection, proceduresCollection;
-	number_of_random_procedures = 50;
+	var worklist, patientsCollection;
+
 
 
 	worklist = new glasswing.views.worklist();
@@ -11,7 +11,7 @@
 
 
 
-	for (var i=0;i<number_of_random_procedures;i++) {
+	for (var i=0;i<70;i++) {
 
 		var procedureModel = worklist.procedures.getRandomProcedure(patientsCollection.generateRandomPatient());
 

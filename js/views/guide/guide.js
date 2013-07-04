@@ -34,7 +34,8 @@
 		},
 		render : function() {
 			this.$el.append($(_.template(this.template, {})));
-
+			console.log(this.$el);
+			console.log(this.$el.html());
 
 
 			this.sidebar = new glasswing.views.guide.sidebar({
@@ -63,7 +64,7 @@
 		},
 		// this is the action corresponding to the title page.
 		// handles the positioning, and if not the initial view, the animation
-		titlePage : function() {
+		home : function() {
 
 
 

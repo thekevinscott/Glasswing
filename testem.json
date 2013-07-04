@@ -14,9 +14,18 @@
 
     "js/glasswing.js",
 
+    "js/views/abstract.js",
+    "js/models/abstract.js",
+    "js/views/worklist/procedure.js",
+
+
     "js/models/*.js",
+    "js/models/guide/*.js",
     "js/collections/*.js",
+    "js/collections/guide/*.js",
     "js/views/*.js",
+    "js/views/guide/*.js",
+    "js/views/worklist/*.js",
     "js/config.js",
     "js/router.js",
 
@@ -24,6 +33,8 @@
     "js/lib/sinon-chai.js",
     "js/lib/sinon-1.5.2.js",
 
-    "js/test/glasswing.js"
+    "js/test/glasswing.js",
+    "js/test/config.js",
+    "js/test/router.js"
   ]
 }

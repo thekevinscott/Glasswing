@@ -5,6 +5,7 @@
 		initialize : function(attributes) {
 			glasswing.views.abstract.prototype.initialize.apply(this, arguments);
 			// parse our chapters
+			console.log('attributes');
 			console.log(attributes);
 
 			this.parent = attributes.parent;
