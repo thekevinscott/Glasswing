@@ -1,54 +1,58 @@
-define([
+(function(){
 
-	'underscore',
-	'backbone',
-	'collections/tabs',
-	'config',
-	'models/patient',
-	'models/procedure',
-	'views/worklist',
-	// other views would go here
-], function(_, Backbone, tabs, config, patient, procedure, worklistView){
-	var tabManager, worklist;
 
-	worklist = config.worklist;
 
+	Backbone.sync = function(method, model, success, error){success();}
+	var tabManager, worklist, guide;
+
+
+
+
+	worklist = glasswing.config.worklist;
+
+
+	var routes = {
+		home : function(chapter, section) {
+			console.log('home');
+
+			guide.home();
+
+
+			glasswing.router.initial_route = false;
+		},
+		guide : function(chapter, section) {
+			guide.begin(arguments);
+			glasswing.router.initial_route = false;
+		},
+		fourohfour : function() {
+
+		}
+
+	};
 
 	var AppRouter = Backbone.Router.extend({
 		routes: {
-			"procedure/:procedure_id" : 'procedure',
-			"worklist" : 'worklist',
+			// "guide" : routes.home,
+			// "guide/" : routes.home,
+			// "guide/:chapter" : routes.guide,
+			// "guide/:chapter/:section" : routes.guide,
 			// "worklist/:layout" : 'worklist',
-			"*actions": "worklist" // matches http://example.com/#anything-here
-			}
+			"": routes.home,
+			"*actions": routes.guide
+		}
 	}); // Initiate the router
-	var app_router = new AppRouter();
-	app_router.on('route:defaultRoute', function(actions) {
-		tabManager.showPage(worklist);
-	});
-	app_router.on('route:worklist', function(layout) {
-		tabManager.showPage(worklist);
-	});
-	app_router.on('route:procedure', function(procedure_id) {
+	glasswing.router = new AppRouter();
+	glasswing.config.routes = routes;
 
-		console.log('procedure: ' + procedure_id);
-		tabManager.getPage(worklist); // get page SETS the page, creates a tab. that's confusing.
 
-		(function(procedure){
-
-			tabManager.showPage(procedure);
-
-		})(worklist.getProcedure(procedure_id));
+	glasswing.router.initial_route = true;
 
 
 
-	});
+	guide = new glasswing.views.guide({router: glasswing.router, chapters : glasswing.config.chapters});
 
-
-	tabManager = new tabs({router : app_router, worklist : worklist});
 
 	Backbone.history.start();
 
 
-
-});
+})();
