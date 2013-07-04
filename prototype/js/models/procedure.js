@@ -27,5 +27,8 @@ glasswing.models.procedure = glasswing.models.abstract.extend({
 		}
 
 	},
+	isStat : function() {
+		return (this.get('priority') > 2) ? true : false;
+	}
 
 });

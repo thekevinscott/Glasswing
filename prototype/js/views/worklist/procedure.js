@@ -30,7 +30,8 @@
 				report_status : this.model.get('report_status'),
 				procedure_status : this.model.get('this.model_status'),
 				referring_physician : this.model.get('referring_physician'),
-				hospital_name : this.model.get('hospital_name')
+				hospital_name : this.model.get('hospital_name'),
+				stat : ( (this.model.isStat()) ? 'stat' : null  )
 			};
 			this.$table = $(_.template(glasswing.template('worklist/row'),opts));
 			$(this.$table).data('view',this);

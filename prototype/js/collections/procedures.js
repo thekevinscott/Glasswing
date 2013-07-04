@@ -51,7 +51,7 @@ glasswing.collections.procedures = Backbone.Collection.extend({
 			referring_physician : 'Thompson',
 
 			procedure_name : this.getRandomIngredient('procedure_name'),
-			priority : 2,
+			priority : Math.round(Math.random()*4),
 			procedure_class : '-',
 			report_status : 'Unread',
 			procedure_status : 'Comp.',

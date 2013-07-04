@@ -21,7 +21,7 @@
 		tagName : 'div',
 		className : 'worklist',
 		// model : new worklist(),
-		// template : template,
+		template : glasswing.template('worklist/index'),
 		events : {
 		  // "click tbody tr" : "openProcedure",
 		  // "click .cards .card" : "openProcedure",
@@ -48,7 +48,15 @@
 			this.url = 'worklist';
 
 
+			this.templates = {
+				card : { template : glasswing.template('worklist/cards'), selector : '.cards'},
+				table : { template : glasswing.template('worklist/table'), selector : 'tbody'}
+			};
 			this.setLayout(this.current_layout);
+
+			// alert('1');
+			// console.log(this.templates);
+
 
 		},
 
@@ -58,11 +66,22 @@
 			// alert('render');
 
 			self.$el.html(_.template(self.template, {}));
-			self.$target = this.$el.find(self.target_selector);
+			self.$list = self.$el.find('.list');
+
+
+			var current_template = self.templates[self.current_layout];
+
+			// console.log(self.current_layout);
+			// console.log(current_template.template);
+			self.$list.html(_.template(current_template.template, {}));
+			// self.$worklist.html('worklist');
+
+
+			self.$target = this.$el.find(current_template.selector);
 
 
 			_.each(self.procedures.models,function(procedure, index){
-				console.log(self.current_layout);
+
 				procedure.view.setLayout(self.current_layout);
 
 
@@ -85,33 +104,19 @@
 
 			layout = (typeof layout == 'string') ? layout : $(layout.currentTarget).val().toLowerCase();
 			if (layout) {
-				this.current_layout = layout;
-
-
-				switch(this.current_layout) {
-
-					case 'card' :
-						this.template = glasswing.template('worklist/cards.html');
-						// this.template_procedure = glasswing.template('worklist/card.html');
-
-						this.target_selector = '.cards';
-						// var self = this;
-						// setTimeout(function(){
-						// 	self.collectCategoriesBy('modality');
-						// },1000);
-					break;
-					default :
-						this.template = glasswing.template('worklist/table.html');
-						// this.template_procedure = glasswing.template('worklist/row.html');
-
-						this.target_selector = 'table tbody';
-					break;
+				switch(layout) {
+					case 'card' : layout = 'card'; break;
+					case 'table' : layout = 'table'; break;
 				}
+				this.current_layout = layout;
 				this.render();
 
 				if (this.selected_button != null) { this.selected_button.deselect(); }
 
-				this.selected_button = this.buttons[this.current_layout].select();
+				if (this.buttons[this.current_layout]) {
+					this.selected_button = this.buttons[this.current_layout].select();
+				}
+
 			}
 
 

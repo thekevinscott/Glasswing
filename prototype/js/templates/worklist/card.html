@@ -1,4 +1,5 @@
-<div id="procedure-<%= id %>" class="card">
+<div id="procedure-<%= id %>" class="card <%= stat %>">
+	<div class="status"></div>
 	<div class="content">
 		<h3><%= last %>, <%= first %></h3>
 
@@ -15,9 +16,12 @@
 		<%= procedure_class %>
 		<%= report_status %>
 		<%= procedure_status %>
-		<%= referring_physician %>
-		<%= hospital_name %>
+
 
 	</div>
 
+		<footer>
+			Hospital : <%= hospital_name %>
+			Referring Physician: <%= referring_physician %>
+		</footer>
 </div>

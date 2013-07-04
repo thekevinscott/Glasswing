@@ -1,12 +1,20 @@
-@one-across:   ~"only screen and (max-width: 414px)";
+/*@one-across:   ~"only screen and (max-width: 414px)";
 @two-across:   ~"only screen and (min-width: 415px) and (max-width: 614px)";
 @three-across:   ~"only screen and (min-width: 615px) and (max-width: 760px)";
 @four-across:    ~"only screen and (min-width: 761px) and (max-width: 1060px)";
 @five-across:    ~"only screen and (min-width: 1061px) and (max-width: 1277px)";
-@six-across:    ~"only screen and (min-width: 1278px)";
+@six-across:    ~"only screen and (min-width: 1278px)";*/
+@one-across:   ~"only screen and (max-width: 114px)";
+@two-across:   ~"only screen and (min-width: 115px) and (max-width: 114px)";
+@three-across:   ~"only screen and (min-width: 115px) and (max-width: 1760px)";
+@four-across:    ~"only screen and (min-width: 1761px) and (max-width: 11060px)";
+@five-across:    ~"only screen and (min-width: 11061px) and (max-width: 11277px)";
+@six-across:    ~"only screen and (min-width: 11278px)";
 
 
 @filter_width : 300px;
+
+
 
 .worklist {
 	margin-top: 20px;
@@ -31,21 +39,71 @@
 		}
 	}
 	/*** Cards ***/
+
+	.cards { zoom: 1; }
+	.cards:before,
+	.cards:after { content: ""; display: table; }
+	.cards:after { clear: both; }
+
+	.card {
+		zoom: 1;
+		display: inline;
+	}
+
 	.cards {
 		position: relative;
 		.card {
 
 			float: left;
 
-			border: 1px solid #666666;
 
 
 			margin-bottom: 20px;
 
-			border-radius: 5px;
 			cursor: pointer;
+			.status {
+				height: 8px;
+				background: #555;
+				border-top: 1px solid #777;
+
+				transition: 		all 0.3s;
+				-webkit-transition: all 0.3s;
+			}
+			footer {
+				background: #444;
+				padding: 20px;
+
+				transition: 		all 0.3s;
+				-webkit-transition: all 0.3s;
+			}
 
 		}
+
+		.content {
+			padding: 20px;
+			background: #333;
+
+			transition: 		all 0.3s;
+			-webkit-transition: all 0.3s;
+		}
+		.card:hover {
+			.content {
+				background: #444;
+			}
+			.status {
+				background: #666;
+			}
+			footer {
+				background: #555;
+			}
+		}
+		.card.stat {
+			.status {
+				background: #cc0000;
+				border-top: 1px solid #e80000;
+			}
+		}
+
 
 
 		@media @one-across {
@@ -67,8 +125,8 @@
 
 		@media @three-across {
 		  .card {
-		    width: 31%;
-		    margin-right: 3%;
+		    width: 31.7%;
+		    margin-right: 2%;
 		  }
 		  .card:nth-child(3n+0) {
 		  	margin-right: 0;
@@ -105,16 +163,6 @@
 		}
 
 
-		.content {
-			padding: 20px;
-			background: #222;
-
-			transition: 		all 0.3s;
-			-webkit-transition: all 0.3s;
-		}
-		.card:hover .content {
-			background: #333;
-		}
 	}
 
 
