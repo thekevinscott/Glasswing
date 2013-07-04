@@ -1,27 +1,6 @@
 
 (function($){
 
-	var worklist, patientsCollection;
-
-
-
-	worklist = new glasswing.views.worklist();
-	// generate a collection of random patients
-	patientsCollection = new glasswing.collections.patients();
-
-
-
-	for (var i=0;i<70;i++) {
-
-		var procedureModel = worklist.procedures.getRandomProcedure(patientsCollection.generateRandomPatient());
-
-		procedureModel.worklist = worklist;
-
-		//var procedureView = new glasswing.views.procedure({model : procedureModel});
-
-		worklist.procedures.add(procedureModel);
-
-	}
 
 
 	var parseChapters = function(data) {
@@ -61,7 +40,7 @@
 		return chapters;
 	}
 
-	glasswing.config = {worklist : worklist, chapters : parseChapters($('#guide-chapter1')) };
+	glasswing.config = {chapters : parseChapters(glasswing.template('chapter1.md')) };
 
 
 

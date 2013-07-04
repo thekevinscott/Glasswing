@@ -15,7 +15,7 @@
 			if (this.$el) { this.$el.data('view',this); }
 
 			this.name = 'Default';
-			this.url = '';
+			// this.url = '';
 			return this;
 		},
 		setOptions : function(options) {

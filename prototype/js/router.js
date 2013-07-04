@@ -27,9 +27,9 @@
 
 			(function(procedure){
 
-				tabManager.showPage(procedure);
+				tabManager.showPage(new glasswing.views.report(procedure));
 
-			})(worklist.getProcedure(procedure_id));
+			})(worklist.procedures.getProcedure(procedure_id));
 			glasswing.router.initial_route = false;
 
 

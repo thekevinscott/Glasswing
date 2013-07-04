@@ -37,7 +37,6 @@
 			this.$card = $(_.template(glasswing.template('worklist/card'),opts));
 			$(this.$card).data('view',this);
 
-			this.$report = $(_.template(glasswing.template('report/index'),opts));
 
 			// }
 

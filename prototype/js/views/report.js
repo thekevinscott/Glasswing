@@ -1,13 +1,12 @@
-//'lib/text!templates/report/index.html',
 (function($){
 	glasswing.views.report = glasswing.views.abstract.extend({
 		tagName : 'div',
 		className : 'report',
 		// model : new worklist(),
 
-		// template_html : 'report/index.html',
 
-		template : glasswing.template('report/index.html'),
+
+		template : glasswing.template('report.html'),
 		events : {
 		  "click .actions input[type=button]" : "saveProcedure"
 		},

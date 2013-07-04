@@ -23,7 +23,15 @@
 	width: 61%;
 }
 */
+
+.report { zoom: 1; }
+.report:before,
+.report:after { content: ""; display: table; }
+.report:after { clear: both; }
+
+
 .report {
+
 	textarea {
 		min-height: 300px;
 		width: 100%;
@@ -42,5 +50,18 @@
 	}
 	.actions {
 		text-align: right;
+	}
+	.left, .right {
+		zoom: 1;
+		display: inline;
+	}
+	.left {
+		float: left;
+		width: 70%;
+	}
+	.right {
+		float: right;
+		width: 27%;
+		padding-left: 3%;
 	}
 }
