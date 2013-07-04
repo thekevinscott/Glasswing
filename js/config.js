@@ -8,8 +8,13 @@
 
 		}
 
-		_.each([data],function(chapter){
+		for (var i=0;i<data.length;i++) {
+			var chapter = data[i];
+
+
+
 			var key;
+
 			// var pane_count;
 			var pane_name;
 			_.each(markdown.toHTMLTree(chapter),function(node){
@@ -36,11 +41,19 @@
 					break;
 				}
 			});
-		});
+		};
 		return chapters;
 	}
 
-	glasswing.config = {chapters : parseChapters(glasswing.template('chapter1.md')) };
+	glasswing.config = {chapters : parseChapters([
+		glasswing.template('guide/tabs.md'),
+		glasswing.template('guide/notifications.md'),
+		glasswing.template('guide/case-cards.md'),
+		glasswing.template('guide/following.md'),
+		glasswing.template('guide/timeline.md'),
+		glasswing.template('guide/side-by-side.md'),
+		glasswing.template('guide/caregivers.md'),
+	]) };
 
 
 

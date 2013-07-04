@@ -50,7 +50,7 @@
 
 
 	guide = new glasswing.views.guide({router: glasswing.router, chapters : glasswing.config.chapters});
-
+	glasswing.guide = guide;
 
 	Backbone.history.start();
 

@@ -51,7 +51,7 @@
 
 		// model : new worklist(),
 		// template_html : 'guide/chapter.html',
-
+		className : 'chapter',
 		template : glasswing.template('chapter.html'),
 		events : {
 		  "click #introduction .button" : "click"
@@ -64,7 +64,10 @@
 			this.parent = options.parent;
 
 
+
+
 			this.model = new glasswing.models.chapter(options.data);
+			this.$el.attr('id','chapter-'+this.model.title)
 			this.panes = {};
 			this.render();
 		},
@@ -72,6 +75,7 @@
 		render : function() {
 			var self = this;
 			//var chapter = new chapterView(this.chapters[key]);
+
 
 			self.$el.html(_.template(this.template,this.model));
 
@@ -88,6 +92,7 @@
 
 
 				self.$sections.append(section.view.$el);
+
 
 
 				self.setupSection(section.view.$el);
@@ -115,7 +120,8 @@
 
 		},
 		navigate : function(path,options) {
-			this.parent.navigate(this.$el.data('url')+'/'+path,options);
+			// this.parent.navigate(this.$el.data('url')+'/'+path,options);
+			this.parent.navigate(path,options);
 		}
 
 	});

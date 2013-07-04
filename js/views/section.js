@@ -30,6 +30,7 @@
 
 			this.$el.data('url',this.title);
 			this.$el.data('view',this);
+
 			return this;
 		},
 		open :function() {

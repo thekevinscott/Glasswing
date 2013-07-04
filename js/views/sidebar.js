@@ -5,8 +5,6 @@
 		initialize : function(attributes) {
 			glasswing.views.abstract.prototype.initialize.apply(this, arguments);
 			// parse our chapters
-			console.log('attributes');
-			console.log(attributes);
 
 			this.parent = attributes.parent;
 			this.chapters = attributes.chapters;
@@ -23,19 +21,24 @@
 
 
 			// set the chapter id
+			var chapter_count = 0;
 			for (var key in this.chapters) {
-				console.log(key);
-				console.log(self.chapters);
-				console.log(self.chapters[key]);
 				self.chapters[key].view = new glasswing.views.chapter({
 					parent : this,
 					data : $.extend({key : key},this.chapters[key]),
 				});
 
 				this.$el.append(  this.chapters[key].view.$el );
+				this.chapters[key].view.$el.css({marginLeft: (chapter_count*100)+'%'});
+				chapter_count++;
 			}
 			this.$el.data('width',this.$el.width() / $('body').width() * 100);
 
+			// var chapter_progress = $('<div class="chapter-progress" />');
+			// this.$el.prepend(chapter_progress);
+			// chapter_progress.progressBar({pages : chapter_count});
+
+			this.progress = new glasswing.views.progress({sidebar : this});
 
 
 			return this;
@@ -43,7 +46,7 @@
 
 		route : function(arguments) {
 
-			console.log('internal route');
+			// console.log('internal route');
 
 
 			var setChapter = function() {
@@ -80,24 +83,21 @@
 			// and now open the right chapter and pane.
 
 			// open chapter, and section
-			console.log('select chapter');
+			// console.log('select chapter');
 			this.parent.router.navigate(this.bookmark.join('/'));
 			this.selectChapter(this.bookmark);
 
 
 		},
 		selectChapter : function(bookmark) {
-			console.log('select chapter: ' + bookmark[0]);
-			console.log(this.chapters);
+
 			var view = this.chapters[bookmark[0]].view;
 
 				// console.log(view);
 			var section = view.panes[bookmark[1]];
 			// console.log('section');
 			// console.log(section);
-			console.log(view);
-			console.log(view.panes);
-			console.log($(section).data('view'));
+
 			$(section).data('view').open();
 
 
@@ -169,6 +169,7 @@
 			});
 		},
 		navigate : function(path,options) {
+
 			this.parent.navigate(path,options);
 		}
 
