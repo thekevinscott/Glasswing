@@ -36,7 +36,8 @@
 
 			self.$sections = self.$el.find('.sections');
 			//this.$el.append(chapter.$el);
-			self.$el.data('url',self.$el.find('h1').html().toURL());
+			this.title = self.$el.find('h1').html().toURL();
+			self.$el.data('url',this.title);
 
 
 			//console.log(self.model.panes.each);
@@ -58,23 +59,21 @@
 		setupSection : function(view_el) {
 
 
-			var title = $(view_el).find('h2').html().toURL();
-			$(view_el).data('url',this.$el.data('url')+'/'+title);
+			var section_title = $(view_el).find('h2').html().toURL();
+			$(view_el).data('url',this.$el.data('url')+'/'+section_title);
 
-			this.panes[title] = view_el;
+			this.panes[section_title] = view_el;
 
 		},
 		play : function(file) {
 			//
 //			self.audio = self.$el.find('audio');
-
-			console.log(this.parent);
-			console.log(this.parent.audio);
-			this.parent.audio.attr('src','audio/'+file+'.mp3');
-			this.parent.audio[0].play();
+			console.log('file: ' + file);
+			this.parent.$audio.attr('src','audio/'+this.title+'/'+file+'.mp3');
+			this.parent.$audio[0].play();
 
 			var self = this;
-			this.parent.audio.audio({
+			this.parent.$audio.audio({
 				// 1.5 : function() {
 				// 	self.$el.find('.pane:first').open();
 				// },
