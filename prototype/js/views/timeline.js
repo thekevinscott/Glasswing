@@ -15,13 +15,48 @@
         	this.render();
 		},
 		render : function() {
-			console.log(this.$el);
-			this.$el.html(_.template(this.template, {
+			var self = this;
+
+			self.$el.html(_.template(self.template, {
 
 			}));
-			this.delegateEvents();
+			self.$bar = this.$el.find('.bar');
 
-			return this;
+
+
+
+			var priors = [
+				{date : new Date('2008') },
+				{date : new Date('2009') },
+				{date : new Date('2010') },
+				{date : new Date('2011') },
+				{date : new Date('2012') },
+				{date : new Date('2013') }
+			];
+			var max = (new Date()).getTime();
+			var min = max;
+			_.each(priors,function(prior){
+				if (prior.date.getTime()< min ) {
+					min = prior.date.getTime();
+				}
+			});
+
+
+			_.each(priors,function(prior){
+				var el = $('<div class="prior"></div>');
+				console.log('min: '+min);
+				console.log('max: '+max);
+				console.log('prior: '+prior.date.getTime());
+				var val = 100-(100 * (prior.date.getTime() - min) / (max - min));
+
+				el.css({top: val+'%'});
+				self.$bar.append(el);
+			});
+
+
+			self.delegateEvents();
+
+			return self;
 		}
 
 	});
