@@ -8,13 +8,12 @@
 			</div>
 			<p class="patient-id">Patient ID: <%= patient_id %>
 		</header>
-		<h3><%= last %>, <%= first %></h3>
+		<h3 class="name"><%= last %>, <%= first %></h3>
 		<p class="dob"><%= dob %></p><p class="gender"><%= gender %>
 
 
 		<hr />
-		<%= patient_id %>
-		<%= patient_risks %>
+		<p class="patient-risks"><%= patient_risks %></p>
 		<%= procedure_name %>
 		<%= priority %>
 		<%= procedure_class %>

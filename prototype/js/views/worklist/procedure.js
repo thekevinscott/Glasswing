@@ -1,7 +1,9 @@
 (function($){
 	glasswing.views.procedure = glasswing.views.abstract.extend({
 		events : {
-			"click" : "click"
+			"click" : "click",
+			"mouseover *" : "mouseover",
+			"mouseout *" : "mouseout",
 		},
 
 		initialize : function(attributes) {
@@ -63,6 +65,22 @@
 				this.report = new glasswing.views.report({model: this.model});
 			}
 			return this.report;
+		},
+		mouseover : function(event) {
+			var el = $(event.currentTarget);
+			if (el.attr('class')) {
+				var clss = el.attr('class').replace('highlight','').trim();
+				console.log('add to: ' + clss);
+				$('.'+clss).addClass('highlight');
+			}
+
+		},
+		mouseout : function() {
+			$('.highlight').removeClass('highlight');
+			// var el = $(event.currentTarget);
+			// var clss = el.attr('class').replace('highlight','').trim();
+			// console.log('remove from: ' + clss);
+			// $('.'+clss).removeClass('highlight');
 		}
 		// getTemplate : function(callback) {
 		// 	if (this.template_html) {
