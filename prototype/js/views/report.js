@@ -95,6 +95,7 @@
 
 				this.notify(this.notification_elements.shift());
 			}
+			this.timeline.afterRender();
 
 		},
 		setOptions : function(options) {
@@ -119,6 +120,7 @@
 			// how do I access tab manager in this scenario?
 		},
 		render : function() {
+
 			this.$el.html(_.template(this.template, {
 				id : this.model.get('id'),
 				patient_id : this.model.get('patient').get('patient-id'),
@@ -136,11 +138,11 @@
 
 			}));
 			this.delegateEvents();
-			this.afterRender();
+
 
 
 			this.timeline = new glasswing.views.timeline({parent : this, el : this.$el.find('.timeline')});
-
+			this.afterRender();
 
 			return this;
 		}
