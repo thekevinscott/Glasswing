@@ -5,9 +5,9 @@
 		<div class="three-col">
 			<div class="col">
 				<p class="patient-id"><%= patient_id %></p>
-				<p class="risks"><%= patient_risks %></p>
-				<p class="dob"><%= dob %></p>
-				<p class="priority"><%= priority %></p>
+				<p class="risks">Risks: <%= patient_risks %></p>
+				<p class="dob">DOB: <%= dob %></p>
+				<p class="priority">Priority: <%= priority %></p>
 
 
 			</div>
@@ -20,11 +20,12 @@
 			<div class="col clearfix">
 
 				<p class="hospital_name"><%= hospital_name %></p>
-				<p class="hospital_location">Huh</p>
+				<p class="hospital_location">Hospital Location</p>
 				<p class="referring_physician"><%= referring_physician %></p>
 			</div>
 
 		</div>
+		<p class="images">Images: <span><%= images %></span></p>
 
 	</div>
 	<form class="report pane">

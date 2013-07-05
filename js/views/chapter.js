@@ -77,7 +77,7 @@
 				// 1.5 : function() {
 				// 	self.$el.find('.pane:first').open();
 				// },
-				1.0 : function() {
+				9.0 : function() {
 					var tr = $p('table tbody tr:first');
 					//var view = $p('data',tr,'view')
 					tr.highlight();

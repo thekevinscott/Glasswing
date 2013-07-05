@@ -16,6 +16,7 @@ glasswing.collections.tabs = Backbone.Collection.extend({
 
             page.view.setOptions(options);
             $('.page').html(page.view.render().$el);
+            page.view.afterRender();
             self.selected_tab = page.tab.select();
         });
         return this;
@@ -47,6 +48,12 @@ glasswing.collections.tabs = Backbone.Collection.extend({
 
 
     },
+    // when a model has changed, we update our tab manager to display a notification
+    notify : function(view, attributes) {
+        this.getPage(view,function(page){
+            page.tab.notify(attributes);
+        });
+    },
     getPage : function(view,callback) {
 
 
@@ -59,11 +66,6 @@ glasswing.collections.tabs = Backbone.Collection.extend({
             this.pages[view['cid']] = null;
             var self = this;
 
-            glasswing.err('associated page view: ');
-            glasswing.err(view);
-
-            //var view = view.get('associated_page_view');
-            glasswing.err(view.constructor);
             view.tabManager = self;
 
 

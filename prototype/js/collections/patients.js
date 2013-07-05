@@ -21,7 +21,7 @@ glasswing.collections.patients = Backbone.Collection.extend({
 		var p = new glasswing.models.patient({
 			first : this.getRandomIngredient('first'),
 			last : this.getRandomIngredient('last'),
-			dob : 'dob',
+			dob : '2/2/1971',
 			gender : (Math.round(Math.random())) ? 'm' : 'f',
 			risks : '-'
 		});
