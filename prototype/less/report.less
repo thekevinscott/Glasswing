@@ -1,3 +1,5 @@
+@blue : #32a6d6;
+
 .procedure {
 	padding: 20px;
 }
@@ -24,16 +26,18 @@
 }
 */
 
-.report { zoom: 1; }
-.report:before,
-.report:after { content: ""; display: table; }
-.report:after { clear: both; }
+.procedure { zoom: 1; }
+.procedure:before,
+.procedure:after { content: ""; display: table; }
+.procedure:after { clear: both; }
 
 
 .report {
+	height: 100%;
+
 
 	textarea {
-		min-height: 300px;
+		min-height: 800px;
 		width: 100%;
 		padding: 5px;
 		font-size: 14px;
@@ -58,10 +62,105 @@
 	.left {
 		float: left;
 		width: 70%;
+		height: calc(~"100% - 60px");
+		overflow: scroll;
 	}
 	.right {
 		float: right;
-		width: 27%;
-		padding-left: 3%;
+		width: 30%;
+		.content {
+			margin-left: 5%;
+		}
 	}
+}
+
+
+.timeline { zoom: 1; }
+.timeline:before,
+.timeline:after { content: ""; display: table; }
+.timeline:after { clear: both; }
+
+
+
+.timeline {
+
+	position: relative;
+
+	h2 {
+		margin-bottom: 20px;
+	}
+
+	.container {
+		padding: 20px 0;
+	}
+	.bar-container, .priors {
+		zoom: 1;
+		display: inline;
+	}
+	.bar-container, .priors {
+		height: calc(~"100% - 180px");
+	}
+	.bar-container {
+
+		width: 14px;
+		float: left;
+		position: relative;
+		.slider {
+			background: blue;
+			opacity: 0.4;
+			width: 4px;
+			display: none;
+			height: 20px;
+			z-index: 10;
+			position: absolute;
+		}
+	}
+	.prior.hover {
+		background: @blue;
+	}
+	.bar {
+		z-index: 12;
+		background: white;
+		border-radius: 5px;
+		height: 100%;
+		border-left: 4px solid #777;
+		position: relative;
+		.prior.hover {
+			background: @blue;
+		}
+		.prior {
+			border-radius: 10px;
+			height: 6px;
+			width: 6px;
+			background: #999;
+			position: absolute;
+			left: 50%;
+			margin-left: -3px;
+			margin-top: -6px;
+		}
+	}
+	.priors {
+		width: 426px;
+		float: left;
+		overflow: scroll;
+		background: #222;
+		z-index: 11;
+
+		.prior {
+			border: 1px solid #333;
+			padding: 20px;
+			cursor: pointer;
+		}
+		h4 {
+			text-transform: uppercase;
+		}
+		p {
+			color: #777;
+			margin: 0;
+		}
+
+	}
+}
+.prior-report {
+	margin-left: 20px;
 }

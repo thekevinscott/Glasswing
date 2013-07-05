@@ -75,6 +75,9 @@
 			}); // attempt to bind to model change event
 
 
+
+
+
 		},
 		addNotification : function(obj) {
 			this.notification_elements.push(obj);
@@ -92,6 +95,7 @@
 
 				this.notify(this.notification_elements.shift());
 			}
+			this.timeline.afterRender();
 
 		},
 		setOptions : function(options) {
@@ -116,6 +120,7 @@
 			// how do I access tab manager in this scenario?
 		},
 		render : function() {
+
 			this.$el.html(_.template(this.template, {
 				id : this.model.get('id'),
 				patient_id : this.model.get('patient').get('patient-id'),
@@ -133,8 +138,22 @@
 
 			}));
 			this.delegateEvents();
+
+
+			this.$left = this.$el.find('.left');
+			this.$right = this.$el.find('.right');
+			this.timeline = new glasswing.views.timeline({parent : this, el : this.$el.find('.timeline')});
 			this.afterRender();
+
 			return this;
+		},
+		twoPane : function(prior) {
+
+			this.$left.animate({width: '50%'});
+			this.$right.animate({width: '50%'});
+
+
+			this.$right.find('.prior-report').html(prior.getReport());
 		}
 
 	});
