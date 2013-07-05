@@ -154,6 +154,7 @@
 
 
 			this.$right.find('.prior-report').html(prior.getReport());
+			prior.afterRender();
 		}
 
 	});
