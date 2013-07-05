@@ -35,7 +35,7 @@
 		// },
 
 		initialize : function(attributes) {
-			console.log("*** initialize our worklist");
+			// console.log("*** initialize our worklist");
 			glasswing.views.abstract.prototype.initialize.apply(this, arguments);
 
 			this.procedures = new glasswing.collections.procedures();

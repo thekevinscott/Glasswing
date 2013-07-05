@@ -11,13 +11,13 @@
 			this.name = this.model.get('name');
 			//this.render(true);
 		},
-		render : function(force) {
+		render : function() {
 			// if (force || this.model.hasChanged()) {
 			// 	// we should cache rendering and only return it on damage to the model
 
 			var opts = {
 				id : this.model.get('id'),
-				scanned_documents : this.model.get('scanned_documents'),
+				attachments : this.model.get('attachments'),
 				dob : this.model.get('patient').get('dob'),
 				first : this.model.get('patient').get('first'),
 				last : this.model.get('patient').get('last'),
@@ -33,16 +33,15 @@
 				hospital_name : this.model.get('hospital_name'),
 				stat : ( (this.model.isStat()) ? 'stat' : null  )
 			};
-			this.$table = $(_.template(glasswing.template('worklist/row'),opts));
-			$(this.$table).data('view',this);
-			this.$card = $(_.template(glasswing.template('worklist/card'),opts));
-			$(this.$card).data('view',this);
+			this['$table'] = $(_.template(glasswing.template('worklist/row'),opts));
+			this['$table'].data('view',this);
+			this['$card'] = $(_.template(glasswing.template('worklist/card'),opts));
+			this['$card'].data('view',this);
 
-
-			// }
 
 			this.$el = this['$'+this.layout];
-			// this.$el = 'sucker';
+			this.$el.data('view',this);
+
 			this.delegateEvents();
 
 			return this;
@@ -52,23 +51,30 @@
 			// var model = $(event.currentTarget).data('model');
 
 			//this.layout = 'report';
-			if (! this.report) { this.report = new glasswing.views.report(this.model); }
-			this.model.worklist.tabManager.showPage(this.report);
+			//if (! this.report) { this.report = new glasswing.views.report(this.model); }
+			this.model.worklist.tabManager.showPage(this.getReport());
 
 		},
 		setLayout : function(layout) {
 			this.layout = layout;
 		},
-		getTemplate : function(callback) {
-			if (this.template_html) {
-
-				var self = this;
-				$.get('js/templates/'+self.template,function(data){
-					self.template = data;
-					callback();
-				});
+		getReport : function() {
+			if (! this.report) {
+				this.report = new glasswing.views.report({model: this.model});
 			}
+			return this.report;
 		}
+		// getTemplate : function(callback) {
+		// 	if (this.template_html) {
+
+		// 		var self = this;
+		// 		$.get('js/templates/'+self.template,function(data){
+		// 			self.template = data;
+		// 			callback();
+		// 		});
+		// 	}
+		// }
+
 
 	});
 

@@ -42,6 +42,15 @@
 			cursor: pointer;
 		}
 	}
+	.stat {
+		.status {
+			background: #cc0000;
+			border-top: 1px solid #e80000;
+		}
+		td {
+			color: #cc0000;
+		}
+	}
 	/*** Cards ***/
 
 	.cards { zoom: 1; }
@@ -56,6 +65,10 @@
 
 	.cards {
 		position: relative;
+		p {
+			margin: 0;
+
+		}
 		.card {
 
 			float: left;
@@ -81,10 +94,21 @@
 				-webkit-transition: all 0.3s;
 			}
 
+			.attachments {
+				float: right;
+				background: url('../images/attachment.png') no-repeat;
+				background-size: 16px;
+				padding-left: 16px;
+			}
+			.patient-id {
+				text-transform: uppercase;
+				font-size: 12px;
+			}
+
 		}
 
 		.content {
-			padding: 20px;
+			padding: 5px 20px;
 			background: #333;
 
 			transition: 		all 0.3s;
@@ -101,12 +125,7 @@
 				background: #555;
 			}
 		}
-		.card.stat {
-			.status {
-				background: #cc0000;
-				border-top: 1px solid #e80000;
-			}
-		}
+
 
 
 

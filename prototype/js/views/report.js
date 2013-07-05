@@ -1,5 +1,31 @@
 //'lib/text!templates/report/index.html',
 (function($){
+	$.fn.notify = function(options) {
+		options = $.extend({
+			notify_appear : 10,
+			notify_disappear : 800,
+			notification_length : 5000
+		},options);
+		return $(this).each(function(){
+			var el = $(this);
+
+			var fadeOut = function() {
+				el.animate({color: 'white'}, options.notify_disappear);
+			}
+			setTimeout(function() {
+				// el = $('.images');
+				el.animate({color: '#32a6d6'}, options.notify_appear, function() {
+					el.mouseover(function(){
+						clearTimeout(timer);
+						fadeOut();
+					});
+					var timer = setTimeout(fadeOut,options.notification_length);
+				});
+			},200);
+
+
+		});
+	};
 	glasswing.views.report = glasswing.views.abstract.extend({
 		tagName : 'div',
 		className : 'report',
@@ -12,26 +38,60 @@
 		  "click .actions input[type=button]" : "saveProcedure"
 		},
 		initialize : function(attributes) {
-
+			this.notification_elements = [];
         	glasswing.views.abstract.prototype.initialize.apply(this, arguments);
 
-
+        	// console.log(attributes);
 			this.name = this.model.get('name');
 
 			this.url = 'procedure/'+this.model.get('id');
 
 			var self = this;
+
 			setTimeout(function(){
-
+				// console.log('change the model');
 				self.model.set('images',10);
-				// console.log(self.model.get('images'));
-			},200);
 
+				// console.log(self.model.get('images'));
+			},1500);
+
+			var view = this;
+
+			// two things need to happen.
 			this.model.on('change', function(){
 				console.log('this sucks, should go in the model code');
-				alert('change the view');
+				_.each(this.changedAttributes(),function(val,key){
+
+					if (view.$el.is(":visible")) {
+						view.notify({key : key, val : val});
+					} else {
+						view.addNotification({key : key, val : val});
+					}
+				});
+
+				// tab manager needs to be notified. but if the tab is active, then do nothing.
+				this.collection.view.tabManager.notify(view, {}); // pass in an optional attributes array
+
 			}); // attempt to bind to model change event
 
+
+		},
+		addNotification : function(obj) {
+			this.notification_elements.push(obj);
+		},
+		notify : function(obj) {
+
+			var el = this.$el.find('.'+obj.key);
+			var span = el.find('span');
+			span.html(obj.val);
+			el.notify();
+
+		},
+		afterRender : function() {
+			while(this.notification_elements.length > 0) {
+
+				this.notify(this.notification_elements.shift());
+			}
 
 		},
 		setOptions : function(options) {
@@ -56,7 +116,6 @@
 			// how do I access tab manager in this scenario?
 		},
 		render : function() {
-
 			this.$el.html(_.template(this.template, {
 				id : this.model.get('id'),
 				patient_id : this.model.get('patient').get('patient-id'),
@@ -70,9 +129,11 @@
 				report_status : this.model.get('report_status'),
 				hospital_name : this.model.get('hospital_name'),
 				referring_physician : this.model.get('referring_physician'),
+				images : this.model.get('images'),
 
 			}));
 			this.delegateEvents();
+			this.afterRender();
 			return this;
 		}
 

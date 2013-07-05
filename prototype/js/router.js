@@ -26,8 +26,11 @@
 			tabManager.getPage(worklist); // get page SETS the page, creates a tab. that's confusing.
 
 			(function(procedure){
-				alert('this is no good, itll make an extra report if you go back to worklist and click again');
-				tabManager.showPage(new glasswing.views.report({model : procedure}));
+				// alert('this is no good, itll make an extra report if you go back to worklist and click again');
+				// tabManager.showPage(new glasswing.views.report({model : procedure}));
+				// console.log(procedure);
+				// console.log(procedure.view);
+				tabManager.showPage(procedure.view.getReport());
 
 			})(worklist.procedures.getProcedure(procedure_id));
 			glasswing.router.initial_route = false;
