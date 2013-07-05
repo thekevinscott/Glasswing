@@ -70,7 +70,7 @@
 			var el = $(event.currentTarget);
 			if (el.attr('class')) {
 				var clss = el.attr('class').replace('highlight','').trim();
-				console.log('add to: ' + clss);
+				// console.log('add to: ' + clss);
 				$('.'+clss).addClass('highlight');
 			}
 

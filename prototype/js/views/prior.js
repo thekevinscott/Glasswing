@@ -14,7 +14,7 @@
 		},
 		initialize : function(attributes) {
 			this.parent = attributes.parent;
-			this.data = attributes.data;
+			// this.data = attributes.data;
         	glasswing.views.abstract.prototype.initialize.apply(this, arguments);
 
         	this.render();
@@ -23,7 +23,7 @@
 			var self = this;
 			self.$dot = $('<div class="prior"></div>');
 			self.$el.html(_.template(self.template, {
-				date : this.data.date.getMonth()+'/'+this.data.date.getDate()+'/'+this.data.date.getFullYear(),
+				date : this.model.getDate(),
 				procedure_name : 'Family Medicine'
 			}));
 			// console.log(this.$dot);
