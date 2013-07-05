@@ -7,11 +7,15 @@
 
 		template : glasswing.template('timeline/index.html'),
 		events : {
-		  "click .actions input[type=button]" : "saveProcedure"
+		  "click .actions input[type=button]" : "saveProcedure",
+		  "mouseover .timeline-container " : "mouseover",
+		  "mouseout .timeline-container" : "mouseout"
 		},
 		initialize : function(attributes) {
+			this.parent = attributes.parent;
 			this.prior_template = glasswing.template('timeline/prior.html');
         	glasswing.views.abstract.prototype.initialize.apply(this, arguments);
+        	this.collapsed = false;
         	this.render();
 		},
 		render : function() {
@@ -70,7 +74,7 @@
 
 
 			_.each(priors,function(data){
-				var prior = new glasswing.views.prior({data : data });
+				var prior = new glasswing.views.prior({parent : self, data : data });
 
 				var val = 100-(100 * (data.date.getTime() - min) / (max - min));
 
@@ -113,6 +117,26 @@
 			});
 
 
+		},
+		mouseover : function() {
+			if ( this.collapsed ) {
+				this.$priors.stop().animate({width: '300', marginLeft: '0'});
+			}
+		},
+		mouseout : function() {
+			if ( this.collapsed ) {
+				this.$priors.stop().animate({width: '0', marginLeft: '-10'});
+			}
+		},
+		twoPane : function(prior) {
+			var self = this;
+			this.parent.twoPane(prior);
+
+			this.$priors.animate({width: '0%', marginLeft: '-10'}, {duration: 400, complete : function(){
+				self.collapsed = true;
+
+				self.$priors.css({position: 'absolute'});
+			}});
 		}
 
 	});

@@ -140,11 +140,20 @@
 			this.delegateEvents();
 
 
-
+			this.$left = this.$el.find('.left');
+			this.$right = this.$el.find('.right');
 			this.timeline = new glasswing.views.timeline({parent : this, el : this.$el.find('.timeline')});
 			this.afterRender();
 
 			return this;
+		},
+		twoPane : function(prior) {
+
+			this.$left.animate({width: '50%'});
+			this.$right.animate({width: '50%'});
+
+
+			this.$right.find('.prior-report').html(prior.getReport());
 		}
 
 	});

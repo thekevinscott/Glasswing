@@ -67,8 +67,10 @@
 	}
 	.right {
 		float: right;
-		width: 27%;
-		padding-left: 3%;
+		width: 30%;
+		.content {
+			margin-left: 5%;
+		}
 	}
 }
 
@@ -117,6 +119,7 @@
 		background: @blue;
 	}
 	.bar {
+		z-index: 12;
 		background: white;
 		border-radius: 5px;
 		height: 100%;
@@ -138,13 +141,15 @@
 	}
 	.priors {
 		width: 426px;
-		float: right;
+		float: left;
 		overflow: scroll;
+		background: #222;
+		z-index: 11;
 
 		.prior {
 			border: 1px solid #333;
 			padding: 20px;
-
+			cursor: pointer;
 		}
 		h4 {
 			text-transform: uppercase;
@@ -155,4 +160,7 @@
 		}
 
 	}
+}
+.prior-report {
+	margin-left: 20px;
 }
