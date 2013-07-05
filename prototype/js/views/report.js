@@ -75,6 +75,9 @@
 			}); // attempt to bind to model change event
 
 
+
+
+
 		},
 		addNotification : function(obj) {
 			this.notification_elements.push(obj);
@@ -134,6 +137,11 @@
 			}));
 			this.delegateEvents();
 			this.afterRender();
+
+
+			this.timeline = new glasswing.views.timeline({parent : this, el : this.$el.find('.timeline')});
+
+
 			return this;
 		}
 
