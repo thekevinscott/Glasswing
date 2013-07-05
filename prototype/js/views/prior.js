@@ -9,7 +9,8 @@
 		events : {
 		  "mouseover" : "mouseover",
 		  "mouseout" : "mouseout",
-		  "click" : "click"
+		  "click" : "click",
+		  "click .coc" : "coc"
 		},
 		initialize : function(attributes) {
 			this.parent = attributes.parent;
@@ -49,10 +50,23 @@
 				this.$report = _.template(glasswing.template('timeline/prior-report.html', {
 
 				}));
-				this.$report = 'ssdf';
 
 			};
 			return this.$report;
+		},
+		afterRender : function() {
+			var self = this;
+			$(this.$report).find('.coc').click(function(){
+				var modal = $('<div class="modal"><div class="arrow"></div><div class="content"></div></div>');
+				// console.log($(this).position());
+				$(this).after(modal);
+				modal.find('.content').html(this.getCaregivers());
+				modal.css({left: $(this).position().left+10, top: $(this).position().top + 85, width: '200px', height: '200px'});
+			});
+		},
+		getCaregivers : function() {
+			if (! this.caregivers) { this.caregivers = new glasswing.views.caregivers(this); }
+			return this.caregivers;
 		}
 	});
 })(jQuery);
