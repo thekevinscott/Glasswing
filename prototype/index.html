@@ -65,5 +65,22 @@
 		<script type="text/javascript" src="js/router.js"></script>
 
 <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+	<script type="text/javascript">
+	var octopus = function(amount) {
+		if (! amount) { amount = 5; }
 
+		$('*').each(function(){
+			var ths = this;
+			var wiggle = function() {
+				var marginLeft = (Math.round(Math.random()*amount))+'px';
+				var marginTop = (Math.round(Math.random()*amount))+'px';
+				$(ths).animate({marginLeft: marginLeft, marginTop: marginTop},Math.round(Math.random()*100),function(){
+					wiggle();
+				});
+			}
+			wiggle();
+		})
+	}
+
+	</script>
 </body></html>
