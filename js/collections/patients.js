@@ -1,30 +1,38 @@
-define([
-	'underscore',
-	'backbone',
-	'models/patient',
-	'views/patient'
-], function(_, Backbone, patient, patientView) {
+glasswing.collections.patients = Backbone.Collection.extend({
+	model: glasswing.models.patient,
+	ingredients : {
+		first : ['Kelsey','Nancy','Mark','Kevin','Ben','Michelle','Gina','Puja','Jon','Phil','Charles','Parker','Nandhita','Min','Rebecca','John','Jason','Jonas','Arthur','Paul','Auldyn','KeVon','Nina','Stephanie'],
+		last : ['Stroshane','Chen','Baldwin','Scott','Margines','Lew','Assaf','Chan','Aweida','Bossier','Kumar','Xao','Rogers','Block','Gebhardt','Mandel','Ticer','Butler'],
+	},
+	initialize : function() {
 
-	return Backbone.Collection.extend({
-		model: patient,
-		initialize : function() {
+		_(this).bindAll('add');
 
-			_(this).bindAll('add');
-
-		},
-		add : function(model) {
-			if (model['getID']) {
-
-				if (! model.getID()) { model.setID(this.length); }
-		    	console.log('you added patient: ' + model.getName());
-
-		    	$('body').append((new patientView({model : model })).render().$el);
-			} else {
-				console.log('who the fuck is this');
-				console.log(model);
-			}
+	},
+	id_offset : 200100,
+	add : function(model) {
+		Backbone.Collection.prototype.add.call(this, model);
+		if (! model.get('id')) {
+			model.set('id',this.id_offset+this.length);
 
 		}
+	},
+	generateRandomPatient : function() {
+		var p = new glasswing.models.patient({
+			first : this.getRandomIngredient('first'),
+			last : this.getRandomIngredient('last'),
+			dob : 'dob',
+			gender : (Math.round(Math.random())) ? 'm' : 'f',
+			risks : '-'
+		});
+		this.add(p);
+		return p;
 
-	});
+
+	},
+	getRandomIngredient : function(key) {
+		return this.ingredients[key][Math.round(Math.random()* (this.ingredients[key].length-1) )];
+	}
+
+
 });

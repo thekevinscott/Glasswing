@@ -1,24 +1,50 @@
-define([
-	'jquery',
-	'underscore',
-	'backbone',
-	// other views would go here
-], function($, _, Backbone){
+(function(){
+
+
+
+	Backbone.sync = function(method, model, success, error){success();}
+	var tabManager, worklist, guide;
+
+
+
+
+	worklist = glasswing.config.worklist;
+
 
 	var AppRouter = Backbone.Router.extend({
-		routes : {
+		routes: {
+			":chapter" : 'guide',
+			":chapter/:section" : 'guide',
+			"": "home",
+			"guide" : 'guide',
+			"guide/" : 'guide',
 
+			"*actions": 'guide'
 		}
-	});
-	var initialize  = function() {
-		var app_router = new AppRouter;
-		app_router.on('defaultAction', function(actions){
-			console.log('No route:', actions);
-		});
-		Backbone.history.start();
+	}); // Initiate the router
+	glasswing.router = new AppRouter();
 
-	};
-	return {
-		initialize : initialize
-	};
-});
+
+	glasswing.router.initial_route = true;
+	glasswing.router.on('route:guide', function(chapter, section) {
+
+		// console.log(arguments);
+		guide.begin(arguments);
+		glasswing.router.initial_route = false;
+
+	});
+	glasswing.router.on('route:home', function(chapter, section) {
+
+		guide.home();
+		glasswing.router.initial_route = false;
+
+	});
+
+
+	guide = new glasswing.views.guide({router: glasswing.router, chapters : glasswing.config.chapters});
+	glasswing.guide = guide;
+
+	Backbone.history.start();
+
+
+})();

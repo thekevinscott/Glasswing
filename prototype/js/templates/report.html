@@ -1,0 +1,46 @@
+<div id="procedure-<%= id %>" class="procedure">
+	<div class="left">
+	<div class="dashboard pane">
+		<h2><%= name %></h2>
+		<div class="three-col">
+			<div class="col">
+				<p class="patient-id"><%= patient_id %></p>
+				<p class="risks">Risks: <%= patient_risks %></p>
+				<p class="dob">DOB: <%= dob %></p>
+				<p class="priority">Priority: <%= priority %></p>
+
+
+			</div>
+			<div class="col">
+				<p class="gender"><%= gender %></p>
+				<p class="procedure_class"><%= procedure_class %></p>
+				<p class="procedure_name"><%= procedure_name %></p>
+				<p class="report_status"><%= report_status %></p>
+			</div>
+			<div class="col clearfix">
+
+				<p class="hospital_name"><%= hospital_name %></p>
+				<p class="hospital_location">Hospital Location</p>
+				<p class="referring_physician"><%= referring_physician %></p>
+			</div>
+
+		</div>
+		<p class="images">Images: <span><%= images %></span></p>
+
+	</div>
+	<form class="report pane">
+		<h2>Report</h2>
+		<textarea class="dictation"></textarea>
+		<div class="actions">
+			<input type="button" value="Read" />
+			<input type="button" value="Co-Read" />
+			<input type="button" value="Approve" />
+		</div>
+	</form>
+	</div>
+	<div class="right">
+		<input type="button" value="Follow" />
+		<br />
+		<h2>Patient History</h2>
+	</div>
+</div>

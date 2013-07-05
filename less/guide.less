@@ -1,0 +1,235 @@
+@hue : 214;
+@saturation : .27;
+@lightness : .16;
+
+@sidebar_width : 24;
+
+#guide {
+	width: 100%;
+	height: 100%;
+    /* background: #18212d; */
+    background: hsl(@hue, percentage(@saturation), percentage(@lightness));
+
+
+    float: left;
+
+
+    border-right: 1px solid #0e1621;
+    overflow: hidden;
+    position: relative;
+    #glasswing {
+    	position: absolute;
+    	top: 0;
+    	left: 100%;
+    	margin-left: @sidebar_width + 0%;
+    	width: 100% - @sidebar_width;
+    	height: 100%;
+        min-height: 100%;
+    }
+    .full {
+    	position: absolute;
+
+    	left: 0;
+    	width: @sidebar_width + 0%;
+    	height: 100%;
+    	float: left;
+    	.pane {
+
+    		width: 360px;
+    		/* background: #293646; */
+
+    		border-top: 1px solid hsl(@hue, percentage(@saturation+-0.1), percentage(@lightness+.1));
+    		background: hsl(@hue, percentage(@saturation+-0.1), percentage(@lightness+.05));
+
+    		/*
+    		border-top: 1px solid #344762;
+    		border-top: 1px solid hsl(@hue, percentage(@saturation+0.03), percentage(@lightness+.08)); */
+
+    		padding: 20px;
+    		margin-top: 20px;
+
+    		/* border-top: 1px solid hsl(@hue, percentage(@saturation+-0.03), percentage(@lightness+-0.06)); */
+
+    		border: none;
+    	}
+    	.pane.raised {
+    		border-top: 1px solid hsl(@hue, percentage(@saturation+0.03), percentage(@lightness+.1));
+    		border-bottom: 1px solid hsl(@hue, percentage(@saturation+0.03), percentage(@lightness+-0.04));
+    	}
+    	.pane.inset {
+    		box-shadow: inset 0 1px 2px hsl(@hue, percentage(@saturation+-0.03), percentage(@lightness+-0.10));
+
+    	}
+    	.pane.inactive {
+    		opacity: 0.6;
+    	}
+    	.pane.active {
+    		background: hsl(@hue, percentage(@saturation), percentage(@lightness+.05));
+    		opacity: 1;
+
+    		transition: 		all 0.35s;
+    		-webkit-transition: all 0.35s; /* Safari */
+    	}
+    }
+    p {
+    	line-height: 20px;
+    	font-size: 1.1em;
+
+    }
+    audio {
+        margin: 20px;
+    }
+    .button {
+    	padding: 10px 20px;
+    	font-size: 14px;
+    	width: 200px;
+    	display: block;
+    	margin: 0 auto;
+    	text-align: center;
+    }
+    #titlePage {
+    	width: 100%;
+    	h1, h2 {
+    		padding: 20px 20px 0 20px;
+    	}
+    	img {
+    		margin: 10px auto;
+    		display: block;
+    	}
+    	.content {
+    		max-width: 800px;
+    		margin: 0px auto 0 auto;
+    		height: 100%;
+    	}
+    	.content { zoom: 1; }
+    	.content:before,
+    	.content:after { content: ""; display: table; }
+    	.content:after { clear: both; }
+    	.content h1 {
+    		text-align: center;
+    		display: block;
+    	}
+    	.pane {
+    		width: 48%;
+    		margin: 20px 4% 0 0;
+    		float: left;
+    		padding: 0;
+    		zoom: 1;
+    		display: inline;
+    		p {
+    			padding: 20px;
+    		}
+
+    	}
+    	.pane:last-child {
+    		margin-right: 0;
+    	}
+    }
+    #sidebar {
+    	left: 100%;
+        overflow: hidden;
+    	background: hsl(@hue, percentage(@saturation), percentage(@lightness));
+    }
+    .content {
+    	padding: 20px;
+    }
+    .chapter {
+        position: absolute;
+        overflow: scroll;
+        width: 100%;
+    	.pane {
+    		width: auto;
+
+    		overflow: hidden;
+    		cursor: pointer;
+    	}
+    	.pane p {
+    		display: none;
+    	}
+    }
+
+
+}
+
+
+
+.chapter-progress {
+    padding: 10px 20px;
+}
+
+
+
+.progress-bar {
+    @border-radius: 10px;
+
+    height: 5px;
+    margin: 0 auto;
+    border-radius: 5px;
+    /* Usual setup stuff */
+    position: relative;
+
+    /* Pad right so we don't cover the borders when fully progressed */
+    padding-right: 2px;
+    /* For browser that don't support gradients, we'll set a blanket background colour */
+    background-color: #abb2bc;
+    /* Rounds the ends, we specify an excessive amount to make sure they are completely rounded */
+    /* Adjust to your liking, and don't forget to adjust to the same amount in .ui-progress */
+    -moz-border-radius: @border-radius;
+    -webkit-border-radius: @border-radius;
+    -o-border-radius: @border-radius;
+    -ms-border-radius: @border-radius;
+    -khtml-border-radius: @border-radius;
+    border-radius: @border-radius;
+    /* Background gradient */
+    background: #555;
+    background: hsl(@hue, percentage(@saturation), percentage(@lightness+.15));
+
+
+    position: relative;
+
+            box-shadow: inset 0 1px 2px hsl(@hue, percentage(@saturation+-0.03), percentage(@lightness+-0.10));
+
+    .dot-container {
+        border-radius: 20px;
+        padding: 0;
+        height: 14px;
+        width: 14px;
+        background: white;
+        margin: -5px 0 0 -5px;
+        display: block;
+        position: absolute;
+
+        background: hsl(@hue, percentage(@saturation), percentage(@lightness+.15));
+
+        border-top: 1px solid hsl(@hue, percentage(@saturation+-0.03), percentage(@lightness+-0.10));
+        .dot {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            height: 8px;
+            width: 8px;
+            margin: -4px 0 0 -4px;
+            border-radius: 20px;
+            cursor: pointer;
+            background: hsl(@hue, percentage(@saturation), percentage(@lightness+.09));
+
+            transition:         all 0.25s;
+            -webkit-transition: all 0.25s; /* Safari */
+        }
+
+    }
+    .dot-container:hover .dot {
+        background: hsl(@hue, percentage(@saturation), percentage(@lightness+.25));
+    }
+    .dot-container.filled {
+        background: hsl(@hue, percentage(@saturation), percentage(@lightness+.25));
+        .dot {
+            background: white;
+        }
+    }
+
+
+    .progress {
+        background: white;
+    }
+}

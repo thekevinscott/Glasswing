@@ -1,0 +1,31 @@
+<div id="procedure-<%= id %>" class="card <%= stat %>">
+	<div class="status"></div>
+
+	<div class="content">
+		<header>
+			<div class="attachments">
+				<%= attachments %>
+			</div>
+			<p class="patient-id">Patient ID: <%= patient_id %>
+		</header>
+		<h3><%= last %>, <%= first %></h3>
+		<p class="dob"><%= dob %></p><p class="gender"><%= gender %>
+
+
+		<hr />
+		<%= patient_id %>
+		<%= patient_risks %>
+		<%= procedure_name %>
+		<%= priority %>
+		<%= procedure_class %>
+		<%= report_status %>
+		<%= procedure_status %>
+
+
+	</div>
+
+		<footer>
+			Hospital : <%= hospital_name %>
+			Referring Physician: <%= referring_physician %>
+		</footer>
+</div>
