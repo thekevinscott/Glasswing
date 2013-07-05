@@ -60,7 +60,7 @@
 				var modal = $('<div class="modal"><div class="arrow"></div><div class="content"></div></div>');
 				// console.log($(this).position());
 				$(this).after(modal);
-				modal.find('.content').html(this.getCaregivers());
+				modal.find('.content').html(self.getCaregivers().$el);
 				modal.css({left: $(this).position().left+10, top: $(this).position().top + 85, width: '200px', height: '200px'});
 			});
 		},

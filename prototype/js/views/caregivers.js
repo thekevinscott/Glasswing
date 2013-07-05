@@ -4,7 +4,6 @@
 		// model : new worklist(),
 
 		// template_html : 'report/index.html',
-		className : "prior",
 		template : glasswing.template('caregivers.html'),
 		events : {
 		},
@@ -17,7 +16,7 @@
 		},
 		render : function() {
 			var self = this;
-
+			this.$el.html(_.template(this.template, {}));
 			return self;
 		},
 	});
