@@ -3,15 +3,14 @@ glasswing.collections.procedures = Backbone.Collection.extend({
 	className : 'procedure',
 
 	initialize : function(attributes) {
-		// console.log('*** we initialize our collection');
+		console.log('*** we initialize our collection');
 		// this.view = attributes.view;
-		// this.parent = attributes.parent;
 		_(this).bindAll('add');
 	},
 
 	ingredients : {
 		procedure_name : ['CT ABD', 'CR R LEG', 'MR ABD', 'CR L LEG', 'MR R LEG', 'MR L LEG'],
-		last : ['Strosahen','Chen','Baldwin','Scott','Margines','Lew','Assaf','Chan','Aweida','Bossier','Kumar','Xao','Rogers','Block','Gebhardt','Mandel','Ticer','Butler'],
+
 		hospital : ['Mercy','Northwestern','Good Heart','Great Lake','Advocate','Shepherd','Good Shepherd','Murphy']
 	},
 	add : function(procedureModel) {
@@ -26,8 +25,6 @@ glasswing.collections.procedures = Backbone.Collection.extend({
 			// optionally, if our parent table is available, render to it
 			this.view.$target.append(procedureModel.view.render().$el);
 		}
-
-		procedureModel.collection = this;
 
 	},
 	getProcedure : function(procedure_id) {
@@ -48,19 +45,19 @@ glasswing.collections.procedures = Backbone.Collection.extend({
 		return procedures;
 	},
 	getRandomProcedure : function(patient) {
+		var p = new glasswing.collections.patients();
 		return new glasswing.models.procedure({
 			patient : patient,
-			attachments : Math.round(Math.random()*10),
+			scanned_documents : Math.round(Math.random()*10),
 			referring_physician : 'Thompson',
 
 			procedure_name : this.getRandomIngredient('procedure_name'),
-			priority : Math.round(Math.random()*4),
+			priority : 2,
 			procedure_class : '-',
 			report_status : 'Unread',
 			procedure_status : 'Comp.',
-			referring_physician : this.getRandomIngredient('last'),
+			referring_physician : p.getRandomIngredient('first')+ ' ' + p.getRandomIngredient('last'),
 			hospital_name : this.getRandomIngredient('hospital'),
-			images : 5
 		});
 	},
 	getRandomIngredient : function(key) {

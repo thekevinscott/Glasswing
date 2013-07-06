@@ -65,7 +65,7 @@ input[type=button], .button:hover {
 	transition: 		all 0.15s;
 	-webkit-transition: all 0.15s; /* Safari */
 }
-input[type=button]:active, .button:active {
+input[type=button]:active, .button:active, input[type=button].selected, .button.selected {
 	.button(214,0.24,0.22);
 }
 
@@ -156,17 +156,4 @@ input[type=button].selected, .button.selected, input[type=button]:hover, .button
 	left: 50%;
 	margin-left: -10px;
 	position: absolute;
-}
-
-th.header {
-
-}
-.header:hover {
-	background: url(../images/bg.gif) no-repeat center right;
-}
-th.header.headerSortUp {
-	background: url(../images/asc.gif) no-repeat center right;
-}
-th.header.headerSortDown {
-	background: url(../images/desc.gif) no-repeat center right;
 }

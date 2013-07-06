@@ -2,11 +2,14 @@
 
 	$.fn.select = function(){
 		return $(this).each(function(){
+
 			$(this).addClass('selected');
+
 		});
 	};
 	$.fn.deselect = function(){
 		return $(this).each(function(){
+
 			$(this).removeClass('selected');
 		});
 	};
@@ -20,7 +23,7 @@
 		  // "click .cards .card" : "openProcedure",
 		  "click input[type=button]" : "setLayout"
 		},
-		current_layout : 'table',
+
 		buttons : {},
 		selected_button : null,
 		// changeLayout : function(event) {
@@ -30,6 +33,8 @@
 		initialize : function(attributes) {
 			// console.log("*** initialize our worklist");
 			glasswing.views.abstract.prototype.initialize.apply(this, arguments);
+
+			this.current_layout = (localStorage && localStorage['worklist-layout']) ? localStorage['worklist-layout'] : 'table';
 
 			this.procedures = new glasswing.collections.procedures();
 			this.procedures.view = this;
@@ -245,6 +250,15 @@
 			}
 
 
+			if (this.selected_button != null) { this.selected_button.deselect(); }
+
+			// console.log(this.buttons);
+
+			if (this.buttons[this.current_layout]) {
+
+				this.selected_button = this.buttons[this.current_layout].select();
+			}
+
 		},
 		sort : function(el) {
 			// var el_index = el.index();
@@ -280,8 +294,15 @@
 
 				if (this.selected_button != null) { this.selected_button.deselect(); }
 
+				// console.log(this.buttons);
+
 				if (this.buttons[this.current_layout]) {
+
 					this.selected_button = this.buttons[this.current_layout].select();
+				}
+
+				if (localStorage) {
+					localStorage['worklist-layout'] = this.current_layout;
 				}
 
 			}

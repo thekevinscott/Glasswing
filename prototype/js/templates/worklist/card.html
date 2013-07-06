@@ -6,25 +6,34 @@
 			<div class="attachments">
 				<%= attachments %>
 			</div>
-			<p class="patient-id">Patient ID: <%= patient_id %>
+			<h5 class="patient-id">Patient ID: <%= patient_id %></h5>
 		</header>
 		<h3 class="name"><%= last %>, <%= first %></h3>
-		<p class="dob"><%= dob %></p><p class="gender"><%= gender %>
+		<h5><span class="dob"><%= dob %></span><span class="gender"><%= gender %></span></h5>
 
+		<h4 class="procedure-name">Procedure: <span><%= procedure_name %></span></h4>
 
-		<hr />
+		<div class="time-container" style="" class="progress">
+			<div class="progress-container"><div class="progress"></div></div>
+		</div>
+		<p class="small time-left" style="">0 min left</p>
+		<p class="small">Currently: Collecting images</p>
+		<p class="report-status">Report Status: <span><%= report_status %></span></p>
+
+		<!--
 		<p class="patient-risks"><%= patient_risks %></p>
 		<%= procedure_name %>
 		<%= priority %>
 		<%= procedure_class %>
-		<%= report_status %>
-		<%= procedure_status %>
 
+		<%= procedure_status %>
+		-->
 
 	</div>
 
 		<footer>
-			Hospital : <%= hospital_name %>
-			Referring Physician: <%= referring_physician %>
+			<a class="coc" href="javascript:;"></a>
+			<p>Hospital : <%= hospital_name %></p>
+			<p>Referring Physician: <%= referring_physician %></p>
 		</footer>
 </div>
