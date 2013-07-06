@@ -18,6 +18,7 @@ glasswing.collections.tabs = Backbone.Collection.extend({
             page.view.setOptions(options);
             $('.page').html(page.view.render().$el);
             self.selected_tab = page.tab.select();
+            page.view.afterRender();
         });
         return this;
     },

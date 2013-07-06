@@ -36,11 +36,21 @@
 	}
 	thead {
 		background: #333;
+		td {
+			z-index: 20;
+			position: static;
+		}
+
 	}
 	tbody {
 		td {
 			cursor: pointer;
 		}
+	}
+	tr.search-fields td {
+		padding: 0;
+		z-index: 19;
+
 	}
 	.stat {
 		.status {
