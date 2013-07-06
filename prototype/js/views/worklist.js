@@ -1,10 +1,3 @@
-/*
-'lib/text!templates/worklist/table.html',
-
-	'lib/text!templates/worklist/cards.html',
-	'lib/text!templates/worklist/row.html',
-	'lib/text!templates/worklist/card.html',
-	*/
 (function($){
 
 	$.fn.select = function(){

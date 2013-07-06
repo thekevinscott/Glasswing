@@ -23,7 +23,7 @@
 				dob : this.model.get('patient').get('dob'),
 				first : this.model.get('patient').get('first'),
 				last : this.model.get('patient').get('last'),
-				gender : this.model.get('patient').get('gender'),
+				gender : (this.model.get('patient').get('gender') == 'f') ? 'female' : 'male',
 				patient_id : this.model.get('patient').get('id'),
 				patient_risks : this.model.get('patient').get('risks'),
 				procedure_name : this.model.get('this.model_name'),
