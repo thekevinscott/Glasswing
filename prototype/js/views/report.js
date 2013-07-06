@@ -85,6 +85,8 @@
 			}
 			this.timeline.afterRender();
 
+
+
 		},
 		setOptions : function(options) {
 
@@ -127,7 +129,37 @@
 			}));
 			this.delegateEvents();
 
+			this.$followButton = this.$el.find('.follow-button');
+			this.$followButton.click(function(e){
+				e.preventDefault();
+				if ($(this).hasClass('active')) {
+					$(this).removeClass('active');
 
+
+					$(this).stop().animate({width: '35px'},{duration: 60});
+					$(this).find('.check').remove();
+					$(this).find('span').html('Follow');
+					$(this).parent().find('p.helper').stop().animate({opacity: 0});
+				} else {
+					var button = this;
+					$(button).addClass('active');
+
+					var check = $('<div class="check"></div>');
+					$(button).append(check);
+					check.hide();
+
+					$(button).stop().animate({width: '70px'},{duration: 100});
+
+					setTimeout(function(){
+
+						check.show().css({opacity: 0, marginTop: 5}).stop().animate({marginTop: 0, opacity: 1},{easing: 'easeOutQuad'});
+
+						$(button).parent().find('.helper').stop().animate({opacity: 1});
+						$(button).find('span').html('Following');
+					},100);
+
+				}
+			})
 			this.$left = this.$el.find('.left');
 			this.$right = this.$el.find('.right');
 			this.timeline = new glasswing.views.timeline({parent : this, el : this.$el.find('.timeline')});
