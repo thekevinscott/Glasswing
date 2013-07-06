@@ -68,7 +68,7 @@
 		play : function(file) {
 			//
 //			self.audio = self.$el.find('audio');
-			console.log('file: ' + file);
+			// console.log('file: ' + file);
 			this.parent.$audio.attr('src','audio/'+this.title+'/'+file+'.mp3');
 			this.parent.$audio[0].play();
 
@@ -77,10 +77,13 @@
 				// 1.5 : function() {
 				// 	self.$el.find('.pane:first').open();
 				// },
-				9.0 : function() {
+
+				9 : function() {
 					var tr = $p('table tbody tr:first');
 					//var view = $p('data',tr,'view')
-					tr.highlight();
+					tr.highlight({
+						content: "Click the highlighted procedure"
+					});
 					tr.click(function(e){
 						$(this).unbind('click');
 						self.nextSection();

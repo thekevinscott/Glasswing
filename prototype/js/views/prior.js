@@ -35,11 +35,14 @@
 		mouseover :function() {
 			this.$el.addClass('hover');
 			this.$dot.addClass('hover');
+			var size = 16;
+			this.$dot.stop().css({zIndex: 15}).animate({width: size, height: size, marginTop: (-1*size/4*3), marginLeft: (-1*size/2)},{duration: 200, easing: 'easeOutBounce'});
 			// this.parent.mouseover();
 		},
 		mouseout : function() {
 			this.$el.removeClass('hover');
 			this.$dot.removeClass('hover');
+			this.$dot.stop().css({zIndex:10}).animate({width: 6, height: 6, marginTop: -6, marginLeft: -3},{duration: 200, easing: 'easeOutBounce'});
 			// this.parent.mouseout();
 		},
 		click : function() {

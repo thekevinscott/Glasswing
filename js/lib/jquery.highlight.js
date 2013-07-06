@@ -1,15 +1,37 @@
 (function($){
-	$.dehighlight = function() {
-		$('.overlay').fadeOut().remove();
+	var highlights = [];
+	$.dehighlight = function(key) {
+		if (key) {
+
+		} else {
+			while(highlights.length) {
+				var obj = highlights.shift();
+				_.each([obj.overlay,obj['modal']], function(o) {
+					if (o) {
+						$(o).animate({opacity : 0.0 }, function() {
+							console.log('all gone');
+							$(this).remove();
+						});
+					}
+				});
+
+
+			}
+
+		}
+
 	}
 	$.fn.highlight = function(options) {
+
 		options = $.extend({
-			opacity : 0.5
+			opacity : 0.5,
+			content : ''
 		},options);
 		return $(this).each(function(){
 
 			$('.overlay').remove();
 			var overlay = $('<div class="overlay" />');
+			var overlay_obj = {overlay : overlay};
 			var body = $(this).parents('body');
 			body.append(overlay);
 
@@ -56,6 +78,27 @@
 				// the bottom piece
 				overlay.append('<div class="piece" style="top: '+(top+height)+'; left: '+left+'; width: '+width+'; height: '+(parent_height-top-height)+'; box-shadow: 0 '+(0-blur)+'px '+blur+'px '+bg_color+'" ></div>');
 
+
+
+
+				// console.log($(this).position());
+				if (options.content) {
+					var modal = $('<div class="modal"><div class="arrow"></div><div class="content"></div></div>');
+					overlay_obj.modal = modal;
+					overlay.after(modal);
+					modal.find('.content').html(options.content);
+					modal.css({left: left + (width/2), top: top+height+(blur)});
+					var shake = function(marginTop) {
+						if (! marginTop) { marginTop = -2; }
+						modal.animate({marginTop: marginTop}, {duration: 1600, easing: 'easeInOutQuad', complete : function() {
+							shake(marginTop*-1);
+						}});
+					}
+					// shake();
+
+				}
+
+
 			}
 
 			overlay.css({opacity :0}).animate({opacity: options.opacity},1000);
@@ -72,6 +115,7 @@
 			}
 
 			monitorEl(el);
+			highlights.push(overlay_obj);
 
 		});
 	}
