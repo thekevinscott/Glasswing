@@ -128,7 +128,18 @@
 				// if (! $('input:focus').length) {
 
 				// }
+				input.unbind('click').click(function(e){
+					e.stopPropagation();
+				}).unbind('blur').blur(function(){
+					$(this).removeClass('focus');
+				}).unbind('keydown').keydown(function(){
+					$(this).addClass('focus');
+				}).unbind('keyup').keyup(function(e){
+					if (e.keyCode == 13) {
+						self.filter();
+					}
 
+				});
 
 			})
 			.mouseout(function(){
@@ -136,10 +147,11 @@
 				var td_index = $(this).index();
 				var input_div = $(self.$list.find('thead tr.search-fields .input')[td_index]);
 				var input = input_div.find('input');
-				if (! input.val() && ! input.is(":focus")) {
+				if (! input.val() && ! input.hasClass(".focus")) {
 					close(input_div);
 				} else {
-					input.blur(function(){
+					input.unbind('blur').blur(function(){
+						$(this).removeClass('focus');
 						if (! input.val()) {
 							close(input_div);
 						}
@@ -148,33 +160,74 @@
 
 
 
+
 			})
-			// .mousedown(function() {
-			// 	console.log('mousedown');
-			//     $(window).mousemove(function() {
-			//         isDragging = true;
-			//         $(window).unbind("mousemove");
+			.mousedown(function(event) {
+				// console.log('mousedown');
+			    $(window).mousemove(function() {
+			        isDragging = true;
+			        $(window).unbind("mousemove");
 
-			//     });
-			// })
-			// .mouseup(function(event) {
-			// 	// console.log('mouseup');
-			//     var wasDragging = isDragging;
-			//     isDragging = false;
-			//     $(window).unbind("mousemove");
-			//     if (!wasDragging) { //was clicking
-			//     	self.sort($(event.currentTarget));
-			//     }
-			// });
+			        console.log('moving');
+
+			    });
+			})
+			.mouseup(function(event) {
+				// console.log('mouseup');
+			    var wasDragging = isDragging;
+			    isDragging = false;
+			    $(window).unbind("mousemove");
+			    if (wasDragging) {
+			    	event.preventDefault();
+			    }
+			});
 
 
+		},
+		filter : function() {
+			var self = this;
+			var inputs = self.$list.find('table thead input');
+			var tr = self.$list.find('table tbody tr');
+			tr.each(function(){
+				$(this).show();
+			});
+			inputs.each(function(){
+				var val = $(this).val().toLowerCase();
+				if (val) {
+					// console.log(this);
+					// console.log($(this).parents('th'));
+					var input_index = $(this).parents('th').index();
+					tr.each(function(){
+						var td = $($(this).find('td')[input_index]);
+						var html = td.html().toLowerCase();
+						// console.log(this);
+						// console.log($(this).find('td'));
+						// console.log(input_index);
+						// console.log($(this).find('td')[input_index]);
+						console.log('val: ' + val);
+						console.log('html: ' + html);
+						if (html.search(val) === -1) {
+							// kill it
+							$(this).hide();
+						}
+
+					});
+				}
+
+
+			});
 		},
 		afterRender : function() {
 			var self = this;
 			switch(this.current_layout) {
 				case 'table' :
+
 					self.$list.find('table').tablesorter();
 					var inputs = self.$list.find('.search-fields input');
+					self.$list.find('table').find('form').submit(function(e){
+						alert('go');
+						e.preventDefault();
+					});
 					// inputs.each(function(){
 					// 	var td = $(this).parents('td');
 					// 	var td_index = td.index();
