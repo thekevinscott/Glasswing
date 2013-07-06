@@ -114,15 +114,17 @@
 			.mouseover(function(){
 				console.log('mouseover');
 				var td_index = $(this).index();
-				var input = $(self.$list.find('thead tr.search-fields input')[td_index]);
-				input.show().stop().animate({marginTop: -6, opacity: 1});
+				var input = $(self.$list.find('thead tr.search-fields .input')[td_index]);
+				input.stop().animate({marginTop: -20, height: 20},{duration: 300, easing:'easeOutBounce'});
 			})
 			.mouseout(function(){
+				console.log('mouseover');
 				var td_index = $(this).index();
-				var input = $(self.$list.find('thead tr.search-fields input')[td_index]);
-				if (! input.val()) {
-					input.stop().animate({marginTop: 0, opacity: 0});
+				var input = $(self.$list.find('thead tr.search-fields .input')[td_index]);
+				if (! input.find('input').val()) {
+					input.stop().animate({marginTop: 0, height: 0},{duration: 500, easing:'easeInOutQuad'});
 				}
+
 
 			})
 			.mousedown(function() {
@@ -150,26 +152,26 @@
 			switch(this.current_layout) {
 				case 'table' :
 					var inputs = self.$list.find('.search-fields input');
-					inputs.each(function(){
-						var td = $(this).parents('td');
-						var td_index = td.index();
-						$(this).css({
-							// width: $(this).parents('td').width(),
-							position: 'absolute'
-						});
-						$(this).data('td_index',td_index);
-					});
-					inputs.each(function(){
-						var td = $(self.$list.find('tbody tr:first td')[$(this).data('td_index')]);
-						var position = td.position();
-						var width = td.width();
-						$(this).css({
-							top: position.top,
-							left: position.left,
-							width: width + 30
-						}).hide();
+					// inputs.each(function(){
+					// 	var td = $(this).parents('td');
+					// 	var td_index = td.index();
+					// 	$(this).css({
+					// 		// width: $(this).parents('td').width(),
+					// 		position: 'absolute'
+					// 	});
+					// 	$(this).data('td_index',td_index);
+					// });
+					// inputs.each(function(){
+					// 	var td = $(self.$list.find('tbody tr:first td')[$(this).data('td_index')]);
+					// 	var position = td.position();
+					// 	var width = td.width();
+					// 	$(this).css({
+					// 		top: position.top,
+					// 		left: position.left,
+					// 		width: width + 30
+					// 	}).hide();
 
-					});
+					// });
 				break;
 			}
 

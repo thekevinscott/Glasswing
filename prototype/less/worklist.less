@@ -24,8 +24,9 @@
 
 	}
 	.list {
-		overflow: scroll;
+		overflow: auto;
 		width: 100%;
+		padding-top: 20px;
 	}
 	table {
 		width: 100%;
@@ -38,10 +39,10 @@
 		background: #333;
 		td {
 			z-index: 20;
-			position: static;
 		}
 
 	}
+
 	tbody {
 		td {
 			cursor: pointer;
@@ -50,6 +51,16 @@
 	tr.search-fields td {
 		padding: 0;
 		z-index: 19;
+		border: none;
+		background: #222;
+		.input {
+			height: 0px;
+			overflow: hidden;
+		}
+		input {
+			width: 100%;
+
+		}
 
 	}
 	.stat {
