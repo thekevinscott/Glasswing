@@ -112,17 +112,34 @@ input[type=button].selected, .button.selected, input[type=button]:hover, .button
 	background: #000;
 }
 
+@modal_color : #ddd;
+
 .modal {
 	position: absolute;
-	background: white;
-	box-shadow: 0 2px 6px rgba(0,0,0,0.9);
+
+
+	background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.2));
+	background: -moz-linear-gradient(	top, rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.2));
+	background: -ms-linear-gradient(	top, rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.2));
+	background: -o-linear-gradient(		top, rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.2));
+	background: linear-gradient(		top, rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.2));
+
+	background-color: @modal_color;
+
+	box-shadow: 0 2px 6px #000;
 	border-radius: 5px;
 
 	color: black;
 	text-shadow: none;
 }
 .modal .content {
+	min-height: 40px;
+	min-width: 80px;
 	padding: 15px;
+	border: 1px solid #eee;
+	text-align: center;
+	border-radius: 5px;
+	text-shadow: 0 1px 0 #fff;
 }
 
 .arrow {
@@ -130,8 +147,10 @@ input[type=button].selected, .button.selected, input[type=button]:hover, .button
 	height: 0;
 	border-left: 10px solid transparent;
 	border-right: 10px solid transparent;
-	border-bottom: 10px solid white;
-	margin-top: -10px;
+	border-bottom: 10px solid @modal_color;
+	margin-top: -9px;
 
-	margin-left: 10px;
+	left: 50%;
+	margin-left: -10px;
+	position: absolute;
 }

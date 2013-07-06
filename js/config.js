@@ -5,7 +5,10 @@
 
 	var parseChapters = function(data) {
 		var chapters = {
+			chapters : {
 
+			},
+			chapters_by_order : []
 		}
 
 		for (var i=0;i<data.length;i++) {
@@ -26,18 +29,19 @@
 				switch(node[0]) {
 					case 'h1' :
 						key = node[1].toURL();
-						if ( ! chapters.hasOwnProperty(key)) { chapters[key] = {panes : {}, panes_by_order : [] }; }
-						chapters[key].title = node[1];
+						if ( ! chapters.chapters.hasOwnProperty(key)) { chapters.chapters[key] = {panes : {}, panes_by_order : [] }; }
+						chapters.chapters[key].title = node[1];
+						chapters.chapters_by_order.push(chapters.chapters[key]);
 					break;
 					case 'h2' :
 						// if (pane_count===undefined) { pane_count = 0;}
 						// else { pane_count++; }
 						pane_name = node[1].toURL();
-						chapters[key].panes[pane_name] = {title : node[1], paragraphs : [] };
-						chapters[key].panes_by_order.push(chapters[key].panes[pane_name]);
+						chapters.chapters[key].panes[pane_name] = {title : node[1], paragraphs : [] };
+						chapters.chapters[key].panes_by_order.push(chapters.chapters[key].panes[pane_name]);
 					break;
 					case 'p' :
-						chapters[key].panes[pane_name].paragraphs.push(node[1]);
+						chapters.chapters[key].panes[pane_name].paragraphs.push(node[1]);
 					break;
 				}
 			});

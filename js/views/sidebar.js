@@ -7,12 +7,13 @@
 			// parse our chapters
 
 			this.parent = attributes.parent;
-			this.chapters = attributes.chapters;
+			this.chapters = attributes.chapters.chapters;
 
 			this.render();
 
-			console.log('todo: do this better');
-			this.bookmark = ['tabs','the-idea']; // set to first.
+
+			var first_chapter = attributes.chapters.chapters_by_order[0];
+			this.bookmark = [first_chapter.title.toURL(),first_chapter.panes_by_order[0].title.toURL()]; // set to first.
 
 
 		},
