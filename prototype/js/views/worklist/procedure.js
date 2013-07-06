@@ -26,11 +26,11 @@
 				gender : (this.model.get('patient').get('gender') == 'f') ? 'female' : 'male',
 				patient_id : this.model.get('patient').get('id'),
 				patient_risks : this.model.get('patient').get('risks'),
-				procedure_name : this.model.get('this.model_name'),
+				procedure_name : this.model.get('procedure_name'),
 				priority : this.model.get('priority'),
-				procedure_class : this.model.get('this.model_class'),
+				procedure_class : this.model.get('procedure_class'),
 				report_status : this.model.get('report_status'),
-				procedure_status : this.model.get('this.model_status'),
+				procedure_status : this.model.get('procedure_status'),
 				referring_physician : this.model.get('referring_physician'),
 				hospital_name : this.model.get('hospital_name'),
 				stat : ( (this.model.isStat()) ? 'stat' : null  )
@@ -71,12 +71,12 @@
 			if (el.attr('class')) {
 				var clss = el.attr('class').replace('highlight','').trim();
 				// console.log('add to: ' + clss);
-				$('.'+clss).addClass('highlight');
+				$('.'+clss).addClass('callout');
 			}
 
 		},
 		mouseout : function() {
-			$('.highlight').removeClass('highlight');
+			$('.callout').removeClass('callout');
 			// var el = $(event.currentTarget);
 			// var clss = el.attr('class').replace('highlight','').trim();
 			// console.log('remove from: ' + clss);
