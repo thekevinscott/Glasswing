@@ -117,7 +117,7 @@
 			}
 
 			// console.log(this.$list.find('thead td'));
-			self.$list.find('thead td')
+			self.$list.find('thead th')
 			.mouseover(function(){
 				// console.log('mouseover');
 				var td_index = $(this).index();

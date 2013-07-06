@@ -17,8 +17,11 @@ h1,h2,h3,h4,h5,h6 {
 table {
 	border-collapse: collapse;
 }
-td {
+td, th {
 	border: 1px solid #999;
+	font-weight: normal;
+	font-size: 12px;
+
 }
 
 .page {
@@ -153,4 +156,22 @@ input[type=button].selected, .button.selected, input[type=button]:hover, .button
 	left: 50%;
 	margin-left: -10px;
 	position: absolute;
+}
+
+th.header {
+	background: #ddd;
+	color: black;
+	text-shadow: 0 1px 0 #FFF;
+}
+th.header:hover {
+	background: #ddd url(../images/bg.gif) no-repeat center right;
+}
+th.headerSortUp {
+	background: #ddd url(../images/asc.gif) no-repeat center right;
+}
+th.headerSortDown {
+	background: #ddd url(../images/desc.gif) no-repeat center right;
+}
+.headerSortUp, .headerSortDown {
+
 }
