@@ -11,7 +11,7 @@
 
 
 
-	for (var i=0;i<70;i++) {
+	for (var i=0;i<20;i++) {
 
 		var procedureModel = worklist.procedures.getRandomProcedure(patientsCollection.generateRandomPatient());
 

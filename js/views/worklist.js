@@ -50,44 +50,6 @@
 			this.setLayout(this.current_layout || 'grid');
 
 		},
-		collectCategoriesBy : function(category) {
-			var cards = $('.cards .card');
-
-			var modality_count = 0;
-			var modalities = this.model.getProceduresByModality();
-
-			var card_width = $('.cards .card').width() + 20;
-
-			for (var modality_type in modalities) {
-				var modality = modalities[modality_type];
-				this.$target.append("<p style='position: absolute; text-align: center; top: 160px; width: "+card_width+";left: "+(modality_count*card_width)+"'>"+modality_type+"</p>");
-				(function(modality,modality_count){
-					for (var i=0;i<modality.length;i++) {
-						var el = modality[i];
-						(function(card,position,i){
-
-
-							setTimeout(function(){
-								$(card).css({
-									position: 'absolute',
-									top: position.top,
-									left: position.left
-								});
-								var offset = i*2;
-								if (offset > 20) { offset = 20;}
-								$(card).animate({
-									top: offset,
-									left: offset + (modality_count*card_width)
-								});
-							},1);
-
-						}(el.view,$(el.view).position(),i));
-					}
-				})(modality,modality_count);
-				modality_count++;
-			}
-
-		},
 		setLayout : function(event) {
 
 			this.current_layout = (typeof event == 'string') ? event : $(event.currentTarget).val().toLowerCase();;
