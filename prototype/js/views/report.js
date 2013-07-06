@@ -49,30 +49,18 @@
 			var self = this;
 
 			setTimeout(function(){
-				// console.log('change the model');
 				self.model.set('images',10);
+
 
 				// console.log(self.model.get('images'));
 			},1500);
 
-			var view = this;
+			// var view = this;
 
 			// two things need to happen.
-			this.model.on('change', function(){
-				console.log('this sucks, should go in the model code');
-				_.each(this.changedAttributes(),function(val,key){
+			// this.model.on('change', function(){
 
-					if (view.$el.is(":visible")) {
-						view.notify({key : key, val : val});
-					} else {
-						view.addNotification({key : key, val : val});
-					}
-				});
-
-				// tab manager needs to be notified. but if the tab is active, then do nothing.
-				this.collection.view.tabManager.notify(view, {}); // pass in an optional attributes array
-
-			}); // attempt to bind to model change event
+			// }); // attempt to bind to model change event
 
 
 

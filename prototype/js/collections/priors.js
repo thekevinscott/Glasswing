@@ -3,16 +3,18 @@ glasswing.collections.priors = Backbone.Collection.extend({
 	initialize : function() {
 
 		_(this).bindAll('add');
+		this.sort_key = 'date';
 
 	},
-	// id_offset : 200100,
 	add : function(model) {
-		console.log("these should enter in sorted direction");
 		Backbone.Collection.prototype.add.call(this, model);
-		// if (! model.get('id')) {
-		// 	model.set('id',this.id_offset+this.length);
-
-		// }
+	},
+	comparator: function(a, b) {
+	    a = a.get(this.sort_key);
+	    b = b.get(this.sort_key);
+	    return a.getTime() > b.getTime() ?  1
+	         : a.getTime() < b.getTime() ? -1
+	         :          0;
 	}
 
 

@@ -8,51 +8,53 @@ glasswing.models.procedure = glasswing.models.abstract.extend({
 		if (! attributes || ! attributes.patient) {throw "No patient specified!";}
 		this.view = new glasswing.views.procedure({model : this});
 
+
 		// this.patient = options.patient;
-		this.on("change", function() {
-		  	if (this.hasChanged()) {
-		    	this.view.render();
-		  	}
-		});
+		this.on("change", this.change, this);
 
-		var priors = [
-
-			{date : new Date('2008') },
-
-			{date : new Date('1/2/2009') },
-			{date : new Date('2/2/2009') },
-			{date : new Date('3/2/2009') },
-			{date : new Date('4/2/2009') },
-			{date : new Date('5/2/2009') },
-			{date : new Date('6/2/2009') },
-			{date : new Date('7/2/2009') },
-			{date : new Date('8/2/2009') },
-			{date : new Date('9/2/2009') },
-			{date : new Date('10/2/2009') },
-			{date : new Date('11/2/2009') },
-			{date : new Date('12/2/2009') },
-			{date : new Date('3/2/2010') },
-			{date : new Date('6/6/2010') },
-			{date : new Date('3/3/2011') },
-			{date : new Date('1/2/2012') },
-			{date : new Date('2/2/2012') },
-			{date : new Date('3/2/2012') },
-			{date : new Date('4/2/2012') },
-			{date : new Date('5/2/2012') },
-			{date : new Date('6/2/2012') },
-			{date : new Date('7/2/2012') },
-			{date : new Date('8/2/2012') },
-			{date : new Date('9/2/2012') },
-			{date : new Date('10/2/2012') },
-			{date : new Date('2013') }
-		];
+		function randomDate(start, end) {
+		    return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()))
+		}
 		this.priors = new glasswing.collections.priors();
 		var self = this;
-		_.each(priors,function(prior) {
-			self.priors.add(new glasswing.models.prior(prior));
-		});
+
+
+		var number_of_priors = 20;
+		var oldest_prior = new Date(2008,0,1);
+		for (var i=0;i<number_of_priors;i++) {
+			self.priors.add(new glasswing.models.prior({date : new Date(randomDate(oldest_prior, new Date())) }));
+		}
+
+
 
 		this.priors.parent = this;
+
+	},
+	change : function() {
+
+
+		var self  = this;
+
+
+		if (self.view.report) { // do we even have a report available?
+			_.each(this.changedAttributes(),function(val,key){
+
+				if (self.view.report.$el.is(":visible")) {
+					self.view.report.notify({key : key, val : val});
+				} else {
+					self.view.report.addNotification({key : key, val : val});
+				}
+			});
+
+
+			console.log(self.worklist);
+			console.log(self.worklist.tabManager);
+			// tab manager needs to be notified. but if the tab is active, then do nothing.
+			self.worklist.tabManager.notify(self.view.report, {}); // pass in an optional attributes array
+
+		}
+
+
 
 	},
 	// we overload our parent get function
