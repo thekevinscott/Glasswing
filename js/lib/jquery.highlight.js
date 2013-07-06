@@ -14,12 +14,8 @@
 						});
 					}
 				});
-
-
 			}
-
 		}
-
 	}
 	$.fn.highlight = function(options) {
 
