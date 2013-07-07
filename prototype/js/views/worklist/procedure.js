@@ -20,7 +20,7 @@
 			var opts = {
 				id : this.model.get('id'),
 				attachments : this.model.get('attachments'),
-				dob : this.model.get('patient').get('dob'),
+				dob : this.model.get('patient').getDob(),
 				first : this.model.get('patient').get('first'),
 				last : this.model.get('patient').get('last'),
 				gender : (this.model.get('patient').get('gender') == 'f') ? 'female' : 'male',
