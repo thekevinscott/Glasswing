@@ -29,64 +29,39 @@
 			self.$priors_content = this.$priors.find('.content');
 
 
+			var priors = this.parent.model.getPriors();
 
-			var priors = [
 
-				{date : new Date('2008') },
-
-				{date : new Date('1/2/2009') },
-				{date : new Date('2/2/2009') },
-				{date : new Date('3/2/2009') },
-				{date : new Date('4/2/2009') },
-				{date : new Date('5/2/2009') },
-				{date : new Date('6/2/2009') },
-				{date : new Date('7/2/2009') },
-				{date : new Date('8/2/2009') },
-				{date : new Date('9/2/2009') },
-				{date : new Date('10/2/2009') },
-				{date : new Date('11/2/2009') },
-				{date : new Date('12/2/2009') },
-				{date : new Date('3/2/2010') },
-				{date : new Date('6/6/2010') },
-				{date : new Date('3/3/2011') },
-				{date : new Date('1/2/2012') },
-				{date : new Date('2/2/2012') },
-				{date : new Date('3/2/2012') },
-				{date : new Date('4/2/2012') },
-				{date : new Date('5/2/2012') },
-				{date : new Date('6/2/2012') },
-				{date : new Date('7/2/2012') },
-				{date : new Date('8/2/2012') },
-				{date : new Date('9/2/2012') },
-				{date : new Date('10/2/2012') },
-				{date : new Date('2013') }
-			];
 
 			// WE NEED PRIORS TO BE IN SORTED DATE.
 
 			var max = (new Date()).getTime();
 			var min = max;
+			// console.log(priors);
 			_.each(priors,function(prior){
-				if (prior.date.getTime()< min ) {
-					min = prior.date.getTime();
+				// console.log(prior);
+				// console.log(prior.date);
+				// console.log(prior.get('date'));
+				if (prior.get('date').getTime()< min ) {
+					min = prior.get('date').getTime();
 				}
 			});
 
 
-			_.each(priors,function(data){
-				var prior = new glasswing.views.prior({parent : self, data : data });
+			_.each(priors,function(prior){
+				var priorView = new glasswing.views.prior({parent : self, model : prior });
 
-				var val = 100-(100 * (data.date.getTime() - min) / (max - min));
+				var val = 100-(100 * (prior.get('date').getTime() - min) / (max - min));
 
-				prior.$dot.css({top: val+'%'});
-				prior.$dot.mouseover(function(){
-					prior.mouseover();
+				priorView.$dot.css({top: val+'%'});
+				priorView.$dot.mouseover(function(){
+					priorView.mouseover();
 				}).mouseout(function(){
-					prior.mouseout();
+					priorView.mouseout();
 				});
-				self.$bar.append(prior.$dot);
+				self.$bar.append(priorView.$dot);
 
-				self.$priors_content.prepend(prior.$el);
+				self.$priors_content.prepend(priorView.$el);
 			});
 
 			self.delegateEvents();

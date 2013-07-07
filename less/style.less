@@ -17,8 +17,11 @@ h1,h2,h3,h4,h5,h6 {
 table {
 	border-collapse: collapse;
 }
-td {
+td, th {
 	border: 1px solid #999;
+	font-weight: normal;
+	font-size: 12px;
+
 }
 
 .page {
@@ -27,11 +30,12 @@ td {
 }
 
 .button (@hue, @saturation, @lightness) {
-
+	text-decoration: none;
 	border-radius: 4px;
+	font-size: 12px;
 
 	color: white;
-	padding: 5px 15px;
+
 	cursor: pointer;
 
 	background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.0));
@@ -55,6 +59,7 @@ td {
 
 input[type=button], .button {
 	.button(214,0.27,0.26);
+	padding: 5px 15px;
 }
 
 input[type=button], .button:hover {
@@ -62,7 +67,7 @@ input[type=button], .button:hover {
 	transition: 		all 0.15s;
 	-webkit-transition: all 0.15s; /* Safari */
 }
-input[type=button]:active, .button:active {
+input[type=button]:active, .button:active, input[type=button].selected, .button.selected {
 	.button(214,0.24,0.22);
 }
 
@@ -112,17 +117,34 @@ input[type=button].selected, .button.selected, input[type=button]:hover, .button
 	background: #000;
 }
 
+@modal_color : #ddd;
+
 .modal {
 	position: absolute;
-	background: white;
-	box-shadow: 0 2px 6px rgba(0,0,0,0.9);
+
+
+	background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.2));
+	background: -moz-linear-gradient(	top, rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.2));
+	background: -ms-linear-gradient(	top, rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.2));
+	background: -o-linear-gradient(		top, rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.2));
+	background: linear-gradient(		top, rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.2));
+
+	background-color: @modal_color;
+
+	box-shadow: 0 2px 6px #000;
 	border-radius: 5px;
 
 	color: black;
 	text-shadow: none;
 }
 .modal .content {
+	min-height: 40px;
+	min-width: 80px;
 	padding: 15px;
+	border: 1px solid #eee;
+	text-align: center;
+	border-radius: 5px;
+	text-shadow: 0 1px 0 #fff;
 }
 
 .arrow {
@@ -130,8 +152,15 @@ input[type=button].selected, .button.selected, input[type=button]:hover, .button
 	height: 0;
 	border-left: 10px solid transparent;
 	border-right: 10px solid transparent;
-	border-bottom: 10px solid white;
-	margin-top: -10px;
+	border-bottom: 10px solid @modal_color;
+	margin-top: -9px;
 
-	margin-left: 10px;
+	left: 50%;
+	margin-left: -10px;
+	position: absolute;
+}
+.callout {
+	background: #83823a;
+	color: white;
+	text-shadow: 0 -1px 0 #3e3e1d;
 }

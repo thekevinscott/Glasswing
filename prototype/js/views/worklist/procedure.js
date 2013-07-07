@@ -1,7 +1,9 @@
 (function($){
 	glasswing.views.procedure = glasswing.views.abstract.extend({
 		events : {
-			"click" : "click"
+			"click" : "click",
+			"mouseover *" : "mouseover",
+			"mouseout *" : "mouseout",
 		},
 
 		initialize : function(attributes) {
@@ -18,17 +20,17 @@
 			var opts = {
 				id : this.model.get('id'),
 				attachments : this.model.get('attachments'),
-				dob : this.model.get('patient').get('dob'),
+				dob : this.model.get('patient').getDob(),
 				first : this.model.get('patient').get('first'),
 				last : this.model.get('patient').get('last'),
-				gender : this.model.get('patient').get('gender'),
+				gender : (this.model.get('patient').get('gender') == 'f') ? 'female' : 'male',
 				patient_id : this.model.get('patient').get('id'),
 				patient_risks : this.model.get('patient').get('risks'),
-				procedure_name : this.model.get('this.model_name'),
+				procedure_name : this.model.get('procedure_name'),
 				priority : this.model.get('priority'),
-				procedure_class : this.model.get('this.model_class'),
+				procedure_class : this.model.get('procedure_class'),
 				report_status : this.model.get('report_status'),
-				procedure_status : this.model.get('this.model_status'),
+				procedure_status : this.model.get('procedure_status'),
 				referring_physician : this.model.get('referring_physician'),
 				hospital_name : this.model.get('hospital_name'),
 				stat : ( (this.model.isStat()) ? 'stat' : null  )
@@ -63,6 +65,22 @@
 				this.report = new glasswing.views.report({model: this.model});
 			}
 			return this.report;
+		},
+		mouseover : function(event) {
+			var el = $(event.currentTarget);
+			if (el.attr('class')) {
+				var clss = el.attr('class').replace('highlight','').trim();
+				// console.log('add to: ' + clss);
+				$('.'+clss).addClass('callout');
+			}
+
+		},
+		mouseout : function() {
+			$('.callout').removeClass('callout');
+			// var el = $(event.currentTarget);
+			// var clss = el.attr('class').replace('highlight','').trim();
+			// console.log('remove from: ' + clss);
+			// $('.'+clss).removeClass('highlight');
 		}
 		// getTemplate : function(callback) {
 		// 	if (this.template_html) {

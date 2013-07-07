@@ -5,6 +5,13 @@ glasswing.models.worklist = glasswing.models.abstract.extend({
 	},
 	initialize : function(attributes) {
 		this.view = attributes.view;
+		this.bind("change", function(){
+		  console.log('Collection has changed.');
+		});
+		this.on("change", function(){
+			alert('heyo');
+		  console.log('Collection has changed.');
+		});
 	},
 	// add : function(procedure) {
 

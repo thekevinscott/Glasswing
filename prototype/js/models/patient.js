@@ -19,5 +19,8 @@ glasswing.models.patient = glasswing.models.abstract.extend({
 		if (! this.get('patient_id')) {
 			this.set('patient_id',patient_id);
 		}
+	},
+	getDob : function() {
+		return this.get('dob').getMonth()+'/'+this.get('dob').getDate()+'/'+this.get('dob').getFullYear();
 	}
 });
