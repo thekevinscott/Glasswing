@@ -10,7 +10,7 @@ var glasswing = {
 	template : function(path) {
 		if (path.split('.').length < 2) { path += '.html'; }
 		if (! this.cache[path]) {
-			this.cache[path] = $.ajax({url: 'js/templates/'+path, async: false}).responseText;
+			this.cache[path] = $.ajax({url: 'js/templates/'+path+"?bust="+(new Date).getTime(), async: false}).responseText;
 		}
 		return this.cache[path];
 	}
