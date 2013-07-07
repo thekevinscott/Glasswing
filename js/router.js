@@ -16,10 +16,12 @@
 			":chapter" : 'guide',
 			":chapter/:section" : 'guide',
 			"": "home",
+			"home": "home",
+			"home/": "home",
 			"guide" : 'guide',
 			"guide/" : 'guide',
 
-			"*actions": 'guide'
+			// "*actions": 'guide'
 		}
 	}); // Initiate the router
 	glasswing.router = new AppRouter();

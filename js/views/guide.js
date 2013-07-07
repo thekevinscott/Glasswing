@@ -71,7 +71,7 @@
 
 				break;
 				default :
-					window.location = 'prototype';
+					window.location = 'prototype/index.html';
 				break;
 			}
 			// this.setActive( (   $(event.currentTarget).attr('val')  == 'walkthrough') ? true : false );
