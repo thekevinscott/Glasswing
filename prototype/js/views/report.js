@@ -119,6 +119,7 @@
 				gender : this.model.get('patient').get('gender'),
 				name : this.model.get('name'),
 				priority : this.model.get('priority'),
+				procedure_date : this.model.get('date'),
 				procedure_class : this.model.get('procedure_class'),
 				procedure_name : this.model.get('procedure_name'),
 				report_status : this.model.get('report_status'),
