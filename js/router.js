@@ -29,14 +29,14 @@
 
 	glasswing.router.initial_route = true;
 	glasswing.router.on('route:guide', function(chapter, section) {
-
+		alert('guide');
 		// console.log(arguments);
 		guide.begin(arguments);
 		glasswing.router.initial_route = false;
 
 	});
-	glasswing.router.on('route:home', function(chapter, section) {
-
+	glasswing.router.on('route:home', function() {
+		alert('home');
 		guide.home();
 		glasswing.router.initial_route = false;
 
