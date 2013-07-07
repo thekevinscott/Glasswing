@@ -169,15 +169,26 @@
 			self.timeline = new glasswing.views.timeline({parent : this, el : this.$el.find('.timeline')});
 			self.afterRender();
 
+			this.caregivers = new glasswing.views.caregivers({
+				collection : this.model.get('caregivers'),
+				button : this.$left.find('.coc')
+			});
 			return self;
 		},
 		twoPane : function(prior) {
+
 
 			this.$left.animate({width: '50%'});
 			this.$right.animate({width: '50%'});
 
 
 			this.$right.find('.prior-report').html(prior.getReport());
+
+			prior.caregivers = new glasswing.views.caregivers({
+				collection : prior.model.get('caregivers'),
+				button : $(prior.$report).find('.coc')
+			});
+
 			prior.afterRender();
 		}
 

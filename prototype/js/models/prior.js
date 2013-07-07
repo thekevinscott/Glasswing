@@ -1,5 +1,5 @@
 glasswing.models.prior = glasswing.models.abstract.extend({
-	initialize : function() {
+	initialize : function(attributes) {
 
 	},
 	getDate : function() {

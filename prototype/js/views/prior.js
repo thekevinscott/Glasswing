@@ -26,6 +26,7 @@
 				date : this.model.getDate(),
 				procedure_name : 'Family Medicine'
 			}));
+
 			// console.log(this.$dot);
 			// self.delegateEvents();
 			// this.$dot.mouseover(this.mouseover).mouseout(this.mouseout);
@@ -54,24 +55,13 @@
 
 				}));
 
+
 			};
 			return this.$report;
 		},
 		afterRender : function() {
 			var self = this;
-			$(this.$report).find('.coc').click(function(){
-				var modal = $('<div class="modal"><div class="arrow"></div><div class="content"></div></div>');
-				// console.log($(this).position());
-				$(this).after(modal);
-				modal.find('.content').html(self.getCaregivers().$el);
-				modal.css({left: $(this).position().left+10, top: $(this).position().top + 85});
-			});
+
 		},
-		getCaregivers : function() {
-			console.log(this);
-			console.log(this.model);
-			if (! this.caregivers) { this.caregivers = new glasswing.views.caregivers({collection : this.model.caregivers}); }
-			return this.caregivers;
-		}
 	});
 })(jQuery);

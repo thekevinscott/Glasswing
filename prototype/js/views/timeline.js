@@ -33,8 +33,6 @@
 
 
 
-			// WE NEED PRIORS TO BE IN SORTED DATE.
-
 			var max = (new Date()).getTime();
 			var min = max;
 			// console.log(priors);

@@ -3,7 +3,6 @@ glasswing.collections.procedures = Backbone.Collection.extend({
 	className : 'procedure',
 
 	initialize : function(attributes) {
-		console.log('*** we initialize our collection');
 		// this.view = attributes.view;
 		_(this).bindAll('add');
 	},
@@ -47,7 +46,8 @@ glasswing.collections.procedures = Backbone.Collection.extend({
 	getRandomProcedure : function(patient) {
 		var p = new glasswing.collections.patients();
 		var caregivers = new glasswing.collections.caregivers();
-		for (var i=0;i<Math.round(Math.random()*15);i++) {
+		var length = Math.round(Math.random()*8)+2;
+		for (var i=0;i<length;i++) {
 			var first = p.getRandomIngredient('first');
 			var last = p.getRandomIngredient('last');
 			caregivers.add(new glasswing.models.caregiver({
