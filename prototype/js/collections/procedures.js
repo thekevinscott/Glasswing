@@ -46,6 +46,21 @@ glasswing.collections.procedures = Backbone.Collection.extend({
 	},
 	getRandomProcedure : function(patient) {
 		var p = new glasswing.collections.patients();
+		var caregivers = new glasswing.collections.caregivers();
+		for (var i=0;i<Math.round(Math.random()*15);i++) {
+			var first = p.getRandomIngredient('first');
+			var last = p.getRandomIngredient('last');
+			caregivers.add(new glasswing.models.caregiver({
+				role : 'Resident',
+				phone : '123-123-1234',
+				pager :'123-123-1234',
+				email : first.substring(0,1).toLowerCase()+last.toLowerCase()+'@'+this.getRandomIngredient('hospital').toLowerCase()+'.com',
+				date : new Date('6/5/2013'),
+				first : first,
+				last : last,
+				backup : p.getRandomIngredient('first') +' ' + p.getRandomIngredient('last')
+			}));
+		}
 		return new glasswing.models.procedure({
 			patient : patient,
 			scanned_documents : Math.round(Math.random()*10),
@@ -58,6 +73,7 @@ glasswing.collections.procedures = Backbone.Collection.extend({
 			procedure_status : 'Comp.',
 			referring_physician : p.getRandomIngredient('first')+ ' ' + p.getRandomIngredient('last'),
 			hospital_name : this.getRandomIngredient('hospital'),
+			caregivers : caregivers
 		});
 	},
 	getRandomIngredient : function(key) {

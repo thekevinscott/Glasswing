@@ -34,15 +34,17 @@ h4 {
 	width: 61%;
 }
 */
-/*
-.procedure { zoom: 1; }
-.procedure:before,
-.procedure:after { content: ""; display: table; }
-.procedure:after { clear: both; }
-*/
+
 
 .report {
-	height: 100%;
+	min-height: 100%;
+
+
+	.procedure { zoom: 1; }
+	.procedure:before,
+	.procedure:after { content: ""; display: table; }
+	.procedure:after { clear: both; }
+
 
 
 	textarea {
@@ -71,8 +73,7 @@ h4 {
 	.left {
 		float: left;
 		width: 70%;
-		height: calc(~"100% - 1360px");
-		overflow: hidden;
+
 	}
 	.right {
 		float: right;
@@ -107,7 +108,8 @@ h4 {
 		display: inline;
 	}
 	.bar-container, .priors {
-		height: calc(~"100% - 180px");
+		height: calc(~"100% - 240px");
+		height: 100%;
 	}
 	.bar-container {
 

@@ -1,1 +1,27 @@
+<select class="sort">
+	<option>Sort by...</option>
+	<option>Role</option>
+	<option>Time Frame</option>
+	<option>Demographics</option>
+</select>
 <h2>Caregivers</h2>
+<% for (var i=0;i<caregivers.length;i++) { %>
+<% caregiver = caregivers[i]; %>
+<div class="caregiver">
+	<div class="image">
+		<img src="images/avatar.png" />
+		<%= caregiver.getName() %>
+	</div>
+	<div class="primary">
+		<h4><%= caregiver.get('role') %></h4>
+		<p>Last saw patient: <%= caregiver.get('date') %></p>
+		<p class="small">Backup: <a href="#"><%= caregiver.backup %></p>
+	</div>
+	<div class="secondary">
+		<p class="phone">Phone: <%= caregiver.phone %></p>
+		<p class="pager">Pager: <%= caregiver.pager %></p>
+		<p class="email"><%= caregiver.email %></p>
+	</div>
+	<a href="javascript:;" class="flag"></a>
+</div>
+<% } %>

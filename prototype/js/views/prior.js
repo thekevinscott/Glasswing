@@ -64,11 +64,13 @@
 				// console.log($(this).position());
 				$(this).after(modal);
 				modal.find('.content').html(self.getCaregivers().$el);
-				modal.css({left: $(this).position().left+10, top: $(this).position().top + 85, width: '200px', height: '200px'});
+				modal.css({left: $(this).position().left+10, top: $(this).position().top + 85});
 			});
 		},
 		getCaregivers : function() {
-			if (! this.caregivers) { this.caregivers = new glasswing.views.caregivers(this); }
+			console.log(this);
+			console.log(this.model);
+			if (! this.caregivers) { this.caregivers = new glasswing.views.caregivers({collection : this.model.caregivers}); }
 			return this.caregivers;
 		}
 	});
