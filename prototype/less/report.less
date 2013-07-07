@@ -224,11 +224,15 @@ h4 {
 
 
 .caregivers {
+	text-align: left;
+	select {
+		float: right;
+		margin-right: 20px;
+	}
 	.caregiver {
-		border-bottom: 1px solid black;
+		border-top: 1px solid black;
 		position: relative;
 		height: 90px;
-		text-align: left;
 		padding-top: 20px;
 	}
 	.caregiver:last-child {
@@ -236,6 +240,9 @@ h4 {
 	}
 	p {
 		margin: 0;
+	}
+	h4 {
+		font-size: 14px;
 	}
 	.image {
 		img {
@@ -246,14 +253,17 @@ h4 {
 		float: left;
 		width: 106px;
 		margin-right: 10px;
+		font-size: 13px;
 	}
-	.primary {
+	.primary, .secondary {
 		float: left;
 		width: 200px;
+		font-size: 12px;
+		padding-top: 10px;
 	}
-	.secondary {
-		float: left;
-		width: 200px;
+	.backup, .backup a {
+		font-size: 11px;
+		color: #666666;
 	}
 	.flag {
 		position: absolute;
