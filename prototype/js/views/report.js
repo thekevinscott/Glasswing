@@ -183,6 +183,7 @@
 
 
 			this.$right.find('.prior-report').html(prior.getReport());
+			this.$right.find('h2').slideUp();
 
 			prior.caregivers = new glasswing.views.caregivers({
 				collection : prior.model.get('caregivers'),
