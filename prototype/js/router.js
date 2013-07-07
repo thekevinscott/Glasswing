@@ -62,8 +62,7 @@
 
 
 	tabManager = new glasswing.collections.tabs({router : glasswing.router, worklist : worklist});
-
-	notifications = new glasswing.views.notifications();
+	worklist.notifications = new glasswing.views.notifications();
 
 	Backbone.history.start();
 

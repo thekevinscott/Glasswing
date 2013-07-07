@@ -162,6 +162,12 @@
 						$(button).find('span').html('Following');
 					},100);
 
+					setTimeout(function(){
+
+						var patient = self.model.get('patient');
+						self.model.worklist.notifications.addNotification('<strong>'+patient.get('last')+', '+patient.get('first')+'</strong><br />All images have been uploaded.');
+					},2000);
+
 				}
 			})
 			self.$left = this.$el.find('.left');

@@ -10,6 +10,7 @@
 
         	this.render();
         	this.collection = new glasswing.collections.notifications();
+
 		},
 		render : function() {
 			var self = this;
@@ -18,21 +19,24 @@
 
 			}));
 			$('.tabs').prepend(self.$el);
+			self.$sheet = self.$el.find('.sheet');
 
+			self.$el.mouseover(function(){
+				self.$el.removeClass('new');
+				self.$sheet.stop().slideDown();
+			}).mouseout(function(){
+				self.$sheet.stop().slideUp(function(){
+					self.$sheet.find('.new').removeClass('new');
+				});
+			})
 
-
-			// self.button.unbind('click').click(function(){
-
-			// 	$(self.$el).modal({
-			// 		button : this
-			// 	})
-
-
-			// });
+			// this.addNotification('<strong>Wise, Sam</strong><br />All images have been uploaded.');
+			// this.addNotification('<strong>Holman, Daniel\'s</strong> report has been approved.');
 			return self;
 		},
-		addNotification : function() {
-
+		addNotification : function(notification) {
+			this.$el.addClass('new');
+			this.$sheet.find('.all').before('<li class="new">'+notification+'</li>');
 		}
 	});
 })(jQuery);
