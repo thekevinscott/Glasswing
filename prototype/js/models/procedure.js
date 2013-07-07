@@ -12,9 +12,6 @@ glasswing.models.procedure = glasswing.models.abstract.extend({
 		// this.patient = options.patient;
 		this.on("change", this.change, this);
 
-		function randomDate(start, end) {
-		    return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()))
-		}
 		this.priors = new glasswing.collections.priors();
 		var self = this;
 
@@ -22,7 +19,7 @@ glasswing.models.procedure = glasswing.models.abstract.extend({
 		var number_of_priors = 20;
 		var oldest_prior = new Date(2008,0,1);
 		for (var i=0;i<number_of_priors;i++) {
-			self.priors.add(new glasswing.models.prior({date : new Date(randomDate(oldest_prior, new Date())) }));
+			self.priors.add(new glasswing.models.prior({date : glasswing.randomDate(oldest_prior, new Date()) }));
 		}
 
 
@@ -76,6 +73,13 @@ glasswing.models.procedure = glasswing.models.abstract.extend({
 		// var priors = ;
 		// return priors;
 		return this.priors.models;
-	}
+	},
+	follow : function() {
+		this.following = true;
+	},
+	unfollow : function() {
+		this.following = false;
+	},
+
 
 });

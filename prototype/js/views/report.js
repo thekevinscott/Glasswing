@@ -85,6 +85,8 @@
 			}
 			this.timeline.afterRender();
 
+
+
 		},
 		setOptions : function(options) {
 
@@ -108,15 +110,16 @@
 			// how do I access tab manager in this scenario?
 		},
 		render : function() {
-
-			this.$el.html(_.template(this.template, {
+			var self = this;
+			self.$el.html(_.template(this.template, {
 				id : this.model.get('id'),
 				patient_id : this.model.get('patient').get('patient-id'),
 				patient_risks : this.model.get('patient').get('patient-risks'),
-				dob : this.model.get('patient').get('dob'),
+				dob : this.model.get('patient').getDob(),
 				gender : this.model.get('patient').get('gender'),
 				name : this.model.get('name'),
 				priority : this.model.get('priority'),
+				procedure_date : this.model.get('date'),
 				procedure_class : this.model.get('procedure_class'),
 				procedure_name : this.model.get('procedure_name'),
 				report_status : this.model.get('report_status'),
@@ -125,15 +128,48 @@
 				images : this.model.get('images'),
 
 			}));
-			this.delegateEvents();
+			self.delegateEvents();
+
+			self.$followButton = this.$el.find('.follow-button');
+			self.$followButton.click(function(e){
+				e.preventDefault();
+				if ($(this).hasClass('active')) {
+					self.model.unfollow();
+					$(this).removeClass('active');
 
 
-			this.$left = this.$el.find('.left');
-			this.$right = this.$el.find('.right');
-			this.timeline = new glasswing.views.timeline({parent : this, el : this.$el.find('.timeline')});
-			this.afterRender();
+					$(this).stop().animate({width: '35px'},{duration: 60});
+					$(this).find('.check').remove();
+					$(this).find('span').html('Follow');
+					$(this).parent().find('p.helper').stop().animate({opacity: 0});
+				} else {
 
-			return this;
+					self.model.follow();
+					var button = this;
+					$(button).addClass('active');
+
+					var check = $('<div class="check"></div>');
+					$(button).append(check);
+					check.hide();
+
+					$(button).stop().animate({width: '70px'},{duration: 100});
+
+					setTimeout(function(){
+
+						check.show().css({opacity: 0, marginTop: 5}).stop().animate({marginTop: 0, opacity: 1},{easing: 'easeOutQuad'});
+
+						$(button).parent().find('.helper').stop().animate({opacity: 1});
+						$(button).find('span').html('Following');
+					},100);
+
+				}
+			})
+			self.$left = this.$el.find('.left');
+			self.$right = this.$el.find('.right');
+			self.timeline = new glasswing.views.timeline({parent : this, el : this.$el.find('.timeline')});
+			self.afterRender();
+
+			return self;
 		},
 		twoPane : function(prior) {
 
