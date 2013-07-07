@@ -26,6 +26,10 @@
 				date : this.model.getDate(),
 				procedure_name : 'Family Medicine'
 			}));
+			if (this.model.get('relevant')) {
+				self.$el.addClass('relevant');
+				self.$dot.addClass('relevant');
+			}
 
 			// console.log(this.$dot);
 			// self.delegateEvents();
@@ -36,8 +40,8 @@
 		mouseover :function() {
 			this.$el.addClass('hover');
 			this.$dot.addClass('hover');
-			var size = 16;
-			this.$dot.stop().css({zIndex: 15}).animate({width: size, height: size, marginTop: (-1*size/4*3), marginLeft: (-1*size/2)},{duration: 200, easing: 'easeOutBounce'});
+			var size = 10;
+			this.$dot.stop().css({zIndex: 15}).animate({width: size, height: size, marginTop: (-1*size/4*3), marginLeft: (-1*size/2)-1},{duration: 200, easing: 'easeOutBounce'});
 			// this.parent.mouseover();
 		},
 		mouseout : function() {

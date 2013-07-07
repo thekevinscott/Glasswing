@@ -43,7 +43,11 @@ glasswing.models.procedure = glasswing.models.abstract.extend({
 				}));
 
 			}
-			self.priors.add(new glasswing.models.prior({caregivers : caregivers, date : glasswing.randomDate(oldest_prior, new Date()) }));
+			var prior = new glasswing.models.prior({caregivers : caregivers, date : glasswing.randomDate(oldest_prior, new Date()) });
+			if (Math.round(Math.random()*3) == 1) {
+				prior.set('relevant',true);
+			}
+			self.priors.add(prior);
 		}
 
 

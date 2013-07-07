@@ -153,9 +153,6 @@ a {
 			position: absolute;
 		}
 	}
-	.prior.hover {
-		background: @blue;
-	}
 	.bar {
 		z-index: 12;
 		background: white;
@@ -164,19 +161,25 @@ a {
 		border-left: 4px solid #777;
 		position: relative;
 		.prior.hover {
-			background: @blue;
+			box-shadow: 0 0 3px rgba(0,0,0,0.5);
 		}
 		.prior {
 			border-radius: 10px;
 			height: 6px;
 			width: 6px;
-			background: #999;
+			background: #CCC;
 			position: absolute;
 			left: 50%;
-			margin-left: -3px;
+			margin-left: -4px;
 			margin-top: -6px;
 			cursor: pointer;
-			z-index: 16;
+			z-index: 10;
+			border: 1px solid #999;
+
+		}
+		.prior.relevant {
+			background: yellow;
+
 		}
 	}
 	.priors {
@@ -191,6 +194,15 @@ a {
 			border: 1px solid #333;
 			padding: 20px;
 			cursor: pointer;
+		}
+		.prior:hover {
+			background: #333;
+		}
+		.relevant {
+			color: yellow;
+			p {
+				color: yellow;
+			}
 		}
 		h4 {
 			text-transform: uppercase;
