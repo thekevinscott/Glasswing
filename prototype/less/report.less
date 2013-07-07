@@ -19,6 +19,10 @@
 h4 {
 	font-size: 18px;
 }
+a {
+	color: white;
+	text-shadow: none;
+}
 /*
 .pane.dashboard {
 	float: left;
@@ -92,7 +96,29 @@ h4 {
 .timeline:after { clear: both; }
 
 
+.twopane {
+	.timeline {
+		width: 5%;
+		float: left;
+	}
+	.prior-report {
+		width: 95%;
+		float: left;
 
+		p.report, p.excerpt {
+			padding: 20px;
+			background: #444;
+			border: 1px solid #111;
+		}
+		p.report {
+			display: none;
+		}
+		a {
+			font-size: 11px;
+			float: right;
+		}
+	}
+}
 .timeline {
 
 	position: relative;
@@ -127,9 +153,6 @@ h4 {
 			position: absolute;
 		}
 	}
-	.prior.hover {
-		background: @blue;
-	}
 	.bar {
 		z-index: 12;
 		background: white;
@@ -138,25 +161,32 @@ h4 {
 		border-left: 4px solid #777;
 		position: relative;
 		.prior.hover {
-			background: @blue;
+			box-shadow: 0 0 3px rgba(0,0,0,0.5);
 		}
 		.prior {
 			border-radius: 10px;
 			height: 6px;
 			width: 6px;
-			background: #999;
+			background: #CCC;
 			position: absolute;
 			left: 50%;
-			margin-left: -3px;
+			margin-left: -4px;
 			margin-top: -6px;
 			cursor: pointer;
-			z-index: 16;
+			z-index: 10;
+			border: 1px solid #999;
+
+		}
+		.prior.relevant {
+			background: yellow;
+
 		}
 	}
 	.priors {
 		width: 360px;
 		float: left;
-		overflow: scroll;
+		overflow-y: scroll;
+		overflow-x: hidden;
 		background: #222;
 		z-index: 11;
 
@@ -164,6 +194,15 @@ h4 {
 			border: 1px solid #333;
 			padding: 20px;
 			cursor: pointer;
+		}
+		.prior:hover {
+			background: #333;
+		}
+		.relevant {
+			color: yellow;
+			p {
+				color: yellow;
+			}
 		}
 		h4 {
 			text-transform: uppercase;
@@ -174,9 +213,6 @@ h4 {
 		}
 
 	}
-}
-.prior-report {
-	margin-left: 20px;
 }
 
 .coc {
@@ -224,11 +260,15 @@ h4 {
 
 
 .caregivers {
+	text-align: left;
+	select {
+		float: right;
+		margin-right: 20px;
+	}
 	.caregiver {
-		border-bottom: 1px solid black;
+		border-top: 1px solid black;
 		position: relative;
 		height: 90px;
-		text-align: left;
 		padding-top: 20px;
 	}
 	.caregiver:last-child {
@@ -236,6 +276,9 @@ h4 {
 	}
 	p {
 		margin: 0;
+	}
+	h4 {
+		font-size: 14px;
 	}
 	.image {
 		img {
@@ -246,14 +289,17 @@ h4 {
 		float: left;
 		width: 106px;
 		margin-right: 10px;
+		font-size: 13px;
 	}
-	.primary {
+	.primary, .secondary {
 		float: left;
 		width: 200px;
+		font-size: 12px;
+		padding-top: 10px;
 	}
-	.secondary {
-		float: left;
-		width: 200px;
+	.backup, .backup a {
+		font-size: 11px;
+		color: #666666;
 	}
 	.flag {
 		position: absolute;

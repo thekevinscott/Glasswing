@@ -20,23 +20,26 @@
 			var self = this;
 
 			// this.$el.html();
-			this.$el = $('<div class="modal"><div class="arrow"></div><div class="content">'+_.template(this.template, {
+			// this.$el = $('<div class="modal"><div class="arrow"></div><div class="content">'+_.template(this.template, {
+
+			// 	caregivers : this.collection.models
+
+			// })+'</div></div>');
+
+			self.$el.html(_.template(this.template, {
 
 				caregivers : this.collection.models
 
-			})+'</div></div>');
+			}));
 
 
 
-			this.button.unbind('click').click(function(){
-				// console.log($(this).position());
-				$(this).after(self.$el);
-				// self.$coc_modal.hide().slideDown();
-				// self.$coc_modal.find('.content').html(self.getCaregivers().$el);
-				var width = self.$el.width();
-				var left = ($(this).position().left - 30 - width/2 + 80 ) + $(this).width()/2;
+			self.button.unbind('click').click(function(){
 
-				self.$el.css({left: left+'px', top: $(this).position().top + 85});
+				$(self.$el).modal({
+					button : this
+				})
+
 
 			});
 			return self;
