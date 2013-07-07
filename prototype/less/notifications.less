@@ -1,0 +1,23 @@
+@blue : #32a6d6;
+.notifications {
+	position: absolute;
+	right: 0;
+	top: 0;
+
+	height: 100%;
+	background: #111;
+	border-left: 1px solid #222;
+	.bell {
+		width: 44px;
+		border-right: 2px groove #333;
+		height: 100%;
+
+	}
+	.content {
+		height: 100%;
+		width: 160px;
+	}
+}
+.notifications.new {
+	background: @blue;
+}

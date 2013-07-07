@@ -3,7 +3,7 @@
 
 
 	Backbone.sync = function(method, model, success, error){success();}
-	var tabManager, worklist, guide;
+	var tabManager, worklist, guide, notifications;
 
 
 
@@ -62,6 +62,8 @@
 
 
 	tabManager = new glasswing.collections.tabs({router : glasswing.router, worklist : worklist});
+
+	notifications = new glasswing.views.notifications();
 
 	Backbone.history.start();
 
