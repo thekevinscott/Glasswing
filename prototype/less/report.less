@@ -19,6 +19,10 @@
 h4 {
 	font-size: 18px;
 }
+a {
+	color: white;
+	text-shadow: none;
+}
 /*
 .pane.dashboard {
 	float: left;
@@ -92,7 +96,29 @@ h4 {
 .timeline:after { clear: both; }
 
 
+.twopane {
+	.timeline {
+		width: 5%;
+		float: left;
+	}
+	.prior-report {
+		width: 95%;
+		float: left;
 
+		p.report, p.excerpt {
+			padding: 20px;
+			background: #444;
+			border: 1px solid #111;
+		}
+		p.report {
+			display: none;
+		}
+		a {
+			font-size: 11px;
+			float: right;
+		}
+	}
+}
 .timeline {
 
 	position: relative;
@@ -156,7 +182,8 @@ h4 {
 	.priors {
 		width: 360px;
 		float: left;
-		overflow: scroll;
+		overflow-y: scroll;
+		overflow-x: hidden;
 		background: #222;
 		z-index: 11;
 
@@ -174,9 +201,6 @@ h4 {
 		}
 
 	}
-}
-.prior-report {
-	margin-left: 20px;
 }
 
 .coc {

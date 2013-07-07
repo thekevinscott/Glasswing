@@ -25,8 +25,10 @@
 
 			}));
 			self.$bar = this.$el.find('.bar');
+			self.$barContainer = this.$el.find('.bar-container');
 			self.$priors = this.$el.find('.priors');
 			self.$priors_content = this.$priors.find('.content');
+
 
 
 			var priors = this.parent.model.getPriors();
@@ -88,6 +90,17 @@
 				self.$slider.css({top : top+'%'});
 
 			});
+
+
+			var padding = 40;
+			var height = 100- (self.$barContainer.offset().top / ($('body').height()-padding) * 100);
+
+			// _.each([,self.$barContainer,self.$priors],function(el){
+			self.$el.css({height: height+'%'});
+			// });
+			// console.log(self.$el);
+			self.$el.css({position: 'fixed'});
+
 
 
 		},

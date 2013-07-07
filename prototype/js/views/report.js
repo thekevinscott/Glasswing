@@ -178,17 +178,15 @@
 		twoPane : function(prior) {
 
 
-			this.$left.animate({width: '50%'});
-			this.$right.animate({width: '50%'});
+			this.$left.addClass('twopane').animate({width: '50%'});
+			this.$right.addClass('twopane').animate({width: '50%'});
 
 
-			this.$right.find('.prior-report').html(prior.getReport());
+
 			this.$right.find('h2').slideUp();
+			this.$right.find('.prior-report').html(prior.getReport());
 
-			prior.caregivers = new glasswing.views.caregivers({
-				collection : prior.model.get('caregivers'),
-				button : $(prior.$report).find('.coc')
-			});
+
 
 			prior.afterRender();
 		}

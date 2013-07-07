@@ -55,13 +55,22 @@
 
 				}));
 
-
 			};
 			return this.$report;
 		},
 		afterRender : function() {
 			var self = this;
+			console.log('after render');
+			$(self.$report).find('.show-more').click(function(e){
+				$(self.$report).find('.excerpt').hide();
+				$(self.$report).find('.report').show();
+				$(this).hide();
+			})
 
+			self.caregivers = new glasswing.views.caregivers({
+				collection : self.model.get('caregivers'),
+				button : $(self.$report).find('.coc')
+			});
 		},
 	});
 })(jQuery);
