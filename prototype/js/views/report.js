@@ -86,7 +86,6 @@
 			this.timeline.afterRender();
 
 
-
 		},
 		setOptions : function(options) {
 
@@ -156,29 +155,7 @@
 
 					self.model.follow();
 					var button = this;
-					$(button).addClass('active');
-
-					var check = $('<div class="check"></div>');
-					$(button).append(check);
-					check.hide();
-
-					$(button).stop().animate({width: '70px'},{duration: 100});
-
-					setTimeout(function(){
-
-						check.show().css({opacity: 0, marginTop: 5}).stop().animate({marginTop: 0, opacity: 1},{easing: 'easeOutQuad'});
-
-						$(button).parent().find('.helper').stop().animate({opacity: 1});
-
-						var text = $(button).find('.text')
-						var span = $(button).find('span');
-						var width = span.width();
-						text.css({width: width});
-						span.html('Following');
-						text.data('width',width);
-						text.stop().animate({width: span.width()},{duration: 200, easing: 'easeInOutQuad'});
-
-					},100);
+					self.setFollowingButton(button);
 
 					setTimeout(function(){
 
@@ -188,6 +165,10 @@
 
 				}
 			})
+			if (self.model.isFollowing()) {
+				self.setFollowingButton(self.$followButton,1);
+			}
+
 			self.$left = this.$el.find('.left');
 			self.$right = this.$el.find('.right');
 			self.timeline = new glasswing.views.timeline({parent : this, el : this.$el.find('.timeline')});
@@ -198,6 +179,32 @@
 				button : this.$left.find('.coc')
 			});
 			return self;
+		},
+		setFollowingButton : function(button,duration) {
+			if (! duration) { duration = 100;}
+			$(button).addClass('active');
+
+			var check = $('<div class="check"></div>');
+			$(button).append(check);
+			check.hide();
+
+			$(button).stop().animate({width: '70px'},{duration: duration});
+
+			setTimeout(function(){
+
+				check.show().css({opacity: 0, marginTop: 5}).stop().animate({marginTop: 0, opacity: 1},{duration: duration*4, easing: 'easeOutQuad'});
+
+				$(button).parent().find('.helper').stop().animate({opacity: 1},{duration: duration*4});
+
+				var text = $(button).find('.text')
+				var span = $(button).find('span');
+				var width = span.width();
+				text.css({width: width});
+				span.html('Following');
+				text.data('width',width);
+				text.stop().animate({width: span.width()},{duration: duration*2, easing: 'easeInOutQuad'});
+
+			},duration);
 		},
 		twoPane : function(prior) {
 
