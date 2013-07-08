@@ -3,7 +3,9 @@
 
 
 
-	var parseChapters = function(data) {
+	var parseChapters = function(urls) {
+		// data =
+
 		var chapters = {
 			chapters : {
 
@@ -11,8 +13,8 @@
 			chapters_by_order : []
 		}
 
-		for (var i=0;i<data.length;i++) {
-			var chapter = data[i];
+		for (var i=0;i<urls.length;i++) {
+			var chapter = glasswing.template('pages/'+urls[i]+'.md');
 
 
 
@@ -45,18 +47,30 @@
 					break;
 				}
 			});
+			// do we have an associated js?
+			var events = $.ajax({
+				url: 'js/views/guide/'+urls[i]+".js?bust="+(new Date).getTime(),
+				async: false,
+			});
+			if (events.status == 200) {
+				chapters.chapters[key].events = events.responseText;
+			}
+			// console.log(events);
 		};
+
+
+
 		return chapters;
 	}
 
 	glasswing.config = {chapters : parseChapters([
-		glasswing.template('pages/tabs.md'),
-		glasswing.template('pages/notifications.md'),
-		glasswing.template('pages/case-cards.md'),
-		glasswing.template('pages/following.md'),
-		glasswing.template('pages/timeline.md'),
-		glasswing.template('pages/side-by-side.md'),
-		glasswing.template('pages/caregivers.md'),
+		'tabs',
+		'notifications',
+		'case-cards',
+		'following',
+		'timeline',
+		'side-by-side',
+		'caregivers'
 	]) };
 
 

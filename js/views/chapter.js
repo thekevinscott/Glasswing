@@ -73,25 +73,27 @@
 			this.parent.$audio[0].play();
 
 			var self = this;
-			this.parent.$audio.audio({
-				// 1.5 : function() {
-				// 	self.$el.find('.pane:first').open();
-				// },
+			console.log('events: ');
+			console.log(this.model.events);
+			console.log(JSON.parse(this.model.events));
+			if (this.model.events) {
+				this.parent.$audio.audio(JSON.parse(this.model.events));
+			}
 
-				9 : function() {
-					var tr = $p('table tbody tr:first');
-					//var view = $p('data',tr,'view')
-					tr.highlight({
-						content: "Click the highlighted procedure"
-					});
-					tr.click(function(e){
-						$(this).unbind('click');
-						self.nextSection();
-						$.dehighlight();
-					});
-				}
-			});
-
+			/*
+			(function() {}
+		var tr = $p('table tbody tr:first');
+		//var view = $p('data',tr,'view')
+		tr.highlight({
+			content: "Click the highlighted procedure"
+		});
+		tr.click(function(e){
+			$(this).unbind('click');
+			self.nextSection();
+			$.dehighlight();
+		});
+	})
+*/
 		},
 		nextSection : function() {
 
