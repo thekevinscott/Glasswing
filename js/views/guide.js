@@ -183,6 +183,14 @@
 					callback();
 				}
 			}
+		},
+		addCallback : function(callback) {
+			if (! this.isActive()) {
+				this.callbacks.push(callback);
+			} else {
+				callback();
+			}
+
 		}
 
 	});

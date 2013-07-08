@@ -137,10 +137,20 @@
 					self.model.unfollow();
 					$(this).removeClass('active');
 
+					var duration = 60;
+					$(this).stop().animate({width: '35px'},{duration: duration});
+					$(this).find('.check').animate({opacity: 0},{duration: 200, complete : function() {
+						this.remove();
+					}});
+					var text = $(this).find('.text');
+					var span = text.find('span');
 
-					$(this).stop().animate({width: '35px'},{duration: 60});
-					$(this).find('.check').remove();
-					$(this).find('span').html('Follow');
+					text.stop().animate({
+						width : text.data('width')
+					},{duration : 120, complete : function(){
+						span.html('Follow');
+					}});
+
 					$(this).parent().find('p.helper').stop().animate({opacity: 0});
 				} else {
 
@@ -159,7 +169,15 @@
 						check.show().css({opacity: 0, marginTop: 5}).stop().animate({marginTop: 0, opacity: 1},{easing: 'easeOutQuad'});
 
 						$(button).parent().find('.helper').stop().animate({opacity: 1});
-						$(button).find('span').html('Following');
+
+						var text = $(button).find('.text')
+						var span = $(button).find('span');
+						var width = span.width();
+						text.css({width: width});
+						span.html('Following');
+						text.data('width',width);
+						text.stop().animate({width: span.width()},{duration: 200, easing: 'easeInOutQuad'});
+
 					},100);
 
 					setTimeout(function(){
