@@ -7,16 +7,8 @@
 
 
 
-	loadFile = function(options){
-		// var link = document.createElement(options.element);
-	 //    link.type = options.type;
+	window.loadFile = function(options){
 
-
-	 //    link.src = options.url + '?bust='+(new Date()).getTime();
-	 //    console.log(link);
-	 //    document.getElementsByTagName("head")[0].appendChild(link);
-	 //    console.log(document.getElementsByTagName("head")[0]);
-		// get some kind of XMLHttpRequest
 		var xhrObj = createXMLHTTPObject();
 		// open and send a synchronous request
 		xhrObj.open('GET', options.url + '?bust='+(new Date()).getTime(), false);
@@ -25,6 +17,7 @@
 		var se = document.createElement('script');
 		se.type = "text/javascript";
 		se.text = xhrObj.responseText;
+		// console.log(options.url);
 		document.getElementsByTagName('head')[0].appendChild(se);
 	};
 
@@ -67,6 +60,6 @@
 		}
 
 
-		loadFile({url: url, element: 'script', type: 'text/javascript'})
+		window.loadFile({url: url, element: 'script', type: 'text/javascript'})
 	}
 }());
