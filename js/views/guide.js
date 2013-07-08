@@ -1,5 +1,3 @@
-//'lib/text!templates/guide/titlePage.html',
-
 (function($){
 
 
@@ -10,12 +8,12 @@
 			page : 1000
 		},
 		// model : new worklist(),
-		// template : 'guide/titlePage.html',
-		// template : $('#guide-titlePage').html(),
-		template : glasswing.template('titlePage.html'),
+		// template : 'guide/home.html',
+		// template : $('#guide-home').html(),
+		template : glasswing.template('home.html'),
 
 		events : {
-		  "click #titlePage .button" : "click"
+		  "click #home .button" : "click"
 		},
 		active : true,
 		current_view : null,
@@ -58,7 +56,7 @@
 			});
 
 
-			this.$titlePage = this.$el.find('#titlePage');
+			this.$home = this.$el.find('#home');
 			this.$glasswing = $('#glasswing');
 			//this.$sidebar = this.$el.find('#sidebar');
 
@@ -71,7 +69,7 @@
 
 				break;
 				default :
-					window.location = 'prototype';
+					window.location = 'prototype/index.html';
 				break;
 			}
 			// this.setActive( (   $(event.currentTarget).attr('val')  == 'walkthrough') ? true : false );
@@ -85,12 +83,12 @@
 
 			if (! this.router.initial_route) {
 				// use a map function here
-				this.$titlePage.animate({left: '0%'},this.animation.page,'easeInOutQuad');
+				this.$home.animate({left: '0%'},this.animation.page,'easeInOutQuad');
 				this.sidebar.$el.animate({left: '100%'},this.animation.page,'easeInOutQuad');
 				this.$glasswing.animate({left: '100%'}, this.animation.page, 'easeInOutQuad');
 			} else {
 
-				this.$titlePage.css({left: '0%'});
+				this.$home.css({left: '0%'});
 				this.sidebar.$el.css({left: '100%'});
 				this.$glasswing.css({left: '100%'});
 			}
@@ -103,7 +101,7 @@
 
 			if (! this.router.initial_route) {
 
-				this.$titlePage.animate({left: '-100%'},this.animation.page,'easeInOutQuad');
+				this.$home.animate({left: '-100%'},this.animation.page,'easeInOutQuad');
 				this.sidebar.$el.animate({left: '0%'},this.animation.page,'easeInOutQuad');
 
 
@@ -111,7 +109,7 @@
 
 			} else {
 
-				this.$titlePage.css({left: '-100%'});
+				this.$home.css({left: '-100%'});
 				this.sidebar.$el.css({left: '0%'});
 				this.$glasswing.css({left: '0%'});
 

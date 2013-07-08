@@ -13,13 +13,14 @@
 
 	var AppRouter = Backbone.Router.extend({
 		routes: {
-			":chapter" : 'guide',
-			":chapter/:section" : 'guide',
 			"": "home",
+			"home": "home",
 			"guide" : 'guide',
 			"guide/" : 'guide',
+			":chapter" : 'guide',
+			":chapter/:section" : 'guide',
 
-			"*actions": 'guide'
+			// "*actions": 'guide'
 		}
 	}); // Initiate the router
 	glasswing.router = new AppRouter();
@@ -33,7 +34,8 @@
 		glasswing.router.initial_route = false;
 
 	});
-	glasswing.router.on('route:home', function(chapter, section) {
+
+	glasswing.router.on('route:home', function() {
 
 		guide.home();
 		glasswing.router.initial_route = false;

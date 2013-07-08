@@ -70,28 +70,52 @@
 //			self.audio = self.$el.find('audio');
 			// console.log('file: ' + file);
 			this.parent.$audio.attr('src','audio/'+this.title+'/'+file+'.mp3');
-			this.parent.$audio[0].play();
+			// this.parent.$audio[0].play();
 
 			var self = this;
-			this.parent.$audio.audio({
-				// 1.5 : function() {
-				// 	self.$el.find('.pane:first').open();
-				// },
 
-				9 : function() {
-					var tr = $p('table tbody tr:first');
-					//var view = $p('data',tr,'view')
-					tr.highlight({
-						content: "Click the highlighted procedure"
-					});
-					tr.click(function(e){
-						$(this).unbind('click');
-						self.nextSection();
-						$.dehighlight();
-					});
-				}
-			});
 
+			var config = glasswing.config.chapters.chapters[this.title];
+
+			// console.log(JSON.parse(this.model.events));
+			switch(this.title) {
+				case 'tabs' :
+				var events = {
+					9 : function(){
+						var tr = $p('table tbody tr:first');
+						//var view = $p('data',tr,'view')
+						tr.highlight({
+							content: "Click the highlighted procedure"
+						});
+						tr.click(function(e){
+							$(this).unbind('click');
+							self.nextSection();
+							$.dehighlight();
+						});
+					}
+				};
+			}
+
+			if (events) {
+
+
+				this.parent.$audio.audio(events);
+			}
+
+			/*
+			(function() {}
+		var tr = $p('table tbody tr:first');
+		//var view = $p('data',tr,'view')
+		tr.highlight({
+			content: "Click the highlighted procedure"
+		});
+		tr.click(function(e){
+			$(this).unbind('click');
+			self.nextSection();
+			$.dehighlight();
+		});
+	})
+*/
 		},
 		nextSection : function() {
 
