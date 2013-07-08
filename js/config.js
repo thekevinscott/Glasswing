@@ -3,16 +3,18 @@
 
 
 
-	var parseChapters = function(data) {
-		var chapters = {
+	var parseChapters = function(urls) {
+		// data =
+		glasswing.config = {};
+		glasswing.config.chapters = {
 			chapters : {
 
 			},
 			chapters_by_order : []
 		}
 
-		for (var i=0;i<data.length;i++) {
-			var chapter = data[i];
+		for (var i=0;i<urls.length;i++) {
+			var chapter = glasswing.template('pages/'+urls[i]+'.md');
 
 
 
@@ -29,35 +31,58 @@
 				switch(node[0]) {
 					case 'h1' :
 						key = node[1].toURL();
-						if ( ! chapters.chapters.hasOwnProperty(key)) { chapters.chapters[key] = {panes : {}, panes_by_order : [] }; }
-						chapters.chapters[key].title = node[1];
-						chapters.chapters_by_order.push(chapters.chapters[key]);
+						if ( ! glasswing.config.chapters.chapters.hasOwnProperty(key)) { glasswing.config.chapters.chapters[key] = {panes : {}, panes_by_order : [] }; }
+						glasswing.config.chapters.chapters[key].title = node[1];
+						glasswing.config.chapters.chapters_by_order.push(glasswing.config.chapters.chapters[key]);
 					break;
 					case 'h2' :
 						// if (pane_count===undefined) { pane_count = 0;}
 						// else { pane_count++; }
 						pane_name = node[1].toURL();
-						chapters.chapters[key].panes[pane_name] = {title : node[1], paragraphs : [] };
-						chapters.chapters[key].panes_by_order.push(chapters.chapters[key].panes[pane_name]);
+						glasswing.config.chapters.chapters[key].panes[pane_name] = {title : node[1], paragraphs : [] };
+						glasswing.config.chapters.chapters[key].panes_by_order.push(glasswing.config.chapters.chapters[key].panes[pane_name]);
 					break;
 					case 'p' :
-						chapters.chapters[key].panes[pane_name].paragraphs.push(node[1]);
+						glasswing.config.chapters.chapters[key].panes[pane_name].paragraphs.push(node[1]);
 					break;
 				}
 			});
+			// // do we have an associated js?
+			// var callback = function(data) {
+
+			// };
+
+			// (function(){
+			// 	var url = 'js/views/guide/'+urls[i]+".js?bust="+(new Date).getTime();
+
+
+			// 	$.ajax({
+			// 		url: url,
+			// 		error : function() {
+			// 			// console.log('error: '+ url);
+			// 		},
+			// 		success : function() {
+			// 			// console.log('success: '+ url);
+			// 			window.loadFile({url: url, element: 'script', type: 'text/javascript'});
+			// 		}
+			// 	});
+			// })();
+
+
 		};
-		return chapters;
+
+
 	}
 
-	glasswing.config = {chapters : parseChapters([
-		glasswing.template('pages/tabs.md'),
-		glasswing.template('pages/notifications.md'),
-		glasswing.template('pages/case-cards.md'),
-		glasswing.template('pages/following.md'),
-		glasswing.template('pages/timeline.md'),
-		glasswing.template('pages/side-by-side.md'),
-		glasswing.template('pages/caregivers.md'),
-	]) };
+	parseChapters([
+		'tabs',
+		'notifications',
+		'case-cards',
+		'following',
+		'timeline',
+		'side-by-side',
+		'caregivers'
+	]);
 
 
 

@@ -1,6 +1,8 @@
 (function($){
 
 	$.fn.audio = function(events){
+		console.log('events!');
+		console.log(events);
 		return $(this).each(function(){
 			var audio = $(this)[0];
 			var currentTime = audio.currentTime;

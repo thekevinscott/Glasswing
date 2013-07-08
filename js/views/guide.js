@@ -1,5 +1,3 @@
-//'lib/text!templates/guide/titlePage.html',
-
 (function($){
 
 
@@ -10,12 +8,12 @@
 			page : 1000
 		},
 		// model : new worklist(),
-		// template : 'guide/titlePage.html',
-		// template : $('#guide-titlePage').html(),
-		template : glasswing.template('titlePage.html'),
+		// template : 'guide/home.html',
+		// template : $('#guide-home').html(),
+		template : glasswing.template('home.html'),
 
 		events : {
-		  "click #titlePage .button" : "click"
+		  "click #home .button" : "click"
 		},
 		active : true,
 		current_view : null,
@@ -27,11 +25,13 @@
 			this.router = attributes.router;
 
 			this.attributes = attributes;
+			this.callbacks = [];
 
 			// we create the view on load
 			this.render();
 
 			var self = this;
+			self.active = false;
 
 
 			window['$p'] = function(selector) {
@@ -47,6 +47,27 @@
 
 		},
 		render : function() {
+			var self = this;
+			var lookForIFrame = function() {
+				var iframe = $('iframe');
+				if (iframe.length) {
+					if (iframe[0].contentWindow) {
+						// console.log('good');
+						iframe.removeClass('loading');
+						// console.log(iframe[0].contentWindow);
+						iframe[0].contentWindow['glasswing-guide-callback'] = function() {
+							self.loaded();
+						}
+					} else {
+						setTimeout(lookForIFrame,50);
+					}
+				} else {
+					setTimeout(lookForIFrame,50);
+				}
+			}
+			lookForIFrame();
+
+
 			this.$el.append($(_.template(this.template, {})));
 
 
@@ -58,8 +79,9 @@
 			});
 
 
-			this.$titlePage = this.$el.find('#titlePage');
+			this.$home = this.$el.find('#home');
 			this.$glasswing = $('#glasswing');
+
 			//this.$sidebar = this.$el.find('#sidebar');
 
 
@@ -71,7 +93,7 @@
 
 				break;
 				default :
-					window.location = 'prototype';
+					window.location = 'prototype/index.html';
 				break;
 			}
 			// this.setActive( (   $(event.currentTarget).attr('val')  == 'walkthrough') ? true : false );
@@ -85,12 +107,12 @@
 
 			if (! this.router.initial_route) {
 				// use a map function here
-				this.$titlePage.animate({left: '0%'},this.animation.page,'easeInOutQuad');
+				this.$home.animate({left: '0%'},this.animation.page,'easeInOutQuad');
 				this.sidebar.$el.animate({left: '100%'},this.animation.page,'easeInOutQuad');
 				this.$glasswing.animate({left: '100%'}, this.animation.page, 'easeInOutQuad');
 			} else {
 
-				this.$titlePage.css({left: '0%'});
+				this.$home.css({left: '0%'});
 				this.sidebar.$el.css({left: '100%'});
 				this.$glasswing.css({left: '100%'});
 			}
@@ -103,7 +125,7 @@
 
 			if (! this.router.initial_route) {
 
-				this.$titlePage.animate({left: '-100%'},this.animation.page,'easeInOutQuad');
+				this.$home.animate({left: '-100%'},this.animation.page,'easeInOutQuad');
 				this.sidebar.$el.animate({left: '0%'},this.animation.page,'easeInOutQuad');
 
 
@@ -111,7 +133,7 @@
 
 			} else {
 
-				this.$titlePage.css({left: '-100%'});
+				this.$home.css({left: '-100%'});
 				this.sidebar.$el.css({left: '0%'});
 				this.$glasswing.css({left: '0%'});
 
@@ -125,33 +147,42 @@
 			this.sidebar.route(arguments);
 		},
 		isActive : function() { return this.active; },
-		// sets whether the guide is active or not.
-		// the event will propagate to sidebar, which is, after all, the thing that's mostly changing.
-		setActive : function(is_active) {
-			this.active = is_active;
-		},
-		activate : function() {
-			alert('activate!');
-			if (! this.router.initial_route) {
-				this.$glasswing.animate({left: '0%', marginLeft: this.sidebar.$el.data('width')+'%', width: (100-this.sidebar.$el.data('width'))+'%'}, this.animation.page, 'easeInOutQuad');
-			} else{
-				this.$glasswing.animate({left: '0%', marginLeft: this.sidebar.$el.data('width')+'%', width: (100-this.sidebar.$el.data('width'))+'%'});
-			}
-			this.sidebar.open();
-		},
-		deactivate : function() {
-			// alert('deactivate!');
-			if (! this.router.initial_route) {
-				this.$glasswing.stop().animate({left: '0%', marginLeft: 0, width: '100%'}, this.animation.page, 'easeInOutQuad');
-			} else{
+		// // sets whether the guide is active or not.
+		// // the event will propagate to sidebar, which is, after all, the thing that's mostly changing.
+		// setActive : function(is_active) {
+		// 	this.active = is_active;
+		// },
+		// activate : function() {
+		// 	// alert('activate!');
+		// 	if (! this.router.initial_route) {
+		// 		this.$glasswing.animate({left: '0%', marginLeft: this.sidebar.$el.data('width')+'%', width: (100-this.sidebar.$el.data('width'))+'%'}, this.animation.page, 'easeInOutQuad');
+		// 	} else{
+		// 		this.$glasswing.animate({left: '0%', marginLeft: this.sidebar.$el.data('width')+'%', width: (100-this.sidebar.$el.data('width'))+'%'});
+		// 	}
+		// 	this.sidebar.open();
+		// },
+		// deactivate : function() {
+		// 	// alert('deactivate!');
+		// 	if (! this.router.initial_route) {
+		// 		this.$glasswing.stop().animate({left: '0%', marginLeft: 0, width: '100%'}, this.animation.page, 'easeInOutQuad');
+		// 	} else{
 
-				this.$glasswing.css({left: '0%', marginLeft: 0, width: '100%'});
-			}
-			this.sidebar.close();
-		},
+		// 		this.$glasswing.css({left: '0%', marginLeft: 0, width: '100%'});
+		// 	}
+		// 	this.sidebar.close();
+		// },
 		navigate : function(path, options) {
 
 			this.router.navigate(path,options);
+		},
+		loaded : function() {
+			this.active = true;
+			if (this.callbacks.length) {
+				while(this.callbacks.length) {
+					var callback = this.callbacks.shift();
+					callback();
+				}
+			}
 		}
 
 	});
