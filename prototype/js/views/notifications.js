@@ -8,7 +8,7 @@
 		},
 		initialize : function(attributes) {
 
-        	// this.render();
+        	this.render();
         	// this.collection = new glasswing.collections.notifications();
 
 		},
@@ -18,6 +18,7 @@
 			self.$el.html(_.template(this.template, {
 
 			}));
+
 			$('.tabs').prepend(self.$el);
 			self.$sheet = self.$el.find('.sheet');
 
