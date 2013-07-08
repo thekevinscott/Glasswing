@@ -31,6 +31,7 @@
 			this.render();
 
 			var self = this;
+			self.active = false;
 
 
 			window['$p'] = function(selector) {
@@ -145,7 +146,7 @@
 
 			this.sidebar.route(arguments);
 		},
-		// isActive : function() { return this.active; },
+		isActive : function() { return this.active; },
 		// // sets whether the guide is active or not.
 		// // the event will propagate to sidebar, which is, after all, the thing that's mostly changing.
 		// setActive : function(is_active) {
@@ -175,6 +176,7 @@
 			this.router.navigate(path,options);
 		},
 		loaded : function() {
+			this.active = true;
 			if (this.callbacks.length) {
 				while(this.callbacks.length) {
 					var callback = this.callbacks.shift();
