@@ -60,6 +60,13 @@
 
 	dataMain = dataMain.split(',');
 	for (i=0;i<dataMain.length;i += 1) {
-		loadFile({url: 'js/'+dataMain[i].trim()+'.js', element: 'script', type: 'text/javascript'})
+		if (dataMain[i].substring(0,2) == '..' || dataMain[i].substring(0,2) == 'js') {
+			var url = dataMain[i].trim()+'.js';
+		} else {
+			var url = 'js/'+dataMain[i].trim()+'.js';
+		}
+
+
+		loadFile({url: url, element: 'script', type: 'text/javascript'})
 	}
 }());
