@@ -8,8 +8,8 @@
 		},
 		initialize : function(attributes) {
 
-        	this.render();
-        	this.collection = new glasswing.collections.notifications();
+        	// this.render();
+        	// this.collection = new glasswing.collections.notifications();
 
 		},
 		render : function() {
