@@ -133,26 +133,33 @@
 				}).unbind('keydown').keydown(function(){
 					$(this).addClass('focus');
 				}).unbind('keyup').keyup(function(e){
+
+					var val = $(this).val();
+
+					var index = $(this).parents('th').index();
+
+					var trs = self.$list.find('tbody tr');
+
+					trs.each(function(){
+						var td = $($(this).find('td')[index]);
+						var html = td.html().split('<span>').join('').split('</span>').join('');
+
+						var search_index = html.search(new RegExp(val,"gmi"));
+						if (search_index !== -1) {
+							html = html.substring(0,search_index) + '<span>' + html.substring(search_index,search_index+val.length) + '</span>' + html.substring(search_index+val.length);
+
+						}
+						td.html(html);
+
+
+					});
+
+
+
 					if (e.keyCode == 13) {
 						self.filter();
 					}
 
-
-					var val = $(this).val();
-					if (val) {
-						var index = $(this).parents('th').index();
-						console.log(index);
-						var trs = self.$list.find('tbody tr');
-
-						trs.each(function(){
-							var td = $($(this).find('td')[index]);
-							var html = td.html().split('<span>').join('').split('</span>').join('');
-
-							html = html.replace(new RegExp(val,"gm"),'<span>'+val+'</span>');
-							td.html(html);
-
-						});
-					}
 
 
 				});
@@ -206,11 +213,18 @@
 			var inputs = self.$list.find('table thead input');
 			var tr = self.$list.find('table tbody tr');
 			tr.each(function(){
-				// $(this).show();
+				$(this).show();
+				$(this).find('td').each(function(){
+					html = $(this).html().split('<span>').join('').split('</span>').join('');
+					$(this).html(html);
+				})
+
 			});
+			var search_present = false;
 			inputs.each(function(){
 				var val = $(this).val().toLowerCase();
 				if (val) {
+					search_present = true;
 					// console.log(this);
 					// console.log($(this).parents('th'));
 					var input_index = $(this).parents('th').index();
@@ -221,22 +235,26 @@
 						// console.log($(this).find('td'));
 						// console.log(input_index);
 						// console.log($(this).find('td')[input_index]);
-						console.log('val: ' + val);
-						console.log('html: ' + html);
+						// console.log('val: ' + val);
+						// console.log('html: ' + html);
 						if (html.search(val) === -1) {
 							// kill it
 							$(this).hide();
 						} else {
-							$(this).show();
+							// $(this).show();
+
 						}
 
 					});
 				} else {
-					$(this).show();
+
 				}
 
 
 			});
+			if (! search_present) {
+				tr.show();
+			}
 		},
 		afterRender : function() {
 			var self = this;
