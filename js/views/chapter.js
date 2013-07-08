@@ -66,13 +66,17 @@
 
 		},
 		play : function(file) {
+			var self = this;
 			//
 //			self.audio = self.$el.find('audio');
 			// console.log('file: ' + file);
-			this.parent.$audio.attr('src','audio/'+this.title+'/'+file+'.mp3');
-			// this.parent.$audio[0].play();
+			self.parent.$audio.attr('src','audio/'+self.title+'/'+file+'.mp3');
+			self.parent.parent.callbacks.push(function(){
+				alert('1');
+				self.parent.$audio[0].play();
+			});
 
-			var self = this;
+
 
 
 			var config = glasswing.config.chapters.chapters[this.title];
