@@ -7,7 +7,7 @@
 		events : {
 		},
 		initialize : function(attributes) {
-
+			this.tabManager = attributes.tabManager;
         	this.render();
         	// this.collection = new glasswing.collections.notifications();
         	this.notifications = [];
@@ -37,19 +37,24 @@
 			// this.addNotification('<strong>Holman, Daniel\'s</strong> report has been approved.');
 			return self;
 		},
-		addNotification : function(notification) {
+		addNotification : function(obj) {
+			var message = obj.message;
+			var view = obj.view;
+			var self = this;
+
 			this.$el.addClass('new');
-			var notification_el = $('<li class="new"><a href="javascript:;">'+notification+'</a></li>');
-			this.notifications.push(notification_el);
+			var notification = $('<li class="new"><a href="javascript:;">'+message+'</a></li>');
+			this.notifications.push(obj);
 			if (this.notifications.length==1) {
 				this.$content.html('1 new notification');
 			} else {
 				this.$content.html(this.notifications.length+ ' new notifications');
 			}
 
-			this.$sheet.find('.all').before(notification_el);
-			notification_el.click(function(e){
-				console.log(e);
+			this.$sheet.find('.all').before(notification);
+			notification.click(function(e){
+				console.log(view);
+				self.tabManager.showPage(view);
 			});
 		}
 	});

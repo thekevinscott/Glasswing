@@ -64,7 +64,7 @@ setTimeout(function(){
 
 
 		tabManager = new glasswing.collections.tabs({router : glasswing.router, worklist : worklist});
-		worklist.notifications = new glasswing.views.notifications();
+		worklist.notifications = new glasswing.views.notifications({tabManager : tabManager});
 
 		Backbone.history.start();
 

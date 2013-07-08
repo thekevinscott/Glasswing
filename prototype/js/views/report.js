@@ -183,7 +183,7 @@
 					setTimeout(function(){
 
 						var patient = self.model.get('patient');
-						self.model.worklist.notifications.addNotification('<strong>'+patient.get('last')+', '+patient.get('first')+'</strong><br />All images have been uploaded.');
+						self.model.worklist.notifications.addNotification({view : self, message : '<strong>'+patient.get('last')+', '+patient.get('first')+'</strong><br />All images have been uploaded.'});
 					},2000);
 
 				}
