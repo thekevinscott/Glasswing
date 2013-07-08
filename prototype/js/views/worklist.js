@@ -122,7 +122,7 @@
 				var input_div = $(self.$list.find('thead tr.search-fields .input')[td_index]);
 				var input = input_div.find('input');
 				open(input_div);
-				input.focus();
+
 				// if (! $('input:focus').length) {
 
 				// }
@@ -137,7 +137,26 @@
 						self.filter();
 					}
 
+
+					var val = $(this).val();
+					if (val) {
+						var index = $(this).parents('th').index();
+						console.log(index);
+						var trs = self.$list.find('tbody tr');
+
+						trs.each(function(){
+							var td = $($(this).find('td')[index]);
+							var html = td.html().split('<span>').join('').split('</span>').join('');
+
+							html = html.replace(new RegExp(val,"gm"),'<span>'+val+'</span>');
+							td.html(html);
+
+						});
+					}
+
+
 				});
+				input.focus();
 
 			})
 			.mouseout(function(){
@@ -187,7 +206,7 @@
 			var inputs = self.$list.find('table thead input');
 			var tr = self.$list.find('table tbody tr');
 			tr.each(function(){
-				$(this).show();
+				// $(this).show();
 			});
 			inputs.each(function(){
 				var val = $(this).val().toLowerCase();
@@ -207,9 +226,13 @@
 						if (html.search(val) === -1) {
 							// kill it
 							$(this).hide();
+						} else {
+							$(this).show();
 						}
 
 					});
+				} else {
+					$(this).show();
 				}
 
 
