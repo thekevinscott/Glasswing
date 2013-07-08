@@ -8,13 +8,25 @@
 
 
 .notifications {
+	a {
+		text-decoration: none;
+	}
 	position: absolute;
 	right: 0;
 	top: 0;
 
 	height: 100%;
-	background: #111;
-	border-left: 1px solid #222;
+	background: #333;
+
+	background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.0));
+	background: -moz-linear-gradient(	top, rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.0));
+	background: -ms-linear-gradient(	top, rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.0));
+	background: -o-linear-gradient(		top, rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.0));
+	background: linear-gradient(		top, rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.0));
+
+
+
+	border-left: 1px solid #444;
 	.bell, .content {
 
 			zoom: 1;
@@ -30,10 +42,21 @@
 		height: 100%;
 		width: 160px;
 		float: right;
+		line-height: 38px;
+		text-align: center;
+		font-size: 13px;
+		color: #777;
 	}
 }
 .new {
-	background: @blue;
+
+	background-color: #435875;
+	.content {
+		color: white;
+	}
+	.bell {
+		border-right: 2px groove #5e7491;
+	}
 }
 .sheet {
 	display: none;
