@@ -96,10 +96,10 @@
 			var height = 100- (self.$barContainer.offset().top / ($('body').height()-padding) * 100);
 
 			// _.each([,self.$barContainer,self.$priors],function(el){
-			self.$el.css({height: height+'%'});
+			// self.$el.css({height: height+'%'});
 			// });
 			// console.log(self.$el);
-			self.$el.css({position: 'fixed'});
+			// self.$el.css({position: 'fixed'});
 
 
 
