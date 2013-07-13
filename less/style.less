@@ -1,3 +1,5 @@
+
+
 body,html{
 	margin: 0;
 	padding: 0;
@@ -22,6 +24,25 @@ td, th {
 	font-weight: normal;
 	font-size: 12px;
 
+}
+
+/*** Set up absolute positioning ***/
+.row, .col { overflow: hidden; position: absolute;}
+.row { left: 0; right: 0;}
+.col { top: 0; bottom: 0;}
+.scroll-x { overflow-x: auto;}
+.scroll-y { overflow-y: auto;}
+.scroll-x, .scroll-y { -webkit-overflow-scrolling: touch; }
+
+.header.row { height: 39px; top: 0;}
+.body.row { top: 39px; bottom: 30px;}
+.footer.row { height: 30px; bottom: 0; }
+
+.footer {
+	background: black;
+	font-size: 12px;
+	line-height: 30px;
+	padding-left: 20px;
 }
 body .loading {
 	background: url(../images/loading.gif) no-repeat center center;
@@ -101,7 +122,8 @@ input[type=button].selected, .button.selected, input[type=button]:hover, .button
 }
 .glasswing {
 	background: #222;
-	min-height: 100%;
+	height: 100%;
+	overflow: hidden;
 
 }
 .overlay {
