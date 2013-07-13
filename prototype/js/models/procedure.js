@@ -102,6 +102,9 @@ glasswing.models.procedure = glasswing.models.abstract.extend({
 		// return priors;
 		return this.priors.models;
 	},
+	isFollowing : function() {
+		return this.following;
+	},
 	follow : function() {
 		this.following = true;
 	},
