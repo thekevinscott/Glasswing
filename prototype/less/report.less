@@ -71,14 +71,6 @@ a {
 		text-align: right;
 	}
 
-	.right {
-
-		width: 30%;
-
-	}
-}
-.right .content {
-	margin-left: 5%;
 }
 
 
@@ -310,4 +302,70 @@ a {
 		width: 32px;
 		height: 32px;
 	}
+}
+
+
+
+
+.draggable {
+	position: absolute;
+	right: 0;
+	z-index: 40;
+	width: 100px;
+}
+.right {
+	width: 50%;
+}
+.droppable {
+	position: absolute;
+	.border {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+	}
+}
+.right .container, .droppable {
+	height: 100%;
+	width: 100%;
+	top: 0;
+
+}
+.right .droppable.hover .border {
+	border: 10px solid @blue;
+
+}
+.right .container .pane {
+	width: 100%;
+	position: absolute;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	cursor: pointer;
+	.content {
+		padding: 20px;
+		width: auto;
+		height: auto;
+	}
+
+}
+.close, .magnify {
+	position: absolute;
+	right: 0;
+	width: 32px;
+	height: 32px;
+	cursor: pointer;
+	z-index: 30;
+}
+.close {
+	top: 0;
+	background: url('../../images/close.png') no-repeat center center;
+}
+.magnify {
+	bottom: 0;
+	background: url('../../images/magnify.png') no-repeat center center;
+}
+.full .magnify {
+	opacity: 0.08;
 }

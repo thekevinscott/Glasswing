@@ -83,7 +83,13 @@
 
 				this.notify(this.notification_elements.shift());
 			}
-			this.timeline.afterRender();
+			//this.timeline.afterRender();
+
+			// this.$('.draggable').draggable({ opacity: 0.7, helper: "clone" });
+
+			this.dynamicPane = new glasswing.views.dynamicContainer({el : $('.right .container'), draggables : this.$('.draggable')});
+
+
 
 
 		},
@@ -171,7 +177,8 @@
 
 			self.$left = this.$el.find('.left');
 			self.$right = this.$el.find('.right');
-			self.timeline = new glasswing.views.timeline({parent : this, el : this.$el.find('.timeline')});
+
+			//self.timeline = new glasswing.views.timeline({parent : this, el : this.$el.find('.timeline')});
 			self.afterRender();
 
 			this.caregivers = new glasswing.views.caregivers({
