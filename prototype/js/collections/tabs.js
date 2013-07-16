@@ -21,12 +21,28 @@ glasswing.collections.tabs = Backbone.Collection.extend({
         });
         return this;
     },
+    recalculateSize : function() {
+        var tab_width = 2;
+        setTimeout(function(){
 
+            $('.tabs .tab').each(function(){
+                tab_width += $(this).outerWidth();
+            });
+
+            // $('.tabs').width(tab_width);
+            $('.search').css({left: tab_width});
+        },3);
+
+
+    },
     addTab : function(page) {
         var self = this;
         var tab = new glasswing.views.tabs({page : page, parent : this });
         $('.tabs').append(tab.$el);
-        tab.show();
+
+
+        // tab.show();
+        this.recalculateSize();
         // tab.$el.click(function(e){
         //     alert('2');
         //     self.showPage(page);
@@ -35,15 +51,18 @@ glasswing.collections.tabs = Backbone.Collection.extend({
         return tab;
     },
     closeTab : function(page) {
-        this.showPage(this.worklist,{trigger : true});
 
-        var cid = page.model['cid'];
+        this.showPage(this.worklist);
+
+        var cid = page['cid'];
         var self = this;
         page = this.pages[cid];
+
         page.tab.close(function(tab){
             tab.remove();
             page.view.remove();
             delete self.pages[cid];
+            self.recalculateSize();
         });
 
 

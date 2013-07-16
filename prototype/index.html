@@ -11,13 +11,23 @@
 <link rel="stylesheet/less" type="text/css" href="less/worklist.less?bust=1" />
 <link rel="stylesheet/less" type="text/css" href="less/report.less?bust=1" />
 <link rel="stylesheet/less" type="text/css" href="less/notifications.less?bust=1" />
+<link rel="stylesheet/less" type="text/css" href="less/timeline.less?bust=1" />
 
 
 </head><body>
 
 <div id="glasswing" class="glasswing loading">
-	<div class="tabs header row"></div>
-	<div class="page body row scroll-y"></div>
+	<div class="header row">
+		<div class="tabs col"></div>
+		<div class="search col"><input type="text" value="Search patient name, MRN, etc." /></div>
+		<div class="system col">
+			<a href="javascript:;" class="preferences"></a>
+			<a href="javascript:;" class="my-profile">My Profile</a>
+
+		</div>
+
+	</div>
+	<div class="page body row"></div>
 	<div class="footer row">&copy; 2013 Glasswing, GE, CMU</div>
 </div><!-- glasswing -->
 		<script type="text/javascript" src="../js/lib/less.min.js"></script>
@@ -28,8 +38,8 @@
 		<script type="text/javascript" src="../js/lib/backbone.min.js"></script>
 		<script type="text/javascript" src="../js/lib/jquery.easing.min.js"></script>
 		<script type="text/javascript" src="../js/lib/jquery.tablesorter.min.js"></script>
-		<script type="text/javascript" src="../js/lib/jquery.modal.js"></script>
-		<script type="text/javascript" src="../js/lib/markdown.js"></script>
+		<script type="text/javascript" src="../js/lib/jquery.modal.min.js"></script>
+		<script type="text/javascript" src="../js/lib/markdown.min.js"></script>
 		<script type="text/javascript" src="js/glasswing.js"></script>
 		<script type="text/javascript" src="../js/lib/utils.js"></script>
 		<script type="text/javascript" src="js/views/abstract.js"></script>

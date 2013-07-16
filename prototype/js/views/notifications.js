@@ -20,7 +20,7 @@
 			}));
 			self.$content = self.$el.find('.content');
 
-			$('.tabs').prepend(self.$el);
+			$('.header .system').prepend(self.$el);
 			self.$sheet = self.$el.find('.sheet');
 
 			self.$el.mouseover(function(){

@@ -4,12 +4,12 @@
 		// model : new worklist(),
 
 		// template_html : 'report/index.html',
-		className : "prior",
+		className : "prior draggable",
 		template : glasswing.template('timeline/prior.html'),
 		events : {
-		  "mouseover" : "mouseover",
-		  "mouseout" : "mouseout",
-		  "click" : "click",
+		  // "mouseover" : "mouseover",
+		  // "mouseout" : "mouseout",
+		  // "click" : "click",
 		  "click .coc" : "coc"
 		},
 		initialize : function(attributes) {
@@ -37,19 +37,20 @@
 
 			return self;
 		},
-		mouseover :function() {
-			this.$el.addClass('hover');
-			this.$dot.addClass('hover');
-			var size = 10;
-			this.$dot.stop().css({zIndex: 15}).animate({width: size, height: size, marginTop: (-1*size/4*3), marginLeft: (-1*size/2)-1},{duration: 200, easing: 'easeOutBounce'});
-			// this.parent.mouseover();
-		},
-		mouseout : function() {
-			this.$el.removeClass('hover');
-			this.$dot.removeClass('hover');
-			this.$dot.stop().css({zIndex:10}).animate({width: 6, height: 6, marginTop: -6, marginLeft: -3},{duration: 200, easing: 'easeOutBounce'});
-			// this.parent.mouseout();
-		},
+		// mouseover :function() {
+		// 	this.$el.addClass('hover');
+		// 	this.$dot.addClass('hover');
+		// 	var size = 16;
+		// 	this.$dot.stop().css({zIndex: 15}).animate({width: size, height: size},{duration: 200, easing: 'easeOutBounce'});
+		// 	// this.parent.mouseover();
+		// },
+		// mouseout : function() {
+		// 	var size = 8;
+		// 	this.$el.removeClass('hover');
+		// 	this.$dot.removeClass('hover');
+		// 	this.$dot.stop().css({zIndex:10}).animate({width: size, height: size},{duration: 200, easing: 'easeOutBounce'});
+		// 	// this.parent.mouseout();
+		// },
 		click : function() {
 			this.parent.twoPane(this);
 		},
@@ -57,9 +58,11 @@
 			if (! this.$report) {
 				this.$report = _.template(glasswing.template('timeline/prior-report.html', {
 
-				}));
+				}))();
 
 			};
+			// console.log(this.$report());
+
 			return this.$report;
 		},
 		afterRender : function() {
