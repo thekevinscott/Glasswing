@@ -26,7 +26,7 @@
 		render : function() {
 			var self = this;
 
-			var content = $('.dynamic-content .container');
+			this.content = $('.dynamic-content .container');
 			var droppable = $('.dynamic-content .droppable');
 			droppable.hide();
 
@@ -39,9 +39,10 @@
 
 				var contentContains = function(attributes) {
 					var e = attributes.e;
+					var draggable_offset = attributes.draggable_offset;
 					var current_position = {x : e.clientX - start_position.x, y : e.clientY - start_position.y};
-					var left = draggable.offset().left + current_position.x + 20;
-					var top = draggable.offset().top + current_position.y + 10;
+					var left = draggable_offset.left + current_position.x + 20;
+					var top = draggable_offset.top + current_position.y + 10;
 
 					var point = {x: left+click_offset.x, y : top+click_offset.y};
 
@@ -78,24 +79,26 @@
 
 					var left, top;
 
+					var draggable_offset = draggable.offset();
+
 					$(window).unbind("mousemove").mousemove(function(e){
 						droppable.show();
 						current_position = {x : e.clientX - start_position.x, y : e.clientY - start_position.y};
 
-						left = draggable.offset().left + current_position.x + 20;
-						top = draggable.offset().top + current_position.y + 10;
+						left = draggable_offset.left + current_position.x + 20;
+						top = draggable_offset.top + current_position.y + 10;
 
 						clone.css({left: left, top: top});
 
 
-						contentContains({e : e, content : content, contains : function(){
+						contentContains({e : e, draggable_offset : draggable_offset, content : self.content, contains : function(){
 
 							droppable.addClass('hover');
 
 							var position = 'full';
 							if (self.panes.length) {
 								var point = {x: left+click_offset.x, y : top+click_offset.y};
-								position = self.getPosition(point,content);
+								position = self.getPosition(point,self.content);
 
 							}
 							self.positionPane({el : droppable, position : position});
@@ -114,13 +117,13 @@
 
 						// var cursor = {x: left+click_offset.x, y : top+click_offset.y};
 
-						contentContains({e : e, content : content, contains : function(){
+						contentContains({e : e, content : self.content, draggable_offset : draggable_offset, contains : function(){
 							var position = 'full';
 							if (self.panes.length >= 1) {
 								var point = {x: left+click_offset.x, y : top+click_offset.y};
-								position = self.getPosition(point,content);
+								position = self.getPosition(point,self.content);
 							}
-							self.addPane({el : content, contents : draggable.data('dynamic-content'), position: position});
+							self.addPane({el : self.content, contents : draggable.data('dynamic-content'), header : draggable.data('header'), clss : draggable.data('clss'), position: position});
 
 						}});
 
@@ -153,16 +156,22 @@
 			return position;
 		},
 		contains : function(point) {
-			return (cursor.x > content.offset().left && cursor.y > content.offset().top && cursor.x < content.offset().left + width && cursor.y < content.offset().top + height);
+			return (cursor.x > self.content.offset().left && cursor.y > self.content.offset().top && cursor.x < self.content.offset().left + width && cursor.y < self.content.offset().top + height);
 		},
 		addPane : function(attributes) {
 			var self = this;
 			var contents = attributes.contents;
+			var header = attributes.header;
 			var position = attributes.position;
-			var target = attributes.el;
+			var clss = attributes.clss;
+			var target = attributes.el || this.content;
 			if (! target) { target = this.content; }
 
-			var pane = new glasswing.views.dynamicPane({ content : contents, parent : this, position : position});
+			if (this.panes.length==2) {
+				this.removePane(this.panes[0]);
+			}
+
+			var pane = new glasswing.views.dynamicPane({ content : contents, header : header, parent : this, position : position, clss : clss});
 			// var pane = $('<div class="pane" />');
 
 			target.prepend(pane.render().$el);

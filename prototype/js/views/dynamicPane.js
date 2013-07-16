@@ -3,7 +3,9 @@
 		className : 'pane',
 		initialize : function(attributes) {
 			this.content = attributes.content;
+			this.header = attributes.header;
 			this.parent = attributes.parent;
+			this.clss = attributes.clss;
 			this.setPosition(attributes.position);
 			this.state = 'normal';
 		},
@@ -11,9 +13,10 @@
 			var self = this;
 			this.$close = $('<div class="close" />');
 			this.$magnify = $('<div class="magnify" />');
-
+			this.$header = $('<div class="header">'+this.header+'</div>');
 			this.$content = $('<div class="content">'+this.content+'</div>');
-
+			this.$el.addClass(this.clss);
+			this.$el.prepend(this.$header);
 			this.$el.append(this.$content);
 
 			this.$el.append(this.$close);

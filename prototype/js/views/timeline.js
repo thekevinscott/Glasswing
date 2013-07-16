@@ -31,14 +31,14 @@
 
 
 
-			var priors = this.parent.model.getPriors();
+			this.priors = this.parent.model.getPriors();
 
 
 
 			var max = (new Date()).getTime();
 			var min = max;
 			// console.log(priors);
-			_.each(priors,function(prior){
+			_.each(this.priors,function(prior){
 				// console.log(prior);
 				// console.log(prior.date);
 				// console.log(prior.get('date'));
@@ -48,22 +48,19 @@
 			});
 
 
-			_.each(priors,function(prior){
-				var priorView = new glasswing.views.prior({parent : self, model : prior });
+			_.each(this.priors,function(prior){
+				prior.view = new glasswing.views.prior({parent : self, model : prior });
 
 				var val = 100-(100 * (prior.get('date').getTime() - min) / (max - min));
 
-				priorView.$dot.css({top: val+'%'});
-				// priorView.$dot.mouseover(function(){
-				// 	priorView.mouseover();
-				// }).mouseout(function(){
-				// 	priorView.mouseout();
-				// });
-				self.$bar.append(priorView.$dot);
+				prior.view.$dot.css({top: val+'%'});
+				self.$bar.append(prior.view.$dot);
 
-				self.$priors_content.prepend(priorView.$el);
+				self.$priors_content.prepend(prior.view.$el);
 
-				priorView.$el.data('dynamic-content',priorView.getReport());
+				prior.view.$el.data('dynamic-content',prior.view.getReport());
+				prior.view.$el.data('header','<p class="right">'+prior.getDate()+'</p><h3>MRI of the ankle</h3>');
+				prior.view.$el.data('clss','prior');
 			});
 
 			self.delegateEvents();
@@ -132,6 +129,20 @@
 			// console.log(self.$el);
 			// self.$el.css({position: 'fixed'});
 
+
+
+		},
+		getFirstRelevant : function() {
+			var self = this;
+			if (! self.firstRelevant) {
+				_.each(self.priors,function(prior) {
+					if (! self.firstRelevant || (prior.get('relevant') && prior.getDate() > self.firstRelevant.getDate())) {
+						self.firstRelevant = prior;
+					}
+				});
+			}
+
+			return self.firstRelevant.view;
 
 
 		},

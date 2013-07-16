@@ -168,6 +168,40 @@ a {
 		.container {
 			height: 100%;
 		}
+
+		.pane {
+			overflow: hidden;
+			background: #414141;
+
+			.header {
+				background: #343434;
+				padding: 10px 20px;
+				h3 {
+					display: inline-block;
+				}
+				.right {
+					float: right;
+					margin: 0;
+				}
+			}
+			.images {
+				background: #343434;
+			}
+
+		}
+		.pane.scanned-document {
+			.content {
+				padding: 0;
+				background: black;
+				overflow: hidden;
+			}
+			img {
+				min-width: 100%;
+			}
+			.header {
+				background: @blue;
+			}
+		}
 	}
 	.patient-history {
 		position: absolute; width: @patient-history+-@padding; right: @padding;
@@ -344,7 +378,7 @@ a {
 	.content {
 		padding: 20px;
 		width: auto;
-		height: auto;
+		height: 100%;
 	}
 
 }
@@ -357,7 +391,7 @@ a {
 	z-index: 30;
 }
 .close {
-	top: 0;
+	top: 40px;
 	background: url('../../images/close.png') no-repeat center center;
 }
 .magnify {

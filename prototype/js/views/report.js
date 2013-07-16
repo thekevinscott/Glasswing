@@ -92,11 +92,19 @@
 				scanned_documents_dropdown.stop().slideDown(slide_speed);
 			}).mouseout(function(){
 				scanned_documents_dropdown.stop().slideUp(slide_speed);
+			})
+
+			this.$('.scanned-documents .draggable').each(function(){
+				$(this).data('dynamic-content','<img src="images/scanned-documents/'+$(this).html()+'" />');
+				$(this).data('header','<p class="right">August 1, 2013</p><h3>Scanned Document: '+$(this).html()+'</h3>');
+				$(this).data('clss','scanned-document');
 			});
-			this.$('.scanned-documents').data('dynamic-content','<img src="images/scanned-document.png" />');
+
 
 			this.dynamicPane = new glasswing.views.dynamicContainer({el : $('.dynamic-content .container'), draggables : $('.draggable')});
 
+			var prior = this.timeline.getFirstRelevant().$el;
+			this.dynamicPane.addPane({contents : prior.data('dynamic-content'), header : prior.data('header'), clss : prior.data('clss')});
 
 
 
@@ -126,16 +134,19 @@
 			var self = this;
 			self.$el.html(_.template(this.template, {
 				id : this.model.get('id'),
-				patient_id : this.model.get('patient').get('patient-id'),
-				patient_risks : this.model.get('patient').get('patient-risks'),
+				patient_id : this.model.get('patient').get('id'),
+				// patient_id : this.model.get('patient').get('patient-id'),
+				patient_risks : this.model.get('patient').get('risks'),
 				dob : this.model.get('patient').getDob(),
-				gender : this.model.get('patient').get('gender'),
+				gender : (this.model.get('patient').get('gender') == 'f') ? 'FEMALE' : 'MALE',
+
 				name : this.model.get('name'),
 				priority : this.model.get('priority'),
 				procedure_date : this.model.getDate(),
 				procedure_class : this.model.get('procedure_class'),
 				procedure_name : this.model.getName(),
 				report_status : this.model.get('report_status'),
+				clinical_indication : this.model.get('clinical_indication'),
 				hospital_name : this.model.get('hospital_name'),
 				referring_physician : this.model.get('referring_physician'),
 				images : this.model.get('images'),
