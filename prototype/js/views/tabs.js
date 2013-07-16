@@ -63,9 +63,9 @@
 		show : function() {
 
 			// console.log(this.$el.find('h2').height());
-			var height = this.$el.height();
+			// var height = this.$el.height();
 
-			this.$el.css({height : height});
+			this.$el.css({height : 38});
 			//this.$el.css({height: 0}).animate({height : height});
 		},
 		notify : function(attributes) {

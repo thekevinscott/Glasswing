@@ -6,7 +6,8 @@
 			point.x > self.offset().left &&
 			point.y > self.offset().top &&
 			point.x < self.offset().left 	+ self.width() &&
-			point.y < self.offset().top 	+ self.height());
+			point.y < self.offset().top 	+ self.height()
+			);
 	}
 	glasswing.views.dynamicContainer = glasswing.views.abstract.extend({
 		initialize : function(attributes) {
@@ -25,8 +26,8 @@
 		render : function() {
 			var self = this;
 
-			var content = $('.right .container');
-			var droppable = $('.right .droppable');
+			var content = $('.dynamic-content .container');
+			var droppable = $('.dynamic-content .droppable');
 			droppable.hide();
 
 			this.draggables.each(function(){
@@ -37,8 +38,12 @@
 				var current_position; // where is our mouse, relatively (compared to our start position);
 
 				var contentContains = function(attributes) {
+					var e = attributes.e;
+					var current_position = {x : e.clientX - start_position.x, y : e.clientY - start_position.y};
+					var left = draggable.offset().left + current_position.x + 20;
+					var top = draggable.offset().top + current_position.y + 10;
 
-					var point = {x: attributes.left+attributes.click_offset.x, y : attributes.top+attributes.click_offset.y};
+					var point = {x: left+click_offset.x, y : top+click_offset.y};
 
 					if (attributes.content.contains(point)) {
 						if (attributes.contains) {
@@ -54,15 +59,21 @@
 				}
 
 
+
+
 				draggable.unbind('mousedown').mousedown(function(e){
 					e.preventDefault();
 					start_position = {x : e.clientX, y : e.clientY };
 					click_offset = {x : start_position.x - draggable.offset().left, y : start_position.y - draggable.offset().top };
 
 					var clone = draggable.clone();
-					clone.css({opacity: 0.7});
-					draggable.after(clone);
-					clone.css({left: draggable.position().left, top: draggable.position().top});
+
+					clone.css({opacity: 0.7, width: 200});
+					clone.addClass('clone');
+					$('body').append(clone);
+					// console.log(draggable.offset());
+					clone.css({left: draggable.offset().left + 20, top: draggable.offset().top + 10});
+					// clone.css({left: 1200, top: 200});
 					self.dragging = true;
 
 					var left, top;
@@ -71,12 +82,14 @@
 						droppable.show();
 						current_position = {x : e.clientX - start_position.x, y : e.clientY - start_position.y};
 
-						left = draggable.position().left + current_position.x;
-						top = draggable.position().top + current_position.y;
+						left = draggable.offset().left + current_position.x + 20;
+						top = draggable.offset().top + current_position.y + 10;
+
 						clone.css({left: left, top: top});
 
 
-						contentContains({click_offset : click_offset, el : droppable, left : left, top : top, content : content, contains : function(){
+						contentContains({e : e, content : content, contains : function(){
+
 							droppable.addClass('hover');
 
 							var position = 'full';
@@ -94,22 +107,20 @@
 
 					}).unbind('mouseup').mouseup(function(e){
 						droppable.hide();
-						current_position = {x : e.clientX - start_position.x, y : e.clientY - start_position.y};
 
 						droppable.removeClass('hover');
 
-						var left = draggable.position().left + current_position.x;
-						var top = draggable.position().top + current_position.y;
 
-						var cursor = {x: left+click_offset.x, y : top+click_offset.y};
 
-						contentContains({click_offset : click_offset, el : droppable, left : left, top : top, content : content, contains : function(){
-							if (self.panes.length < 1) {
-								self.addPane({el : content, contents : 'Shit brains', position: 'full'});
-							} else {
+						// var cursor = {x: left+click_offset.x, y : top+click_offset.y};
+
+						contentContains({e : e, content : content, contains : function(){
+							var position = 'full';
+							if (self.panes.length >= 1) {
 								var point = {x: left+click_offset.x, y : top+click_offset.y};
-								self.addPane({el : content, contents : 'Chunky butt', position : self.getPosition(point,content)});
+								position = self.getPosition(point,content);
 							}
+							self.addPane({el : content, contents : draggable.data('dynamic-content'), position: position});
 
 						}});
 

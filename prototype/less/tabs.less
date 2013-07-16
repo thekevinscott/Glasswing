@@ -1,4 +1,5 @@
-@notification : #32a6d6;
+@import "../../less/constants.less";
+
 .tabs {
 	border-bottom: 1px solid black;
 	font-style: Lato;
@@ -10,7 +11,7 @@
 	list-style: none;
 	overflow: hidden;
 
-	background: #111;
+	background: #000;
 	display: inline-block;
 
 	font-size: 16px;
@@ -18,12 +19,11 @@
 	border-top: 1px solid #333;
 
 	vertical-align: bottom;
-	transition: 		all 0.3s;
-	-webkit-transition: all 0.3s; /* Safari */
+
 	position: relative;
 }
 .tab.selected, .tab:hover {
-	background: #222;
+	background: @background;
 }
 .tab a {
 	color: #DDD;
@@ -32,9 +32,10 @@
 	padding: 10px 25px;
 	display: block;
 }
-.notification {
-	color: @notification;
-
+.tab span {
+	margin-left: 10px;
+	font-size: 12px;
+	color: @dark-text;
 }
 
 .tab .notification {
@@ -49,4 +50,51 @@
 	border-radius: 18px;
 	text-align: center;
 	box-shadow: 0 1px 2px rgba(0,0,0,0.5);
+}
+@notifications-width: 180px;
+.tabs {
+	left: 0;
+
+}
+.search {
+
+	left: 200px;
+	right: @notifications-width;
+
+	line-height: 39px;
+	font-size: 12px;
+	padding-left: 52px;
+	background: black url(../images/search.png) no-repeat 20px center;
+	input {
+		width: 100%;
+		font-style: italic;
+		color: @dark-text;
+
+		background: black;
+		padding: 11px 0;
+		border: none;
+	}
+}
+.system {
+	right: 0;
+	width: @notifications-width;
+	background: black;
+
+	.bell {
+		background: url(../images/bell.png) no-repeat center center;
+	}
+	.preferences {
+		background: url(../images/preferences.png) no-repeat center center;
+		width: 44px;
+	}
+	.my-profile {
+		text-decoration: none;
+		line-height: 39px;
+		color: @dark-text;
+	}
+}
+.system > * {
+	height: 100%;
+	display: inline-block;
+	float: left;
 }

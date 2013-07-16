@@ -21,7 +21,7 @@
 		events : {
 		  // "click tbody tr" : "openProcedure",
 		  // "click .cards .card" : "openProcedure",
-		  "click input[type=button]" : "setLayout"
+		  "click .layouts a.button" : "setLayout"
 		},
 
 		buttons : {},
@@ -48,7 +48,8 @@
 
 			this.templates = {
 				card : { template : glasswing.template('worklist/cards'), selector : '.cards'},
-				table : { template : glasswing.template('worklist/table'), selector : 'tbody'}
+				table : { template : glasswing.template('worklist/table'), selector : 'tbody'},
+				grid : { template : glasswing.template('worklist/grid'), selector : '.grid-contents'},
 			};
 			this.setLayout(this.current_layout);
 
@@ -90,10 +91,11 @@
 			this.delegateEvents();
 
 
-			this.$el.find('input[type=button]').each(function(){
+			this.$el.find('.layouts a.button').each(function(){
 
-				self.buttons[$(this).val().toLowerCase()] = $(this);
+				self.buttons[$(this).attr('rel').toLowerCase()] = $(this);
 			});
+
 
 
 			switch(self.current_layout) {
@@ -264,7 +266,7 @@
 					self.$list.find('table').tablesorter();
 					var inputs = self.$list.find('.search-fields input');
 					self.$list.find('table').find('form').submit(function(e){
-						alert('go');
+						// alert('go');
 						e.preventDefault();
 					});
 					// inputs.each(function(){
@@ -288,6 +290,21 @@
 
 					// });
 				break;
+				case 'grid' :
+					self.$('.grid-header p').click(function(e){
+						var old = $(this).html();
+						var form = $('<form />');
+						var input = $('<input name="something" type="text" />');
+						$(this).html(form);
+						form.html(input);
+						input.focus();
+						form.submit(function(e){
+							e.preventDefault();
+							$(this).replaceWith(input.val());
+						});
+
+					});
+				break;
 			}
 
 
@@ -298,6 +315,18 @@
 			if (this.buttons[this.current_layout]) {
 
 				this.selected_button = this.buttons[this.current_layout].select();
+			}
+
+			this.setFilters();
+		},
+		setFilters : function() {
+
+			if (this.current_layout=='grid') {
+				$('.filters').css({width: 0});
+				$('.worklist .container').css({right: 0});
+			} else {
+				$('.filters').css({width: 320});
+				$('.worklist .container').css({right: 340});
 			}
 
 		},
@@ -324,10 +353,12 @@
 		},
 		setLayout : function(layout) {
 
-			layout = (typeof layout == 'string') ? layout : $(layout.currentTarget).val().toLowerCase();
+
+			layout = (typeof layout == 'string') ? layout : $(layout.currentTarget).attr('rel').toLowerCase();
 			if (layout) {
 				switch(layout) {
 					case 'card' : layout = 'card'; break;
+					case 'grid' : layout = 'grid'; break;
 					case 'table' : layout = 'table'; break;
 				}
 				this.current_layout = layout;
@@ -336,6 +367,7 @@
 				if (this.selected_button != null) { this.selected_button.deselect(); }
 
 				// console.log(this.buttons);
+
 
 				if (this.buttons[this.current_layout]) {
 
@@ -347,6 +379,8 @@
 				}
 
 			}
+
+			this.setFilters();
 
 
 		},

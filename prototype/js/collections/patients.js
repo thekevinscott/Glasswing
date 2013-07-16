@@ -19,7 +19,7 @@ glasswing.collections.patients = Backbone.Collection.extend({
 		'Rogers','Block','Gebhardt','Hong','Jablonsky',
 		'Mandel','Matthews','Ticer','Wong','Butler',
 		'Helmbrecht','Muhnot','Wang','Gladwin','Humphries',
-		'Luetger','Todhunder','Lokhande','Koo',
+		'Luetger','Todhunter','Lokhande','Koo',
 		'Tucker','Briguglio','Roche','Gonzalez'
 		],
 	},
@@ -28,12 +28,12 @@ glasswing.collections.patients = Backbone.Collection.extend({
 		_(this).bindAll('add');
 
 	},
-	id_offset : 200100,
+	id_offset : 100100,
 	add : function(model) {
 		Backbone.Collection.prototype.add.call(this, model);
-		if (! model.get('id')) {
-			model.set('id',this.id_offset+this.length);
 
+		if (! model.get('id')) {
+			model.set('id',this.id_offset+this.length + Math.round(Math.random()*200000));
 		}
 	},
 	generateRandomPatient : function() {

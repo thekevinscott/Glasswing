@@ -1,0 +1,172 @@
+@import "../../less/constants.less";
+
+	.timeline-buttons {
+		a {
+
+			background: @gray;
+			color: @dark-text;
+			text-decoration: none;
+			width: 50%;
+			float: left;
+			display: inline-block;
+			position: relative;
+			padding: 20px 0;
+			.dot {
+
+				border-radius: 16px;
+				height: 16px;
+				width: 16px;
+				padding: 0;
+				display: block;
+				position: absolute;
+				min-height: 0;
+				top: 50%;
+				margin-top: -8px;
+				left: 12px;
+			}
+			span {
+				display: block;
+				min-height: 36px;
+				padding: 0 20px 0 40px;
+			}
+		}
+		.relevant-priors .dot {
+			background: @orange;
+		}
+		.all-priors .dot {
+			background: #9b9b9b;
+		}
+		a:first-child {
+			border-radius: @border-radius 0 0 @border-radius;
+		}
+		a:last-child {
+			border-radius: 0 @border-radius @border-radius 0;
+			span {
+				line-height: 36px;
+			}
+		}
+		a.selected {
+			background: @gray-darker;
+			color: white;
+		}
+	}
+	.timeline-container {
+		position: absolute;
+		bottom: 0;
+		top: 160px;
+		width: 100%;
+	}
+	.timeline {
+		top: 180px;
+		bottom: 0;
+		overflow: visible;
+		position: absolute;
+	}
+
+
+.timeline {
+	@bar-width: 32px;
+
+	h2 {
+		margin-bottom: 20px;
+	}
+
+	.container {
+		padding: 0 0;
+	}
+	.bar-container {
+
+		width: @bar-width;
+		height: 100%;
+
+		position: absolute;
+		.slider {
+			background: #222323;
+			opacity: 1;
+			width: 100%;
+			display: none;
+			height: 20px;
+			z-index: 9;
+			position: absolute;
+		}
+	}
+	.bar {
+		z-index: 12;
+		background: black;
+		border-radius: @border-radius;
+		height: 100%;
+		overflow: hidden;
+
+		position: relative;
+		.prior.hover {
+			box-shadow: 0 0 3px rgba(0,0,0,0.5);
+		}
+		@prior-size : 8px;
+		.prior {
+			border-radius: 10px;
+			background: #CCC;
+			position: absolute;
+			left: 50%;
+
+			height: @prior-size;
+			width: @prior-size;
+			margin-left: -(@prior-size/2);
+			margin-top: -@prior-size;
+			cursor: pointer;
+			z-index: 10;
+
+
+		}
+		.prior.relevant {
+			background: @orange;
+			height: @prior-size*2;
+			width: @prior-size*2;
+			margin-left: -(@prior-size);
+			margin-top: -@prior-size*2;
+
+		}
+	}
+	.priors {
+		position: absolute;
+		left: @bar-width+10px;
+		right: 0;
+		height: 100%;
+		z-index: 11;
+		overflow-y: auto;
+		border-radius: @border-radius;
+
+		.prior {
+			margin-bottom: 2px;
+			padding: 20px;
+			cursor: pointer;
+			background: @gray;
+		}
+		.prior:last-child {
+			margin-bottom: 0;
+		}
+		.relevant {
+			color: @orange;
+			p {
+				color: @orange;
+			}
+		}
+		h4 {
+			text-transform: uppercase;
+			font-size: 18px;
+		}
+		p {
+			font-size: 16px;
+			margin: 0;
+		}
+
+	}
+}
+
+
+.prior.clone {
+
+
+	padding: 20px;
+	cursor: pointer;
+	background: @gray;
+}

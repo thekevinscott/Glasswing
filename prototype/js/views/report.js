@@ -42,15 +42,15 @@
         	glasswing.views.abstract.prototype.initialize.apply(this, arguments);
 
         	// console.log(attributes);
-			this.name = this.model.get('name');
+			this.name = this.model.get('procedure_name') + '<span>'+this.model.get('id')+'. '+this.model.get('name')+ '</span>';
 
 			this.url = 'procedure/'+this.model.get('id');
 
 			var self = this;
 
 			setTimeout(function(){
-				self.model.set('images',10);
-
+				// self.model.set('images',10);
+				console.log('could update images here');
 
 				// console.log(self.model.get('images'));
 			},1500);
@@ -83,11 +83,19 @@
 
 				this.notify(this.notification_elements.shift());
 			}
-			//this.timeline.afterRender();
+			this.timeline.afterRender();
 
 			// this.$('.draggable').draggable({ opacity: 0.7, helper: "clone" });
+			var scanned_documents_dropdown = this.$('.scanned-documents-dropdown');
+			var slide_speed = 200;
+			this.$('.scanned-documents').mouseover(function(){
+				scanned_documents_dropdown.stop().slideDown(slide_speed);
+			}).mouseout(function(){
+				scanned_documents_dropdown.stop().slideUp(slide_speed);
+			});
+			this.$('.scanned-documents').data('dynamic-content','<img src="images/scanned-document.png" />');
 
-			this.dynamicPane = new glasswing.views.dynamicContainer({el : $('.right .container'), draggables : this.$('.draggable')});
+			this.dynamicPane = new glasswing.views.dynamicContainer({el : $('.dynamic-content .container'), draggables : $('.draggable')});
 
 
 
@@ -124,9 +132,9 @@
 				gender : this.model.get('patient').get('gender'),
 				name : this.model.get('name'),
 				priority : this.model.get('priority'),
-				procedure_date : this.model.get('date'),
+				procedure_date : this.model.getDate(),
 				procedure_class : this.model.get('procedure_class'),
-				procedure_name : this.model.get('procedure_name'),
+				procedure_name : this.model.getName(),
 				report_status : this.model.get('report_status'),
 				hospital_name : this.model.get('hospital_name'),
 				referring_physician : this.model.get('referring_physician'),
@@ -175,10 +183,10 @@
 				self.setFollowingButton(self.$followButton,1);
 			}
 
-			self.$left = this.$el.find('.left');
-			self.$right = this.$el.find('.right');
+			self.$left = this.$el.find('.current-report');
+			self.$right = this.$el.find('.dynamic-content');
 
-			//self.timeline = new glasswing.views.timeline({parent : this, el : this.$el.find('.timeline')});
+			self.timeline = new glasswing.views.timeline({parent : this, el : this.$el.find('.timeline')});
 			self.afterRender();
 
 			this.caregivers = new glasswing.views.caregivers({
@@ -213,21 +221,21 @@
 
 			},duration);
 		},
-		twoPane : function(prior) {
+		// twoPane : function(prior) {
 
 
-			this.$left.addClass('twopane').animate({width: '50%'});
-			this.$right.addClass('twopane').animate({width: '50%'});
-
-
-
-			this.$right.find('h2').slideUp();
-			this.$right.find('.prior-report').html(prior.getReport());
+		// 	this.$left.addClass('twopane').animate({width: '50%'});
+		// 	this.$right.addClass('twopane').animate({width: '50%'});
 
 
 
-			prior.afterRender();
-		}
+		// 	this.$right.find('h2').slideUp();
+		// 	this.$right.find('.prior-report').html(prior.getReport());
+
+
+
+		// 	prior.afterRender();
+		// }
 
 	});
 

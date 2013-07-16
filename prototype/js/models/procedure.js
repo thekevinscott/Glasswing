@@ -72,8 +72,6 @@ glasswing.models.procedure = glasswing.models.abstract.extend({
 			});
 
 
-			console.log(self.worklist);
-			console.log(self.worklist.tabManager);
 			// tab manager needs to be notified. but if the tab is active, then do nothing.
 			self.worklist.tabManager.notify(self.view.report, {}); // pass in an optional attributes array
 
@@ -95,6 +93,7 @@ glasswing.models.procedure = glasswing.models.abstract.extend({
 
 	},
 	isStat : function() {
+
 		return (this.get('priority') > 2) ? true : false;
 	},
 	getPriors : function() {
@@ -111,6 +110,12 @@ glasswing.models.procedure = glasswing.models.abstract.extend({
 	unfollow : function() {
 		this.following = false;
 	},
-
+	getDate : function(key) {
+		if (! key) { key = 'date';}
+		return (this.get(key).getMonth()+1)+'/'+this.get(key).getDate()+'/'+this.get(key).getFullYear();
+	},
+	getName : function() {
+		return this.get('procedure_type').toUpperCase() + ' '+this.get('body_part').toUpperCase();
+	}
 
 });

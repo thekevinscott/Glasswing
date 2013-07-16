@@ -54,22 +54,23 @@
 				var val = 100-(100 * (prior.get('date').getTime() - min) / (max - min));
 
 				priorView.$dot.css({top: val+'%'});
-				priorView.$dot.mouseover(function(){
-					priorView.mouseover();
-				}).mouseout(function(){
-					priorView.mouseout();
-				});
+				// priorView.$dot.mouseover(function(){
+				// 	priorView.mouseover();
+				// }).mouseout(function(){
+				// 	priorView.mouseout();
+				// });
 				self.$bar.append(priorView.$dot);
 
 				self.$priors_content.prepend(priorView.$el);
+
+				priorView.$el.data('dynamic-content',priorView.getReport());
 			});
 
 			self.delegateEvents();
 
 			return self;
 		},
-		afterRender : function() {
-
+		renderBar : function() {
 			var self = this;
 			if (self.$priors_content.height() > self.$bar.height()) {
 
@@ -77,6 +78,7 @@
 				self.$slider = self.$el.find('.slider');
 				self.$slider.show().css({height: bar_size+'%', top: 0});
 			}
+
 
 			this.$priors.scroll(function(){
 				var leftover = (self.$priors_content.height() - self.$priors.height());
@@ -90,10 +92,39 @@
 				self.$slider.css({top : top+'%'});
 
 			});
+		},
+		afterRender : function() {
+
+			var self = this;
+
+			this.renderBar();
+
+			var bar_priors = $('.timeline .bar .prior:not(.relevant)');
+			var prior_priors = $('.timeline .priors .prior:not(.relevant)');
+			$('.timeline-buttons a').click(function(e){
+				e.preventDefault();
+				if ($(this).hasClass('selected')) {return;}
+				$('.timeline-buttons a.selected').removeClass('selected');
 
 
-			var padding = 40;
-			var height = 100- (self.$barContainer.offset().top / ($('body').height()-padding) * 100);
+
+				switch($(this).attr('class')) {
+					case 'relevant-priors' :
+						bar_priors.fadeOut();
+						prior_priors.slideUp();
+					break;
+					default :
+						bar_priors.fadeIn();
+						prior_priors.slideDown();
+					break;
+				}
+				$(this).addClass('selected');
+				self.renderBar();
+			});
+
+
+			// var padding = 40;
+			// var height = 100- (self.$barContainer.offset().top / ($('body').height()-padding) * 100);
 
 			// _.each([,self.$barContainer,self.$priors],function(el){
 			// self.$el.css({height: height+'%'});
@@ -114,16 +145,16 @@
 				this.$priors.stop().animate({width: '0', marginLeft: '-10'});
 			}
 		},
-		twoPane : function(prior) {
-			var self = this;
-			this.parent.twoPane(prior);
+		// twoPane : function(prior) {
+		// 	var self = this;
+		// 	this.parent.twoPane(prior);
 
-			this.$priors.animate({width: '0%', marginLeft: '-10'}, {duration: 400, complete : function(){
-				self.collapsed = true;
+		// 	this.$priors.animate({width: '0%', marginLeft: '-10'}, {duration: 400, complete : function(){
+		// 		self.collapsed = true;
 
-				self.$priors.css({position: 'absolute'});
-			}});
-		}
+		// 		self.$priors.css({position: 'absolute'});
+		// 	}});
+		// }
 
 	});
 
