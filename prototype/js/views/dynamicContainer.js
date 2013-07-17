@@ -220,7 +220,7 @@
 			var opts = {};
 
 			if (options.position != 'full') {
-				opts[this.getConverse(options.position)] = '50%';
+				opts[this.getConverse(options.position)] = '51%';
 			}
 			options.el.css({zIndex : 11});
 			// console.log(opts);
