@@ -1,0 +1,43 @@
+<li id="procedure-<%= id %>" class="grid-row">
+	<% if (stat =='stat') { %>
+	<div class="stat"><div class="stat-shade"></div><span>STAT</span>: 15:03</div>
+	<% } %>
+
+	<!-- <div class="paper-curl"></div> -->
+	<div class="contents col">
+		<div class="info">
+			<h2><%= procedure_name %></h2>
+			<p><%= end_time %></p>
+		</div>
+		<div class="reason">
+			<p><%= clinical_indication %></p>
+		</div>
+		<div class="patient">
+
+			<h3><%= first %> <%= last %></h3>
+			<p>
+				<span><%= patient_id %></span>
+				<span><%= dob %></span>
+				<span><%= gender %></span>
+			</p>
+
+		</div>
+		<div class="referring">
+			<p class="physician"><%= referring_physician %></p>
+			<p class="hospital"><%= hospital_name %></p>
+		</div>
+	</div>
+	<div class="meta col">
+		<div class="row">
+			<a class="col queue"></a>
+			<a class="col lock"></a>
+			<a class="col attachments"></a>
+		</div>
+		<div class="row">
+			<a class="col folder"></a>
+			<a class="col eyeball"></a>
+			<a class="col camera"></a>
+		</div>
+	</div>
+
+</li>

@@ -8,7 +8,10 @@ glasswing.collections.procedures = Backbone.Collection.extend({
 	},
 
 	ingredients : {
-		procedure_name : ['CT ABD', 'CR R LEG', 'MR ABD', 'CR L LEG', 'MR R LEG', 'MR L LEG'],
+		procedure_type : ['CT'],
+		body_part : ['ABD', 'L LEG', 'R LEG', 'HEAD', 'CHEST', 'ANKLE', 'WRIST'],
+		clinical_indications : ['Right lower lobe lung mass seen on abdominal/pelvic CT scan.'],
+		procedure_informations : ['Contrast enhanced and unenhanced CT scan of the chest was performed. 92 cc Isovue was administered IV.'],
 
 		hospital : ['Mercy','Northwestern','Good Heart','Great Lake','Advocate','Shepherd','Good Shepherd','Murphy']
 	},
@@ -46,7 +49,7 @@ glasswing.collections.procedures = Backbone.Collection.extend({
 	getRandomProcedure : function(patient) {
 		var p = new glasswing.collections.patients();
 		var caregivers = new glasswing.collections.caregivers();
-		var length = Math.round(Math.random()*8)+2;
+		var length = Math.round(Math.random()*1)+2;
 		for (var i=0;i<length;i++) {
 			var first = p.getRandomIngredient('first');
 			var last = p.getRandomIngredient('last');
@@ -66,8 +69,9 @@ glasswing.collections.procedures = Backbone.Collection.extend({
 			scanned_documents : Math.round(Math.random()*10),
 			referring_physician : 'Thompson',
 			date : glasswing.randomDate(),
-			procedure_name : this.getRandomIngredient('procedure_name'),
-			priority : 2,
+			end_time : glasswing.randomDate(new Date(2013,0,1)),
+			procedure_name : this.getRandomIngredient('procedure_type') + ' ' + this.getRandomIngredient('body_part'),
+			priority : Math.round(Math.random()*2),
 			procedure_class : '-',
 			report_status : 'Unread',
 			procedure_status : 'Comp.',

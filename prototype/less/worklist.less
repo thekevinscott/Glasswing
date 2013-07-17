@@ -1,3 +1,4 @@
+@import "../../less/constants.less";
 /*@one-across:   ~"only screen and (max-width: 414px)";
 @two-across:   ~"only screen and (min-width: 415px) and (max-width: 614px)";
 @three-across:   ~"only screen and (min-width: 615px) and (max-width: 760px)";
@@ -13,16 +14,17 @@
 
 
 @filter_width : 300px;
-
-
+@padding: 20px;
+@meta-width: 120px;
 
 .worklist {
 	margin-top: 20px;
 	padding-right: 20px;
 
+
 	h3,h4,h5,p {
 		padding: 5px;
-		display: inline-block;
+
 		clear: both;
 	}
 	h4 {
@@ -36,14 +38,48 @@
 	h4.callout, h5.callout {
 		color: white;
 	}
-
+	h1 {
+		margin-left: @padding;
+		img {
+			margin: 5px 10px;
+		}
+	}
 	.container {
-		margin-right: @filter_width;
+		top: 120px;
+		right: @filter_width + (@padding*2);
+		left: 0;
+		padding: 0 @padding;
+		h1 {
+			display: inline-block;
+		}
 
 	}
+
+	.filters {
+		right: @padding;
+
+		width: @filter_width + @padding;
+		.filters-inner {
+			padding: 40px;
+			.add {
+				padding: 1px 10px 5px 10px;
+				display: inline-block;
+				color: black;
+				font-size: 24px;
+				font-weight: bold;
+				background: @gray;
+
+			}
+		}
+		h4 {
+			color: @dark-text;
+		}
+
+	}
+
 	.list {
 		width: 100%;
-		padding-top: 20px;
+
 		overflow-x: auto;
 
 	}
@@ -118,15 +154,53 @@
 
 		}
 		.card {
+			position: relative;
+			border-radius: 5px;
 			zoom: 1;
-			display: inline;
+			display: block;
+			overflow: hidden;
+
 			float: left;
-
-
 
 			margin-bottom: 20px;
 
 			cursor: pointer;
+			footer a {
+				background-position: center center;
+				background-repeat: no-repeat;
+				width: 32px;
+				height: 16px;
+				display: block;
+				float: left;
+				margin-right: 20px;
+
+			}
+			.patient {
+				padding: 20px 30px;
+
+				span {
+					width: 130px;
+					opacity: 0.5;
+					display: inline-block;
+				}
+			}
+			.procedure {
+				position: relative;
+				border-bottom: 1px solid #696a6a;
+			}
+			.attachments {
+				position: absolute;
+				right: 0px;
+				top: 20px;
+				background: url('../images/attachment.png') no-repeat;
+				background-size: 16px;
+				padding-left: 16px;
+				height: 16px;
+				width: 16px;
+				margin-right: 0;
+			}
+
+
 			.status {
 				height: 8px;
 				background: #555;
@@ -136,21 +210,23 @@
 				-webkit-transition: all 0.3s;
 			}
 			footer {
-				background: #444;
-				padding: 20px;
+				background: #363737;
+				padding: 12px 20px 26px 20px;
 
 				transition: 		all 0.3s;
 				-webkit-transition: all 0.3s;
 				font-size: 11px;
+				.queue {
+					margin-right: 10px;
+				}
+				.camera, .eyeball, .lock {
+					float: right;
+					margin-right: 0;
+					margin-left: 10px;
 
+				}
 			}
 
-			.attachments {
-				float: right;
-				background: url('../images/attachment.png') no-repeat;
-				background-size: 16px;
-				padding-left: 16px;
-			}
 			.procedure-name {
 				margin-bottom: 20px;
 			}
@@ -199,26 +275,10 @@
 		}
 
 		.content {
-			padding: 5px 20px;
-			background: #333;
 
-			transition: 		all 0.3s;
-			-webkit-transition: all 0.3s;
+			background: @gray;
+
 		}
-		.card:hover {
-			.content {
-				background: #444;
-			}
-			.status {
-				background: #666;
-			}
-			footer {
-				background: #555;
-			}
-		}
-
-
-
 
 		@media @one-across {
 		  .card {
@@ -280,74 +340,8 @@
 	}
 
 
-	.layouts {
-		float: right;
-
-	}
 
 
-	.filters {
-		float: right;
-		position: fixed;
-		right: 20px;
-
-		width: @filter_width - 20px;
-
-		min-height: 100px;
-		margin-left: 20px;
-		select {
-			width: 100%;
-			margin: 10px 0;
-		}
-		input[type=text] {
-
-			    @border-radius: 10px;
-			    width: 100%;
-			    padding: 10px 3%;
-
-
-			    height: 20px;
-			    margin: 0 auto;
-			    border-radius: 5px;
-			    /* Usual setup stuff */
-			      position: relative;
-
-			      /* Pad right so we don't cover the borders when fully progressed */
-
-			      /* For browser that don't support gradients, we'll set a blanket background colour */
-			      background-color: #abb2bc;
-			      /* Rounds the ends, we specify an excessive amount to make sure they are completely rounded */
-			      /* Adjust to your liking, and don't forget to adjust to the same amount in .ui-progress */
-			      border: none;
-			      -moz-border-radius: @border-radius;
-			      -webkit-border-radius: @border-radius;
-			      -o-border-radius: @border-radius;
-			      -ms-border-radius: @border-radius;
-			      -khtml-border-radius: @border-radius;
-			      border-radius: @border-radius;
-			      /* Background gradient */
-
-
-			background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #949daa), color-stop(100%, #abb2bc));
-			      background: -webkit-linear-gradient(#949daa 0%, #abb2bc 100%);
-			      background: -moz-linear-gradient(#949daa 0%, #abb2bc 100%);
-			      background: -o-linear-gradient(#949daa 0%, #abb2bc 100%);
-			      background: -ms-linear-gradient(#949daa 0%, #abb2bc 100%);
-			      background: linear-gradient(#949daa 0%, #abb2bc 100%);
-
-			      /* Give it the inset look by adding some shadows and highlights */
-			      -moz-box-shadow: inset 0px 1px 2px 0px rgba(0, 0, 0, 0.5), 0px 1px 0px 0px rgba(255,255,255,0.7);
-			      -webkit-box-shadow: inset 0px 1px 2px 0px rgba(0, 0, 0, 0.5), 0px 1px 0px 0px  rgba(255,255,255,0.7);
-			      -o-box-shadow: inset 0px 1px 2px 0px rgba(0, 0, 0, 0.5), 0px 1px 0px 0px  rgba(255,255,255,0.7);
-			      box-shadow: inset 0px 1px 2px 0px rgba(0, 0, 0, 0.5), 0px 1px 0px 0px  rgba(255,255,255,0.7);
-			      /* Alt colours */
-			      /* Progress part of the progress bar */
-
-		}
-		input[type=text]:focus {
-			background: white;
-		}
-	}
 }
 
 
@@ -356,7 +350,7 @@
 th.header {
 
 }
-.header:hover {
+table .header:hover {
 	background: url(../images/bg.gif) no-repeat center right;
 }
 th.header.headerSortUp {
@@ -364,4 +358,233 @@ th.header.headerSortUp {
 }
 th.header.headerSortDown {
 	background: url(../images/desc.gif) no-repeat center right;
+}
+
+
+
+
+
+/**** Grid ****/
+
+
+.grid-row { zoom: 1; }
+.grid-row:before,
+.grid-row:after { content: ""; display: table; }
+.grid-row:after { clear: both; }
+.grid-row  {
+	min-height: 84px;
+	.contents { zoom: 1; }
+	.contents:before,
+	.contents:after { content: ""; display: table; }
+	.contents:after { clear: both; }
+	.contents > * {
+		zoom: 1;
+		display: inline;
+	}
+
+}
+.grid-worklist {
+	padding-left: 10px;
+	text-shadow: none;
+	.grid-header {
+		font-size: 100%;
+		background: @blue;
+
+		font-style: italic;
+		text-shadow: none;
+	}
+
+}
+.referring {
+	.physician, .physician.callout {
+		opacity: 1;
+		background: url(../images/physician.png) no-repeat;
+		padding-left: 16px;
+		margin-bottom: 10px;
+	}
+	.hospital, .hospital.callout {
+		background: url(../images/hospital.png) no-repeat;
+		padding-left: 16px;
+	}
+}
+.grid-contents {
+	margin: 0;
+	padding: 0;
+}
+
+.grid-row {
+	position: relative;
+	cursor: pointer;
+	background: @gray;
+	list-style: none;
+
+	margin: 10px 0 20px;
+
+	.info, .reason, .patient, .referring {
+		float: left;
+		width: 23%;
+		padding: 0 1%;
+	}
+	p, h3, h4 {
+		opacity: 0.5;
+		display: block;
+	}
+	p {
+		font-size: 14px;
+		padding: 0;
+		margin: 0;
+		span {
+			margin-right: 10px;
+		}
+	}
+	h2, h3 {
+		margin: 0;
+		padding: 0;
+		font-size: 20px;
+		display: block;
+	}
+	.callout {
+		background: inherit;
+	}
+	@papercurl : 8px;
+	.paper-curl {
+		position: absolute;
+		top: 0;
+		left: 0;
+
+		border-left: @papercurl solid @background;
+		border-right: @papercurl solid #acacac;
+		border-top: @papercurl solid @background;
+		border-bottom: @papercurl solid #acacac;
+	}
+	.stat {
+		position: absolute;
+		background: @red;
+		color: white;
+		padding: 5px 15px;
+
+		top: -10px;
+		left: -10px;
+		z-index: 12;
+		text-shadow: none;
+		span {
+			font-weight: bold;
+		}
+	}
+	@stat-border : 5px;
+	.stat-shade {
+
+		position: absolute;
+		border-left: @stat-border solid @background;
+		border-right: @stat-border solid @red-shade;
+		border-bottom: @stat-border solid @background;
+		border-top: @stat-border solid @red-shade;
+		left: 0;
+		bottom: -10px;
+	}
+	.contents, .meta {
+		position: absolute;
+
+	}
+
+
+	.contents {
+		left: 0;
+		right: @meta-width;
+		padding: 20px;
+	}
+}
+.procedure-type {
+	font-size: 20px;
+}
+.meta {
+	right: 0;
+	width: @meta-width;
+	background: @gray-darker;
+	padding: 5px 10px 5px 20px;
+	.row:first-child {
+		top: 0;
+		bottom: 50%;
+	}
+	.row:last-child {
+		top: 50%;
+		bottom: 0;
+	}
+	.col {
+		background-position: center center;
+		background-repeat: no-repeat;
+		width: 33%;
+	}
+
+}
+
+.queue {
+	background-image: url(../images/queue.png);
+}
+.lock {
+	background-image: url(../images/lock.png);
+	left: 33%;
+}
+
+.attachments {
+	background-image: url(../images/attachments.png);
+}
+.grid-row .attachments {
+
+	left: 66%;
+}
+.folder {
+	background-image: url(../images/folder.png);
+}
+.eyeball {
+	background-image: url(../images/eyeball.png);
+	left: 33%;
+}
+.camera {
+	background-image: url(../images/camera.png);
+	left: 66%;
+}
+
+
+.buttons {
+	right: 340px;
+	z-index: 15;
+	position: absolute;
+	top: @padding;
+	.layouts {
+		float: right;
+
+	}
+	.button {
+		padding: 10px;
+		background: @gray;
+		border-radius: @border-radius;
+		display: inline-block;
+		width: 20px;
+		height: 20px;
+		background-repeat: no-repeat;
+		background-position: center center;
+	}
+	.button.selected {
+		background-color: @gray-darker;
+	}
+	.button.grid {
+		border-radius: @border-radius 0 0 @border-radius;
+		background-image: url(../images/layout_grid.png);
+	}
+	.button.card {
+		border-radius: 0 @border-radius @border-radius 0;
+		background-image: url(../images/layout_card.png);
+		margin-left: -4px;
+
+	}
+	.preferences {
+		width: auto;
+		background-image: url(../images/preferences.png);
+		line-height: 20px;
+		padding-left: 30px;
+		background-position: 10px center;
+		float: right;
+		margin-left: 20px;
+	}
 }

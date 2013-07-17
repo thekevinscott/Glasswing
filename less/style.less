@@ -1,12 +1,14 @@
+@import "constants.less";
 body,html{
 	margin: 0;
 	padding: 0;
 	width: 100%;
 	height: 100%;
-	text-shadow: 0 -2px 0 rgba(0, 0, 0, 0.4);
+
 	color: #FFF;
 
 	font-family: "Titillium", sans-serif;
+	font-family: "Helvetica Neue", sans-serif;
 
 }
 h1,h2,h3,h4,h5,h6 {
@@ -23,23 +25,64 @@ td, th {
 	font-size: 12px;
 
 }
+textarea {
+	border: none;
+	width: 100%;
+	padding: 5px;
+	font-size: 14px;
+	background: #FFF;
+	border-radius: @border-radius;
+	margin: 20px 0;
+
+
+	transition: 		all 0.3s;
+	-webkit-transition: all 0.3s; /* Safari */
+}
+textarea:focus {
+	box-shadow: inset 0 0 0px #000;
+}
+
+
+/*** Set up absolute positioning ***/
+.row, .col { overflow: hidden; position: absolute;}
+.row { left: 0; right: 0;}
+.col { top: 0; bottom: 0;}
+.scroll-x { overflow-x: auto;}
+.scroll-y { overflow-y: auto;}
+.scroll-x, .scroll-y { -webkit-overflow-scrolling: touch; }
+
+.header.row { height: 39px; top: 0;}
+.body.row { top: 39px; bottom: 30px;}
+.footer.row { height: 30px; bottom: 0; }
+
+.left.col { left: 0; right: 50%;}
+.right.col { left: 50%; right: 100%;}
+
+.footer {
+	background: black;
+	font-size: 12px;
+	line-height: 30px;
+	padding-left: 20px;
+}
 body .loading {
 	background: url(../images/loading.gif) no-repeat center center;
 }
 .page {
 	border-top: 1px solid #333;
-	padding-left: 20px;
+
 }
 
 .button (@hue, @saturation, @lightness) {
 	text-decoration: none;
-	border-radius: 4px;
+	border-radius: @border-radius;
 	font-size: 12px;
 
 	color: white;
 
 	cursor: pointer;
-
+	border: none;
+	padding: 20px 40px;
+	/*
 	background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.0));
 	background: -moz-linear-gradient(	top, rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.0));
 	background: -ms-linear-gradient(	top, rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.0));
@@ -55,6 +98,7 @@ body .loading {
 	box-shadow: 		inset 0 1px 0 rgba(255, 255, 255, 0.2);
 
 	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.5);
+	*/
 
 
 }
@@ -66,8 +110,8 @@ input[type=button], .button {
 
 input[type=button], .button:hover {
 	.button(214,0.27,0.36);
-	transition: 		all 0.15s;
-	-webkit-transition: all 0.15s; /* Safari */
+	transition: 		all 0.1s;
+	-webkit-transition: all 0.1s; /* Safari */
 }
 input[type=button]:active, .button:active, input[type=button].selected, .button.selected {
 	.button(214,0.24,0.22);
@@ -100,8 +144,9 @@ input[type=button].selected, .button.selected, input[type=button]:hover, .button
 
 }
 .glasswing {
-	background: #222;
-	min-height: 100%;
+	background: @background;
+	height: 100%;
+	overflow: hidden;
 
 }
 .overlay {
@@ -121,6 +166,7 @@ input[type=button].selected, .button.selected, input[type=button]:hover, .button
 	opacity: 0.5;
 	position: fixed;
 	cursor: pointer;
+	z-index: 13;
 }
 .overlay .piece {
 	pointer-events:none;
@@ -134,13 +180,14 @@ input[type=button].selected, .button.selected, input[type=button]:hover, .button
 	position: absolute;
 
 
-	background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.2));
-	background: -moz-linear-gradient(	top, rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.2));
-	background: -ms-linear-gradient(	top, rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.2));
-	background: -o-linear-gradient(		top, rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.2));
-	background: linear-gradient(		top, rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.2));
+	// background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.2));
+	// background: -moz-linear-gradient(	top, rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.2));
+	// background: -ms-linear-gradient(	top, rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.2));
+	// background: -o-linear-gradient(		top, rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.2));
+	// background: linear-gradient(		top, rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.2));
 
 	background-color: @modal_color;
+	background: white;
 
 	box-shadow: 0 2px 6px #000;
 	border-radius: 5px;
@@ -148,6 +195,14 @@ input[type=button].selected, .button.selected, input[type=button]:hover, .button
 	color: black;
 	text-shadow: none;
 	z-index: 15;
+	.close {
+		position: absolute;
+		right: 6px;
+		top: 6px;
+		width: 16px;
+		height: 16px;
+		background: url('../images/close.png') no-repeat;
+	}
 }
 body .modal .modal-content {
 	min-height: 40px;
@@ -168,20 +223,15 @@ body .modal .modal-content {
 	border-bottom: 10px solid @modal_color;
 	margin-top: -9px;
 
-	left: 50%;
-	margin-left: -10px;
+	left: 5%;
+
 	position: absolute;
 }
-.close {
-	position: absolute;
-	right: 6px;
-	top: 6px;
-	width: 16px;
-	height: 16px;
-	background: url('../images/close.png') no-repeat;
-}
+
+/*
 .callout {
 	background: #83823a;
 	color: white;
 	text-shadow: 0 -1px 0 #3e3e1d;
 }
+*/

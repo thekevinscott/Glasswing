@@ -1,91 +1,94 @@
 <div id="procedure-<%= id %>" class="procedure">
-	<div class="dashboard">
-
-
-		<div class="three-col">
-			<div class="col">
-				<h2><%= name %></h2>
-				<p class="dob">DOB: <%= dob %></p>
-				<!--
 
 
 
-				<p class="priority">Priority: <%= priority %></p>
-	-->
+	<div class="current-report col">
+		<div class="content">
+			<!-- <div class="dashboard">
 
-			</div>
-			<div class="col">
-				<p class="patient-id"><%= patient_id %></p>
+
 				<p class="procedure_class"><%= procedure_class %></p>
 				<br /><br />
-				<!--
-				<p class="gender"><%= gender %></p>
 
-				<p class="procedure_name"><%= procedure_name %></p>
-				<p class="report_status"><%= report_status %></p>
-			-->
-			</div>
-			<div class="col clearfix">
 				<div class="follow">
-					<a href="javascript:;" class="follow-button button" ><span>Follow</span></a>
+					<a href="javascript:;" class="follow-button button" ><div class="text"><span>Follow</span></div></a>
 					<p class="helper">You will be alerted when the images finish coming in.</p>
 				</div>
 				<p class="risks">Risks: <%= patient_risks %></p>
-<!--
-				<p class="hospital_name"><%= hospital_name %></p>
-				<p class="hospital_location">Hospital Location</p>
-				<p class="referring_physician"><%= referring_physician %></p>-->
-
-			</div>
-
-		</div>
 
 
-	</div><!-- dashboard -->
+			</div> -->
 
-	<div class="left">
-
-		<form class="pane">
-			<h2>Current</h2>
-			<p class="procedure-id">Procedure ID: <span><%= id %></span></p>
-			<p class="procedure-date"><span><%= procedure_date %></span></p>
-
-			<div class="pane">
-				<div class="three-col">
-					<div class="col">
-						<h4>MRI of the ankle</h4>
-
-						<p>Procedure Type: xxx</p>
-						<p>Other hospital records</p>
+			<div class="currents row">
+				<div class="pane">
+					<div class="header">
+						<p class="procedure-date"><%= procedure_date %></p>
+						<h2><span><%= procedure_name %></span></h2>
 					</div>
-					<div class="col">
-						<p>55 images</p>
-						<p>2 scanned documents</p>
+					<div class="content">
+						<div class="images">
+							<img src="images/homer.png" />
+							<span>55</span> images
+						</div>
+						<p class="reason-header">Reason for exam:</p>
+						<p class="reason"><%= clinical_indication %></p>
 					</div>
-					<div class="col">
-						<a href="javascript:;" class="coc" style="width: 100px; float: right;"></a>
+					<div class="footer">
+						<a href="javascript:;" class="procedure-information draggable">Procedure Information</a>
+						<div class="scanned-documents"><a href="javascript:;">2 Scanned Documents</a>
+							<ul class="scanned-documents-dropdown">
+								<li><a href="javascript:;" class="draggable">RequestForm.png</a></li>
+								<li><a href="javascript:;" class="draggable">TechNotes.png</a></li>
+
+							</ul>
+						</div>
+
 					</div>
 				</div>
-
 			</div>
-			<p>Reason for exam: Fracture lorem ipsum Fracture lorem ipsum Fracture lorem ipsum Fracture lorem ipsum Fracture lorem ipsum Fracture lorem ipsum Fracture lorem ipsum Fracture lorem ipsum </p>
-			<h3>Report</h3>
-			<textarea class="dictation"></textarea>
-			<div class="actions">
+			<div class="row things-you-can-do">
+				<a href="javascript:;" class="community-of-caregivers">Related Caregivers</a>
+				<a href="javascript:;" class="follow">Follow Case</a>
+			</div>
+			<form class="row dictation">
+				<textarea></textarea>
+			</form>
+			<div class="row actions">
+				<input type="button" value="Submit Report" />
+				<!--
 				<input type="button" value="Read" />
 				<input type="button" value="Co-Read" />
-				<input type="button" value="Approve" />
+				<input type="button" value="Approve" /> -->
 			</div>
-		</form><!-- form -->
-	</div><!-- left -->
-	<div class="right">
-		<div class="content">
+		</div>
+	</div><!-- current-report -->
+	<div class="col dynamic-content">
+
+		<div class="container">
+
+			<% /*
 			<div class="timeline">
 
 			</div><!-- timeline -->
 			<div class="prior-report"></div>
-
+			*/ %>
 		</div><!-- content -->
-	</div><!-- right -->
+		<div class="droppable"><div class="border"></div></div>
 
+	</div><!-- dynamic content -->
+	<div class="col patient-history">
+		<div class="content">
+			<div class="patient row">
+				<h2><%= name %></h2>
+				<p class="patient-id"><span>Patient ID:</span><%= patient_id %></p>
+				<p class="dob"><span>Date of Birth:</span><%= dob %></p>
+				<p class="gender"><span>Gender:</span><%= gender %></p>
+				<p class="risk"><span>Risk:</span><%= patient_risks %></p>
+			</div>
+			<div class="timeline row">
+				<h2>Timeline</h2>
+			</div>
+		</div>
+
+	</div><!-- patient-history -->
 </div>

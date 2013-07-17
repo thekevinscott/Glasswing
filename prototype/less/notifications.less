@@ -8,13 +8,12 @@
 
 
 .notifications {
-	position: absolute;
-	right: 0;
-	top: 0;
+	a {
+		text-decoration: none;
+	}
 
 	height: 100%;
-	background: #111;
-	border-left: 1px solid #222;
+
 	.bell, .content {
 
 			zoom: 1;
@@ -22,7 +21,7 @@
 	}
 	.bell {
 		width: 44px;
-		border-right: 2px groove #333;
+
 		height: 100%;
 		float: left;
 	}
@@ -30,18 +29,22 @@
 		height: 100%;
 		width: 160px;
 		float: right;
+		line-height: 38px;
+		text-align: center;
+		font-size: 13px;
+		color: #777;
 	}
 }
-.new {
-	background: @blue;
-}
+
 .sheet {
 	display: none;
-	clear: both;
+	position: absolute;
+
+
 	width: 100%;
 	list-style: none;
 	background: #444;
-	position: relative;
+	top: 39px;
 	z-index: 20;
 	padding: 0;
 	margin: 0;

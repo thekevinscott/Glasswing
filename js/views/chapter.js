@@ -71,12 +71,10 @@
 //			self.audio = self.$el.find('audio');
 			// console.log('file: ' + file);
 			self.parent.$audio.attr('src','audio/'+self.title+'/'+file+'.mp3');
-			if (! self.parent.parent.isActive()) {
-				self.parent.parent.callbacks.push(function(){
-					self.parent.$audio[0].play();
-				});
 
-			}
+			self.parent.parent.addCallback(function(){
+				self.parent.$audio[0].play();
+			});
 
 
 

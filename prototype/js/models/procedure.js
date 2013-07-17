@@ -12,7 +12,9 @@ glasswing.models.procedure = glasswing.models.abstract.extend({
 		// this.patient = options.patient;
 		this.on("change", this.change, this);
 
+
 		this.priors = new glasswing.collections.priors();
+
 		var self = this;
 
 
@@ -23,11 +25,12 @@ glasswing.models.procedure = glasswing.models.abstract.extend({
 		/** initialize priors **/
 		var pa = new glasswing.collections.patients();
 		var pr = new glasswing.collections.procedures();
+
 		for (var i=0;i<number_of_priors;i++) {
 			var caregivers = new glasswing.collections.caregivers();
 
-			var length = Math.round(Math.random()*8)+2;
-			for (var j=0;j<length;j++) {
+			// var length = Math.round(Math.random()*2)+1;
+			for (var j=0;j<3;j++) {
 
 				var first = pa.getRandomIngredient('first');
 				var last = pa.getRandomIngredient('last');
@@ -72,8 +75,6 @@ glasswing.models.procedure = glasswing.models.abstract.extend({
 			});
 
 
-			console.log(self.worklist);
-			console.log(self.worklist.tabManager);
 			// tab manager needs to be notified. but if the tab is active, then do nothing.
 			self.worklist.tabManager.notify(self.view.report, {}); // pass in an optional attributes array
 
@@ -95,6 +96,7 @@ glasswing.models.procedure = glasswing.models.abstract.extend({
 
 	},
 	isStat : function() {
+
 		return (this.get('priority') > 2) ? true : false;
 	},
 	getPriors : function() {
@@ -102,12 +104,21 @@ glasswing.models.procedure = glasswing.models.abstract.extend({
 		// return priors;
 		return this.priors.models;
 	},
+	isFollowing : function() {
+		return this.following;
+	},
 	follow : function() {
 		this.following = true;
 	},
 	unfollow : function() {
 		this.following = false;
 	},
-
+	getDate : function(key) {
+		if (! key) { key = 'date';}
+		return (this.get(key).getMonth()+1)+'/'+this.get(key).getDate()+'/'+this.get(key).getFullYear();
+	},
+	getName : function() {
+		return this.get('procedure_type').toUpperCase() + ' '+this.get('body_part').toUpperCase();
+	}
 
 });
