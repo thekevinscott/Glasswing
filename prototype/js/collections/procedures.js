@@ -46,7 +46,7 @@ glasswing.collections.procedures = Backbone.Collection.extend({
 		});
 		return procedures;
 	},
-	getRandomProcedure : function(patient) {
+	getRandomProcedure : function(patient, priors) {
 		var p = new glasswing.collections.patients();
 		var caregivers = new glasswing.collections.caregivers();
 		var length = Math.round(Math.random()*1)+2;
@@ -77,7 +77,8 @@ glasswing.collections.procedures = Backbone.Collection.extend({
 			procedure_status : 'Comp.',
 			referring_physician : p.getRandomIngredient('first')+ ' ' + p.getRandomIngredient('last'),
 			hospital_name : this.getRandomIngredient('hospital'),
-			caregivers : caregivers
+			caregivers : caregivers,
+			priors : priors
 		});
 	},
 	getRandomIngredient : function(key) {

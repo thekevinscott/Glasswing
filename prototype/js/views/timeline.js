@@ -59,7 +59,7 @@
 				self.$priors_content.prepend(prior.view.$el);
 
 				prior.view.$el.data('dynamic-content',prior.view.getReport());
-				prior.view.$el.data('header','<p class="right">'+prior.getDate()+'</p><h3>MRI of the ankle</h3>');
+				prior.view.$el.data('header','<p class="right">'+prior.getDate()+'</p><h3>'+prior.get('type')+' '+prior.get('body_part')+'</h3>');
 				prior.view.$el.data('clss','prior');
 			});
 
