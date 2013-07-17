@@ -49,11 +49,11 @@
 			var self = this;
 
 			setTimeout(function(){
-				// self.model.set('images',10);
-				console.log('could update images here');
+				self.model.set('images',10);
+				// console.log('could update images here');
 
 				// console.log(self.model.get('images'));
-			},1500);
+			},8000);
 
 			// var view = this;
 
@@ -72,7 +72,7 @@
 		},
 		notify : function(obj) {
 
-			var el = this.$el.find('.'+obj.key);
+			var el = this.$('.currents').find('.'+obj.key);
 			var span = el.find('span');
 			span.html(obj.val);
 			el.notify();
@@ -105,6 +105,7 @@
 
 			var prior = this.timeline.getFirstRelevant().$el;
 			this.dynamicPane.addPane({contents : prior.data('dynamic-content'), header : prior.data('header'), clss : prior.data('clss')});
+
 
 
 
@@ -154,26 +155,27 @@
 			}));
 			self.delegateEvents();
 
-			self.$followButton = this.$el.find('.follow-button');
+			self.$followButton = this.$el.find('.follow');
 			self.$followButton.click(function(e){
 				e.preventDefault();
 				if ($(this).hasClass('active')) {
 					self.model.unfollow();
 					$(this).removeClass('active');
+					$(this).html('Follow Case');
 
-					var duration = 60;
-					$(this).stop().animate({width: '35px'},{duration: duration});
-					$(this).find('.check').animate({opacity: 0},{duration: 200, complete : function() {
-						this.remove();
-					}});
-					var text = $(this).find('.text');
-					var span = text.find('span');
+					// var duration = 60;
+					// $(this).stop().animate({width: '35px'},{duration: duration});
+					// $(this).find('.check').animate({opacity: 0},{duration: 200, complete : function() {
+					// 	this.remove();
+					// }});
+					// var text = $(this).find('.text');
+					// var span = text.find('span');
 
-					text.stop().animate({
-						width : text.data('width')
-					},{duration : 120, complete : function(){
-						span.html('Follow');
-					}});
+					// text.stop().animate({
+					// 	width : text.data('width')
+					// },{duration : 120, complete : function(){
+					// 	span.html('Follow');
+					// }});
 
 					$(this).parent().find('p.helper').stop().animate({opacity: 0});
 				} else {
@@ -182,14 +184,25 @@
 					var button = this;
 					self.setFollowingButton(button);
 
+
+					var overlay = $('<div class="follow-overlay" />');
+					$(overlay).html("<strong>You will be notified when this case is updated.</strong>");
+					$('body').append(overlay);
+					setTimeout(function(){
+						overlay.fadeOut(function(){
+							$(this).remove();
+						});
+					},4000);
+
 					setTimeout(function(){
 
 						var patient = self.model.get('patient');
 						self.model.worklist.notifications.addNotification({view : self, message : '<strong>'+patient.get('last')+', '+patient.get('first')+'</strong><br />All images have been uploaded.'});
-					},2000);
+					},10000);
 
 				}
 			})
+
 			if (self.model.isFollowing()) {
 				self.setFollowingButton(self.$followButton,1);
 			}
@@ -202,35 +215,36 @@
 
 			this.caregivers = new glasswing.views.caregivers({
 				collection : this.model.get('caregivers'),
-				button : this.$left.find('.coc')
+				button : this.$('.community-of-caregivers')
 			});
 			return self;
 		},
 		setFollowingButton : function(button,duration) {
-			if (! duration) { duration = 100;}
+			// if (! duration) { duration = 100;}
 			$(button).addClass('active');
+			$(button).html('Following');
 
-			var check = $('<div class="check"></div>');
-			$(button).append(check);
-			check.hide();
+			// var check = $('<div class="check"></div>');
+			// $(button).append(check);
+			// check.hide();
 
-			$(button).stop().animate({width: '70px'},{duration: duration});
+			// $(button).stop().animate({width: '70px'},{duration: duration});
 
-			setTimeout(function(){
+			// setTimeout(function(){
 
-				check.show().css({opacity: 0, marginTop: 5}).stop().animate({marginTop: 0, opacity: 1},{duration: duration*4, easing: 'easeOutQuad'});
+			// 	check.show().css({opacity: 0, marginTop: 5}).stop().animate({marginTop: 0, opacity: 1},{duration: duration*4, easing: 'easeOutQuad'});
 
-				$(button).parent().find('.helper').stop().animate({opacity: 1},{duration: duration*4});
+			// 	$(button).parent().find('.helper').stop().animate({opacity: 1},{duration: duration*4});
 
-				var text = $(button).find('.text')
-				var span = $(button).find('span');
-				var width = span.width();
-				text.css({width: width});
-				span.html('Following');
-				text.data('width',width);
-				text.stop().animate({width: span.width()},{duration: duration*2, easing: 'easeInOutQuad'});
+			// 	var text = $(button).find('.text')
+			// 	var span = $(button).find('span');
+			// 	var width = span.width();
+			// 	text.css({width: width});
+			// 	span.html('Following');
+			// 	text.data('width',width);
+			// 	text.stop().animate({width: span.width()},{duration: duration*2, easing: 'easeInOutQuad'});
 
-			},duration);
+			// },duration);
 		},
 		// twoPane : function(prior) {
 

@@ -160,6 +160,36 @@ a {
 				box-shadow: 0 0px 0 @green-border;
 			}
 		}
+
+		.things-you-can-do {
+			position: absolute;
+			top: 205px;
+			bottom: 260px;
+			a {
+				color: @dark-text;
+				position: absolute;
+				display: block;
+				text-decoration: none;
+				padding: 5px 0;
+			}
+
+			.community-of-caregivers {
+				left: 20px;
+				padding-left: 24px;
+				background: url(../images/coc.png) no-repeat left center;
+			}
+			.follow {
+				right: 20px;
+				padding-left: 8px;
+				text-align: right;
+				background: url(../images/footsteps.png) no-repeat left center;
+			}
+			.follow.active {
+				background: url(../images/footsteps-active.png) no-repeat left center;
+				color: white;
+			}
+		}
+
 	}
 	.dynamic-content {
 		left: @current-report+@margin; right: @patient-history + @margin;
@@ -428,4 +458,18 @@ a {
 	li:last-child {
 		border-bottom: none;
 	}
+}
+@overlay-width: 400px;
+.follow-overlay {
+	position: absolute;
+	top: 40px;
+	width: @overlay-width;
+	left: 50%;
+	margin-left: -(@overlay-width / 2);
+	z-index: 20;
+	text-align: center;
+	background: #6bb753 url(../images/follow-check.png) no-repeat 20px center;
+	padding: 10px 50px;
+	color: white;
+
 }

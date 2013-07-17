@@ -25,6 +25,7 @@
 		procedureModel.set('procedure_information',attb.procedure);
 		procedureModel.set('findings',attb.findings);
 		procedureModel.set('impression',attb.impression);
+		if (attb.priors) { procedureModel.priors = attb.priors };
 		procedureModel.worklist = worklist;
 		worklist.procedures.add(procedureModel);
 	}

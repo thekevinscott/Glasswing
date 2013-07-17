@@ -12,7 +12,9 @@ glasswing.models.procedure = glasswing.models.abstract.extend({
 		// this.patient = options.patient;
 		this.on("change", this.change, this);
 
+
 		this.priors = new glasswing.collections.priors();
+
 		var self = this;
 
 
@@ -23,10 +25,11 @@ glasswing.models.procedure = glasswing.models.abstract.extend({
 		/** initialize priors **/
 		var pa = new glasswing.collections.patients();
 		var pr = new glasswing.collections.procedures();
+
 		for (var i=0;i<number_of_priors;i++) {
 			var caregivers = new glasswing.collections.caregivers();
 
-			var length = Math.round(Math.random()*8)+2;
+			var length = Math.round(Math.random()*2)+2;
 			for (var j=0;j<length;j++) {
 
 				var first = pa.getRandomIngredient('first');
