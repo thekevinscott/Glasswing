@@ -49,6 +49,7 @@
 		procedure: 'Pre-and post gadolinium MRI exam was performed, using 15 cc Omniscan IV.'
 	});
 
+
 	// createProcedure({
 	// 	type : 'NUCLEAR',
 	// 	body_part: 'BACK',
@@ -70,6 +71,11 @@
 	// 	worklist.procedures.add(procedureModel);
 
 	// }
+
+	var prior1 = {
+		indication: 'blah blah',
+		procedure: ' wuh wuh '
+	};
 
 	var parseChapters = function(data) {
 		var chapters = {
