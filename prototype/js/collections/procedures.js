@@ -49,7 +49,7 @@ glasswing.collections.procedures = Backbone.Collection.extend({
 	getRandomProcedure : function(patient) {
 		var p = new glasswing.collections.patients();
 		var caregivers = new glasswing.collections.caregivers();
-		var length = Math.round(Math.random()*8)+2;
+		var length = Math.round(Math.random()*1)+2;
 		for (var i=0;i<length;i++) {
 			var first = p.getRandomIngredient('first');
 			var last = p.getRandomIngredient('last');

@@ -29,8 +29,8 @@ glasswing.models.procedure = glasswing.models.abstract.extend({
 		for (var i=0;i<number_of_priors;i++) {
 			var caregivers = new glasswing.collections.caregivers();
 
-			var length = Math.round(Math.random()*2)+2;
-			for (var j=0;j<length;j++) {
+			// var length = Math.round(Math.random()*2)+1;
+			for (var j=0;j<3;j++) {
 
 				var first = pa.getRandomIngredient('first');
 				var last = pa.getRandomIngredient('last');
