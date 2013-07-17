@@ -29,7 +29,7 @@
 	color: #DDD;
 
 	text-decoration: none;
-	padding: 10px 25px;
+	padding: 10px 30px;
 	display: block;
 }
 .tab span {
@@ -40,13 +40,14 @@
 
 .tab .notification {
 	background: @notification;
-	color: white;
+	margin-top: -9px;
+	color: black;
 	display: none;
 	height: 18px;
 	width: 18px;
 	position: absolute;
-	bottom: 3px;
-	right: 3px;
+	top: 50%;
+	left: 5px;
 	border-radius: 18px;
 	text-align: center;
 	box-shadow: 0 1px 2px rgba(0,0,0,0.5);
@@ -75,13 +76,20 @@
 		border: none;
 	}
 }
+.system.col {
+		overflow: visible;
+}
 .system {
 	right: 0;
 	width: @notifications-width;
 	background: black;
 
 	.bell {
-		background: url(../images/bell.png) no-repeat center center;
+		background: url(../images/notification.png) no-repeat center center;
+	}
+
+	.new .bell {
+		background: url(../images/notification_on.png) no-repeat center center;
 	}
 	.preferences {
 		background: url(../images/preferences.png) no-repeat center center;
@@ -97,4 +105,7 @@
 	height: 100%;
 	display: inline-block;
 	float: left;
+}
+.header.row {
+	overflow: visible;
 }

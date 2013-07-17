@@ -27,9 +27,10 @@
         overlay.click(exit);
         close.click(exit);
 
+        console.log(button);
 
-        left = button.position().left - (modal.outerWidth() / 2) + (button.width() / 2);
-        top = button.position().top + (button.outerHeight() + arrow.outerHeight());
+        left = button.offset().left;// - (button.width() / 2);
+        top = button.offset().top + (button.outerHeight() + arrow.outerHeight());
         modal.css({left: left+'px', top: top});
 
 

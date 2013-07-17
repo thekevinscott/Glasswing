@@ -1,5 +1,3 @@
-setTimeout(function(){
-
 	(function(){
 
 
@@ -71,4 +69,3 @@ setTimeout(function(){
 		$('.loading').removeClass('loading');
 		if (window['glasswing-guide-callback']) { window['glasswing-guide-callback'](); }
 	})();
-},1000);

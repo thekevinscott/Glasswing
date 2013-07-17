@@ -24,7 +24,7 @@
 			self.$dot = $('<div class="prior"></div>');
 			self.$el.html(_.template(self.template, {
 				date : this.model.getDate(),
-				procedure_name : 'Family Medicine'
+				procedure_name : 'MRI'
 			}));
 			if (this.model.get('relevant')) {
 				self.$el.addClass('relevant');
