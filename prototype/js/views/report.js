@@ -143,9 +143,9 @@
 
 				name : this.model.get('name'),
 				priority : this.model.get('priority'),
-				procedure_date : this.model.getDate(),
+				procedure_date : this.model.getDate('end_time'),
 				procedure_class : this.model.get('procedure_class'),
-				procedure_name : this.model.getName(),
+				procedure_name : this.model.get('procedure_name'),
 				report_status : this.model.get('report_status'),
 				clinical_indication : this.model.get('clinical_indication'),
 				hospital_name : this.model.get('hospital_name'),
