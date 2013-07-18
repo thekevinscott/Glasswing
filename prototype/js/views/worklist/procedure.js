@@ -1,7 +1,32 @@
 (function($){
 	$.fn.countUp = function() {
 		return $(this).each(function(){
+			var div = $(this);
+			var span = div.find('span');
+			var timestamp = span.attr('rel');
+			// var end_time = new Date(timestamp);
 
+			var interval = 200;
+
+
+			var count = function() {
+				var difference = Math.ceil(((new Date()).getTime() - timestamp) / 1000);
+				if (difference < 60) {
+					if (difference == 1) {
+						span.html(difference+' second');
+					} else {
+						span.html(difference+' seconds');
+					}
+
+				} else if (difference < 60*60) {
+					var minutes = Math.floor(difference / 60);
+					span.html(minutes + ' minutes, ' + (difference%60)+' seconds');
+				}
+
+				setTimeout(count,interval);
+			}
+
+			count();
 		});
 	}
 	glasswing.views.procedure = glasswing.views.abstract.extend({
@@ -58,7 +83,7 @@
 
 			this.delegateEvents();
 
-			this.$('.stat').countUp();
+			// this.$('.stat').countUp();
 
 			return this;
 		},
