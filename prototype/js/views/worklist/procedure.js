@@ -8,19 +8,19 @@
 
 			var interval = 200;
 
+			// var pluralize(num, label) {
+			// 	return (num==1) ? label : label + 's';
+			// }
+
 
 			var count = function() {
 				var difference = Math.ceil(((new Date()).getTime() - timestamp) / 1000);
 				if (difference < 60) {
-					if (difference == 1) {
-						span.html(difference+' second');
-					} else {
-						span.html(difference+' seconds');
-					}
+					span.html(difference+'"');
 
 				} else if (difference < 60*60) {
 					var minutes = Math.floor(difference / 60);
-					span.html(minutes + ' minutes, ' + (difference%60)+' seconds');
+					span.html(minutes + '\' ' + (difference%60)+'"');
 				}
 
 				setTimeout(count,interval);
@@ -83,7 +83,7 @@
 
 			this.delegateEvents();
 
-			// this.$('.stat').countUp();
+			this.$('.stat').countUp();
 
 			return this;
 		},
