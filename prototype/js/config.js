@@ -82,7 +82,7 @@
 
 	//these are the current ones in the worklist
 	createProcedure({
-		priority : 2,
+		priority : 4,
 		type : 'CT',
 		body_part : 'Chest',
 		indication : 'Right lower lobe lung mass seen on abdominal/pelvic CT scan.',
@@ -96,14 +96,14 @@
 		procedure: 'Oral contrast enhanced CT scan abdomen and pelvis was performed. Coronal and sagittal reconstructions were created.'
 	});
 	createProcedure({
-		priority : 4,
+		priority : 2,
 		type: 'CT',
 		body_part : 'head',
 		indication : 'Low-speed MVA, patient found prone with some confusion. A&O x3. Rule out cervical fractures',
 		procedure: 'Volumetric scanning of head and next performed in 64 slices.'
 	});
 	createProcedure({
-		priority : 4,
+		priority : 2,
 		type : 'CR',
 		body_part : "RT Wrist",
 		indication : 'Pt fell off bicycle and landed on RT arm and shoulder. Complains of wrist pain.',
