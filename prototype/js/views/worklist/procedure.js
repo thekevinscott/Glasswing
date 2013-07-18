@@ -1,4 +1,9 @@
 (function($){
+	$.fn.countUp = function() {
+		return $(this).each(function(){
+
+		});
+	}
 	glasswing.views.procedure = glasswing.views.abstract.extend({
 		events : {
 			"click" : "click",
@@ -35,6 +40,7 @@
 				hospital_name : this.model.get('hospital_name'),
 				clinical_indication : this.model.get('clinical_indication'),
 				end_time : this.model.getDate('end_time'),
+				end_timestamp : this.model.get('end_time').getTime(),
 				stat : ( (this.model.isStat()) ? 'stat' : null  )
 			};
 
@@ -51,6 +57,8 @@
 			this.$el.data('view',this);
 
 			this.delegateEvents();
+
+			this.$('.stat').countUp();
 
 			return this;
 		},
