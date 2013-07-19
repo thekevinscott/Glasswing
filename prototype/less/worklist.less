@@ -372,7 +372,7 @@ th.header.headerSortDown {
 .grid-row:after { content: ""; display: table; }
 .grid-row:after { clear: both; }
 .grid-row  {
-	min-height: 64px;
+	min-height: 74px;
 	.contents { zoom: 1; }
 	.contents:before,
 	.contents:after { content: ""; display: table; }
@@ -420,10 +420,16 @@ th.header.headerSortDown {
 
 	margin: 10px 0 10px;
 
-	.info, .reason, .patient, .referring {
+	.info, .reason, .patient-status, .patient, .referring {
 		float: left;
-		width: 23%;
+		width: 18%;
 		padding: 0 1%;
+	}
+	.patient-status {
+		width: 16%;
+	}
+	.patient {
+		width: 20%;
 	}
 	p, h3, h4 {
 		opacity: 0.5;

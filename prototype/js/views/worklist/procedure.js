@@ -49,6 +49,7 @@
 
 			var opts = {
 				id : this.model.get('id'),
+				accession_id : 1234,
 				attachments : this.model.get('attachments'),
 				dob : this.model.get('patient').getDob(),
 				first : this.model.get('patient').get('first'),
