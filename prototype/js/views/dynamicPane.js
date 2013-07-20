@@ -11,6 +11,7 @@
 		},
 		render : function() {
 			var self = this;
+			this.$el.html('');
 			this.$close = $('<div class="close" />');
 			this.$magnify = $('<div class="magnify" />');
 			this.$header = $('<div class="header">'+this.header+'</div>');
@@ -47,10 +48,14 @@
 
 		},
 		setPosition : function(pos) {
+			console.log(pos);
 			if (! pos) { pos = 'full'; }
 			this.$el.removeClass(this.position);
+
 			this.position = pos;
-			this.parent.positionPane({el : this.$el, position: this.position});
+			console.log('my position to add: ' + this.position);
+			console.log(this.$el[0]);
+			// this.parent.positionPane({el : this.$el, position: this.position});
 			this.$el.addClass(this.position);
 		}
 	});

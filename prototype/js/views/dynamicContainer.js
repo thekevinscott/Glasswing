@@ -132,7 +132,7 @@
 									var point = {x: left+click_offset.x, y : top+click_offset.y};
 									position = self.getPosition(point,self.content);
 								}
-								self.addPane({el : self.content, content : draggable.data('dynamic-content'), header : draggable.data('header'), clss : draggable.data('clss'), position: position});
+								self.addPane({content : draggable.data('dynamic-content'), header : draggable.data('header'), clss : draggable.data('clss'), position: position});
 
 							}});
 
@@ -140,7 +140,7 @@
 							self.dragging = false;
 							clone.remove();
 						} else {
-							self.addPane({el : self.content, content : draggable.data('dynamic-content'), header : draggable.data('header'), clss : draggable.data('clss'), position: 'full'});
+							self.addPane({content : draggable.data('dynamic-content'), header : draggable.data('header'), clss : draggable.data('clss'), position: 'full'});
 						}
 
 
@@ -175,11 +175,12 @@
 		addPane : function(attributes) {
 
 			var self = this;
-			var contents = attributes.contents;
-			var header = attributes.header;
+			// var contents = attributes.contents;
+			// var header = attributes.header;
 			var position = attributes.position;
-			var clss = attributes.clss;
-			var target = attributes.el || this.content;
+			// var clss = attributes.clss;
+			// var target = attributes.el || this.content;
+			var target;
 			if (! target) { target = this.content; }
 
 			/*
@@ -199,39 +200,62 @@
 
 			*/
 
+
 			// create a new pane
-			console.log({ content : contents, header : header, parent : this, position : position, clss : clss});
-			console.log($.extend({parent : this},attributes));
-			// var pane = new glasswing.views.dynamicPane({ content : contents, header : header, parent : this, position : position, clss : clss});
 			var pane = new glasswing.views.dynamicPane($.extend({parent : this},attributes));
-			this.panes.push(pane);
+
+			// add to our panes stack
+			this.pushPane(pane);
 
 			// render onto our container
-			target.prepend(pane.render().$el);
+			target.append(pane.render().$el);
 
 			// position the pane
 			self.positionPane({el : pane.$el, position: position});
+
+
+
+
+			if (position !== 'full' && this.panes.length > 1) {
+				var conversePane = this.getPane(pane.pane_id-1);
+				// self.removePane(conversePane);
+				self.positionPane({pane : conversePane, position : self.getConverse(position)});
+				// console.log(self.getConverse(position));
+				// conversePane.setPosition(self.getConverse(position));
+			}
 
 
 			// if (this.panes.length > 1) {
 			// 	self.panes[0].setPosition(self.getConverse(position));
 			// 	self.positionPane({el : self.panes[0].$el, position: self.getConverse(position)});
 			// }
-
+			console.log(this.panes);
 			return pane;
 		},
+		pushPane : function(pane) {
+			this.panes.push(pane);
+			pane.pane_id = this.panes.length;
+		},
+		getPane : function(pane_id) {
+			return this.panes[pane_id - 1];
+		},
 		removePane : function(pane) {
-			var newPanes = [];
-			_.each(this.panes,function(p){
-				if (p==pane) {
-					pane.$el.remove();
-					delete p;
-				} else {
-					p.setPosition('full');
-					newPanes.push(p);
-				}
-			});
-			this.panes = newPanes;
+
+			pane.$el.remove();
+			delete this.panes[pane.pane_id - 1];
+
+			// var newPanes = [];
+
+			// _.each(this.panes,function(p){
+			// 	if (p==pane) {
+			// 		pane.$el.remove();
+			// 		delete p;
+			// 	} else {
+			// 		p.setPosition('full');
+			// 		newPanes.push(p);
+			// 	}
+			// });
+			// this.panes = newPanes;
 		},
 		getConverse : function(position) {
 			switch(position) {
@@ -243,6 +267,7 @@
 			return position;
 		},
 		positionPane : function(options) {
+
 			_.each(this.panes,function(pane){
 				pane.$el.css({zIndex : 10});
 			});
@@ -251,15 +276,21 @@
 			var opts = {};
 
 			if (options.position != 'full') {
-				opts[this.getConverse(options.position)] = '51%';
+				opts[this.getConverse(options.position)] = '50%';
 			}
-			options.el.css({zIndex : 11});
+
+			if (! options.el && options.pane) {
+				options.el = options.pane.$el;
+				options.pane.setPosition(options.position);
+			}
+
+			$(options.el).css({zIndex : 11});
 			// console.log(opts);
 
 			(function(attributes){
 				if (attributes['right'] || attributes['left']) {	attributes.width = 'auto'; }
 				else { 												attributes.height = 'auto'; }
-				options.el.css($.extend(defaultOptions(),attributes));
+				$(options.el).css($.extend(defaultOptions(),attributes));
 			})(opts);
 
 		}
