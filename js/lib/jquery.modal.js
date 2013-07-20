@@ -1,23 +1,42 @@
 (function ($) {
+    var defaults = {
+        arrow : true,
+        close : true,
+        content : ''
+    };
     $.fn.modal = function (options) {
-        var self, button, content, modal, arrow, close, overlay, exit, left, top;
+        if (typeof options === 'string') {
+            options = $.extend(defaults,{content : options});
+        } else {
+            options = $.extend(defaults,options);
+        }
+
+        var self, content, modal, arrow, close, overlay, exit, left, top;
 
         self = $(this);
-        button = $(options.button);
+        var offset = self.offset();
 
 
 
+        if (glasswing.hasOwnProperty('modal')) {
+            glasswing.modal.modal.remove();
+            glasswing.modal.overlay.remove();
+            delete glasswing.modal;
+        }
 
-        $('body').append(self);
+        // $('body').append(self);
 
-        content = $(self).wrap('<div class="modal-content" />').parent();
-        modal = content.wrap('<div class="modal" />').parent();
-        arrow = $('<div class="arrow" />');
-        close = $('<a href="javascript:;" class="close" />');
-
-        modal.prepend(arrow);
-        modal.prepend(close);
+        modal = $('<div class="modal" />');
+        content = $('<div class="modal-content" />');
+        if (options.arrow) { arrow = $('<div class="arrow" />'); }
+        if (options.close) { close = $('<a href="javascript:;" class="close" />'); }
         overlay = $('<div class="modal-overlay" />');
+
+        modal.html(content);
+        content.html(options.content);
+        if (arrow) { modal.prepend(arrow); }
+        if (close) { modal.prepend(close); }
+        $('body').append(modal);
         modal.before(overlay);
 
         exit = function () {
@@ -27,12 +46,11 @@
         overlay.click(exit);
         close.click(exit);
 
-        console.log(button);
 
-        left = button.offset().left;// - (button.width() / 2);
-        top = button.offset().top + (button.outerHeight() + arrow.outerHeight());
-        modal.css({left: left+'px', top: top});
+        left = offset.left;
+        top = offset.top + self.outerHeight() + arrow.outerHeight();
+        modal.css({left: left, top: top});
 
-
+        glasswing.modal = {modal : modal, overlay : overlay };
     }
 })(jQuery);

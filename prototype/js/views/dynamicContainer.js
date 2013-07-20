@@ -218,23 +218,20 @@
 
 			if (position !== 'full' && this.panes.length > 1) {
 				var conversePane = this.getPane(pane.pane_id-1);
-				// self.removePane(conversePane);
 				self.positionPane({pane : conversePane, position : self.getConverse(position)});
-				// console.log(self.getConverse(position));
-				// conversePane.setPosition(self.getConverse(position));
 			}
 
-
-			// if (this.panes.length > 1) {
-			// 	self.panes[0].setPosition(self.getConverse(position));
-			// 	self.positionPane({el : self.panes[0].$el, position: self.getConverse(position)});
-			// }
-			console.log(this.panes);
 			return pane;
 		},
 		pushPane : function(pane) {
-			this.panes.push(pane);
+			var self = this;
+			self.panes.push(pane);
 			pane.pane_id = this.panes.length;
+			pane.$el.dblclick(function(e){
+				e.preventDefault();
+				pane.magnify();
+				// self.positionPane({el : pane.$el, position: 'full'});
+			});
 		},
 		getPane : function(pane_id) {
 			return this.panes[pane_id - 1];
