@@ -47,6 +47,7 @@
 
 		},
 		setPosition : function(pos) {
+			if (! pos) { pos = 'full'; }
 			this.$el.removeClass(this.position);
 			this.position = pos;
 			this.parent.positionPane({el : this.$el, position: this.position});

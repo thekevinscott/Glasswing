@@ -105,7 +105,7 @@
 
 			var prior = this.timeline.getFirstRelevant().$el;
 
-			this.dynamicPane.addPane({contents : prior.data('dynamic-content'), header : prior.data('header'), clss : prior.data('clss')});
+			this.dynamicPane.addPane({content : prior.data('dynamic-content'), header : prior.data('header'), clss : prior.data('clss')});
 
 
 

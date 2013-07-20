@@ -132,7 +132,7 @@
 									var point = {x: left+click_offset.x, y : top+click_offset.y};
 									position = self.getPosition(point,self.content);
 								}
-								self.addPane({el : self.content, contents : draggable.data('dynamic-content'), header : draggable.data('header'), clss : draggable.data('clss'), position: position});
+								self.addPane({el : self.content, content : draggable.data('dynamic-content'), header : draggable.data('header'), clss : draggable.data('clss'), position: position});
 
 							}});
 
@@ -140,7 +140,7 @@
 							self.dragging = false;
 							clone.remove();
 						} else {
-							self.addPane({el : self.content, contents : draggable.data('dynamic-content'), header : draggable.data('header'), clss : draggable.data('clss'), position: 'full'});
+							self.addPane({el : self.content, content : draggable.data('dynamic-content'), header : draggable.data('header'), clss : draggable.data('clss'), position: 'full'});
 						}
 
 
@@ -173,7 +173,7 @@
 			return (cursor.x > self.content.offset().left && cursor.y > self.content.offset().top && cursor.x < self.content.offset().left + width && cursor.y < self.content.offset().top + height);
 		},
 		addPane : function(attributes) {
-			console.log('add pane!');
+
 			var self = this;
 			var contents = attributes.contents;
 			var header = attributes.header;
@@ -202,7 +202,8 @@
 			// create a new pane
 			console.log({ content : contents, header : header, parent : this, position : position, clss : clss});
 			console.log($.extend({parent : this},attributes));
-			var pane = new glasswing.views.dynamicPane({ content : contents, header : header, parent : this, position : position, clss : clss});
+			// var pane = new glasswing.views.dynamicPane({ content : contents, header : header, parent : this, position : position, clss : clss});
+			var pane = new glasswing.views.dynamicPane($.extend({parent : this},attributes));
 			this.panes.push(pane);
 
 			// render onto our container
