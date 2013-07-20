@@ -104,6 +104,7 @@
 			this.dynamicPane = new glasswing.views.dynamicContainer({el : $('.dynamic-content .container'), draggables : $('.draggable')});
 
 			var prior = this.timeline.getFirstRelevant().$el;
+
 			this.dynamicPane.addPane({contents : prior.data('dynamic-content'), header : prior.data('header'), clss : prior.data('clss')});
 
 
@@ -211,7 +212,7 @@
 			self.$right = this.$el.find('.dynamic-content');
 
 			self.timeline = new glasswing.views.timeline({parent : this, el : this.$el.find('.timeline')});
-			self.afterRender();
+			// self.afterRender();
 
 			this.caregivers = new glasswing.views.caregivers({
 				collection : this.model.get('caregivers'),

@@ -173,11 +173,12 @@
 			return (cursor.x > self.content.offset().left && cursor.y > self.content.offset().top && cursor.x < self.content.offset().left + width && cursor.y < self.content.offset().top + height);
 		},
 		addPane : function(attributes) {
+			console.log('add pane!');
 			var self = this;
-			// var contents = attributes.contents;
-			// var header = attributes.header;
+			var contents = attributes.contents;
+			var header = attributes.header;
 			var position = attributes.position;
-			// var clss = attributes.clss;
+			var clss = attributes.clss;
 			var target = attributes.el || this.content;
 			if (! target) { target = this.content; }
 
@@ -199,9 +200,9 @@
 			*/
 
 			// create a new pane
-			var pane = new glasswing.views.dynamicPane($.extend({parent : this},attributes));
-
-			// add onto our panes stack
+			console.log({ content : contents, header : header, parent : this, position : position, clss : clss});
+			console.log($.extend({parent : this},attributes));
+			var pane = new glasswing.views.dynamicPane({ content : contents, header : header, parent : this, position : position, clss : clss});
 			this.panes.push(pane);
 
 			// render onto our container
