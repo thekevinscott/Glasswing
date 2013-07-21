@@ -7,60 +7,23 @@
 			<div class="attachments">
 				<%= attachments %>
 			</div>
-			<h3>Procedure: <span><%= procedure_name %></span></h3>
+			<h3><span><%= procedure_name %></span></h3>
 			<p><%= clinical_indication %></p>
+			<p class="accession-number"><span>Accession #:</span> <%= accession_id %></p>
+			<p class="patient-status"><span>Patient Status:</span> In-patient</p>
 		</div>
 		<div class="patient">
-			<h3 class="name"><%= last %>, <%= first %></h3><br />
+			<h3 class="name"><%= last %>, <%= first %></h3>
 			<p class="patient-id"><span>Patient ID:</span><%= patient_id %></p>
 			<p class="dob"><span>Date of Birth:</span><%= dob %></p>
 			<p class="gender"><span>Gender:</span><%= gender %></p>
 		</div>
 
-		<!--
-		<header>
-			<div class="attachments">
-				<%= attachments %>
-			</div>
-			<h5 class="patient-id">Patient ID: <%= patient_id %></h5>
-		</header>
-		<h3 class="name"><%= last %>, <%= first %></h3><br />
-		<h5><span class="dob"><%= dob %></span><span class="gender"><%= gender %></span></h5><br />
-
-		<h4 class="procedure-name">Procedure: <span><%= procedure_name %></span></h4><br />
-
-		<div class="time-container" style="" class="progress">
-			<div class="progress-container"><div class="progress"></div></div>
-		</div>
-		<p class="small time-left" style="">0 min left</p>
-		<p class="small">Currently: Collecting images</p><br />
-		<p class="report-status">Report Status: <span><%= report_status %></span></p>
-
-
-		<p class="patient-risks"><%= patient_risks %></p>
-		<%= procedure_name %>
-		<%= priority %>
-		<%= procedure_class %>
-
-		<%= procedure_status %>
-
-
-	</div>
- -->
 		<footer>
-			<!-- <a class="coc" href="javascript:;"></a>
-			<p>Hospital : <%= hospital_name %></p>
-			<p>Referring Physician: <%= referring_physician %></p> -->
-
-
-			<a class="queue"></a>
-			<a class="folder"></a>
-			<a class="attachments"></a>
-
 			<a class="camera"></a>
-			<a class="eyeball"></a>
-			<a class="lock"></a>
 
+			<a class="lock"></a>
+			<a href="javascript:;" class="queue"><img src="images/queue.png" /></a>
 
 		</footer>
 </div>

@@ -108,6 +108,7 @@
 		right: @padding;
 
 		width: @filter_width + @padding;
+		top: 120px;
 		.filters-inner {
 			padding: 40px;
 			.add {
@@ -212,6 +213,19 @@
 			margin-bottom: 20px;
 
 			cursor: pointer;
+			.accession-number span , .patient-status span {
+				color: @dark-text;
+				width: 90px;
+				display: inline-block;
+			}
+
+
+			p {
+				font-size: 12px;
+				line-height: 16px;
+				padding: 0;
+				margin: 3px 0;
+			}
 			footer a {
 				background-position: center center;
 				background-repeat: no-repeat;
@@ -222,8 +236,12 @@
 				margin-right: 20px;
 
 			}
+			h3 {
+				margin: 0 0 10px 0;
+				padding: 0;
+			}
 			.patient {
-				padding: 20px 30px;
+				padding: 10px 30px 10px 30px;
 
 				span {
 					width: 130px;
@@ -232,8 +250,10 @@
 				}
 			}
 			.procedure {
+				padding: 20px 30px 10px 30px;
 				position: relative;
 				border-bottom: 1px solid #696a6a;
+
 			}
 			.attachments {
 				position: absolute;
@@ -263,13 +283,36 @@
 				transition: 		all 0.3s;
 				-webkit-transition: all 0.3s;
 				font-size: 11px;
+				position: relative;
 				.queue {
-					margin-right: 10px;
+					margin-right: 0;
+
+					position: absolute;
+					background: none;
+					width: 42px;
+					height: 100%;
+					right: 0;
+					top: 0;
+					img {
+						position: absolute;
+						top: 50%;
+						left: 50%;
+						margin-top: -8px;
+						margin-left: -6px;
+
+						transition: 		all 0.3s;
+						-webkit-transition: all 0.3s;
+					}
+				}
+				.queue:hover {
+					background: @orange;
+
+
 				}
 				.camera, .eyeball, .lock {
-					float: right;
+
 					margin-right: 0;
-					margin-left: 10px;
+					margin-left: 5px;
 
 				}
 			}
@@ -426,10 +469,15 @@ th.header.headerSortDown {
 
 		font-style: italic;
 		text-shadow: none;
+		.image-status p {
+			color: @grid-text;
+		}
 	}
 	.image-status {
+
 		p {
 			margin: 10px 0;
+			color: @gray-darker;
 		}
 		.camera, .lock {
 			background-repeat: no-repeat;
@@ -438,6 +486,10 @@ th.header.headerSortDown {
 		}
 		.lock {
 			background-position: 3px 0;
+		}
+		.lock.on {
+			background-image: url(../images/lock_on.png);
+			color: white;
 		}
 		.camera {
 			background-image: url(../images/camera_orange.png);
@@ -520,7 +572,7 @@ th.header.headerSortDown {
 
 
 	p, h3, h4 {
-		opacity: 0.5;
+		color: @grid-text;
 		display: block;
 	}
 	p {

@@ -40,9 +40,14 @@
 		var setSlaveHeight = function(attb) {
 			if (! attb.easing) { attb.easing = 'linear'; }
 			if (options.slave) {
-				options.slave.animate({
-					top: getTargetHeight()
-				}, {easing : attb.easing, duration : attb.duration });
+				if (attb.duration < 10) {
+					options.slave.css({top: getTargetHeight()});
+				} else {
+					options.slave.animate({
+						top: getTargetHeight()
+					}, {easing : attb.easing, duration : attb.duration });
+				}
+
 			}
 		}
 
@@ -85,7 +90,7 @@
 			header.prepend(arrow);
 			arrow.click(toggle);
 		});
-		setSlaveHeight({duration: 100});
+		setSlaveHeight({duration: 1});
 	}
 
 })(jQuery);

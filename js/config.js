@@ -75,13 +75,13 @@
 	}
 
 	parseChapters([
-		'tabs',
-		'notifications',
+		'double-grid',
 		'case-cards',
-		'following',
-		'timeline',
-		'side-by-side',
-		'caregivers'
+		'tabs',
+		'caregivers',
+		'notifications',
+		'dynamic-content',
+
 	]);
 
 
