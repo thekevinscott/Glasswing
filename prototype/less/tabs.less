@@ -1,7 +1,9 @@
 @import "../../less/constants.less";
-
+.header {
+	border-bottom: 2px solid @blue;
+}
 .tabs {
-	border-bottom: 1px solid black;
+
 	font-style: Lato;
 	background: black;
 	display: table-layout;
@@ -24,6 +26,7 @@
 }
 .tab.selected, .tab:hover {
 	background: red;//@background;
+	background: @blue;
 }
 .tab a {
 	color: #DDD;

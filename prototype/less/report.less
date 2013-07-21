@@ -73,20 +73,46 @@ a {
 	.current-report {
 		overflow: visible; left: @padding; width: @current-report+-@padding;
 
+		@patients-height : 110px;
 		@actions-height: 70px;
 		@margin: 10px;
 
 
 
+		.patient {
+			.col {
+				left: 0;
+				right: 50%;
+			}
+			.col:last-child {
+				left: 50%;
+				right: 0;
+			}
+			h2 {
+				margin: 0 0 10px 0;
+			}
+			p {
+				margin: 7px 0;
+				font-size: 13px;
+			}
+			span {
+				width: 130px;
+				opacity: 0.5;
+				display: inline-block;
+			}
+			height: @patients-height;
+		}
+
 		.currents {
 			overflow: visible;
+			top: @patients-height;
 			.pane {
 				background: @dark-blue;
 				border: none;
 				padding: 0;
 				.header {
 					background: @blue;
-					border-bottom: 1px solid @darker-blue;
+					border-bottom: 2px solid @darker-blue;
 					padding: 10px 20px;
 					font-size: 14px;
 
@@ -248,15 +274,6 @@ a {
 		display: inline;
 		top: @margin; bottom: @margin;
 		overflow: visible;
-	}
-
-	.patient {
-		span {
-			width: 130px;
-			opacity: 0.5;
-			display: inline-block;
-		}
-		height: 180px;
 	}
 
 

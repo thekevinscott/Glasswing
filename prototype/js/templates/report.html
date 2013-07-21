@@ -18,7 +18,19 @@
 
 
 			</div> -->
-
+			<div class="patient row">
+				<div class="col">
+					<h2><%= name %></h2>
+					<p class="patient-id"><span>Patient ID:</span><%= patient_id %></p>
+					<p class="dob"><span>Date of Birth:</span><%= dob %></p>
+					<p class="gender"><span>Gender:</span><%= gender %></p>
+					<!-- <p class="risk"><span>Risk:</span><%= patient_risks %></p> -->
+				</div>
+				<div class="col">
+					<p class="reason-header"><span>Reason for exam:</span></p>
+					<p class="reason"><%= clinical_indication %></p>
+				</div>
+			</div>
 			<div class="currents row">
 				<div class="pane">
 					<div class="header">
@@ -30,8 +42,6 @@
 							<img src="images/homer.png" />
 							<span>55</span> images
 						</div>
-						<p class="reason-header">Reason for exam:</p>
-						<p class="reason"><%= clinical_indication %></p>
 					</div>
 					<div class="footer">
 						<a href="javascript:;" class="procedure-information draggable">Procedure Information</a>
@@ -71,13 +81,7 @@
 	</div><!-- dynamic content -->
 	<div class="col patient-history">
 		<div class="content">
-			<div class="patient row">
-				<h2><%= name %></h2>
-				<p class="patient-id"><span>Patient ID:</span><%= patient_id %></p>
-				<p class="dob"><span>Date of Birth:</span><%= dob %></p>
-				<p class="gender"><span>Gender:</span><%= gender %></p>
-				<!-- <p class="risk"><span>Risk:</span><%= patient_risks %></p> -->
-			</div>
+
 			<div class="timeline row">
 				<h2>Timeline</h2>
 			</div>
