@@ -111,7 +111,7 @@
 			this.$('.accordion').accordion({
 				slave : $('.dictation')
 			});
-			$('.dictation textarea').hint().autosave();
+			$('.dictation textarea').hint().autosave({notification : $('.dictation .autosave')});
 
 
 			// tinymce.init({

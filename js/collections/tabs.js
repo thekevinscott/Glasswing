@@ -5,6 +5,8 @@ glasswing.collections.tabs = Backbone.Collection.extend({
         this.pages = {};
         this.router = attributes.router;
         this.worklist = attributes.worklist;
+
+
     },
     showPage : function(model, options) {
         var self = this;

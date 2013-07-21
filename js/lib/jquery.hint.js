@@ -1,20 +1,23 @@
 (function($){
 	$.fn.hint = function(){
 		return $(this).each(function(){
-			console.log(this);
-			var tagname = this.tagName;
-			console.log(tagname);
-			var val;
+			var el = $(this);
 
-			switch(tagname.toLowerCase()) {
-				case 'textarea' :
-					val = $(this).html();
-				break;
-				default :
-					val = $(this).val();
-				break;
-			}
-			console.log(val);
+			el.data('placeholder',el.val());
+			el.addClass('hint');
+			el.focus(function(){
+				el.removeClass('hint');
+				if (el.val() === el.data('placeholder')) {
+
+					el.val('');
+				}
+			}).blur(function(){
+				if (el.val() == '') {
+
+					el.val(el.data('placeholder'));
+					el.addClass('hint');
+				}
+			})
 		});
 	}
 })(jQuery);
