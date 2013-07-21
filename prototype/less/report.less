@@ -8,7 +8,6 @@
 	padding: 20px;
 
 	margin-bottom: 20px;
-	border-radius: @border-radius;
 	.pane {
 		border-top: 1px solid #333;
 	    background: #222;
@@ -74,7 +73,9 @@ a {
 		overflow: visible; left: @padding; width: @current-report+-@padding;
 
 		@patients-height : 110px;
-		@actions-height: 70px;
+
+		@actions-height: 40px;
+		@submit-height: 80px;
 		@margin: 10px;
 
 
@@ -104,27 +105,99 @@ a {
 		}
 
 		.currents {
-			overflow: visible;
+			overflow: hidden;
 			top: @patients-height;
+			border-radius: @border-radius;
+
 			.pane {
 				background: @dark-blue;
 				border: none;
 				padding: 0;
+				margin-bottom: 0;
 				.header {
 					background: @blue;
 					border-bottom: 2px solid @darker-blue;
-					padding: 10px 20px;
+					padding: 10px 20px 10px 26px;
 					font-size: 14px;
+					position: relative;
+					color: #99b3cf;
+
+					.arrow {
+						border: none;
+						background: url(../images/arrow.png) no-repeat center center;
+						width: 16px;
+						height: 16px;
+						top: 50%;
+						margin-top: -8px;
+						left: 6px;
+						cursor: pointer;
+					}
 
 					h2 {
 						font-size: 14px;
-						font-weight: bold;
+
+						span {
+							color: white;
+							font-weight: bold;
+							margin-right: 8px;
+						}
+
 					}
-					border-radius: @border-radius @border-radius 0 0;
+					.buttons {
+						position: absolute;
+						right: 0;
+						top: 0;
+
+						height: 100%;
+						a {
+							background-position: center center;
+							background-repeat: no-repeat;
+							display: block;
+							height: 100%;
+							width: 32px;
+							position: absolute;
+							top: 0;
+							right: 0;
+						}
+						a.attachments {
+							right: 0;
+							background-image: url(../images/attachments-white.png);
+							line-height: 50px;
+						}
+						a.pacs {
+							right: 42px;
+							background-image: url(../images/camera.png);
+
+						}
+					}
+
 				}
 
+
 				.content {
-					padding: 10px 40px;
+					padding: 10px 10px;
+					color: #d2d8de;
+					.accession-number {
+						color: #909eac;
+						margin: 0;
+					}
+					.procedure-information {
+						background: url(../images/procedure-information.png) no-repeat left center;
+						padding-left: 26px;
+						margin: 5px 0 5px 0;
+					}
+					table {
+						width: 100%;
+						thead td {
+							font-weight: bold;
+						}
+						td {
+							border: none;
+							color: #d2d8de;
+							font-size: 14px;
+						}
+
+					}
 				}
 				.footer {
 					background: @darker-blue;
@@ -153,12 +226,50 @@ a {
 
 				}
 			}
+			padding-bottom: @actions-height;
+			.actions {
+				position: absolute;
+
+				bottom: 0px;
+				height: @actions-height;
+				width: 100%;
+				a {
+					color: @dark-text;
+					position: absolute;
+					display: block;
+					text-decoration: none;
+					padding: 5px 0;
+				}
+
+				.community-of-caregivers {
+
+					padding-left: 24px;
+					background: url(../images/coc.png) no-repeat left center;
+					right: 0;
+				}
+				.folder {
+					background: url(../images/folder.png) no-repeat left center;
+					left: 0;
+					padding-left: 24px;
+
+				}
+				.follow {
+					right: 20px;
+					padding-left: 8px;
+					text-align: right;
+					background: url(../images/footsteps.png) no-repeat left center;
+				}
+				.follow.active {
+					background: url(../images/footsteps-active.png) no-repeat left center;
+					color: white;
+				}
+			}
 
 
 		}
 		.dictation {
-			top: 260px;
-			bottom: @actions-height;
+			top: 360px;
+			bottom: @submit-height;
 			margin-bottom: 0;
 			textarea {
 				position: absolute;
@@ -167,10 +278,10 @@ a {
 				margin: 0;
 			}
 		}
-		.actions {
+		.submit {
 			text-align: right;
 			bottom: 0;
-			height: @actions-height;
+			height: @submit-height;
 			input[type=button] {
 				background: @green;
 				font-size: 14px;
@@ -186,34 +297,6 @@ a {
 			}
 		}
 
-		.things-you-can-do {
-			position: absolute;
-			top: 225px;
-			bottom: 260px;
-			a {
-				color: @dark-text;
-				position: absolute;
-				display: block;
-				text-decoration: none;
-				padding: 5px 0;
-			}
-
-			.community-of-caregivers {
-				left: 20px;
-				padding-left: 24px;
-				background: url(../images/coc.png) no-repeat left center;
-			}
-			.follow {
-				right: 20px;
-				padding-left: 8px;
-				text-align: right;
-				background: url(../images/footsteps.png) no-repeat left center;
-			}
-			.follow.active {
-				background: url(../images/footsteps-active.png) no-repeat left center;
-				color: white;
-			}
-		}
 
 	}
 	.dynamic-content {

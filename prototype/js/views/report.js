@@ -108,7 +108,9 @@
 			this.dynamicPane.addPane({content : prior.data('dynamic-content'), header : prior.data('header'), clss : prior.data('clss')});
 
 
-
+			this.$('.accordion').accordion({
+				slave : $('.dictation')
+			});
 
 		},
 		setOptions : function(options) {
