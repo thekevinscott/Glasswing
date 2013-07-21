@@ -51,8 +51,8 @@ a {
 
 
 
-	@current-report: 540px;
-	@patient-history: 290px;
+	@current-report: 500px;
+	@patient-history: 320px;
 	@margin: 20px;
 	@padding: 40px;
 
@@ -308,6 +308,17 @@ a {
 				background: #414141;
 
 			}
+			table td {
+				border: none;
+				font-size: 14px;
+				span {
+					color: @dark-text;
+				}
+			}
+			table tr td:first-child {
+				padding-right: 10px;
+				min-width: 120px;
+			}
 			.header {
 				background: #343434;
 				padding: 10px 20px;
@@ -334,11 +345,7 @@ a {
 			p {
 				margin: 0;
 			}
-			p span {
-				color: @dark-text;
-				min-width: 130px;
-				display: inline-block;
-			}
+
 			strong {
 				display: block;
 				color: white;
@@ -621,7 +628,7 @@ a {
 	li {
 		border-bottom: 1px solid black;
 		padding: 10px 40px 10px 20px;
-		background: url(../images/scanned-documents-affordance.png) no-repeat right center;
+		background: url(../images/affordance.png) no-repeat right center;
 		a {
 			margin: 0;
 			padding: 0;
