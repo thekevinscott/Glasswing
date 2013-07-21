@@ -1,4 +1,34 @@
 (function($){
+	$.fn.countUp = function() {
+		return $(this).each(function(){
+			var div = $(this);
+			var span = div.find('span');
+			var timestamp = span.attr('rel');
+			// var end_time = new Date(timestamp);
+
+			var interval = 200;
+
+			// var pluralize(num, label) {
+			// 	return (num==1) ? label : label + 's';
+			// }
+
+
+			var count = function() {
+				var difference = Math.ceil(((new Date()).getTime() - timestamp) / 1000);
+				if (difference < 60) {
+					span.html(difference+'"');
+
+				} else if (difference < 60*60) {
+					var minutes = Math.floor(difference / 60);
+					span.html(minutes + '\' ' + (difference%60)+'"');
+				}
+
+				setTimeout(count,interval);
+			}
+
+			count();
+		});
+	}
 	glasswing.views.procedure = glasswing.views.abstract.extend({
 		events : {
 			"click" : "click",
@@ -19,6 +49,7 @@
 
 			var opts = {
 				id : this.model.get('id'),
+				accession_id : Math.round(Math.random()*1000)+1000,
 				attachments : this.model.get('attachments'),
 				dob : this.model.get('patient').getDob(),
 				first : this.model.get('patient').get('first'),
@@ -35,6 +66,7 @@
 				hospital_name : this.model.get('hospital_name'),
 				clinical_indication : this.model.get('clinical_indication'),
 				end_time : this.model.getDate('end_time'),
+				end_timestamp : this.model.get('end_time').getTime(),
 				stat : ( (this.model.isStat()) ? 'stat' : null  )
 			};
 
@@ -51,6 +83,8 @@
 			this.$el.data('view',this);
 
 			this.delegateEvents();
+
+			this.$('.stat').countUp();
 
 			return this;
 		},

@@ -13,7 +13,8 @@ glasswing.collections.procedures = Backbone.Collection.extend({
 		clinical_indications : ['Right lower lobe lung mass seen on abdominal/pelvic CT scan.'],
 		procedure_informations : ['Contrast enhanced and unenhanced CT scan of the chest was performed. 92 cc Isovue was administered IV.'],
 
-		hospital : ['Mercy','Northwestern','Good Heart','Great Lake','Advocate','Shepherd','Good Shepherd','Murphy']
+		hospital : ['Mercy','Northwestern','Good Heart','Great Lake','Advocate','Shepherd','Good Shepherd','Murphy'],
+		role : ['Resident','Technologist']
 	},
 	add : function(procedureModel) {
 
@@ -46,15 +47,16 @@ glasswing.collections.procedures = Backbone.Collection.extend({
 		});
 		return procedures;
 	},
-	getRandomProcedure : function(patient) {
+	getRandomProcedure : function(patient, priors) {
 		var p = new glasswing.collections.patients();
 		var caregivers = new glasswing.collections.caregivers();
-		var length = Math.round(Math.random()*1)+2;
+		var length = Math.round(Math.random()*0)+2;
+
 		for (var i=0;i<length;i++) {
 			var first = p.getRandomIngredient('first');
 			var last = p.getRandomIngredient('last');
 			caregivers.add(new glasswing.models.caregiver({
-				role : 'Resident',
+				role : this.getRandomIngredient('role'),
 				phone : '123-123-1234',
 				pager :'123-123-1234',
 				email : first.substring(0,1).toLowerCase()+last.toLowerCase()+'@'+this.getRandomIngredient('hospital').toLowerCase()+'.com',
@@ -64,12 +66,25 @@ glasswing.collections.procedures = Backbone.Collection.extend({
 				backup : p.getRandomIngredient('first') +' ' + p.getRandomIngredient('last')
 			}));
 		}
+
+		var first = p.getRandomIngredient('first');
+		var last = p.getRandomIngredient('last');
+		caregivers.add(new glasswing.models.caregiver({
+			role : 'Referring Physician',
+			phone : '123-123-1234',
+			pager :'123-123-1234',
+			email : first.substring(0,1).toLowerCase()+last.toLowerCase()+'@'+this.getRandomIngredient('hospital').toLowerCase()+'.com',
+			date : new Date('6/5/2013'),
+			first : first,
+			last : last,
+			backup : p.getRandomIngredient('first') +' ' + p.getRandomIngredient('last')
+		}));
 		return new glasswing.models.procedure({
 			patient : patient,
 			scanned_documents : Math.round(Math.random()*10),
 			referring_physician : 'Thompson',
-			date : glasswing.randomDate(),
-			end_time : glasswing.randomDate(new Date(2013,0,1)),
+			date : glasswing.randomDate(new Date()),
+			end_time : new Date((new Date()).getTime() - Math.round(Math.random()*1000*360)),
 			procedure_name : this.getRandomIngredient('procedure_type') + ' ' + this.getRandomIngredient('body_part'),
 			priority : Math.round(Math.random()*2),
 			procedure_class : '-',
@@ -77,7 +92,8 @@ glasswing.collections.procedures = Backbone.Collection.extend({
 			procedure_status : 'Comp.',
 			referring_physician : p.getRandomIngredient('first')+ ' ' + p.getRandomIngredient('last'),
 			hospital_name : this.getRandomIngredient('hospital'),
-			caregivers : caregivers
+			caregivers : caregivers,
+			priors : priors
 		});
 	},
 	getRandomIngredient : function(key) {
@@ -85,3 +101,11 @@ glasswing.collections.procedures = Backbone.Collection.extend({
 	}
 
 });
+
+
+
+
+
+
+
+

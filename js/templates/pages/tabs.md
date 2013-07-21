@@ -11,4 +11,6 @@ Handling Interruptions
 -------------
 Radiologists collaborate constantly. Current software does not adequately support a radiologist's need to easily respond to interruptions and switch cases. If a colleague requests a radiologist to open a case, the radiologist must currently close what they are working on, which results in lost time returning to their place.
 
-In our proposed interface, a radiologist can easily return to the worklist and view a colleague's case. Once done, the radiologist can quickly and efficiently return to the case they were working on.
+In our proposed interface, a radiologist can easily return to the worklist to view a colleague's case. Click on the worklist tab.
+
+Once done, the radiologist can quickly and efficiently return to the case they were working on.

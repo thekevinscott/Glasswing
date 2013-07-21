@@ -104,10 +104,20 @@
 			this.dynamicPane = new glasswing.views.dynamicContainer({el : $('.dynamic-content .container'), draggables : $('.draggable')});
 
 			var prior = this.timeline.getFirstRelevant().$el;
-			this.dynamicPane.addPane({contents : prior.data('dynamic-content'), header : prior.data('header'), clss : prior.data('clss')});
+
+			this.dynamicPane.addPane({content : prior.data('dynamic-content'), header : prior.data('header'), clss : prior.data('clss')});
 
 
+			this.$('.accordion').accordion({
+				slave : $('.dictation')
+			});
+			$('.dictation textarea').hint().autosave({notification : $('.dictation .autosave')});
 
+
+			// tinymce.init({
+			// 	selector: "textarea",
+
+			// });
 
 		},
 		setOptions : function(options) {
@@ -143,9 +153,9 @@
 
 				name : this.model.get('name'),
 				priority : this.model.get('priority'),
-				procedure_date : this.model.getDate(),
+				procedure_date : this.model.getDate('end_time'),
 				procedure_class : this.model.get('procedure_class'),
-				procedure_name : this.model.getName(),
+				procedure_name : this.model.get('procedure_name'),
 				report_status : this.model.get('report_status'),
 				clinical_indication : this.model.get('clinical_indication'),
 				hospital_name : this.model.get('hospital_name'),
@@ -211,7 +221,7 @@
 			self.$right = this.$el.find('.dynamic-content');
 
 			self.timeline = new glasswing.views.timeline({parent : this, el : this.$el.find('.timeline')});
-			self.afterRender();
+			// self.afterRender();
 
 			this.caregivers = new glasswing.views.caregivers({
 				collection : this.model.get('caregivers'),

@@ -1,8 +1,9 @@
-<div class="grid-worklist">
 
-	<div class="grid-header grid-row">
-		<div class="contents col">
-			<div class="info">
+<table class="grid-worklist">
+
+	<thead class="grid-header grid-row">
+		<tr>
+			<td class="info">
 				<h2>Procedure Type</h2>
 				<!-- <select class="procedure-type">
 					<option>Procedure Type</option>
@@ -11,11 +12,15 @@
 					<option>Head</option>
 				</select> -->
 				<p>Procedure end time</p>
-			</div>
-			<div class="reason">
+			</td>
+			<td class="reason">
 				<p>Procedure detailed description</p>
-			</div>
-			<div class="patient">
+			</td>
+			<td class="patient-status">
+				<p>Accession Number</p>
+				<p>Patient Status</p>
+			</td>
+			<td class="patient">
 				<h3>Patient Name</h3>
 				<p>
 					<span>Patient ID</span>
@@ -23,13 +28,19 @@
 					<span>Gender</span>
 				</p>
 
-			</div>
-			<div class="referring">
+			</td>
+			<td class="referring">
 				<p class="physician">Referring Physician</p>
 				<p class="hospital">Referring Hospital</p>
-			</div>
-		</div>
+			</td>
+			<td class="image-status">
+				<p class="images-completion-status camera">Images Completion Status</p>
+				<p class="reporting-status lock">Reporting Status</p>
+			</td>
+			<td class="queue-action">
 
-	</div>
-	<ul class="grid-contents"></ul>
-</div>
+			</td>
+		</tr>
+	</thead>
+	<tbody class="grid-contents"></tbody>
+</table>

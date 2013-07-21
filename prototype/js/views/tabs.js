@@ -11,6 +11,7 @@
 			this.parent = options.parent;
 			this.a = null;
 			this.render();
+			this.$el.addClass('tab-'+this.page.name.toLowerCase());
 		},
 		render : function() {
 			var self = this;
@@ -30,13 +31,21 @@
 			this.$a.click(function(e){
 
 				e.preventDefault();
+				if (! $(this).parents('li').hasClass('selected')) {
+					self.parent.showPage(self.page);
+				}
 
-				self.parent.showPage(self.page);
+
 
 				// self.router.url($(this).attr('href'));
 
 			});
+			this.$('.close-tab').click(function(e){
+				self.parent.closeTab(self.page);
+			});
 
+
+			$('.search input').hint();
 
 
 			return this;

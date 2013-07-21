@@ -11,6 +11,7 @@
 		},
 		render : function() {
 			var self = this;
+			this.$el.html('');
 			this.$close = $('<div class="close" />');
 			this.$magnify = $('<div class="magnify" />');
 			this.$header = $('<div class="header">'+this.header+'</div>');
@@ -19,8 +20,8 @@
 			this.$el.prepend(this.$header);
 			this.$el.append(this.$content);
 
-			this.$el.append(this.$close);
-			this.$el.append(this.$magnify);
+			this.$header.append(this.$close);
+			this.$header.append(this.$magnify);
 
 			this.$close.click(function(e){
 				e.preventDefault();
@@ -28,28 +29,32 @@
 				// self.parent.positionPane({el : self.$el, position: 'full'});
 				// self.$el.animate({width: 0, height: 0});
 			});
-			this.$magnify.click(function(e){
-				e.preventDefault();
-
-				if (self.position != 'full') {
-					if (self.state=='full') {
-						self.state = 'normal';
-						self.parent.positionPane({el : self.$el, position: self.position});
-					} else {
-						self.state = 'full';
-						self.parent.positionPane({el : self.$el, position: 'full'});
-					}
-				}
-
-
-			});
+			this.$magnify.click(this.magnify);
 			return this;
 
 		},
+		magnify : function(e) {
+			if (e) { e.preventDefault(); }
+			var self = this;
+			if (self.position != 'full') {
+				if (self.state=='full') {
+					self.state = 'normal';
+					self.parent.positionPane({el : self.$el, position: self.position});
+					this.$el.addClass(this.position);
+				} else {
+					self.state = 'full';
+					self.parent.positionPane({el : self.$el, position: 'full'});
+					this.$el.removeClass(this.position);
+				}
+			}
+		},
 		setPosition : function(pos) {
+
+			if (! pos) { pos = 'full'; }
 			this.$el.removeClass(this.position);
+
 			this.position = pos;
-			this.parent.positionPane({el : this.$el, position: this.position});
+			// this.parent.positionPane({el : this.$el, position: this.position});
 			this.$el.addClass(this.position);
 		}
 	});

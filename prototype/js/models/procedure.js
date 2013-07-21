@@ -18,7 +18,7 @@ glasswing.models.procedure = glasswing.models.abstract.extend({
 		var self = this;
 
 
-		var number_of_priors = 20;
+		var number_of_priors = 5;
 		var oldest_prior = new Date(2008,0,1);
 
 
@@ -26,7 +26,9 @@ glasswing.models.procedure = glasswing.models.abstract.extend({
 		var pa = new glasswing.collections.patients();
 		var pr = new glasswing.collections.procedures();
 
-		for (var i=0;i<number_of_priors;i++) {
+
+
+		for (var i=0;i<attributes.priors.length;i++) {
 			var caregivers = new glasswing.collections.caregivers();
 
 			// var length = Math.round(Math.random()*2)+1;
@@ -46,10 +48,12 @@ glasswing.models.procedure = glasswing.models.abstract.extend({
 				}));
 
 			}
-			var prior = new glasswing.models.prior({caregivers : caregivers, date : glasswing.randomDate(oldest_prior, new Date()) });
-			if (Math.round(Math.random()*3) == 1) {
-				prior.set('relevant',true);
-			}
+			var prior_data = $.extend({caregivers : caregivers},attributes.priors[i]);
+			// var prior = new glasswing.models.prior({caregivers : caregivers, date : glasswing.randomDate(oldest_prior, new Date()) });
+			var prior = new glasswing.models.prior(prior_data);
+			// if (Math.round(Math.random()*3) == 1) {
+			// 	prior.set('relevant',true);
+			// }
 			self.priors.add(prior);
 		}
 

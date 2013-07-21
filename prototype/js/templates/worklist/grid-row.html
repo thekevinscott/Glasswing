@@ -1,18 +1,26 @@
-<li id="procedure-<%= id %>" class="grid-row">
-	<% if (stat =='stat') { %>
-	<div class="stat"><div class="stat-shade"></div><span>STAT</span>: 15:03</div>
-	<% } %>
 
-	<!-- <div class="paper-curl"></div> -->
-	<div class="contents col">
-		<div class="info">
+<tr id="procedure-<%= id %>" class="grid-row">
+
+
+
+		<td class="info">
+			<div class="paper-curl"></div>
+			<% if (stat =='stat') { %>
+			<div class="stat"><div class="stat-shade"></div><strong>STAT: </strong><span class="end-time" rel="<%= end_timestamp %>"></span> </div>
+			<% } %>
+			<!-- <p><%= end_time %></p> -->
 			<h2><%= procedure_name %></h2>
-			<p><%= end_time %></p>
-		</div>
-		<div class="reason">
+
+			<p>5 mins ago</p>
+		</td>
+		<td class="reason">
 			<p><%= clinical_indication %></p>
-		</div>
-		<div class="patient">
+		</td>
+		<td class="patient-status">
+			<p><%= accession_id %></p>
+			<p>In-patient</p>
+		</td>
+		<td class="patient">
 
 			<h3><%= first %> <%= last %></h3>
 			<p>
@@ -21,23 +29,20 @@
 				<span><%= gender %></span>
 			</p>
 
-		</div>
-		<div class="referring">
+		</td>
+		<td class="referring">
 			<p class="physician"><%= referring_physician %></p>
 			<p class="hospital"><%= hospital_name %></p>
-		</div>
-	</div>
-	<div class="meta col">
-		<div class="row">
-			<a class="col queue"></a>
-			<a class="col lock"></a>
-			<a class="col attachments"></a>
-		</div>
-		<div class="row">
-			<a class="col folder"></a>
-			<a class="col eyeball"></a>
-			<a class="col camera"></a>
-		</div>
-	</div>
+		</td>
+		<td class="image-status">
 
-</li>
+			<p class="images-completion-status camera">All images are completed</p>
+			<!-- <p class="reporting-status lock on">Dr. Rebecca Whatley</p> -->
+			<p class="reporting-status lock">Nobody is reporting</p>
+		</td>
+		<td class="queue-action">
+			<a href="javascript:;" class="queue"><img src="images/queue.png" /></a>
+		</td>
+</tr>
+
+

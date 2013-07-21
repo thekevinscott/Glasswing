@@ -4,12 +4,10 @@
 	padding: 20px;
 }
 .pane {
-	background: @pane;
+
 	padding: 20px;
-	border-bottom: 1px solid #222;
-	border-top: 1px solid #444;
+
 	margin-bottom: 20px;
-	border-radius: @border-radius;
 	.pane {
 		border-top: 1px solid #333;
 	    background: #222;
@@ -53,11 +51,39 @@ a {
 
 
 
-	@current-report: 540px;
-	@patient-history: 290px;
+	@current-report: 500px;
+	@patient-history: 320px;
 	@margin: 20px;
 	@padding: 40px;
 
+
+	.buttons {
+		position: absolute;
+		right: 0;
+		top: 0;
+
+		height: 32px;
+		a {
+			background-position: center center;
+			background-repeat: no-repeat;
+			display: block;
+			height: 100%;
+			width: 32px;
+			position: absolute;
+			top: 0;
+			right: 0;
+		}
+		a.attachments {
+			right: 0;
+			background-image: url(../images/attachments-white.png);
+			line-height: 41px;
+		}
+		a.pacs {
+			right: 36px;
+			background-image: url(../images/camera.png);
+
+		}
+	}
 
 	.images {
 		background: @darker-blue;
@@ -71,35 +97,111 @@ a {
 		}
 	}
 
+
+
 	.current-report {
 		overflow: visible; left: @padding; width: @current-report+-@padding;
 
-		@actions-height: 70px;
+		@patients-height : 110px;
+
+		@actions-height: 50px;
+		@submit-height: 66px;
 		@margin: 10px;
 
 
 
+		.patient {
+			.col {
+				left: 0;
+				right: 50%;
+			}
+			.col:last-child {
+				left: 50%;
+				right: 0;
+			}
+			h2 {
+				margin: 0 0 10px 0;
+			}
+			p {
+				margin: 7px 0;
+				font-size: 13px;
+			}
+			span {
+				width: 130px;
+				opacity: 0.5;
+				display: inline-block;
+			}
+			height: @patients-height;
+		}
+
 		.currents {
-			overflow: visible;
+			overflow: hidden;
+			top: @patients-height;
+			border-radius: @border-radius;
+
 			.pane {
 				background: @dark-blue;
 				border: none;
 				padding: 0;
+				margin-bottom: 0;
 				.header {
 					background: @blue;
-					border-bottom: 1px solid @darker-blue;
-					padding: 10px 20px;
+					border-bottom: 2px solid @darker-blue;
+					padding: 10px 20px 10px 26px;
 					font-size: 14px;
+					position: relative;
+					color: #99b3cf;
+
+					.arrow {
+						border: none;
+						background: url(../images/arrow.png) no-repeat center center;
+						width: 16px;
+						height: 16px;
+						top: 50%;
+						margin-top: -8px;
+						left: 6px;
+						cursor: pointer;
+					}
 
 					h2 {
 						font-size: 14px;
-						font-weight: bold;
+
+						span {
+							color: white;
+							font-weight: bold;
+							margin-right: 8px;
+						}
+
 					}
-					border-radius: @border-radius @border-radius 0 0;
+
+
 				}
 
+
 				.content {
-					padding: 10px 40px;
+					padding: 10px 10px;
+					color: #d2d8de;
+					.accession-number {
+						color: #909eac;
+						margin: 0;
+					}
+					.procedure-information {
+						background: url(../images/procedure-information.png) no-repeat left center;
+						padding-left: 26px;
+						margin: 5px 0 5px 0;
+					}
+					table {
+						width: 100%;
+						thead td {
+							font-weight: bold;
+						}
+						td {
+							border: none;
+							color: #d2d8de;
+							font-size: 14px;
+						}
+
+					}
 				}
 				.footer {
 					background: @darker-blue;
@@ -128,24 +230,90 @@ a {
 
 				}
 			}
+			padding-bottom: @actions-height;
+			.actions {
+				position: absolute;
+
+				bottom: 0px;
+				height: @actions-height;
+				padding-bottom: 0px;
+				width: 100%;
+				a {
+					color: @dark-text;
+					position: absolute;
+					display: block;
+					text-decoration: none;
+					padding: 5px 0;
+				}
+
+				.community-of-caregivers {
+
+					padding-left: 24px;
+					background: url(../images/coc.png) no-repeat left center;
+					right: 0;
+				}
+				.folder {
+					background: url(../images/folder.png) no-repeat left center;
+					left: 0;
+					padding-left: 24px;
+
+				}
+				.follow {
+					right: 20px;
+					padding-left: 8px;
+					text-align: right;
+					background: url(../images/footsteps.png) no-repeat left center;
+				}
+				.follow.active {
+					background: url(../images/footsteps-active.png) no-repeat left center;
+					color: white;
+				}
+			}
 
 
 		}
 		.dictation {
-			top: 260px;
-			bottom: @actions-height;
+			top: 360px;
+			bottom: 0;
+			border-radius: @border-radius;
+			overflow: hidden;
+			.row:first-child {
+				top: 0;
+				bottom: @submit-height;
+			}
+
 			margin-bottom: 0;
+			.jazz {
+				position: absolute;
+				top: 0;
+				background: #d3d3d3 url(../images/textarea-jazz.png) no-repeat 10px 6px;
+				width: 100%;
+				height: 30px;
+				z-index: 20;
+			}
 			textarea {
+
 				position: absolute;
 				top: 10px;
 				bottom: 10px;
 				margin: 0;
+				padding: 30px 10px 10px 10px;
 			}
+
 		}
-		.actions {
+		.submit {
 			text-align: right;
 			bottom: 0;
-			height: @actions-height;
+			height: @submit-height;
+			.autosave {
+				position: absolute;
+				left: 0;
+				margin: 0;
+				color: @dark-text;
+
+				cursor: pointer;
+				display: none;
+			}
 			input[type=button] {
 				background: @green;
 				font-size: 14px;
@@ -161,34 +329,6 @@ a {
 			}
 		}
 
-		.things-you-can-do {
-			position: absolute;
-			top: 205px;
-			bottom: 260px;
-			a {
-				color: @dark-text;
-				position: absolute;
-				display: block;
-				text-decoration: none;
-				padding: 5px 0;
-			}
-
-			.community-of-caregivers {
-				left: 20px;
-				padding-left: 24px;
-				background: url(../images/coc.png) no-repeat left center;
-			}
-			.follow {
-				right: 20px;
-				padding-left: 8px;
-				text-align: right;
-				background: url(../images/footsteps.png) no-repeat left center;
-			}
-			.follow.active {
-				background: url(../images/footsteps-active.png) no-repeat left center;
-				color: white;
-			}
-		}
 
 	}
 	.dynamic-content {
@@ -201,18 +341,58 @@ a {
 
 		.pane {
 			overflow: hidden;
-			background: #414141;
 
+			font-size: 14px;
+			background: black;
+			.content {
+				background: #414141;
+
+			}
+			table td {
+				border: none;
+				font-size: 14px;
+				span {
+					color: @dark-text;
+				}
+			}
+			table tr td:first-child {
+				padding-right: 10px;
+				min-width: 120px;
+			}
 			.header {
 				background: #343434;
 				padding: 10px 20px;
-				h3 {
+				font-size: 14px;
+				color: @dark-text;
+				h2 {
+					span {
+						color: white;
+						margin-right: 8px;
+					}
 					display: inline-block;
+					position: absolute;
+					font-size: 14px;
 				}
 				.right {
 					float: right;
 					margin: 0;
 				}
+			}
+			.accession-number {
+				color: @dark-text;
+				margin-bottom: 10px;
+			}
+			p {
+				margin: 0;
+			}
+
+			strong {
+				display: block;
+				color: white;
+				margin-bottom: 10px;
+			}
+			.impression {
+				margin: 10px 0;
 			}
 			.images {
 				background: #343434;
@@ -242,15 +422,6 @@ a {
 		display: inline;
 		top: @margin; bottom: @margin;
 		overflow: visible;
-	}
-
-	.patient {
-		span {
-			width: 130px;
-			opacity: 0.5;
-			display: inline-block;
-		}
-		height: 180px;
 	}
 
 
@@ -398,18 +569,67 @@ a {
 	border: 10px solid @blue;
 
 }
-.container .pane {
-	width: 100%;
-	position: absolute;
-	height: 100%;
-	margin: 0;
-	padding: 0;
-	cursor: pointer;
-	.content {
-		padding: 20px;
-		width: auto;
+@container-padding : 4px;
+@container-header-height : 40px;
+.container {
+	.pane {
+		width: 100%;
+		position: absolute;
 		height: 100%;
+		margin: 0;
+		padding: 0;
+		cursor: pointer;
+		.header {
+			top: 0;
+			bottom: @container-header-height;
+			position: absolute;
+			left: 0;
+			right: 0;
+		}
+		.content {
+			padding: 20px;
+			left: 0;
+			right: 0;
+			position: absolute;
+			top: @container-header-height;
+
+			overflow: scroll;
+			bottom: 0;
+		}
+
 	}
+	.left {
+		.content, .header {
+			left: 0;
+			right: @container-padding;
+		}
+		.close, .magnify {
+			right: @container-padding;
+		}
+	}
+	.right {
+		.content, .header {
+			right: 0;
+			left: @container-padding;
+		}
+	}
+	.top {
+		.content {
+			top: @container-header-height;
+			bottom: @container-padding;
+		}
+	}
+	.bottom {
+		.header {
+			top: @container-padding;
+			bottom: @container-padding + @container-header-height;
+		}
+		.content {
+			top: @container-padding + @container-header-height;
+			bottom: 0;
+		}
+	}
+
 
 }
 .close, .magnify {
@@ -419,17 +639,18 @@ a {
 	height: 32px;
 	cursor: pointer;
 	z-index: 30;
+	top: 5px;
 }
 .close {
-	top: 40px;
-	background: url('../../images/close.png') no-repeat center center;
+	right: 4px;
+	background: url('../images/close.png') no-repeat center center;
 }
 .magnify {
-	bottom: 0;
-	background: url('../../images/magnify.png') no-repeat center center;
+	right: 36px;
+	background: url('../images/zoom.png') no-repeat center center;
 }
 .full .magnify {
-	opacity: 0.08;
+
 }
 
 
@@ -447,7 +668,7 @@ a {
 	li {
 		border-bottom: 1px solid black;
 		padding: 10px 40px 10px 20px;
-		background: url(../images/scanned-documents-affordance.png) no-repeat right center;
+		background: url(../images/affordance.png) no-repeat right center;
 		a {
 			margin: 0;
 			padding: 0;
@@ -473,3 +694,6 @@ a {
 	color: white;
 
 }
+
+
+

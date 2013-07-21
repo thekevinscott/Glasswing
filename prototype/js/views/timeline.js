@@ -58,9 +58,14 @@
 
 				self.$priors_content.prepend(prior.view.$el);
 
-				prior.view.$el.data('dynamic-content',prior.view.getReport());
-				prior.view.$el.data('header','<p class="right">'+prior.getDate()+'</p><h3>MRI of the ankle</h3>');
-				prior.view.$el.data('clss','prior');
+
+				_.each([prior.view.$el,prior.view.$dot],function(el){
+					el.data('dynamic-content',prior.view.getReport());
+					el.data('header','<h2><span>'+prior.get('type')+' '+prior.get('body_part')+'</span> '+prior.getDate()+'</h2>');
+					el.data('clss','prior');
+				});
+
+
 			});
 
 			self.delegateEvents();
