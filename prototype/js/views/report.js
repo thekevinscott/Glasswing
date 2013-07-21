@@ -108,7 +108,16 @@
 			this.dynamicPane.addPane({content : prior.data('dynamic-content'), header : prior.data('header'), clss : prior.data('clss')});
 
 
+			this.$('.accordion').accordion({
+				slave : $('.dictation')
+			});
+			$('.dictation textarea').hint().autosave({notification : $('.dictation .autosave')});
 
+
+			// tinymce.init({
+			// 	selector: "textarea",
+
+			// });
 
 		},
 		setOptions : function(options) {

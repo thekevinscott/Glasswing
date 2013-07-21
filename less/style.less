@@ -67,10 +67,7 @@ textarea:focus {
 body .loading {
 	background: url(../images/loading.gif) no-repeat center center;
 }
-.page {
-	border-top: 1px solid #333;
 
-}
 
 .button (@hue, @saturation, @lightness) {
 	text-decoration: none;
@@ -147,6 +144,7 @@ input[type=button].selected, .button.selected, input[type=button]:hover, .button
 	background: @background;
 	height: 100%;
 	overflow: hidden;
+	color: @text;
 
 }
 .overlay {
@@ -194,7 +192,6 @@ input[type=button].selected, .button.selected, input[type=button]:hover, .button
 	border-radius: 5px;
 
 	color: black;
-	text-shadow: none;
 	z-index: 15;
 	.close {
 		position: absolute;
@@ -213,7 +210,6 @@ body .modal .modal-content {
 	text-align: center;
 	border-radius: 5px;
 	font-size: 12px;
-	text-shadow: 0 1px 0 #fff;
 	margin-left: 0;
 	p {
 		text-align: left;
@@ -241,3 +237,7 @@ body .modal .modal-content {
 	text-shadow: 0 -1px 0 #3e3e1d;
 }
 */
+body .glasswing .hint {
+	color: @dark-text;
+	font-style: italic;
+}

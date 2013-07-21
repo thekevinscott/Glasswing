@@ -18,48 +18,125 @@
 
 
 			</div> -->
-
-			<div class="currents row">
-				<div class="pane">
-					<div class="header">
-						<p class="procedure-date"><%= procedure_date %></p>
-						<h2><span><%= procedure_name %></span></h2>
-					</div>
-					<div class="content">
-						<div class="images">
-							<img src="images/homer.png" />
-							<span>55</span> images
-						</div>
-						<p class="reason-header">Reason for exam:</p>
-						<p class="reason"><%= clinical_indication %></p>
-					</div>
-					<div class="footer">
-						<a href="javascript:;" class="procedure-information draggable">Procedure Information</a>
-						<div class="scanned-documents"><a href="javascript:;">2 Scanned Documents</a>
-							<ul class="scanned-documents-dropdown">
-								<li><a href="javascript:;" class="draggable">RequestForm.png</a></li>
-								<li><a href="javascript:;" class="draggable">TechNotes.png</a></li>
-
-							</ul>
-						</div>
-
-					</div>
+			<div class="patient row">
+				<div class="col">
+					<h2><%= name %></h2>
+					<p class="patient-id"><span>Patient ID:</span><%= patient_id %></p>
+					<p class="dob"><span>Date of Birth:</span><%= dob %></p>
+					<p class="gender"><span>Gender:</span><%= gender %></p>
+					<!-- <p class="risk"><span>Risk:</span><%= patient_risks %></p> -->
+				</div>
+				<div class="col">
+					<p class="reason-header"><span>Reason for exam:</span></p>
+					<p class="reason"><%= clinical_indication %></p>
 				</div>
 			</div>
-			<div class="row things-you-can-do">
-				<a href="javascript:;" class="community-of-caregivers">Related Caregivers</a>
-				<a href="javascript:;" class="follow">Follow Case</a>
-			</div>
+			<div class="currents row">
+				<div class="accordion">
+
+					<div class="pane">
+						<div class="header">
+							<h2><span><%= procedure_name %></span> Today at 14:03</h2>
+							<div class="buttons">
+								<a class="scanned-documents attachments" alt="View attachments">2</a>
+
+								<ul class="scanned-documents-dropdown">
+									<li><a href="javascript:;" class="draggable">RequestForm.png</a></li>
+									<li><a href="javascript:;" class="draggable">TechNotes.png</a></li>
+								</ul>
+
+
+								<a class="pacs" alt="View images"></a>
+							</div>
+						</div>
+						<div class="content">
+							<p class="accession-number">Accession #: 3910</p>
+							<h3 class="procedure-information">Procedure Information</h3>
+							<table>
+								<thead>
+									<tr>
+										<td>Consumables Description</td>
+										<td>Quantity</td>
+										<td>Unit Average Cost</td>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>MRI Contrast Media-Gadolinium</td>
+										<td>1 Per ml</td>
+										<td>10</td>
+									</tr>
+									<tr>
+										<td>Needle</td>
+										<td>1 Piece</td>
+										<td>6</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div><!-- pane -->
+					<div class="pane">
+						<div class="header">
+							<h2><span>CR R Arm</span> Today at 9:03</h2>
+							<div class="buttons">
+								<a class="scanned-documents attachments" alt="View attachments">2</a>
+
+								<ul class="scanned-documents-dropdown">
+									<li><a href="javascript:;" class="draggable">RequestForm.png</a></li>
+									<li><a href="javascript:;" class="draggable">TechNotes.png</a></li>
+								</ul>
+
+
+								<a class="pacs" alt="View images"></a>
+							</div>
+						</div>
+						<div class="content">
+							<p class="accession-number">Accession #: 3910</p>
+							<h3 class="procedure-information">Procedure Information</h3>
+							<table>
+								<thead>
+									<tr>
+										<td>Consumables Description</td>
+										<td>Quantity</td>
+										<td>Unit Average Cost</td>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>MRI Contrast Media-Gadolinium</td>
+										<td>1 Per ml</td>
+										<td>10</td>
+									</tr>
+									<tr>
+										<td>Needle</td>
+										<td>1 Piece</td>
+										<td>6</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div><!-- pane -->
+				</div><!-- accordion -->
+
+				<div class="actions">
+					<a href="javascript:;" class="folder">Add case to folder</a>
+					<a href="javascript:;" class="community-of-caregivers">Related Caregivers</a>
+
+				</div>
+			</div><!-- currents -->
+
+
+
 			<form class="row dictation">
-				<textarea placeholder="Dictate report here..."></textarea>
+				<div class="row">
+					<textarea>Dictate report here...</textarea>
+				</div>
+				<div class="row submit">
+					<p class="autosave">Autosaved at 14:30 today</p>
+					<input type="button" value="Submit Report" />
+				</div>
 			</form>
-			<div class="row actions">
-				<input type="button" value="Submit Report" />
-				<!--
-				<input type="button" value="Read" />
-				<input type="button" value="Co-Read" />
-				<input type="button" value="Approve" /> -->
-			</div>
+
 		</div>
 	</div><!-- current-report -->
 	<div class="col dynamic-content">
@@ -71,13 +148,7 @@
 	</div><!-- dynamic content -->
 	<div class="col patient-history">
 		<div class="content">
-			<div class="patient row">
-				<h2><%= name %></h2>
-				<p class="patient-id"><span>Patient ID:</span><%= patient_id %></p>
-				<p class="dob"><span>Date of Birth:</span><%= dob %></p>
-				<p class="gender"><span>Gender:</span><%= gender %></p>
-				<!-- <p class="risk"><span>Risk:</span><%= patient_risks %></p> -->
-			</div>
+
 			<div class="timeline row">
 				<h2>Timeline</h2>
 			</div>

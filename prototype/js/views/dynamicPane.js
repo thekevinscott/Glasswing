@@ -20,8 +20,8 @@
 			this.$el.prepend(this.$header);
 			this.$el.append(this.$content);
 
-			this.$el.append(this.$close);
-			this.$el.append(this.$magnify);
+			this.$header.append(this.$close);
+			this.$header.append(this.$magnify);
 
 			this.$close.click(function(e){
 				e.preventDefault();

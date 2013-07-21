@@ -24,7 +24,8 @@
 			self.$dot = $('<div class="prior draggable"></div>');
 			self.$el.html(_.template(self.template, {
 				date : this.model.getDate(),
-				procedure_name : this.model.get('type')
+				procedure_name : this.model.get('type'),
+				impression : this.model.get('impression'),
 			}));
 			if (this.model.get('relevant')) {
 				self.$el.addClass('relevant');

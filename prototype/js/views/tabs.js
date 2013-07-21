@@ -38,6 +38,8 @@
 			});
 
 
+			$('.search input').hint();
+
 
 			return this;
 		},

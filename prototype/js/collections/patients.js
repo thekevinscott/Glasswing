@@ -1,16 +1,27 @@
 glasswing.collections.patients = Backbone.Collection.extend({
 	model: glasswing.models.patient,
 	ingredients : {
-		first : [
-		'Kelsey','Nancy','Mark','Kevin','Ben', // glasswing
-		'Michelle','Gina','Puja','Jon','Phil', // spark
-		'Charles','Parker','Nandhita','Min','Rebecca', // momo
-		'John','Jason','Jonas','Arthur','Rebecca', // zephyr
-		'Paul','Auldyn','KeVon','Nina','Stephanie', // solidus
-		'Michael','Nishita','Ying','Debra','Kelsey', // wanderlust
-		'Luis','Alina','Chaiyawut','Truc', // glace
-		'Dave','Ian','Kiran','Sebon', // eaton
-		'Judith', 'Louise', 'Doug', 'Juan' // crosslands
+		first_female : [
+		'Kelsey','Nancy',
+		'Michelle','Gina','Puja',
+		'Nandhita','Min','Rebecca', // momo
+		'Rebecca', // zephyr
+		'Auldyn','Nina','Stephanie', // solidus
+		'Nishita','Ying','Debra','Kelsey', // wanderlust
+		'Alina','Truc', // glace
+		'Kiran',
+		'Judith', 'Louise',
+		],
+		first_male : [
+		'Mark','Kevin','Ben', // glasswing
+		'Jon','Phil', // spark
+		'Charles','Parker',
+		'John','Jason','Jonas','Arthur',
+		'Paul','KeVon',
+		'Michael',
+		'Luis','Chaiyawut',
+		'Dave','Ian','Sebon', // eaton
+		'Doug', 'Juan' // crosslands
 		],
 		last : [
 		'Stroshane','Chen','Baldwin','Scott','Margines',
@@ -37,11 +48,12 @@ glasswing.collections.patients = Backbone.Collection.extend({
 		}
 	},
 	generateRandomPatient : function() {
+		var gender = (Math.round(Math.random())) ? 'male' : 'female';
 		var p = new glasswing.models.patient({
-			first : this.getRandomIngredient('first'),
+			first : this.getRandomIngredient('first_'+gender),
 			last : this.getRandomIngredient('last'),
 			dob : glasswing.randomDate(new Date(1940,0,1), new Date(2000,0,1)),
-			gender : (Math.round(Math.random())) ? 'm' : 'f',
+			gender : (gender === 'male') ? 'm' : 'f',
 			risks : '-'
 		});
 		this.add(p);
@@ -50,6 +62,9 @@ glasswing.collections.patients = Backbone.Collection.extend({
 
 	},
 	getRandomIngredient : function(key) {
+
+		if (key=='first') { key += (Math.round(Math.random())) ? '_male' : '_female'; }
+
 		return this.ingredients[key][Math.round(Math.random()* (this.ingredients[key].length-1) )];
 	}
 

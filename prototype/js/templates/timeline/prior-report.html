@@ -1,21 +1,31 @@
-<div class="images">
-	<img src="images/homer.png" />
-	8 images
+<div class="buttons">
+	<a class="scanned-documents attachments" alt="View attachments">2</a>
+
+	<ul class="scanned-documents-dropdown">
+		<li><a href="javascript:;" class="draggable">RequestForm.png</a></li>
+		<li><a href="javascript:;" class="draggable">TechNotes.png</a></li>
+	</ul>
+
+
+	<a class="pacs" alt="View images"></a>
 </div>
+<p class="accession-number">Accession #: 3910</p>
+<table>
+	<tr class="reason"><td><span>Reason for exam:</span></td><td><%= indication %></td></tr>
+	<tr class="technique"><td><span>Technique:</span></td><td> <%= procedure %></td></tr>
+	<tr class="comparisons"><td><span>Comparisons:</span></td><td> Plain films of right ankle from 11/14/2008</td></tr>
 
-<p class="reason-header"><strong>Reason for exam:</strong></p>
-<p class="reason"><%= indication %></p>
-<!--
-<a href="javascript:;" class="procedure-information ">Procedure Information</a>
-<a href="javascript:;" class="scanned-documents ">2 Scanned Documents</a>
- -->
+</table>
 
 
 
-<p><strong>Technique:</strong> <%= procedure %></p>
-<p><strong>Comparisons:</strong> Plain films of right ankle from 11/14/2008</p>
-<p><strong>Impression:</strong> <%= impression %></p>
+
+
+<p class="impression"><strong>Impression:</strong> <%= impression %></p>
 <p><strong>Findings:</strong> <%= findings %></p>
+
+
+<a style="float: right;" href="javascript:;"><img src="images/coc.png" /></a>
 
 <!--
 	<p class="procedure-date"><span>Fri Nov 09 2012 21:24:34 GMT-0500 (EST)</span></p>
