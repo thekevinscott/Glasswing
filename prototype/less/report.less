@@ -4,10 +4,9 @@
 	padding: 20px;
 }
 .pane {
-	background: @pane;
+
 	padding: 20px;
-	border-bottom: 1px solid #222;
-	border-top: 1px solid #444;
+
 	margin-bottom: 20px;
 	border-radius: @border-radius;
 	.pane {
@@ -201,15 +200,20 @@ a {
 
 		.pane {
 			overflow: hidden;
-			background: #414141;
-			font-size: 14px;
 
+			font-size: 14px;
+			background: black;
+			.content {
+				background: #414141;
+
+			}
 			.header {
 				background: #343434;
 				padding: 10px 20px;
 				font-size: 14px;
 				h3 {
 					display: inline-block;
+					position: absolute;
 				}
 				.right {
 					float: right;
@@ -400,22 +404,67 @@ a {
 	border: 10px solid @blue;
 
 }
-.container .pane {
-	width: 100%;
-	position: absolute;
-	height: 100%;
-	margin: 0;
-	padding: 0;
-	cursor: pointer;
-	.content {
-		padding: 20px;
-
-		position: absolute;
-		top: 43px;
+@container-padding : 4px;
+@container-header-height : 40px;
+.container {
+	.pane {
 		width: 100%;
-		overflow: scroll;
-		bottom: 0;
+		position: absolute;
+		height: 100%;
+		margin: 0;
+		padding: 0;
+		cursor: pointer;
+		.header {
+			top: 0;
+			bottom: @container-header-height;
+			position: absolute;
+			left: 0;
+			right: 0;
+		}
+		.content {
+			padding: 20px;
+			left: 0;
+			right: 0;
+			position: absolute;
+			top: @container-header-height;
+
+			overflow: scroll;
+			bottom: 0;
+		}
+
 	}
+	.left {
+		.content, .header {
+			left: 0;
+			right: @container-padding;
+		}
+		.close, .magnify {
+			right: @container-padding;
+		}
+	}
+	.right {
+		.content, .header {
+			right: 0;
+			left: @container-padding;
+		}
+	}
+	.top {
+		.content {
+			top: @container-header-height;
+			bottom: @container-padding;
+		}
+	}
+	.bottom {
+		.header {
+			top: @container-padding;
+			bottom: @container-padding + @container-header-height;
+		}
+		.content {
+			top: @container-padding + @container-header-height;
+			bottom: 0;
+		}
+	}
+
 
 }
 .close, .magnify {

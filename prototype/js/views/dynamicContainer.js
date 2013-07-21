@@ -67,21 +67,29 @@
 					start_position = {x : e.clientX, y : e.clientY };
 					click_offset = {x : start_position.x - draggable.offset().left, y : start_position.y - draggable.offset().top };
 
-					var clone = draggable.clone();
-
-					clone.css({opacity: 0.7, width: 200});
-					clone.addClass('clone');
-					$('body').append(clone);
-					// console.log(draggable.offset());
-					clone.css({left: draggable.offset().left + 20, top: draggable.offset().top + 10});
-					// clone.css({left: 1200, top: 200});
-					self.dragging = true;
 
 					var left, top;
 
 					var draggable_offset = draggable.offset();
+					var clone;
+
+
+					var createClone = function() {
+						clone = draggable.clone();
+
+						clone.css({opacity: 0.7, width: 200});
+						clone.addClass('clone');
+						$('body').append(clone);
+						// console.log(draggable.offset());
+						clone.css({left: draggable.offset().left + 20, top: draggable.offset().top + 10});
+						// clone.css({left: 1200, top: 200});
+						self.dragging = true;
+					}
+
+
 
 					$(window).unbind("mousemove").mousemove(function(e){
+						if (! clone) { createClone(); }
 						droppable.show();
 						current_position = {x : e.clientX - start_position.x, y : e.clientY - start_position.y};
 
@@ -109,27 +117,33 @@
 
 
 					}).unbind('mouseup').mouseup(function(e){
-						droppable.hide();
+						if (clone) {
+							droppable.hide();
 
-						droppable.removeClass('hover');
-
-
-
-						// var cursor = {x: left+click_offset.x, y : top+click_offset.y};
-
-						contentContains({e : e, content : self.content, draggable_offset : draggable_offset, contains : function(){
-							var position = 'full';
-							if (self.panes.length >= 1) {
-								var point = {x: left+click_offset.x, y : top+click_offset.y};
-								position = self.getPosition(point,self.content);
-							}
-							self.addPane({el : self.content, contents : draggable.data('dynamic-content'), header : draggable.data('header'), clss : draggable.data('clss'), position: position});
-
-						}});
+							droppable.removeClass('hover');
 
 
-						self.dragging = false;
-						clone.remove();
+
+							// var cursor = {x: left+click_offset.x, y : top+click_offset.y};
+
+							contentContains({e : e, content : self.content, draggable_offset : draggable_offset, contains : function(){
+								var position = 'full';
+								if (self.panes.length >= 1) {
+									var point = {x: left+click_offset.x, y : top+click_offset.y};
+									position = self.getPosition(point,self.content);
+								}
+								self.addPane({content : draggable.data('dynamic-content'), header : draggable.data('header'), clss : draggable.data('clss'), position: position});
+
+							}});
+
+
+							self.dragging = false;
+							clone.remove();
+						} else {
+							self.addPane({content : draggable.data('dynamic-content'), header : draggable.data('header'), clss : draggable.data('clss'), position: 'full'});
+						}
+
+
 						$(window).unbind('mousemove').unbind('mouseup');
 					});
 
@@ -159,48 +173,86 @@
 			return (cursor.x > self.content.offset().left && cursor.y > self.content.offset().top && cursor.x < self.content.offset().left + width && cursor.y < self.content.offset().top + height);
 		},
 		addPane : function(attributes) {
+
 			var self = this;
-			var contents = attributes.contents;
-			var header = attributes.header;
+			// var contents = attributes.contents;
+			// var header = attributes.header;
 			var position = attributes.position;
-			var clss = attributes.clss;
-			var target = attributes.el || this.content;
+			// var clss = attributes.clss;
+			// var target = attributes.el || this.content;
+			var target;
 			if (! target) { target = this.content; }
 
-			if (this.panes.length==2) {
-				this.removePane(this.panes[0]);
-			}
+			/*
+			whats gonna happen here
 
-			var pane = new glasswing.views.dynamicPane({ content : contents, header : header, parent : this, position : position, clss : clss});
-			// var pane = $('<div class="pane" />');
+			1. if we have no panes: add to panes.
 
-			target.prepend(pane.render().$el);
+			2. if we have 1 pane, and a full position: add to panes. position on top of previous.
 
-			this.panes.push(pane);
+			3. if we have 1 pane, and a side position: add to panes. position correctly. position previous pane correctly.
 
-			// lets position this shit.
+			4. if we have 2 panes, and a full position: add to panes. position on top of previous.
+
+			5. if we have 2 panes, and a side position that matches one of the previous panes: add ot panes. position on top of that side position that matches.
+
+			6. if we have 2 panes, and a side position that does not match the previous layout: add to panes. flip the previous two to match the new layout; replace the desired pane.
+
+			*/
+
+
+			// create a new pane
+			var pane = new glasswing.views.dynamicPane($.extend({parent : this},attributes));
+
+			// add to our panes stack
+			this.pushPane(pane);
+
+			// render onto our container
+			target.append(pane.render().$el);
+
+			// position the pane
 			self.positionPane({el : pane.$el, position: position});
 
-			if (this.panes.length > 1) {
-				self.panes[0].setPosition(self.getConverse(position));
-				self.positionPane({el : self.panes[0].$el, position: self.getConverse(position)});
 
+
+
+			if (position !== 'full' && this.panes.length > 1) {
+				var conversePane = this.getPane(pane.pane_id-1);
+				self.positionPane({pane : conversePane, position : self.getConverse(position)});
 			}
 
 			return pane;
 		},
-		removePane : function(pane) {
-			var newPanes = [];
-			_.each(this.panes,function(p){
-				if (p==pane) {
-					pane.$el.remove();
-					delete p;
-				} else {
-					p.setPosition('full');
-					newPanes.push(p);
-				}
+		pushPane : function(pane) {
+			var self = this;
+			self.panes.push(pane);
+			pane.pane_id = this.panes.length;
+			pane.$el.dblclick(function(e){
+				e.preventDefault();
+				pane.magnify();
+				// self.positionPane({el : pane.$el, position: 'full'});
 			});
-			this.panes = newPanes;
+		},
+		getPane : function(pane_id) {
+			return this.panes[pane_id - 1];
+		},
+		removePane : function(pane) {
+
+			pane.$el.remove();
+			delete this.panes[pane.pane_id - 1];
+
+			// var newPanes = [];
+
+			// _.each(this.panes,function(p){
+			// 	if (p==pane) {
+			// 		pane.$el.remove();
+			// 		delete p;
+			// 	} else {
+			// 		p.setPosition('full');
+			// 		newPanes.push(p);
+			// 	}
+			// });
+			// this.panes = newPanes;
 		},
 		getConverse : function(position) {
 			switch(position) {
@@ -212,6 +264,7 @@
 			return position;
 		},
 		positionPane : function(options) {
+
 			_.each(this.panes,function(pane){
 				pane.$el.css({zIndex : 10});
 			});
@@ -220,15 +273,21 @@
 			var opts = {};
 
 			if (options.position != 'full') {
-				opts[this.getConverse(options.position)] = '51%';
+				opts[this.getConverse(options.position)] = '50%';
 			}
-			options.el.css({zIndex : 11});
+
+			if (! options.el && options.pane) {
+				options.el = options.pane.$el;
+				options.pane.setPosition(options.position);
+			}
+
+			$(options.el).css({zIndex : 11});
 			// console.log(opts);
 
 			(function(attributes){
 				if (attributes['right'] || attributes['left']) {	attributes.width = 'auto'; }
 				else { 												attributes.height = 'auto'; }
-				options.el.css($.extend(defaultOptions(),attributes));
+				$(options.el).css($.extend(defaultOptions(),attributes));
 			})(opts);
 
 		}
