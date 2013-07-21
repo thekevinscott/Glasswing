@@ -31,11 +31,17 @@
 			this.$a.click(function(e){
 
 				e.preventDefault();
+				if (! $(this).parents('li').hasClass('selected')) {
+					self.parent.showPage(self.page);
+				}
 
-				self.parent.showPage(self.page);
+
 
 				// self.router.url($(this).attr('href'));
 
+			});
+			this.$('.close-tab').click(function(e){
+				self.parent.closeTab(self.page);
 			});
 
 
