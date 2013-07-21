@@ -53,6 +53,8 @@
 			};
 			this.setLayout(this.current_layout);
 
+
+
 			// alert('1');
 			// console.log(this.templates);
 
@@ -102,6 +104,13 @@
 				case 'table' : self.attachTableEvents(); break;
 			}
 
+			if (! $('.tab-worklist .layout').length) {
+				$('.tab-worklist').prepend('<div class="layout" />');
+			}
+
+			$('.tab-worklist').removeClass('grid');
+			$('.tab-worklist').removeClass('card');
+			$('.tab-worklist').addClass(self.current_layout);
 
 			return this;
 		},
@@ -354,6 +363,7 @@
 		setLayout : function(layout) {
 
 
+
 			layout = (typeof layout == 'string') ? layout : $(layout.currentTarget).attr('rel').toLowerCase();
 			if (layout) {
 				switch(layout) {
@@ -381,6 +391,9 @@
 			}
 
 			this.setFilters();
+
+
+
 
 
 		},

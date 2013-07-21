@@ -39,11 +39,60 @@
 		color: white;
 	}
 	h1 {
+		span {
+			color: @dark-text;
+		}
 		margin-left: @padding;
 		img {
 			margin: 5px 10px;
 		}
 	}
+
+
+
+	.buttons {
+		right: @padding;
+		z-index: 15;
+		position: absolute;
+		top: @padding;
+		.layouts {
+			float: right;
+
+		}
+		.button {
+			padding: 10px;
+			background: @gray;
+			border-radius: @border-radius;
+			display: inline-block;
+			width: 20px;
+			height: 20px;
+			background-repeat: no-repeat;
+			background-position: center center;
+		}
+		.button.selected {
+			background-color: @gray-darker;
+		}
+		.button.grid {
+			border-radius: @border-radius 0 0 @border-radius;
+			background-image: url(../images/layout_grid.png);
+		}
+		.button.card {
+			border-radius: 0 @border-radius @border-radius 0;
+			background-image: url(../images/layout_card.png);
+			margin-left: -4px;
+
+		}
+		.preferences {
+			width: auto;
+			background-image: url(../images/preferences.png);
+			line-height: 20px;
+			padding-left: 30px;
+			background-position: 10px center;
+			float: right;
+			margin-left: 20px;
+		}
+	}
+
 	.container {
 		top: 120px;
 		right: @filter_width + (@padding*2);
@@ -80,7 +129,7 @@
 	.list {
 		width: 100%;
 
-		overflow-x: auto;
+		// overflow-x: auto;
 
 	}
 	table {
@@ -90,9 +139,6 @@
 	td {
 		font-size: 13px;
 		padding: 6px;
-		span {
-			color: yellow;
-		}
 	}
 	thead {
 		background: #333;
@@ -139,6 +185,7 @@
 			color: #cc0000;
 		}
 	}
+
 	/*** Cards ***/
 
 	.cards { zoom: 1; }
@@ -367,25 +414,12 @@ th.header.headerSortDown {
 /**** Grid ****/
 
 
-.grid-row { zoom: 1; }
-.grid-row:before,
-.grid-row:after { content: ""; display: table; }
-.grid-row:after { clear: both; }
-.grid-row  {
-	min-height: 74px;
-	.contents { zoom: 1; }
-	.contents:before,
-	.contents:after { content: ""; display: table; }
-	.contents:after { clear: both; }
-	.contents > * {
-		zoom: 1;
-		display: inline;
-	}
-
-}
 .grid-worklist {
 	padding-left: 10px;
 	text-shadow: none;
+	td {
+		border: none;
+	}
 	.grid-header {
 		font-size: 100%;
 		background: @blue;
@@ -393,11 +427,28 @@ th.header.headerSortDown {
 		font-style: italic;
 		text-shadow: none;
 	}
+	.image-status {
+		p {
+			margin: 10px 0;
+		}
+		.camera, .lock {
+			background-repeat: no-repeat;
+			padding-left: 32px;
+
+		}
+		.lock {
+			background-position: 3px 0;
+		}
+		.camera {
+			background-image: url(../images/camera_orange.png);
+		}
+	}
+
 
 }
 .referring {
 	.physician, .physician.callout {
-		opacity: 1;
+
 		background: url(../images/physician.png) no-repeat;
 		padding-left: 16px;
 		margin-bottom: 10px;
@@ -410,6 +461,9 @@ th.header.headerSortDown {
 .grid-contents {
 	margin: 0;
 	padding: 0;
+	td {
+		border-top: 15px solid @background;
+	}
 }
 
 .grid-row {
@@ -418,19 +472,53 @@ th.header.headerSortDown {
 	background: @gray;
 	list-style: none;
 
-	margin: 10px 0 10px;
 
-	.info, .reason, .patient-status, .patient, .referring {
-		float: left;
-		width: 18%;
-		padding: 0 1%;
+
+	border-collapse: separate;
+	border-spacing: 10px;
+	td {
+		padding: 10px 20px;
+
+		position: relative;
 	}
-	.patient-status {
-		width: 16%;
+	.reason {
+		width: 100%/7;
 	}
-	.patient {
-		width: 20%;
+	.queue-action {
+		padding: 0;
+		height: 32px;
+		width: 32px;
+		a {
+			display: block;
+			width: 32px;
+			background: #828383;
+			height: 100%;
+			float: right;
+			text-align: center;
+
+			transition: 		all 0.3s;
+			-webkit-transition: all 0.3s;
+			img {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				margin-top: -8px;
+				margin-left: -6px;
+
+				transition: 		all 0.3s;
+				-webkit-transition: all 0.3s;
+			}
+		}
+		a:hover {
+			background: @orange;
+			img {
+				margin-top: -11px;
+			}
+		}
+
 	}
+
+
 	p, h3, h4 {
 		opacity: 0.5;
 		display: block;
@@ -552,46 +640,3 @@ th.header.headerSortDown {
 	left: 66%;
 }
 
-
-.buttons {
-	right: 340px;
-	z-index: 15;
-	position: absolute;
-	top: @padding;
-	.layouts {
-		float: right;
-
-	}
-	.button {
-		padding: 10px;
-		background: @gray;
-		border-radius: @border-radius;
-		display: inline-block;
-		width: 20px;
-		height: 20px;
-		background-repeat: no-repeat;
-		background-position: center center;
-	}
-	.button.selected {
-		background-color: @gray-darker;
-	}
-	.button.grid {
-		border-radius: @border-radius 0 0 @border-radius;
-		background-image: url(../images/layout_grid.png);
-	}
-	.button.card {
-		border-radius: 0 @border-radius @border-radius 0;
-		background-image: url(../images/layout_card.png);
-		margin-left: -4px;
-
-	}
-	.preferences {
-		width: auto;
-		background-image: url(../images/preferences.png);
-		line-height: 20px;
-		padding-left: 30px;
-		background-position: 10px center;
-		float: right;
-		margin-left: 20px;
-	}
-}

@@ -104,7 +104,7 @@
 	});
 	createProcedure({
 		priority : 2,
-		type : 'CR',
+		type : 'CT',
 		body_part : "RT Wrist",
 		indication : 'Pt fell off bicycle and landed on RT arm and shoulder. Complains of wrist pain.',
 		procedure: 'AP and lateral CR images taken.'

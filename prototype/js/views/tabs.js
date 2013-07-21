@@ -11,6 +11,7 @@
 			this.parent = options.parent;
 			this.a = null;
 			this.render();
+			this.$el.addClass('tab-'+this.page.name.toLowerCase());
 		},
 		render : function() {
 			var self = this;
