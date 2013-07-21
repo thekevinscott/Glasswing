@@ -74,7 +74,7 @@ a {
 
 		@patients-height : 110px;
 
-		@actions-height: 40px;
+		@actions-height: 50px;
 		@submit-height: 80px;
 		@margin: 10px;
 
@@ -232,6 +232,7 @@ a {
 
 				bottom: 0px;
 				height: @actions-height;
+				padding-bottom: 0px;
 				width: 100%;
 				a {
 					color: @dark-text;
@@ -282,6 +283,13 @@ a {
 			text-align: right;
 			bottom: 0;
 			height: @submit-height;
+			.autosave {
+				position: absolute;
+				left: 0;
+				margin: 0;
+				color: @dark-text;
+				opacity: 0.0;
+			}
 			input[type=button] {
 				background: @green;
 				font-size: 14px;
