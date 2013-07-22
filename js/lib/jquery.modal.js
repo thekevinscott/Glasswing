@@ -53,10 +53,11 @@
             }
             self.data('modal-element',modal);
             $('body').append(modal.el);
-            modal.el.css({opacity: 0})
 
+            modal.el.css({opacity: 0});
         }
-        // modal.show();
+
+        modal.el.show();
 
 
         exit = function () {
