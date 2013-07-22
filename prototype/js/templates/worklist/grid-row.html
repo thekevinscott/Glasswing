@@ -36,9 +36,10 @@
 		</td>
 		<td class="image-status">
 
-			<p class="images-completion-status camera">All images are completed</p>
+			<p class="images-completion-status camera <% if (! ready) { %>not-ready<% } %>" alt="<% if (ready) { %>All images are completed<% } else { %>Images in progress<% } %>"><% if (ready) { %>All images are completed<% } else { %>Images in progress<% } %></p>
 			<!-- <p class="reporting-status lock on">Dr. Rebecca Whatley</p> -->
-			<p class="reporting-status lock">Nobody is reporting</p>
+			<p class="reporting-status lock <% if (lock) { %>on<% } %>" alt="<% if (lock) { %><%= lock %><% } else { %>Nobody is reporting<% } %>"><% if (lock) { %><%= lock%><% } else { %>Nobody is reporting<% } %></p>
+
 		</td>
 		<td class="queue-action">
 			<a href="javascript:;" class="queue"><img src="images/queue.png" /></a>

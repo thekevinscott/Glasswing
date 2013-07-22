@@ -12,6 +12,7 @@
 			this.collection = attributes.collection;
 			this.button = attributes.button;
 
+
         	// glasswing.views.abstract.prototype.initialize.apply(this, arguments);
 
         	this.render();
@@ -32,13 +33,10 @@
 
 			}));
 
-
-
 			self.button.unbind('click').click(function(){
 
-				$(self.$el).modal({
-					button : this
-				})
+
+				$(self.button).modal({content: self.$el.html(), position: 'right'});
 
 
 			});

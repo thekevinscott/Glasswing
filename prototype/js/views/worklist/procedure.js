@@ -41,9 +41,12 @@
 			this.model = attributes.model;
 			this.layout = 'table';
 			this.name = this.model.get('name');
+
+
 			//this.render(true);
 		},
 		render : function() {
+			var self = this;
 			// if (force || this.model.hasChanged()) {
 			// 	// we should cache rendering and only return it on damage to the model
 
@@ -67,7 +70,9 @@
 				clinical_indication : this.model.get('clinical_indication'),
 				end_time : this.model.getDate('end_time'),
 				end_timestamp : this.model.get('end_time').getTime(),
-				stat : ( (this.model.isStat()) ? 'stat' : null  )
+				stat : ( (this.model.isStat()) ? 'stat' : null  ),
+				lock : this.model.get('lock'),
+				ready : this.model.get('ready')
 			};
 
 			this['$table'] = $(_.template(glasswing.template('worklist/row'),opts));
@@ -86,7 +91,27 @@
 
 			this.$('.stat').countUp();
 
+			this.$('.queue').click(function(e){
+				e.stopPropagation();
+				self.model.toggle('in-queue');
+			});
+			this.change('in-queue');
 			return this;
+		},
+		change : function(key) {
+			switch(key) {
+				case 'in-queue' :
+					if (this.model.get(key)) {
+						this.$el.addClass(key);
+						this.$('.queue').attr('alt','You have ______ (parked / queued) this case. Go to ______ (folders location) to access all _____ (parked / queued) cases. ');
+					} else {
+						this.$el.removeClass(key);
+						this.$('.queue').attr('alt','Park or queue this case for later.');
+
+					}
+				break;
+			}
+
 		},
 		click : function() {
 
