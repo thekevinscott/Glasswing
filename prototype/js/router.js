@@ -19,33 +19,33 @@
 				tabManager.showPage(worklist);
 				glasswing.router.initial_route = false;
 			},
-			procedure : function(procedure_id) {
+			exam : function(exam_id) {
 
 
-				glasswing.notif('procedure: ' + procedure_id);
+				glasswing.notif('exam: ' + exam_id);
 				tabManager.getPage(worklist); // get page SETS the page, creates a tab. that's confusing.
 
-				(function(procedure){
+				(function(exam){
 					// alert('this is no good, itll make an extra report if you go back to worklist and click again');
-					// tabManager.showPage(new glasswing.views.report({model : procedure}));
-					// console.log(procedure);
-					// console.log(procedure.view);
-					tabManager.showPage(procedure.view.getReport());
+					// tabManager.showPage(new glasswing.views.report({model : exam}));
+					// console.log(exam);
+					// console.log(exam.view);
+					tabManager.showPage(exam.view.getReport());
 
-				})(worklist.procedures.getProcedure(procedure_id));
+				})(worklist.exams.getExam(exam_id));
 				glasswing.router.initial_route = false;
 
 
 			},
 			fourohfour : function() {
-
+				alert('Page not found.');
 			}
 
 		};
 
 		var AppRouter = Backbone.Router.extend({
 			routes: {
-				"procedure/:procedure_id" : routes.procedure,
+				"exam/:exam_id" : routes.exam,
 				"worklist" : routes.worklist,
 				"": routes.worklist,
 				"*actions": routes.fourohfour

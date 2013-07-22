@@ -35,16 +35,16 @@
 
 		template : glasswing.template('report.html'),
 		events : {
-		  "click .actions input[type=button]" : "saveProcedure"
+		  "click .actions input[type=button]" : "saveexam"
 		},
 		initialize : function(attributes) {
 			this.notification_elements = [];
         	glasswing.views.abstract.prototype.initialize.apply(this, arguments);
 
         	// console.log(attributes);
-			this.name = this.model.get('procedure_name') + '<span>'+this.model.get('id')+'. '+this.model.get('name')+ '</span>';
+			this.name = this.model.get('exam_name') + '<span>'+this.model.get('id')+'. '+this.model.get('name')+ '</span>';
 
-			this.url = 'procedure/'+this.model.get('id');
+			this.url = 'exam/'+this.model.get('id');
 
 			var self = this;
 
@@ -145,7 +145,7 @@
 		setOptions : function(options) {
 
 		},
-		saveProcedure : function(event) {
+		saveexam : function(event) {
 			var button = $(event.currentTarget);
 
 			switch(button.val()) {
@@ -175,9 +175,9 @@
 
 				name : this.model.get('name'),
 				priority : this.model.get('priority'),
-				procedure_date : this.model.getDate('end_time'),
-				procedure_class : this.model.get('procedure_class'),
-				procedure_name : this.model.get('procedure_name'),
+				exam_date : this.model.getDate('end_time'),
+				exam_class : this.model.get('exam_class'),
+				procedure_name : this.model.get('exam_name'),
 				report_status : this.model.get('report_status'),
 				clinical_indication : this.model.get('clinical_indication'),
 				hospital_name : this.model.get('hospital_name'),

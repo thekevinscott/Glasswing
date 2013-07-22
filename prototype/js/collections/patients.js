@@ -32,7 +32,7 @@ glasswing.collections.patients = Backbone.Collection.extend({
 		'Helmbrecht','Muhnot','Wang','Gladwin','Humphries',
 		'Luetger','Todhunter','Lokhande','Koo',
 		'Tucker','Briguglio','Roche','Gonzalez'
-		],
+		]
 	},
 	initialize : function() {
 

@@ -13,29 +13,29 @@ glasswing.models.worklist = glasswing.models.abstract.extend({
 		  console.log('Collection has changed.');
 		});
 	},
-	// add : function(procedure) {
+	// add : function(exam) {
 
-	// 	this.collection.add(procedure);
+	// 	this.collection.add(exam);
 
 	// 	/// hmmm, this code should actually be in the model definition, not in the collection definition
-	// 	if (! procedure.get('id')) {
-	// 		procedure.set('id',this.collection.length);
+	// 	if (! exam.get('id')) {
+	// 		exam.set('id',this.collection.length);
 	// 	}
 	// },
-	getProcedure : function(procedure_id) {
-		return this.collection.get(procedure_id);
+	getExam : function(exam_id) {
+		return this.collection.get(exam_id);
 	},
-	getProcedures : function() {
+	getExams : function() {
 		return this.collection.models;
 	},
-	getProceduresByModality : function() {
+	getExamsByModality : function() {
 
-		var procedures = {};
-		$(this.getProcedures()).each(function(){
-			var procedure_name = this.get('procedure_name');
-			if (! procedures[procedure_name]) { procedures[procedure_name] = []; }
-			procedures[procedure_name].push(this);
+		var exams = {};
+		$(this.getExams()).each(function(){
+			var exam_name = this.get('exam_name');
+			if (! exams[exam_name]) { exams[exam_name] = []; }
+			exams[exam_name].push(this);
 		});
-		return procedures;
+		return exams;
 	}
 });

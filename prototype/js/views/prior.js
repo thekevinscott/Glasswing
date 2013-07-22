@@ -26,7 +26,7 @@
 			self.$dot = $('<div class="prior draggable"></div>');
 			self.$el.html(_.template(self.template, {
 				date : this.model.getDate(),
-				procedure_name : this.model.get('type'),
+				exam_name : this.model.get('type'),
 				impression : this.model.get('impression'),
 			}));
 			if (this.model.get('relevant')) {
@@ -63,7 +63,7 @@
 				var report_template = glasswing.template('timeline/prior-report.html');
 				this.$report = _.template(report_template, {
 					indication : this.model.get('indication'),
-					procedure : this.model.get('procedure'),
+					exam : this.model.get('exam'),
 					findings : this.model.get('findings'),
 					impression : this.model.get('impression')
 				});
