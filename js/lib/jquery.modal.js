@@ -56,6 +56,7 @@
             modal.el.css({opacity: 0})
 
         }
+        // modal.show();
 
 
         exit = function () {
@@ -68,7 +69,7 @@
 
 
         left = offset.left;
-        console.log('left: ' + left);
+
         top = offset.top + self.outerHeight() + modal.arrow.outerHeight();
 
 
@@ -94,6 +95,7 @@
         var modal = $(el).data("modal-element");
         modal.el.stop().animate({opacity: 0, marginTop : 6}, {easing : 'easeInQuad',duration: 200, complete : function() {
             modal.el.css({marginTop : 0});
+            modal.el.hide();
         }});
         // self.data("modal-element").remove();
         // self.data("modal-element").stop().fadeOut(function(){

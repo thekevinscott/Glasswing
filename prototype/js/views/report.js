@@ -91,15 +91,21 @@
 
 			this.$('.scanned-documents').each(function(){
 				var dropdown = $(this).find('.scanned-documents-dropdown');
-				$(this).mouseover(function(){
-					dropdown.stop().slideDown(slide_speed);
-				}).mouseout(function(){
-					dropdown.stop().slideUp(slide_speed);
+				$(this).mouseenter(function(){
+					console.log('over');
+					dropdown.show();
+					// dropdown.stop().slideDown(slide_speed);
+				}).mouseleave(function(){
+					console.log('out');
+					dropdown.hide();
+					// dropdown.stop().slideUp(slide_speed);
 				});
+
 				$(this).find('.draggable').each(function(){
 					$(this).data('dynamic-content','<img src="images/scanned-documents/'+$(this).html()+'" />');
-					$(this).data('header','<p class="right">August 1, 2013</p><h3>Scanned Document: '+$(this).html()+'</h3>');
+					$(this).data('header','<h2><span>Scanned Document: '+$(this).html()+'</span> '+'August 12'+'</h2>');
 					$(this).data('clss','scanned-document');
+
 				});
 			});
 

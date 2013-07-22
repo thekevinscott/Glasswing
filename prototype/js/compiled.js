@@ -162,6 +162,7 @@ g.on("init",function(){d(n,function(e){g.formatter.register(e.name,e)})});var i=
 
 
 
+
         // if (glasswing.hasOwnProperty('modal')) {
         //     glasswing.modal.modal.remove();
         //     if (glasswing.modal.overlay) { glasswing.modal.overlay.remove(); }
@@ -206,7 +207,8 @@ g.on("init",function(){d(n,function(e){g.formatter.register(e.name,e)})});var i=
         if (modal.close) { modal.close.click(exit); }
 
 
-        left = offset.left + 5;
+        left = offset.left;
+
         top = offset.top + self.outerHeight() + modal.arrow.outerHeight();
 
 
@@ -2995,7 +2997,9 @@ String.prototype.toURL = function () { return this.split(' ').join('-').toLowerC
 				// self.parent.positionPane({el : self.$el, position: 'full'});
 				// self.$el.animate({width: 0, height: 0});
 			});
-			this.$magnify.click(this.magnify);
+			this.$magnify.click(function(e){
+				self.magnify(e);
+			});
 			if (this.callback) { this.callback(this); }
 			return this;
 
@@ -3009,6 +3013,7 @@ String.prototype.toURL = function () { return this.split(' ').join('-').toLowerC
 					self.parent.positionPane({el : self.$el, position: self.position});
 					this.$el.addClass(this.position);
 				} else {
+					console.log(self);
 					self.state = 'full';
 					self.parent.positionPane({el : self.$el, position: 'full'});
 					this.$el.removeClass(this.position);
@@ -4212,15 +4217,18 @@ String.prototype.toURL = function () { return this.split(' ').join('-').toLowerC
 
 			this.$('.scanned-documents').each(function(){
 				var dropdown = $(this).find('.scanned-documents-dropdown');
-				$(this).mouseover(function(){
+				$(this).mouseenter(function(){
+					console.log('over');
 					dropdown.stop().slideDown(slide_speed);
-				}).mouseout(function(){
+				}).mouseleave(function(){
+					console.log('out');
 					dropdown.stop().slideUp(slide_speed);
 				});
 				$(this).find('.draggable').each(function(){
 					$(this).data('dynamic-content','<img src="images/scanned-documents/'+$(this).html()+'" />');
-					$(this).data('header','<p class="right">August 1, 2013</p><h3>Scanned Document: '+$(this).html()+'</h3>');
+					$(this).data('header','<h2><span>Scanned Document: '+$(this).html()+'</span> '+'August 12'+'</h2>');
 					$(this).data('clss','scanned-document');
+
 				});
 			});
 
