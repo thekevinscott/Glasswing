@@ -66,6 +66,11 @@ glasswing.collections.patients = Backbone.Collection.extend({
 		if (key=='first') { key += (Math.round(Math.random())) ? '_male' : '_female'; }
 
 		return this.ingredients[key][Math.round(Math.random()* (this.ingredients[key].length-1) )];
+	},
+	getAvatar : function(gender, count) {
+		count = (count % 2) + 1;
+
+		return 'images/avatars/'+gender+'-'+count+'.png';
 	}
 
 

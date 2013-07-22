@@ -52,33 +52,8 @@ glasswing.collections.procedures = Backbone.Collection.extend({
 		var caregivers = new glasswing.collections.caregivers();
 		// var length = Math.round(Math.random()*0)+2;
 
-		var first = p.getRandomIngredient('first');
-		var last = p.getRandomIngredient('last');
-		caregivers.add(new glasswing.models.caregiver({
-			role : 'Referring Physician',
-			phone : '123-123-1234',
-			pager :'123-123-1234',
-			email : first.substring(0,1).toLowerCase()+last.toLowerCase()+'@'+this.getRandomIngredient('hospital').toLowerCase()+'.com',
-			date : new Date('6/5/2013'),
-			first : first,
-			last : last,
-			backup : p.getRandomIngredient('first') +' ' + p.getRandomIngredient('last')
-		}));
-
-		for (var i=0;i<1;i++) {
-			var first = p.getRandomIngredient('first');
-			var last = p.getRandomIngredient('last');
-			caregivers.add(new glasswing.models.caregiver({
-				role : this.getRandomIngredient('role'),
-				phone : '123-123-1234',
-				pager :'123-123-1234',
-				email : first.substring(0,1).toLowerCase()+last.toLowerCase()+'@'+this.getRandomIngredient('hospital').toLowerCase()+'.com',
-				date : new Date('6/5/2013'),
-				first : first,
-				last : last,
-				backup : p.getRandomIngredient('first') +' ' + p.getRandomIngredient('last')
-			}));
-		}
+		var caregivers = new glasswing.collections.caregivers();
+		caregivers.generateRandomArray(1);
 
 		return new glasswing.models.procedure({
 			id : id,

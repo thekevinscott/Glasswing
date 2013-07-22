@@ -3,22 +3,28 @@
 	<% caregiver = caregivers[i]; %>
 	<div class="caregiver">
 		<div class="image">
-			<img src="images/avatar.png" />
-			<%= caregiver.getName() %>
+			<img src="<%= caregiver.get('avatar') %>" />
+
 		</div>
-		<div class="primary">
-			<h4><%= caregiver.get('role') %></h4>
-			<p>Last saw patient: 2 days ago</p>
-			<p class="backup">Backup: <a href="javascript:;"><%= caregiver.get('backup') %></a></p>
-		</div>
-		<div class="secondary">
-			<p class="phone">Phone: <%= caregiver.get('phone') %></p>
-			<p class="pager">Pager: <%= caregiver.get('pager') %></p>
-			<p class="email"><a href="javascript:;"><%= caregiver.get('email') %></a></p>
-		</div>
+
+		<table>
+			<tr><td colspan="4"><h4><strong><%= caregiver.getName() %>,</strong> <%= caregiver.get('role') %></h4></td></tr>
+			<tr>
+				<td><span>Last saw patient: </span></td><td>3 hours ago</td>
+				<td><span>Phone: </span></td><td><a class="phone" href="javascript:;"><%= caregiver.get('phone') %></a></td>
+			</tr>
+			<tr>
+				<td><span>Backup Contact: </span></td><td><%= caregiver.get('backup') %></td>
+				<td><span>Pager: </span></td><td><a class="pager" href="javascript:;"><%= caregiver.get('pager') %></a></td>
+			</tr>
+			<tr>
+				<td><span>Note: </span></td><td>Night Shift</td>
+				<td><span>Email: </span></td><td><a href="mailto:<%= caregiver.get('email') %>"><%= caregiver.get('email') %></a></td>
+			</tr>
+		</table>
+
 		<a href="javascript:;" class="flag"></a>
-		<br class="clear" />
+
 	</div>
 	<% } %>
-	<br class="clear" />
 </div>
