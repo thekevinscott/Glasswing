@@ -62,6 +62,7 @@
 
 				var report_template = glasswing.template('timeline/prior-report.html');
 				this.$report = _.template(report_template, {
+					accession_id : this.model.get('accession_id'),
 					indication : this.model.get('indication'),
 					exam : this.model.get('exam'),
 					findings : this.model.get('findings'),

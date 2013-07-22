@@ -11,6 +11,9 @@
 			var autosave = function() {
 				clearTimeout(notification_timer);
 				options.notification.show();
+				var d = new Date();
+
+				options.notification.html('Autosaved at '+d.getHours()+':'+((d.getMinutes() > 10) ? d.getMinutes() : '0' + d.getMinutes())+' today');
 				options.notification.css({opacity :1});
 				notification_timer = setTimeout(function(){
 					options.notification.stop().animate({opacity : 0.25},{duration : notification_duration});

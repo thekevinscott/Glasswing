@@ -39,7 +39,7 @@
 		initialize : function(attributes) {
 
 			this.model = attributes.model;
-			this.layout = 'table';
+			this.layout = 'grid';
 			this.name = this.model.get('name');
 
 
@@ -99,11 +99,13 @@
 			return this;
 		},
 		change : function(key) {
+
 			switch(key) {
 				case 'in-queue' :
+
 					if (this.model.get(key)) {
 						this.$el.addClass(key);
-						this.$('.queue').attr('alt','You have ______ (parked / queued) this case.<br />Go to ______ (folders location) to access all <br />_____ (parked / queued) cases. ');
+						this.$('.queue').attr('alt','You have queued this case.<br />Go to your Queue Folder to access all <br />queued cases. ');
 					} else {
 						this.$el.removeClass(key);
 						this.$('.queue').attr('alt','Park or queue this case for later.');

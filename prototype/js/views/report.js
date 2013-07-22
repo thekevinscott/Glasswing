@@ -132,14 +132,77 @@
 			this.$('.accordion').accordion({
 				slave : $('.dictation')
 			});
-			$('.dictation textarea').hint().autosave({notification : $('.dictation .autosave')});
+
+
+
+
+
+
+
+
+
 
 
 			// tinymce.init({
 			// 	selector: "textarea",
+			// 	skin: 'glasswing',
+			// 	menubar : false,
+			// 	plugins : 'autoresize',
 
+			//     setup : function(editor) {
+
+			//     	var duration = 500;
+			//     	var timer;
+
+			//     	var notification_timer;
+			//     	var notification_duration = 1500;
+			//     	var notification_timer_duration = 2500;
+			//     	var hint;
+			//     	var options = {
+			//     		notification : $('.dictation .autosave')
+			//     	}
+			//     	var autosave = function() {
+			//     		clearTimeout(notification_timer);
+			//     		options.notification.show();
+			//     		var d = new Date();
+
+			//     		options.notification.html('Autosaved at '+d.getHours()+':'+((d.getMinutes() > 10) ? d.getMinutes() : '0' + d.getMinutes())+' today');
+			//     		options.notification.css({opacity :1});
+			//     		notification_timer = setTimeout(function(){
+			//     			options.notification.stop().animate({opacity : 0.25},{duration : notification_duration});
+			//     		},notification_timer_duration);
+			//     	};
+
+			//     	options.notification.mouseover(function(){
+			//     		options.notification.stop().animate({opacity : 1},{duration : 200});
+			//     	}).mouseout(function(){
+			//     		options.notification.stop().animate({opacity : 0.25},{duration : notification_duration});
+			//     	});
+
+			//     	editor.on('init', function(args) {
+			//     		hint = this.getContent();
+			//     	});
+			//         editor.on('focus', function(args) {
+			//         	if (this.getContent() == hint) {
+			//         		this.setContent('');
+			//         	}
+			//         });
+			//         editor.on('blur', function(args) {
+			//         	if (this.getContent() == '') {
+			//         		this.setContent(hint);
+			//         	}
+			//         });
+			//         editor.on('keydown', function(e){
+			//     		clearTimeout(timer);
+			//     		timer = setTimeout(function(){
+			//     			autosave();
+			//     		},duration);
+			//     	});
+			//     }
 			// });
 
+
+			$('.dictation textarea').hint().autosave({notification : $('.dictation .autosave')});
 
 		},
 		setOptions : function(options) {

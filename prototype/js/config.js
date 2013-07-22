@@ -96,8 +96,8 @@
 		type : 'CT',
 		body_part : 'Abdomen',
 		indication : 'Followup diverticulitis. Questionable abscess and enterovesical fistula.',
-		exam: 'Oral contrast enhanced CT scan abdomen and pelvis was performed. Coronal and sagittal reconstructions were created.',
-		procedure : 'Dr. McCarthy'
+		procedure: 'Oral contrast enhanced CT scan abdomen and pelvis was performed. Coronal and sagittal reconstructions were created.',
+		lock : 'Dr. McCarthy'
 	});
 	createexam({
 		priority : 2,
