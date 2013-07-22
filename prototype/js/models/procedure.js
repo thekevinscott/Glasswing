@@ -32,33 +32,13 @@ glasswing.models.procedure = glasswing.models.abstract.extend({
 		var oldest_prior = new Date(2008,0,1);
 
 
-		/** initialize priors **/
-		var pa = new glasswing.collections.patients();
-		var pr = new glasswing.collections.procedures();
 
 
-
+		var gender_count = {male : 0, female : 0};
 		for (var i=0;i<attributes.priors.length;i++) {
 			var caregivers = new glasswing.collections.caregivers();
+			caregivers.generateRandomArray(1);
 
-
-			// var length = Math.round(Math.random()*2)+1;
-			for (var j=0;j<1;j++) {
-
-				var first = pa.getRandomIngredient('first');
-				var last = pa.getRandomIngredient('last');
-				caregivers.add(new glasswing.models.caregiver({
-					role : 'Referring Physician',
-					phone : '123-123-1234',
-					pager :'123-123-1234',
-					email : first.substring(0,1).toLowerCase()+last.toLowerCase()+'@'+pr.getRandomIngredient('hospital').toLowerCase()+'.com',
-					date : new Date('6/5/2013'),
-					first : first,
-					last : last,
-					backup : pa.getRandomIngredient('first') +' ' + pa.getRandomIngredient('last')
-				}));
-
-			}
 			var prior_data = $.extend({caregivers : caregivers},attributes.priors[i]);
 			// var prior = new glasswing.models.prior({caregivers : caregivers, date : glasswing.randomDate(oldest_prior, new Date()) });
 			var prior = new glasswing.models.prior(prior_data);
