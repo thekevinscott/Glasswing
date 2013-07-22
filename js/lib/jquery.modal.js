@@ -22,6 +22,7 @@
 
 
 
+
         // if (glasswing.hasOwnProperty('modal')) {
         //     glasswing.modal.modal.remove();
         //     if (glasswing.modal.overlay) { glasswing.modal.overlay.remove(); }
@@ -66,7 +67,8 @@
         if (modal.close) { modal.close.click(exit); }
 
 
-        left = offset.left + 5;
+        left = offset.left;
+        console.log('left: ' + left);
         top = offset.top + self.outerHeight() + modal.arrow.outerHeight();
 
 
