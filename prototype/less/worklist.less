@@ -1,4 +1,24 @@
-@import "../../less/constants.less";
+@text : #ebebeb;
+@background: #1a1a1a;
+@gray : #444545;
+@gray-darker: #363737;
+@blue : #3e6a9e;
+@dark-blue: #26405c;
+@darker-blue: #1e324a;
+@red : #e02f30;
+@red-shade: #a12f30;
+@notification : #f88d47;
+@unknown-blue: #32a6d6;
+@pane: #2f2f2f;
+@border-radius: 5px;
+@green: #6bb753;
+@green-border: #569343;
+@dark-text: #7f7f7f;
+@grid-text: #a2a2a2;
+@orange: #f88d47;
+
+
+
 /*@one-across:   ~"only screen and (max-width: 414px)";
 @two-across:   ~"only screen and (min-width: 415px) and (max-width: 614px)";
 @three-across:   ~"only screen and (min-width: 615px) and (max-width: 760px)";
@@ -57,7 +77,6 @@
 		top: @padding;
 		.layouts {
 			float: right;
-
 		}
 		.button {
 			padding: 10px;
@@ -68,9 +87,14 @@
 			height: 20px;
 			background-repeat: no-repeat;
 			background-position: center center;
+			opacity: 0.3;
+
+			transition: 		all 0.3s;
+			-webkit-transition: all 0.3s;
 		}
 		.button.selected {
 			background-color: @gray-darker;
+			opacity: 1;
 		}
 		.button.grid {
 			border-radius: @border-radius 0 0 @border-radius;
@@ -90,6 +114,7 @@
 			background-position: 10px center;
 			float: right;
 			margin-left: 20px;
+			opacity: 1;
 		}
 	}
 
@@ -201,6 +226,7 @@
 			margin: 0;
 
 		}
+
 		.card {
 			position: relative;
 			border-radius: 5px;
@@ -218,7 +244,10 @@
 				width: 90px;
 				display: inline-block;
 			}
-
+			.lock.on {
+				background-image: url(../images/lock_on.png);
+				color: white;
+			}
 
 			p {
 				font-size: 12px;
@@ -230,7 +259,7 @@
 				background-position: center center;
 				background-repeat: no-repeat;
 				width: 32px;
-				height: 16px;
+				height: 20px;
 				display: block;
 				float: left;
 				margin-right: 20px;
@@ -258,12 +287,12 @@
 			.attachments {
 				position: absolute;
 				right: 0px;
-				top: 20px;
+				top: 16px;
 				background: url('../images/attachment.png') no-repeat;
-				background-size: 16px;
+
 				padding-left: 16px;
-				height: 16px;
-				width: 16px;
+				height: 24px;
+				width: 24px;
 				margin-right: 0;
 			}
 
@@ -276,6 +305,32 @@
 				transition: 		all 0.3s;
 				-webkit-transition: all 0.3s;
 			}
+			.queue {
+				margin-right: 0;
+
+				position: absolute;
+				background: none;
+				width: 42px;
+				height: 100%;
+				right: 0;
+				top: 0;
+				img {
+					position: absolute;
+					top: 50%;
+					left: 50%;
+					margin-top: -12px;
+					margin-left: -12px;
+
+					transition: 		all 0.3s;
+					-webkit-transition: all 0.3s;
+				}
+			}
+			.queue:hover {
+				background: @orange;
+				img {
+					margin-top: -15px;
+				}
+			}
 			footer {
 				background: #363737;
 				padding: 12px 20px 26px 20px;
@@ -284,31 +339,7 @@
 				-webkit-transition: all 0.3s;
 				font-size: 11px;
 				position: relative;
-				.queue {
-					margin-right: 0;
 
-					position: absolute;
-					background: none;
-					width: 42px;
-					height: 100%;
-					right: 0;
-					top: 0;
-					img {
-						position: absolute;
-						top: 50%;
-						left: 50%;
-						margin-top: -8px;
-						margin-left: -6px;
-
-						transition: 		all 0.3s;
-						-webkit-transition: all 0.3s;
-					}
-				}
-				.queue:hover {
-					background: @orange;
-
-
-				}
 				.camera, .eyeball, .lock {
 
 					margin-right: 0;
@@ -471,6 +502,7 @@ th.header.headerSortDown {
 		text-shadow: none;
 		.image-status p {
 			color: @grid-text;
+
 		}
 	}
 	.image-status {
@@ -478,6 +510,8 @@ th.header.headerSortDown {
 		p {
 			margin: 10px 0;
 			color: @gray-darker;
+			min-height: 22px;
+			line-height: 26px;
 		}
 		.camera, .lock {
 			background-repeat: no-repeat;
@@ -485,29 +519,29 @@ th.header.headerSortDown {
 
 		}
 		.lock {
-			background-position: 3px 0;
 		}
 		.lock.on {
 			background-image: url(../images/lock_on.png);
 			color: white;
 		}
-		.camera {
-			background-image: url(../images/camera_orange.png);
-		}
+
 	}
 
 
+}
+.camera {
+	background-image: url(../images/camera_orange.png);
 }
 .referring {
 	.physician, .physician.callout {
 
 		background: url(../images/physician.png) no-repeat;
-		padding-left: 16px;
+		padding-left: 24px;
 		margin-bottom: 10px;
 	}
 	.hospital, .hospital.callout {
 		background: url(../images/hospital.png) no-repeat;
-		padding-left: 16px;
+		padding-left: 24px;
 	}
 }
 .grid-contents {
@@ -554,8 +588,8 @@ th.header.headerSortDown {
 				position: absolute;
 				top: 50%;
 				left: 50%;
-				margin-top: -8px;
-				margin-left: -6px;
+				margin-top: -12px;
+				margin-left: -12px;
 
 				transition: 		all 0.3s;
 				-webkit-transition: all 0.3s;
@@ -564,7 +598,7 @@ th.header.headerSortDown {
 		a:hover {
 			background: @orange;
 			img {
-				margin-top: -11px;
+				margin-top: -15px;
 			}
 		}
 
@@ -691,4 +725,11 @@ th.header.headerSortDown {
 	background-image: url(../images/camera.png);
 	left: 66%;
 }
+.camera.not-ready {
+	background-image: url(../images/camera_orange.png);
+}
 
+
+.container .list .in-queue .queue {
+	background: @orange;
+}

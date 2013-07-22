@@ -12,10 +12,20 @@ glasswing.models.procedure = glasswing.models.abstract.extend({
 		// this.patient = options.patient;
 		this.on("change", this.change, this);
 
+		if (this.get('lock')===undefined) {
+			this.set('lock',false);
+		}
+		if (this.get('ready')===undefined) {
+			this.set('ready',true);
+		}
+
+
 
 		this.priors = new glasswing.collections.priors();
 
 		var self = this;
+
+
 
 
 		var number_of_priors = 5;
@@ -31,13 +41,14 @@ glasswing.models.procedure = glasswing.models.abstract.extend({
 		for (var i=0;i<attributes.priors.length;i++) {
 			var caregivers = new glasswing.collections.caregivers();
 
+
 			// var length = Math.round(Math.random()*2)+1;
-			for (var j=0;j<3;j++) {
+			for (var j=0;j<1;j++) {
 
 				var first = pa.getRandomIngredient('first');
 				var last = pa.getRandomIngredient('last');
 				caregivers.add(new glasswing.models.caregiver({
-					role : 'Resident',
+					role : 'Referring Physician',
 					phone : '123-123-1234',
 					pager :'123-123-1234',
 					email : first.substring(0,1).toLowerCase()+last.toLowerCase()+'@'+pr.getRandomIngredient('hospital').toLowerCase()+'.com',
@@ -58,11 +69,22 @@ glasswing.models.procedure = glasswing.models.abstract.extend({
 		}
 
 
+		// console.log(attributes);
+		// console.log('procedure-'+this.get('id')+'-inqueue');
+		// console.log(localStorage['procedure-'+this.get('id')+'-inqueue']);
+
+		_.each(['in-queue','in-folder'],function(key){
+			if (localStorage['procedure-'+self.get('id')+'-'+key]) {
+				self.toggle('in-queue',localStorage['procedure-'+self.get('id')+'-'+key]);
+			}
+		});
+
+
 
 		this.priors.parent = this;
 
 	},
-	change : function() {
+	change : function(obj) {
 
 
 		var self  = this;
@@ -84,9 +106,33 @@ glasswing.models.procedure = glasswing.models.abstract.extend({
 
 		}
 
+		_.each(obj.changed,function(val,key){
+
+			self.view.change(key,val);
+			if (self.view.hasOwnProperty('report')) {
+				self.view.report.change(key,val);
+			}
+
+		});
+
+
 
 
 	},
+	toggle : function(key,val) {
+		if (val) {
+			this.set(key,val);
+		} else {
+
+			if (this.get(key)) {
+				this.set(key,false);
+			} else {
+				this.set(key,true);
+			}
+		}
+		localStorage['procedure-'+this.get('id')+'-'+key] = this.get(key);
+	},
+
 	// we overload our parent get function
 	get: function (attr) {
 		switch(attr) {

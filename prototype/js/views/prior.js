@@ -13,6 +13,8 @@
 		  "click .coc" : "coc"
 		},
 		initialize : function(attributes) {
+
+			this.model = attributes.model;
 			this.parent = attributes.parent;
 			// this.data = attributes.data;
         	glasswing.views.abstract.prototype.initialize.apply(this, arguments);
@@ -72,19 +74,21 @@
 
 			return this.$report;
 		},
-		afterRender : function() {
+		afterRender : function(view) {
 			var self = this;
-			console.log('after render');
-			$(self.$report).find('.show-more').click(function(e){
-				$(self.$report).find('.excerpt').hide();
-				$(self.$report).find('.report').show();
-				$(this).hide();
-			})
+
+			// $(self.$report).find('.show-more').click(function(e){
+			// 	$(self.$report).find('.excerpt').hide();
+			// 	$(self.$report).find('.report').show();
+			// 	$(this).hide();
+			// })
 
 			self.caregivers = new glasswing.views.caregivers({
 				collection : self.model.get('caregivers'),
-				button : $(self.$report).find('.coc')
+				button : view.$('.community-of-caregivers')
 			});
+
 		},
+
 	});
 })(jQuery);

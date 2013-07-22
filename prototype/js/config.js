@@ -66,8 +66,11 @@
 	var createProcedure = function(attb) {
 		if (attb.body_part) { body_part = attb.body_part; }
 		if (attb.type) { type = attb.type; }
-		procedureModel = worklist.procedures.getRandomProcedure(patientsCollection.generateRandomPatient(), priors);
+		procedureModel = worklist.procedures.getRandomProcedure(patientsCollection.generateRandomPatient(), priors, worklist.procedures.length+1);
 		if (attb.priority) { procedureModel.set('priority',attb.priority); }
+		if (attb.lock !== undefined ) { procedureModel.set('lock',attb.lock); }
+		if (attb.ready !== undefined) { procedureModel.set('ready',attb.ready); }
+
 		procedureModel.set('procedure_type',type);
 		procedureModel.set('body_part',body_part);
 		procedureModel.set('clinical_indication',attb.indication);
@@ -93,14 +96,16 @@
 		type : 'CT',
 		body_part : 'Abdomen',
 		indication : 'Followup diverticulitis. Questionable abscess and enterovesical fistula.',
-		procedure: 'Oral contrast enhanced CT scan abdomen and pelvis was performed. Coronal and sagittal reconstructions were created.'
+		procedure: 'Oral contrast enhanced CT scan abdomen and pelvis was performed. Coronal and sagittal reconstructions were created.',
+		lock : 'Dr. McCarthy'
 	});
 	createProcedure({
 		priority : 2,
 		type: 'CT',
 		body_part : 'head',
 		indication : 'Low-speed MVA, patient found prone with some confusion. A&O x3. Rule out cervical fractures',
-		procedure: 'Volumetric scanning of head and next performed in 64 slices.'
+		procedure: 'Volumetric scanning of head and next performed in 64 slices.',
+		ready : false
 	});
 	createProcedure({
 		priority : 2,
@@ -143,44 +148,45 @@
 
 
 
-	var parseChapters = function(data) {
-		var chapters = {
+	// var parseChapters = function(data) {
+	// 	var chapters = {
 
-		}
+	// 	}
 
-		_.each([data],function(chapter){
-			var key;
-			// var pane_count;
-			var pane_name;
-			_.each(markdown.toHTMLTree(chapter),function(node){
-
-
+	// 	_.each([data],function(chapter){
+	// 		var key;
+	// 		// var pane_count;
+	// 		var pane_name;
+	// 		_.each(markdown.toHTMLTree(chapter),function(node){
 
 
 
-				switch(node[0]) {
-					case 'h1' :
-						key = node[1].toURL();
-						if ( ! chapters.hasOwnProperty(key)) { chapters[key] = {panes : {}, panes_by_order : [] }; }
-						chapters[key].title = node[1];
-					break;
-					case 'h2' :
-						// if (pane_count===undefined) { pane_count = 0;}
-						// else { pane_count++; }
-						pane_name = node[1].toURL();
-						chapters[key].panes[pane_name] = {title : node[1], paragraphs : [] };
-						chapters[key].panes_by_order.push(chapters[key].panes[pane_name]);
-					break;
-					case 'p' :
-						chapters[key].panes[pane_name].paragraphs.push(node[1]);
-					break;
-				}
-			});
-		});
-		return chapters;
-	}
 
-	glasswing.config = {worklist : worklist, chapters : parseChapters($('#guide-chapter1')) };
+
+	// 			switch(node[0]) {
+	// 				case 'h1' :
+	// 					key = node[1].toURL();
+	// 					if ( ! chapters.hasOwnProperty(key)) { chapters[key] = {panes : {}, panes_by_order : [] }; }
+	// 					chapters[key].title = node[1];
+	// 				break;
+	// 				case 'h2' :
+	// 					// if (pane_count===undefined) { pane_count = 0;}
+	// 					// else { pane_count++; }
+	// 					pane_name = node[1].toURL();
+	// 					chapters[key].panes[pane_name] = {title : node[1], paragraphs : [] };
+	// 					chapters[key].panes_by_order.push(chapters[key].panes[pane_name]);
+	// 				break;
+	// 				case 'p' :
+	// 					chapters[key].panes[pane_name].paragraphs.push(node[1]);
+	// 				break;
+	// 			}
+	// 		});
+	// 	});
+	// 	return chapters;
+	// }
+
+	// glasswing.config = {worklist : worklist, chapters : parseChapters($('#guide-chapter1')) };
+	glasswing.config = {worklist : worklist };
 
 
 

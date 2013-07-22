@@ -1,7 +1,7 @@
 (function($){
 	$.fn.autosave = function(options){
 		return $(this).each(function(){
-			console.log(this);
+
 			var duration = 500;
 			var timer;
 

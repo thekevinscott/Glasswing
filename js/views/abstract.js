@@ -25,6 +25,9 @@
 			this.delegateEvents();
 			return this;
 		},
+		change : function(key,val) {
+
+		},
 		getTemplate : function(callback) {
 			if (this.template_html) {
 

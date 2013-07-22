@@ -86,26 +86,47 @@
 			this.timeline.afterRender();
 
 			// this.$('.draggable').draggable({ opacity: 0.7, helper: "clone" });
-			var scanned_documents_dropdown = this.$('.scanned-documents-dropdown');
-			var slide_speed = 200;
-			this.$('.scanned-documents').mouseover(function(){
-				scanned_documents_dropdown.stop().slideDown(slide_speed);
-			}).mouseout(function(){
-				scanned_documents_dropdown.stop().slideUp(slide_speed);
-			})
 
-			this.$('.scanned-documents .draggable').each(function(){
-				$(this).data('dynamic-content','<img src="images/scanned-documents/'+$(this).html()+'" />');
-				$(this).data('header','<p class="right">August 1, 2013</p><h3>Scanned Document: '+$(this).html()+'</h3>');
-				$(this).data('clss','scanned-document');
+			var slide_speed = 200;
+
+			this.$('.scanned-documents').each(function(){
+				var dropdown = $(this).find('.scanned-documents-dropdown');
+				$(this).mouseenter(function(){
+					console.log('over');
+					dropdown.show();
+					// dropdown.stop().slideDown(slide_speed);
+				}).mouseleave(function(){
+					console.log('out');
+					dropdown.hide();
+					// dropdown.stop().slideUp(slide_speed);
+				});
+
+				$(this).find('.draggable').each(function(){
+					$(this).data('dynamic-content','<img src="images/scanned-documents/'+$(this).html()+'" />');
+					$(this).data('header','<h2><span>Scanned Document: '+$(this).html()+'</span> '+'August 12'+'</h2>');
+					$(this).data('clss','scanned-document');
+
+				});
 			});
+
+
+
 
 
 			this.dynamicPane = new glasswing.views.dynamicContainer({el : $('.dynamic-content .container'), draggables : $('.draggable')});
 
-			var prior = this.timeline.getFirstRelevant().$el;
+			var prior = this.timeline.getFirstRelevant();
+			var prior_el = prior.$el;
+			// console.log(prior);
+			this.dynamicPane.addPane({
+				content : prior_el.data('dynamic-content'),
+				header : prior_el.data('header'),
+				clss : prior_el.data('clss'),
+				callback : function(view){
+					prior.afterRender(view);
+				}
 
-			this.dynamicPane.addPane({content : prior.data('dynamic-content'), header : prior.data('header'), clss : prior.data('clss')});
+			});
 
 
 			this.$('.accordion').accordion({
@@ -118,6 +139,7 @@
 			// 	selector: "textarea",
 
 			// });
+
 
 		},
 		setOptions : function(options) {
@@ -223,12 +245,57 @@
 			self.timeline = new glasswing.views.timeline({parent : this, el : this.$el.find('.timeline')});
 			// self.afterRender();
 
-			this.caregivers = new glasswing.views.caregivers({
+			self.caregivers = new glasswing.views.caregivers({
 				collection : this.model.get('caregivers'),
 				button : this.$('.community-of-caregivers')
 			});
+
+
+			self.$folder = this.$('.folder');
+			self.$folder.click(function(){
+				self.model.toggle('in-folder');
+			});
+
+			this.change('in-folder');
+
+			self.$follow = this.$('.follow');
+			self.$follow.click(function(){
+				self.model.toggle('following');
+			});
+
+			this.change('following');
+
+
+
+
 			return self;
 		},
+		change : function(key,val) {
+
+			switch(key) {
+				case 'in-folder' :
+					if (this.model.get(key)) {
+						this.$folder.attr('alt','This case is filed under "Teaching".');
+					} else {
+						this.$folder.attr('alt','Add to folder...');
+					}
+				break;
+				case 'following' :
+					if (this.model.get(key)) {
+						this.$follow.attr('alt','Unfollow this case.');
+					} else {
+						this.$follow.attr('alt','Follow this case.');
+					}
+				break;
+			}
+			if (this.model.get(key)) {
+				this.$el.addClass(key);
+			} else {
+				this.$el.removeClass(key);
+			}
+
+		},
+
 		setFollowingButton : function(button,duration) {
 			// if (! duration) { duration = 100;}
 			$(button).addClass('active');

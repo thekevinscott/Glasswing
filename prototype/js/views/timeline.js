@@ -46,7 +46,8 @@
 					min = prior.get('date').getTime();
 				}
 			});
-
+			self.$bar.before('<p class="year-max">'+(new Date(max)).getFullYear()+'</p>');
+			self.$bar.after('<p class="year-min">'+(new Date(min)).getFullYear()+'</p>');
 
 			_.each(this.priors,function(prior){
 				prior.view = new glasswing.views.prior({parent : self, model : prior });
@@ -63,6 +64,9 @@
 					el.data('dynamic-content',prior.view.getReport());
 					el.data('header','<h2><span>'+prior.get('type')+' '+prior.get('body_part')+'</span> '+prior.getDate()+'</h2>');
 					el.data('clss','prior');
+					el.data('callback',function(view){
+						prior.view.afterRender(view);
+					});
 				});
 
 
@@ -94,6 +98,8 @@
 				self.$slider.css({top : top+'%'});
 
 			});
+
+
 		},
 		afterRender : function() {
 

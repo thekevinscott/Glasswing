@@ -6,7 +6,9 @@
 			this.header = attributes.header;
 			this.parent = attributes.parent;
 			this.clss = attributes.clss;
+
 			this.setPosition(attributes.position);
+			this.callback = attributes.callback;
 			this.state = 'normal';
 		},
 		render : function() {
@@ -29,7 +31,10 @@
 				// self.parent.positionPane({el : self.$el, position: 'full'});
 				// self.$el.animate({width: 0, height: 0});
 			});
-			this.$magnify.click(this.magnify);
+			this.$magnify.click(function(e){
+				self.magnify(e);
+			});
+			if (this.callback) { this.callback(this); }
 			return this;
 
 		},
@@ -42,6 +47,7 @@
 					self.parent.positionPane({el : self.$el, position: self.position});
 					this.$el.addClass(this.position);
 				} else {
+					console.log(self);
 					self.state = 'full';
 					self.parent.positionPane({el : self.$el, position: 'full'});
 					this.$el.removeClass(this.position);

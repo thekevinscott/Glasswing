@@ -132,7 +132,7 @@
 									var point = {x: left+click_offset.x, y : top+click_offset.y};
 									position = self.getPosition(point,self.content);
 								}
-								self.addPane({content : draggable.data('dynamic-content'), header : draggable.data('header'), clss : draggable.data('clss'), position: position});
+								self.addPane({content : draggable.data('dynamic-content'), header : draggable.data('header'), clss : draggable.data('clss'), position: position, callback : draggable.data('callback')});
 
 							}});
 
@@ -140,7 +140,7 @@
 							self.dragging = false;
 							clone.remove();
 						} else {
-							self.addPane({content : draggable.data('dynamic-content'), header : draggable.data('header'), clss : draggable.data('clss'), position: 'full'});
+							self.addPane({content : draggable.data('dynamic-content'), header : draggable.data('header'), clss : draggable.data('clss'), position: 'full', callback : draggable.data('callback')});
 						}
 
 
