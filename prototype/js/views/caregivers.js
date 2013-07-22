@@ -12,12 +12,14 @@
 			this.collection = attributes.collection;
 			this.button = attributes.button;
 
-
-        	// glasswing.views.abstract.prototype.initialize.apply(this, arguments);
-
-        	this.render();
+        	var self = this;
+        	self.button.unbind('click').click(function(){
+        		$(self.button).modal({content: self.render().$el, position: 'right'});
+        		self.afterRender();
+        	});
 		},
 		render : function() {
+			console.log('render');
 			var self = this;
 
 			// this.$el.html();
@@ -32,15 +34,69 @@
 				caregivers : this.collection.models
 
 			}));
-
-			self.button.unbind('click').click(function(){
-
-
-				$(self.button).modal({content: self.$el.html(), position: 'right'});
-
-
-			});
 			return self;
 		},
+
+		afterRender : function() {
+			var self = this;
+
+			self.$('.phone, .pager').each(function(){
+				var phone = $(this);
+
+				var status = $('<p>Calling... </p><a class="hangup" href="javascript:;">Hangup</a>');
+				var hangup_el;
+				var parent = phone.parent();
+				var number = phone.html().split('-').join('');
+
+				// var phone_html = phone.html();
+				parent.addClass("disabled");
+				parent.html('Setting up VOIP...');
+
+				glasswing.twilio.addListener('ready',function() {
+					// console.log('ready');
+					phone.removeClass('disabled');
+					parent.html(phone);
+
+				});
+
+
+				var hangup = function(e) {
+					if (e) { e.preventDefault();}
+					glasswing.twilio.hangup();
+					// var old_html = $('<a href="javascript:;">'+html+'</a>');
+					$(parent).html(phone);
+					phone.unbind('click').click(placeCall);
+				}
+				var placeCall = function(e) {
+
+					if (e) { e.preventDefault();}
+
+
+
+
+
+					glasswing.twilio.call(number);
+
+					$(phone).replaceWith(status);
+					hangup_el = parent.find('.hangup');
+					hangup_el.click(hangup);
+					glasswing.twilio.addListener('connect',function(){
+						// console.log('connect');
+						// console.log(status);
+						parent.find('p').html('Connected ');
+					});
+					glasswing.twilio.addListener('disconnect',function(){
+						// console.log('disconncect');
+						$(parent).html(phone);
+						phone.unbind('click').click(placeCall);
+					});
+
+
+				}
+				phone.unbind('click').click(placeCall);
+			});
+
+			return self;
+		}
 	});
 })(jQuery);
