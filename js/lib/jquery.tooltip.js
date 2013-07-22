@@ -5,11 +5,17 @@
 		options = $.extend(defaults,options);
 
 		return $(this).each(function(){
+
 			var self = $(this);
+
+
 			self.data('alt',self.attr('alt'));
 			self.removeAttr('alt');
 
-
+			// self.modal({content : self.data('alt'), overlay : false, close : false, show : false});
+			if (self.data('modal-element')) {
+				self.data('modal-element').content.html(self.data('alt'));
+			}
 			self.mouseover(function(){
 				self.modal({content : self.data('alt'), overlay : false, close : false, show : false});
 			}).mouseout(function(){

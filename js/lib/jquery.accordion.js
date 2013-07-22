@@ -27,14 +27,14 @@
 		var top = accordion.offset().top;
 		// var height = accordion.offset().top;
 		var getTargetHeight = function() {
-			var height = top + 50; // padding on bottom
+			var height = top + 60; // padding on bottom
 			accordion.find('.pane').each(function(){
 				// height += header_height;
 				if (! $(this).hasClass('collapsed')) {
 					height += $(this).data('height');
 				}
 			});
-			console.log(height);
+			// console.log(height);
 			return height;
 		}
 		var setSlaveHeight = function(attb) {

@@ -6,7 +6,9 @@
 			this.header = attributes.header;
 			this.parent = attributes.parent;
 			this.clss = attributes.clss;
+
 			this.setPosition(attributes.position);
+			this.callback = attributes.callback;
 			this.state = 'normal';
 		},
 		render : function() {
@@ -30,6 +32,7 @@
 				// self.$el.animate({width: 0, height: 0});
 			});
 			this.$magnify.click(this.magnify);
+			if (this.callback) { this.callback(this); }
 			return this;
 
 		},

@@ -38,12 +38,15 @@
 						<div class="header">
 							<h2><span><%= procedure_name %></span> Today at 14:03</h2>
 							<div class="buttons">
-								<a class="scanned-documents attachments" alt="View attachments">2</a>
+								<div class="scanned-documents">
+									<a class="attachments">2</a>
+									<ul class="scanned-documents-dropdown">
+										<li><a href="javascript:;" class="draggable">RequestForm.png</a></li>
+										<li><a href="javascript:;" class="draggable">TechNotes.png</a></li>
+									</ul>
+								</div>
 
-								<ul class="scanned-documents-dropdown">
-									<li><a href="javascript:;" class="draggable">RequestForm.png</a></li>
-									<li><a href="javascript:;" class="draggable">TechNotes.png</a></li>
-								</ul>
+
 
 
 								<a class="pacs" alt="View images"></a>
@@ -79,12 +82,13 @@
 						<div class="header">
 							<h2><span>CR R Arm</span> Today at 9:03</h2>
 							<div class="buttons">
-								<a class="scanned-documents attachments" alt="View attachments">2</a>
-
-								<ul class="scanned-documents-dropdown">
-									<li><a href="javascript:;" class="draggable">RequestForm.png</a></li>
-									<li><a href="javascript:;" class="draggable">TechNotes.png</a></li>
-								</ul>
+								<div class="scanned-documents">
+									<a class="attachments">2</a>
+									<ul class="scanned-documents-dropdown">
+										<li><a href="javascript:;" class="draggable">RequestForm.png</a></li>
+										<li><a href="javascript:;" class="draggable">TechNotes.png</a></li>
+									</ul>
+								</div>
 
 
 								<a class="pacs" alt="View images"></a>
@@ -119,7 +123,8 @@
 				</div><!-- accordion -->
 
 				<div class="actions">
-					<a href="javascript:;" class="folder">Add case to folder</a>
+					<a href="javascript:;" class="follow">Follow case</a>
+					<a href="javascript:;" class="folder">Add to folder</a>
 					<a href="javascript:;" class="community-of-caregivers">Related Caregivers</a>
 
 				</div>

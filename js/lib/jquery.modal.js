@@ -1,16 +1,18 @@
 (function ($) {
-    var defaults = {
-        arrow : true,
-        close : true,
-        overlay : true,
-        content : ''
-    };
+
     $.fn.modal = function (options) {
+
         if (typeof options === 'string') {
-            options = $.extend(defaults,{content : options});
-        } else {
-            options = $.extend(defaults,options);
+            options = {content : options};
+
         }
+        options = $.extend({
+            arrow : true,
+            close : true,
+            overlay : true,
+            content : ''
+        },options);
+
 
         var self, content, modal, arrow, close, overlay, exit, left, top;
 
@@ -28,6 +30,7 @@
 
         // $('body').append(self);
         modal = self.data('modal-element');
+
         if (! modal || options.content !== modal.alt) {
             modal = {};
             modal.alt = options.content;
@@ -35,6 +38,7 @@
             modal.content = $('<div class="modal-content" />');
             if (options.arrow) { modal.arrow = $('<div class="arrow" />'); }
             if (options.close) { modal.close = $('<a href="javascript:;" class="close" />'); }
+
             if (options.overlay) { modal.overlay = $('<div class="modal-overlay" />'); }
 
             modal.el.html(modal.content);
@@ -42,19 +46,24 @@
             if (options.arrow) { modal.el.prepend(modal.arrow); }
             if (options.close) { modal.el.prepend(modal.close); }
 
-            if (options.overlay) { modal.el.before(modal.overlay); }
+            if (options.overlay) {
+
+                $('body').append(modal.overlay);
+            }
             self.data('modal-element',modal);
             $('body').append(modal.el);
+            modal.el.css({opacity: 0})
 
         }
 
 
         exit = function () {
-            if (overlay) { modal.overlay.remove(); }
+            if (modal.overlay) { modal.overlay.remove(); }
             modal.el.remove();
+            self.data('modal-element',null);
         }
-        if (overlay) { modal.overlay.click(exit); }
-        if (close) { modal.close.click(exit); }
+        if (modal.overlay) { modal.overlay.click(exit); }
+        if (modal.close) { modal.close.click(exit); }
 
 
         left = offset.left + 5;
@@ -73,7 +82,7 @@
 
 
 
-        modal.el.stop().css({opacity: 0}).animate({opacity: 1, marginTop: 3},{easing : 'easeOutQuad', duration: 200});
+        modal.el.stop().animate({opacity: 1, marginTop: 3},{easing : 'easeOutQuad', duration: 200});
 
 
 
