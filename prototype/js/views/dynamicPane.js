@@ -31,7 +31,9 @@
 				// self.parent.positionPane({el : self.$el, position: 'full'});
 				// self.$el.animate({width: 0, height: 0});
 			});
-			this.$magnify.click(this.magnify);
+			this.$magnify.click(function(e){
+				self.magnify(e);
+			});
 			if (this.callback) { this.callback(this); }
 			return this;
 
@@ -45,6 +47,7 @@
 					self.parent.positionPane({el : self.$el, position: self.position});
 					this.$el.addClass(this.position);
 				} else {
+					console.log(self);
 					self.state = 'full';
 					self.parent.positionPane({el : self.$el, position: 'full'});
 					this.$el.removeClass(this.position);

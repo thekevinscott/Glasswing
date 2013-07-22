@@ -22,6 +22,7 @@
 
 
 
+
         // if (glasswing.hasOwnProperty('modal')) {
         //     glasswing.modal.modal.remove();
         //     if (glasswing.modal.overlay) { glasswing.modal.overlay.remove(); }
@@ -55,6 +56,7 @@
             modal.el.css({opacity: 0})
 
         }
+        // modal.show();
 
 
         exit = function () {
@@ -66,7 +68,8 @@
         if (modal.close) { modal.close.click(exit); }
 
 
-        left = offset.left + 5;
+        left = offset.left;
+
         top = offset.top + self.outerHeight() + modal.arrow.outerHeight();
 
 
@@ -92,6 +95,7 @@
         var modal = $(el).data("modal-element");
         modal.el.stop().animate({opacity: 0, marginTop : 6}, {easing : 'easeInQuad',duration: 200, complete : function() {
             modal.el.css({marginTop : 0});
+            modal.el.hide();
         }});
         // self.data("modal-element").remove();
         // self.data("modal-element").stop().fadeOut(function(){

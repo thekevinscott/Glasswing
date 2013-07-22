@@ -95,38 +95,38 @@
 
 })(jQuery);
 
-// var ringNotif = function(el) {
-// 	var count = 4;
-// 	var inc = 0;
-// 	var timeout = 1200;
-// 	var duration = 60;
-// 	var amount = 10;
+var ringNotif = function(el) {
+	var count = 4;
+	var inc = 0;
+	var timeout = 1200;
+	var duration = 60;
+	var amount = 10;
 
-// 	var r = function() {
-// 		if (inc < count) {
-// 			ring(el,0-amount,amount,duration);
-// 			inc++;
-// 			setTimeout(r,timeout);
-// 			console.log(el);
-// 			el.find('img').css({boxShadow: '0 0 50px #fff'});
-// 		}
+	var r = function() {
+		if (inc < count) {
+			ring(el,0-amount,amount,duration);
+			inc++;
+			setTimeout(r,timeout);
+			console.log(el);
+			el.find('img').css({boxShadow: '0 0 50px #fff'});
+		}
 
 
-// 	}
-// 	r();
+	}
+	r();
 
-// }
-// var ring = function(el,start,end, duration) {
-// 	var decay = 0.7;
-// 	$(el).css({'-webkit-transform-origin' : '50% 0'  })
-// 	var r = function(start,end) {
-// 		$(el).animateRotate(start,end,duration,'linear',function(){
-// 			if (Math.abs(start) > 1) {
-// 				r(end*decay,start*decay);
-// 			}
+}
+var ring = function(el,start,end, duration) {
+	var decay = 0.7;
+	$(el).css({'-webkit-transform-origin' : '50% 0'  })
+	var r = function(start,end) {
+		$(el).animateRotate(start,end,duration,'linear',function(){
+			if (Math.abs(start) > 1) {
+				r(end*decay,start*decay);
+			}
 
-// 		});
-// 	}
-// 	r(start,end);
+		});
+	}
+	r(start,end);
 
-// }
+}
