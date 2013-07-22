@@ -46,7 +46,8 @@
 					min = prior.get('date').getTime();
 				}
 			});
-
+			self.$bar.before('<p class="year-max">'+(new Date(max)).getFullYear()+'</p>');
+			self.$bar.after('<p class="year-min">'+(new Date(min)).getFullYear()+'</p>');
 
 			_.each(this.priors,function(prior){
 				prior.view = new glasswing.views.prior({parent : self, model : prior });
@@ -97,6 +98,8 @@
 				self.$slider.css({top : top+'%'});
 
 			});
+
+
 		},
 		afterRender : function() {
 
