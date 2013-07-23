@@ -22,7 +22,7 @@
 		<footer>
 			<a class="camera <% if (! ready) { %>not-ready<% } %>" alt="<% if (ready) { %>All images are completed<% } else { %>Images in progress<% } %>"></a>
 
-			<a class="lock <% if (lock) { %>on<% } %>" alt="<% if (lock) { %><%= lock %><% } else { %>Nobody is reporting<% } %>"></a>
+			<a class="lock <% if (lock) { %>on<% } %>" alt="<% if (lock) { %><%= lock %> is reading this case.<% } else { %>Nobody is reporting<% } %>"><% if (lock) { %><%= lock %><% } %></a>
 			<a href="javascript:;" class="queue"><img src="images/queue.png" /></a>
 
 		</footer>

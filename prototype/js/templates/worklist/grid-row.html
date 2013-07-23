@@ -38,7 +38,7 @@
 
 			<p class="images-completion-status camera <% if (! ready) { %>not-ready<% } %>" alt="<% if (ready) { %>All images are completed<% } else { %>Images in progress<% } %>"><% if (ready) { %>All images are completed<% } else { %>Images in progress<% } %></p>
 			<!-- <p class="reporting-status lock on">Dr. Rebecca Whatley</p> -->
-			<p class="reporting-status lock <% if (lock) { %>on<% } %>" alt="<% if (lock) { %><%= lock %><% } else { %>Nobody is reporting<% } %>"><% if (lock) { %><%= lock%><% } else { %>Nobody is reporting<% } %></p>
+			<p class="reporting-status lock <% if (lock) { %>on<% } %>" alt="<% if (lock) { %><%= lock %> is reading this case.<% } else { %>Nobody is reporting<% } %>"><% if (lock) { %><%= lock%><% } else { %>Nobody is reporting<% } %></p>
 
 		</td>
 		<td class="queue-action">
