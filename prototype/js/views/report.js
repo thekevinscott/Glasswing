@@ -104,7 +104,7 @@
 
 				$(this).find('.draggable').each(function(){
 					$(this).data('dynamic-content','<img src="images/scanned-documents/'+$(this).html()+'" />');
-					$(this).data('header','<h2><span>Scanned Document: '+$(this).html()+'</span> '+'August 12'+'</h2>');
+					$(this).data('header','<h2><span>'+$(this).html()+'</span> '+'August 12'+'</h2>');
 					$(this).data('clss','scanned-document');
 
 				});
