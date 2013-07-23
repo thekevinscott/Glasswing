@@ -75,9 +75,10 @@
 	}
 
 	parseChapters([
+		'tabs',
 		'double-grid',
 		'case-cards',
-		'tabs',
+
 		'caregivers',
 		'notifications',
 		'dynamic-content',

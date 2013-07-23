@@ -4,9 +4,7 @@
 	<div class="content">
 
 		<div class="exam">
-			<div class="attachments">
-				<%= attachments %>
-			</div>
+			<div class="attachments <% if (attachments === 0) { %>none<% } %>" alt="There <% if (attachments === 1) { %>is 1 attachment<% } else { %>are <%= attachments %> attachments<% } %>"></div>
 			<h3><span><%= exam_name %></span></h3>
 			<p><%= clinical_indication %></p>
 			<p class="accession-number"><span>Accession #:</span> <%= accession_id %></p>
@@ -22,7 +20,7 @@
 		<footer>
 			<a class="camera <% if (! ready) { %>not-ready<% } %>" alt="<% if (ready) { %>All images are completed<% } else { %>Images in progress<% } %>"></a>
 
-			<a class="lock <% if (lock) { %>on<% } %>" alt="<% if (lock) { %><%= lock %><% } else { %>Nobody is reporting<% } %>"></a>
+			<a class="locked <% if (locked) { %>on<% } %>" alt="<% if (locked) { %><%= locked %> is reading this case.<% } else { %>Nobody is reporting<% } %>"><% if (locked) { %><%= locked %><% } %></a>
 			<a href="javascript:;" class="queue"><img src="images/queue.png" /></a>
 
 		</footer>

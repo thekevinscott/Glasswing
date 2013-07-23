@@ -244,7 +244,7 @@
 				width: 90px;
 				display: inline-block;
 			}
-			.lock.on {
+			.locked.on {
 				background-image: url(../images/lock_on.png);
 				color: white;
 			}
@@ -295,6 +295,9 @@
 				width: 24px;
 				margin-right: 0;
 			}
+			.attachments.none {
+				opacity: 0.3;
+			}
 
 
 			.status {
@@ -340,11 +343,21 @@
 				font-size: 11px;
 				position: relative;
 
-				.camera, .eyeball, .lock {
+				.camera, .eyeball, .locked {
 
 					margin-right: 0;
 					margin-left: 5px;
 
+				}
+				.locked.on {
+					background-position: 0 -2px;
+					padding-left: 32px;
+					font-size: 13px;
+					line-height: 20px;
+					position: absolute;
+					left: 60px;
+					right: 42px;
+					width: auto;
 				}
 			}
 
@@ -528,14 +541,14 @@ th.header.headerSortDown {
 			min-height: 22px;
 			line-height: 26px;
 		}
-		.camera, .lock {
+		.camera, .locked {
 			background-repeat: no-repeat;
 			padding-left: 32px;
 
 		}
-		.lock {
+		.locked {
 		}
-		.lock.on {
+		.locked.on {
 			background-image: url(../images/lock_on.png);
 			color: white;
 		}
@@ -717,7 +730,7 @@ th.header.headerSortDown {
 .queue {
 	background-image: url(../images/queue.png);
 }
-.lock {
+.locked {
 	background-image: url(../images/lock.png);
 	left: 33%;
 }

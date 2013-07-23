@@ -45,12 +45,11 @@
 				if (self.state=='full') {
 					self.state = 'normal';
 					self.parent.positionPane({el : self.$el, position: self.position});
-					this.$el.addClass(this.position);
+					this.$el.addClass(this.position).removeClass('magnified');
 				} else {
-					console.log(self);
 					self.state = 'full';
 					self.parent.positionPane({el : self.$el, position: 'full'});
-					this.$el.removeClass(this.position);
+					this.$el.removeClass(this.position).addClass('magnified');
 				}
 			}
 		},

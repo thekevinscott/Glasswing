@@ -54,6 +54,12 @@
 
 				// console.log(self.model.get('images'));
 			},8000);
+			setTimeout(function(){
+				self.model.set('images',1);
+				// console.log('could update images here');
+
+				// console.log(self.model.get('images'));
+			},1000);
 
 			// var view = this;
 
@@ -104,7 +110,7 @@
 
 				$(this).find('.draggable').each(function(){
 					$(this).data('dynamic-content','<img src="images/scanned-documents/'+$(this).html()+'" />');
-					$(this).data('header','<h2><span>Scanned Document: '+$(this).html()+'</span> '+'August 12'+'</h2>');
+					$(this).data('header','<h2><span>'+$(this).html()+'</span> '+'August 12'+'</h2>');
 					$(this).data('clss','scanned-document');
 
 				});
@@ -252,7 +258,7 @@
 				// patient_id : this.model.get('patient').get('patient-id'),
 				patient_risks : this.model.get('patient').get('risks'),
 				dob : this.model.get('patient').getDob(),
-				gender : (this.model.get('patient').get('gender') == 'f') ? 'FEMALE' : 'MALE',
+				gender : (this.model.get('patient').get('gender') == 'f') ? 'F' : 'M',
 
 				name : this.model.get('name'),
 				priority : this.model.get('priority'),
@@ -264,7 +270,9 @@
 				hospital_name : this.model.get('hospital_name'),
 				referring_physician : this.model.get('referring_physician'),
 				images : this.model.get('images'),
-				status : this.model.get('status')
+				status : this.model.get('status'),
+				locked : this.model.get('locked'),
+
 
 			}));
 			self.delegateEvents();
@@ -300,13 +308,13 @@
 
 
 					var overlay = $('<div class="follow-overlay" />');
-					$(overlay).html("<strong>You will be notified when this case is updated.</strong>");
+					$(overlay).html("<strong>You will be notified when this case is updated.</strong><a href='javascript:;'>View notification settings</a>");
 					$('body').append(overlay);
 					setTimeout(function(){
 						overlay.fadeOut(function(){
 							$(this).remove();
 						});
-					},4000);
+					},40000);
 
 					setTimeout(function(){
 

@@ -5,7 +5,7 @@ glasswing.models.prior = glasswing.models.abstract.extend({
 
 	},
 	getDate : function() {
-		return this.get('date').getMonth()+'/'+this.get('date').getDate()+'/'+this.get('date').getFullYear();
+		return (this.get('date').getMonth()+1)+'/'+this.get('date').getDate()+'/'+this.get('date').getFullYear();
 	}
 
 });

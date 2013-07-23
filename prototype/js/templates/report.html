@@ -21,8 +21,8 @@
 			<div class="patient row">
 				<div class="col">
 					<h2><%= name %></h2>
-					<p class="patient-id"><span>Patient ID:</span><%= patient_id %></p>
-					<p class="dob"><span>Date of Birth:</span><%= dob %></p>
+					<p class="patient-id"><span>Pt ID:</span><%= patient_id %></p>
+					<p class="dob"><span>DOB:</span><%= dob %></p>
 					<p class="gender"><span>Gender:</span><%= gender %></p>
 					<!-- <p class="risk"><span>Risk:</span><%= patient_risks %></p> -->
 				</div>
@@ -69,18 +69,13 @@
 										<td>1 Per ml</td>
 										<td>10</td>
 									</tr>
-									<tr>
-										<td>Needle</td>
-										<td>1 Piece</td>
-										<td>6</td>
-									</tr>
 								</tbody>
 							</table>
 						</div>
 					</div><!-- pane -->
 					<div class="pane">
 						<div class="header">
-							<h2><span>CR R Arm</span> Today at 9:03</h2>
+							<h2><span>CT Femur</span> Today at 9:03</h2>
 							<div class="buttons">
 								<div class="scanned-documents">
 									<a class="attachments">2</a>
@@ -111,11 +106,6 @@
 										<td>1 Per ml</td>
 										<td>10</td>
 									</tr>
-									<tr>
-										<td>Needle</td>
-										<td>1 Piece</td>
-										<td>6</td>
-									</tr>
 								</tbody>
 							</table>
 						</div>
@@ -134,8 +124,9 @@
 
 			<form class="row dictation">
 				<div class="row">
+					<% if (locked) { %><div class="locked"><p>Currently being read by <%= locked %></div><% } %>
 					<div class="jazz"></div>
-					<textarea hint="Dictate report here..."></textarea>
+					<textarea <% if (locked) { %>disabled="disabled"<% } %>hint="Dictate report here..."></textarea>
 				</div>
 				<div class="row submit">
 					<p class="autosave"></p>
@@ -147,8 +138,8 @@
 	</div><!-- current-report -->
 	<div class="col dynamic-content">
 
-		<div class="container">
-		</div><!-- content -->
+		<div class="container"><div class="helper"><p>Drag a scanned document or a prior here to view.</p></div>
+		</div><!-- container -->
 		<div class="droppable"><div class="border"></div></div>
 
 	</div><!-- dynamic content -->

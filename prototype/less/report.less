@@ -128,11 +128,12 @@ a {
 		z-index: 25;
 		li {
 			border-bottom: 1px solid black;
-			padding: 10px 40px 10px 20px;
+
 			background: url(../images/affordance.png) no-repeat right center;
 			a {
+				padding: 10px 40px 10px 20px;
+
 				margin: 0;
-				padding: 0;
 				color: black;
 				position: relative;
 				display: inline-block;
@@ -239,11 +240,13 @@ a {
 					.accession-number {
 						color: #909eac;
 						margin: 0;
+						font-size: 13px;
 					}
 					.procedure-information {
 						background: url(../images/procedure-information.png) no-repeat left center;
 						padding-left: 26px;
 						margin: 5px 0 5px 0;
+						font-size: 13px;
 					}
 					table {
 						width: 100%;
@@ -253,7 +256,7 @@ a {
 						td {
 							border: none;
 							color: #d2d8de;
-							font-size: 14px;
+							font-size: 13px;
 						}
 
 					}
@@ -361,8 +364,30 @@ a {
 				position: absolute;
 				top: 10px;
 				bottom: 10px;
+				bottom: 0;
 				margin: 0;
 				padding: 30px 10px 10px 10px;
+				background: #acacac;
+
+			}
+			.locked {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background: #FFF;
+				opacity: 0.7;
+				z-index: 10;
+				p {
+					position: absolute;
+					width: 100%;
+					text-align: center;
+					top: 50%;
+					margin-top: -10px;
+					color: #000;
+					-webkit-transform: rotate(-13deg);
+				}
 			}
 
 		}
@@ -396,93 +421,7 @@ a {
 
 
 	}
-	.dynamic-content {
-		left: @current-report+@margin; right: @patient-history + @margin;
-		border: 2px dashed #333;
-		background: #111;
-		.container {
-			height: 100%;
-		}
 
-		.pane {
-			overflow: hidden;
-
-			font-size: 14px;
-			background: black;
-			.content {
-				background: #414141;
-
-			}
-			table td {
-				border: none;
-				font-size: 14px;
-				span {
-					color: @dark-text;
-				}
-			}
-			table tr td:first-child {
-				padding-right: 10px;
-				min-width: 120px;
-			}
-			.header {
-				background: #343434;
-				padding: 10px 20px;
-				font-size: 14px;
-				color: @dark-text;
-				h2 {
-					span {
-						color: white;
-						margin-right: 8px;
-					}
-					display: inline-block;
-					position: absolute;
-					font-size: 14px;
-				}
-				.right {
-					float: right;
-					margin: 0;
-				}
-			}
-			.accession-number {
-				color: @dark-text;
-				margin-bottom: 10px;
-			}
-			p {
-				margin: 0;
-			}
-
-			strong {
-				display: block;
-				color: white;
-				margin-bottom: 10px;
-			}
-			.impression {
-				margin: 10px 0;
-			}
-			.images {
-				background: #343434;
-			}
-
-		}
-		.pane.scanned-document {
-			.content {
-				padding: 0;
-				background: black;
-				overflow: hidden;
-			}
-			img {
-				min-width: 100%;
-			}
-			.header {
-				background: @blue;
-				h2 {
-					color: white;
-
-				}
-
-			}
-		}
-	}
 	.patient-history {
 		position: absolute; width: @patient-history+-@padding; right: @padding;
 	}
@@ -554,123 +493,9 @@ a {
 
 
 
-.draggable {
-
-	right: 0;
-	z-index: 40;
-
-}
-.draggable.clone {
-	position: absolute;
-}
-.droppable {
-	position: absolute;
-	.border {
-		position: absolute;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0;
-	}
-}
-.droppable {
-	height: 100%;
-	width: 100%;
-	top: 0;
-
-}
-.droppable.hover .border {
-	border: 10px solid @blue;
-
-}
-@container-padding : 4px;
-@container-header-height : 40px;
-.container {
-	.pane {
-		width: 100%;
-		position: absolute;
-		height: 100%;
-		margin: 0;
-		padding: 0;
-		cursor: pointer;
-		.header {
-			top: 0;
-			bottom: @container-header-height;
-			position: absolute;
-			left: 0;
-			right: 0;
-		}
-		.content {
-			padding: 20px;
-			left: 0;
-			right: 0;
-			position: absolute;
-			top: @container-header-height;
-
-			overflow: scroll;
-			bottom: 0;
-		}
-
-	}
-	.left {
-		.content, .header {
-			left: 0;
-			right: @container-padding;
-		}
-		.close {
-			right: @container-padding;
-		}
-	}
-	.right {
-		.content, .header {
-			right: 0;
-			left: @container-padding;
-		}
-	}
-	.top {
-		.content {
-			top: @container-header-height;
-			bottom: @container-padding;
-		}
-	}
-	.bottom {
-		.header {
-			top: @container-padding;
-			bottom: @container-padding + @container-header-height;
-		}
-		.content {
-			top: @container-padding + @container-header-height;
-			bottom: 0;
-		}
-	}
 
 
-}
-.close, .magnify {
-	position: absolute;
-	right: 0;
-	width: 32px;
-	height: 32px;
-	cursor: pointer;
-	z-index: 30;
-	top: 5px;
-}
-.close {
-	right: 4px;
-	background: url(../images/close.png) no-repeat center center;
-}
-.magnify {
-	right: 36px;
-	background: url(../images/zoom.png) no-repeat center center;
-}
-.full .magnify {
-
-}
-
-
-
-
-@overlay-width: 400px;
+@overlay-width: 550px;
 .follow-overlay {
 	position: absolute;
 	top: 40px;
@@ -682,6 +507,12 @@ a {
 	background: #6bb753 url(../images/follow-check.png) no-repeat 20px center;
 	padding: 10px 50px;
 	color: white;
+	a {
+		text-decoration: underline;
+		color: #305524;
+		display: inline-block;
+		margin-left: 15px;
+	}
 
 }
 
