@@ -123,7 +123,7 @@ window['data']=function(el,key){return $(el).data(key);};; /* ../js/lib/twilio.j
 var call=function(number){if(window.hasOwnProperty('Twilio')){connection=Twilio.Device.connect({"number":number});}else{throw("Twilio not set up yet");}}
 var hangup=function(){if(window.hasOwnProperty('Twilio')){Twilio.Device.disconnectAll();}else{throw("Twilio not set up yet");}}
 var addListener=function(key,func){if(key=='ready'&&window.hasOwnProperty('Twilio')){func();}else{listeners[key]=func;}}
-$.ajax({url:'../twilio/token.php',dataType:'jsonp',success:function(data){var script=document.createElement('script');script.type='text/javascript';script.src='http://static.twilio.com/libs/twiliojs/1.0/twilio.min.js';$("body").append(script);var setTimer=function(){if(window.hasOwnProperty('Twilio')){setupTwilio(data);}else{setTimeout(function(){setTimer();},200);}}
+$.ajax({url:token_url,dataType:'jsonp',success:function(data){var script=document.createElement('script');script.type='text/javascript';script.src='http://static.twilio.com/libs/twiliojs/1.0/twilio.min.js';$("body").append(script);var setTimer=function(){if(window.hasOwnProperty('Twilio')){setupTwilio(data);}else{setTimeout(function(){setTimer();},200);}}
 setTimer();}});return{call:call,hangup:hangup,addListener:addListener}}();})(jQuery);; /* ../js/lib/utils.js */ if(!window.glasswing){var glasswing={};}
 glasswing.randomDate=function(start,end){if(!start){start=new Date(2008,0,1);}
 if(!end){end=new Date();}
