@@ -47,7 +47,7 @@
 
 			this.$el.addClass('new');
 
-			this.$('img').attr('src','images/notification_on.png').css({width: 20, height: 20, marginTop: -1, marginLeft: -1});
+			this.$('img').attr('src','images/notification_on.png');//.css({width: 20, height: 20, marginTop: -1, marginLeft: -1});
 			var notification = $('<li class="new"><a href="javascript:;">'+message+'</a></li>');
 			self.notifications.push(obj);
 			self.pulser = setTimeout(function(){
@@ -70,15 +70,15 @@
 			var size = 20;
 			var img = $(self.$('img'));
 
-			if (img.css('opacity')==1) {
-				img.animate({opacity: 0.7, width: 16, height: 16, marginTop: 0, marginLeft: 0},{duration: 480});
-			} else {
-				img.animate({opacity: 1, width: size, height: size, marginTop: -1, marginLeft: -1},{duration: 480});
-			}
+			// if (img.css('opacity')==1) {
+			// 	img.animate({opacity: 0.7, width: 16, height: 16, marginTop: 0, marginLeft: 0},{duration: 480});
+			// } else {
+			// 	img.animate({opacity: 1, width: size, height: size, marginTop: -1, marginLeft: -1},{duration: 480});
+			// }
 
-			self.pulser = setTimeout(function(){
-				self.pulse();
-			},500);
+			// self.pulser = setTimeout(function(){
+			// 	self.pulse();
+			// },500);
 		}
 	});
 })(jQuery);

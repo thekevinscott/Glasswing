@@ -1,6 +1,7 @@
 (function($){
 	glasswing.twilio = function() {
-		var token_url = 'http://www.hcii.cmu.edu/M-HCI/2013/Glasswing/twilio/token.php';
+		// var token_url = 'http://www.hcii.cmu.edu/M-HCI/2013/Glasswing/twilio/token.php';
+		var token_url = 'http://herdingpixels.com/twilio/token.php';
 		// var token_url = '../twilio/token.php';
 		var listeners = {};
 
@@ -57,6 +58,7 @@
 		$.ajax({
 			url : token_url,
 			dataType : 'jsonp',
+			data : {ajax : true},
 			// complete : function() {alert('c');},
 			// error : function() {alert('e');},
 			success : function(data) {
