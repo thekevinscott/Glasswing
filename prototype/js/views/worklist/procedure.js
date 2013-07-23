@@ -103,7 +103,7 @@
 				case 'in-queue' :
 					if (this.model.get(key)) {
 						this.$el.addClass(key);
-						this.$('.queue').attr('alt','You have ______ (parked / queued) this case. Go to ______ (folders location) to access all _____ (parked / queued) cases. ');
+						this.$('.queue').attr('alt','You have ______ (parked / queued) this case.<br />Go to ______ (folders location) to access all <br />_____ (parked / queued) cases. ');
 					} else {
 						this.$el.removeClass(key);
 						this.$('.queue').attr('alt','Park or queue this case for later.');

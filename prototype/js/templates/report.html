@@ -1,4 +1,4 @@
-<div id="procedure-<%= id %>" class="procedure">
+<div id="exam-<%= id %>" class="exam">
 
 
 
@@ -7,7 +7,7 @@
 			<!-- <div class="dashboard">
 
 
-				<p class="procedure_class"><%= procedure_class %></p>
+				<p class="exam_class"><%= exam_class %></p>
 				<br /><br />
 
 				<div class="follow">
@@ -95,7 +95,7 @@
 							</div>
 						</div>
 						<div class="content">
-							<p class="accession-number">Accession #: 3910</p>
+							<p class="accession-number">Accession #: 3911</p>
 							<h3 class="procedure-information">Procedure Information</h3>
 							<table>
 								<thead>
@@ -135,11 +135,11 @@
 			<form class="row dictation">
 				<div class="row">
 					<div class="jazz"></div>
-					<textarea>Dictate report here...</textarea>
+					<textarea hint="Dictate report here..."></textarea>
 				</div>
 				<div class="row submit">
-					<p class="autosave">Autosaved at 14:30 today</p>
-					<input type="button" value="Submit Report" />
+					<p class="autosave"></p>
+					<input type="button" value="<% if (status == 'for-approval' ) { %>Approve<% } else { %>Submit Report<% } %>" />
 				</div>
 			</form>
 

@@ -278,7 +278,7 @@
 					display: inline-block;
 				}
 			}
-			.procedure {
+			.exam {
 				padding: 20px 30px 10px 30px;
 				position: relative;
 				border-bottom: 1px solid #696a6a;
@@ -288,7 +288,7 @@
 				position: absolute;
 				right: 0px;
 				top: 16px;
-				background: url('../images/attachment.png') no-repeat;
+				background: url(../images/attachment.png) no-repeat;
 
 				padding-left: 16px;
 				height: 24px;
@@ -348,7 +348,7 @@
 				}
 			}
 
-			.procedure-name {
+			.exam-name {
 				margin-bottom: 20px;
 			}
 			.dob {
@@ -500,8 +500,23 @@ th.header.headerSortDown {
 
 		font-style: italic;
 		text-shadow: none;
+		td {
+			padding: 0 10px;
+		}
 		.image-status p {
 			color: @grid-text;
+
+		}
+		p, h2, h3, .image-status p {
+			background: #2a5d8f;
+			line-height: 26px;
+			padding: 0 10px;
+			margin-bottom: 5px;
+			display: inline-block;
+
+			color: #d6dfe9;
+
+			margin-right: 5px;
 
 		}
 	}
@@ -511,7 +526,6 @@ th.header.headerSortDown {
 			margin: 10px 0;
 			color: @gray-darker;
 			min-height: 22px;
-			line-height: 26px;
 		}
 		.camera, .lock {
 			background-repeat: no-repeat;
@@ -573,7 +587,7 @@ th.header.headerSortDown {
 	.queue-action {
 		padding: 0;
 		height: 32px;
-		width: 32px;
+		/* width: 32px; */
 		a {
 			display: block;
 			width: 32px;
@@ -675,7 +689,7 @@ th.header.headerSortDown {
 		padding: 10px;
 	}
 }
-.procedure-type {
+.exam-type {
 	font-size: 20px;
 }
 .meta {

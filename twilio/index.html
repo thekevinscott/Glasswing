@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Twilio Client Test</title>
+
+<script type="text/javascript" src="../js/lib/jquery.2.0.2.min.js"></script>
+</head>
+
+<script type="text/javascript">
+var glasswing = {};
+(function($){
+	glasswing.twilio = function() {
+
+
+
+		var setupTwilio = function(attb) {
+			var token = attb.token;
+			Twilio.Device.setup(token);
+			Twilio.Device.ready(function (device) {
+				console.log('ready');
+			});
+			Twilio.Device.error(function (error) {
+				console.log('error');
+				console.log(error);
+			});
+
+			Twilio.Device.connect(function (conn) {
+				console.log('connect');
+			});
+			Twilio.Device.disconnect(function (conn) {
+				console.log('disconnects');
+				console.log(conn);
+			});
+		}
+
+
+
+
+		var call = function(number) {
+			connection = Twilio.Device.connect({ "number" : number});
+		}
+		var hangup = function() {
+			Twilio.Device.disconnectAll();
+		}
+
+		$(document).ready(function(){
+			$.ajax({
+				url : 'token.php',
+				dataType : 'jsonp',
+				// complete : function() {},
+				// error : function() {},
+				success : function(data) {
+					var script = document.createElement( 'script' );
+					script.type = 'text/javascript';
+					script.src = 'http://static.twilio.com/libs/twiliojs/1.0/twilio.min.js';
+					$("body").append( script );
+
+					setupTwilio(data);
+					$('#call').click(function(e){
+						// call('7142903863');
+						call('8604608183');
+					});
+					$('#hangup').click(function(e){
+						hangup();
+					});
+				}
+			});
+
+
+		})
+		return {
+			call : call,
+			hangup : hangup
+		}
+	}
+
+})(jQuery);
+
+</script><body>
+<h1>Twilio Client Test</h1>
+<a id="call" href="#">Call</a>
+|
+<a id="hangup" href="#">Hangup</a>
+
+
+</body>
+</html>

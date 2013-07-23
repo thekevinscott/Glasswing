@@ -17,7 +17,7 @@
 @grid-text: #a2a2a2;
 @orange: #f88d47;
 
-.procedure {
+.exam {
 	padding: 20px;
 }
 .pane {
@@ -61,10 +61,10 @@ a {
 	min-height: 100%;
 
 
-	.procedure { zoom: 1; }
-	.procedure:before,
-	.procedure:after { content: ""; display: table; }
-	.procedure:after { clear: both; }
+	.exam { zoom: 1; }
+	.exam:before,
+	.exam:after { content: ""; display: table; }
+	.exam:after { clear: both; }
 
 
 
@@ -272,9 +272,9 @@ a {
 						display: inline-block;
 						padding-left: 24px;
 					}
-					.procedure-information {
+					.exam-information {
 						width: 49%;
-						background: url(../images/procedure-information.png) no-repeat left center;
+						background: url(../images/exam-information.png) no-repeat left center;
 					}
 					.scanned-documents {
 						background: url(../images/scanned-documents.png) no-repeat left center;
@@ -339,11 +339,12 @@ a {
 		.dictation {
 			top: 360px;
 			bottom: 0;
-			border-radius: @border-radius;
+
 			overflow: hidden;
 			.row:first-child {
 				top: 0;
-				bottom: @submit-height;
+				bottom: @submit-height+25px;
+				border-radius: @border-radius;
 			}
 
 			margin-bottom: 0;
@@ -486,7 +487,7 @@ a {
 		position: absolute; width: @patient-history+-@padding; right: @padding;
 	}
 
-	.procedure > * {
+	.exam > * {
 		zoom: 1;
 		display: inline;
 		top: @margin; bottom: @margin;
@@ -494,7 +495,7 @@ a {
 	}
 
 
-	.procedure-date {
+	.exam-date {
 		float: right;
 		margin: 0;
 	}
@@ -539,7 +540,7 @@ a {
 }
 
 .check {
-	background: url('../images/check.png') no-repeat;
+	background: url(../images/check.png) no-repeat;
 	width: 24px;
 	height: 24px;
 	position: absolute;
@@ -549,62 +550,6 @@ a {
 
 
 
-
-.caregivers {
-	text-align: left;
-	text-shadow: none;
-	a {
-		color: black;
-	}
-	select {
-		float: right;
-		margin-right: 20px;
-	}
-	.caregiver {
-		border-top: 1px solid black;
-		position: relative;
-		height: 90px;
-		padding-top: 20px;
-	}
-	.caregiver:last-child {
-		border-bottom: none;
-	}
-	p {
-		margin: 0;
-	}
-	h4 {
-		font-size: 14px;
-	}
-	.image {
-		img {
-			display: block;
-			margin: 0 auto;
-		}
-		text-align: center;
-		float: left;
-		width: 106px;
-		margin-right: 10px;
-		font-size: 13px;
-	}
-	.primary, .secondary {
-		float: left;
-		width: 200px;
-		font-size: 12px;
-		padding-top: 10px;
-	}
-	.backup, .backup a {
-		font-size: 11px;
-		color: #666666;
-	}
-	.flag {
-		position: absolute;
-		right: 0;
-		top: 0;
-		background: url(../images/flag.png);
-		width: 32px;
-		height: 32px;
-	}
-}
 
 
 
@@ -712,11 +657,11 @@ a {
 }
 .close {
 	right: 4px;
-	background: url('../images/close.png') no-repeat center center;
+	background: url(../images/close.png) no-repeat center center;
 }
 .magnify {
 	right: 36px;
-	background: url('../images/zoom.png') no-repeat center center;
+	background: url(../images/zoom.png) no-repeat center center;
 }
 .full .magnify {
 

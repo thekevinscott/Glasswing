@@ -7,7 +7,7 @@
 
 		template : glasswing.template('timeline/index.html'),
 		events : {
-		  "click .actions input[type=button]" : "saveProcedure",
+		  "click .actions input[type=button]" : "saveexam",
 		  "mouseover .timeline-container " : "mouseover",
 		  "mouseout .timeline-container" : "mouseout"
 		},

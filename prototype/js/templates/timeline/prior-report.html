@@ -9,10 +9,10 @@
 
 	<a class="pacs" alt="View images"></a>
 </div>
-<p class="accession-number">Accession #: 3910</p>
+<p class="accession-number">Accession #: <%= accession_id %></p>
 <table>
 	<tr class="reason"><td><span>Reason for exam:</span></td><td><%= indication %></td></tr>
-	<tr class="technique"><td><span>Technique:</span></td><td> <%= procedure %></td></tr>
+	<tr class="technique"><td><span>Technique:</span></td><td> <%= exam %></td></tr>
 	<tr class="comparisons"><td><span>Comparisons:</span></td><td> Plain films of right ankle from 11/14/2008</td></tr>
 
 </table>
@@ -28,14 +28,14 @@
 <a class="community-of-caregivers" style="float: right;" href="javascript:;"><img src="images/coc.png" /></a>
 
 <!--
-	<p class="procedure-date"><span>Fri Nov 09 2012 21:24:34 GMT-0500 (EST)</span></p>
+	<p class="exam-date"><span>Fri Nov 09 2012 21:24:34 GMT-0500 (EST)</span></p>
 
 	<div class="pane">
 		<div class="three-col">
 			<div class="col">
 				<h4>MRI of the ankle</h4>
 
-				<p>Procedure Type: xxx</p>
+				<p>exam Type: xxx</p>
 				<p>Other hospital records</p>
 			</div>
 

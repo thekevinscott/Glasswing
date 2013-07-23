@@ -19,8 +19,8 @@
 		// model : new worklist(),
 		template : glasswing.template('worklist/index'),
 		events : {
-		  // "click tbody tr" : "openProcedure",
-		  // "click .cards .card" : "openProcedure",
+		  // "click tbody tr" : "openexam",
+		  // "click .cards .card" : "openexam",
 		  "click .layouts a.button" : "setLayout"
 		},
 
@@ -36,8 +36,8 @@
 
 			this.current_layout = (localStorage && localStorage['worklist-layout']) ? localStorage['worklist-layout'] : 'table';
 
-			this.procedures = new glasswing.collections.procedures();
-			this.procedures.view = this;
+			this.exams = new glasswing.collections.exams();
+			this.exams.view = this;
 
 			// this.tabManager = attributes.tabManager;
 			// console.log('init the worklist');
@@ -81,12 +81,12 @@
 			self.$target = this.$el.find(current_template.selector);
 
 
-			_.each(self.procedures.models,function(procedure, index){
+			_.each(self.exams.models,function(exam, index){
 
-				procedure.view.setLayout(self.current_layout);
+				exam.view.setLayout(self.current_layout);
 
 
-				self.$target.append(procedure.view.render().$el);
+				self.$target.append(exam.view.render().$el);
 
 
 			});
@@ -405,7 +405,7 @@
 				}
 			}
 		},
-		openProcedure : function(event) {
+		openexam : function(event) {
 			var model = $(event.currentTarget).data('model');
 			this.tabManager.showPage(model);
 

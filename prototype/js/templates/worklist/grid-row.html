@@ -1,15 +1,15 @@
 
-<tr id="procedure-<%= id %>" class="grid-row">
+<tr id="exam-<%= id %>" class="grid-row">
 
 
 
 		<td class="info">
-			<div class="paper-curl"></div>
+			<% if (draft === true) { %><div class="paper-curl" alt="This is a draft."></div><% } %>
 			<% if (stat =='stat') { %>
 			<div class="stat"><div class="stat-shade"></div><strong>STAT: </strong><span class="end-time" rel="<%= end_timestamp %>"></span> </div>
 			<% } %>
 			<!-- <p><%= end_time %></p> -->
-			<h2><%= procedure_name %></h2>
+			<h2><%= exam_name %></h2>
 
 			<p>5 mins ago</p>
 		</td>

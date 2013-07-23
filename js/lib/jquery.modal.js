@@ -53,10 +53,11 @@
             }
             self.data('modal-element',modal);
             $('body').append(modal.el);
-            modal.el.css({opacity: 0})
 
+            modal.el.css({opacity: 0});
         }
-        // modal.show();
+
+        modal.el.show();
 
 
         exit = function () {
@@ -74,12 +75,35 @@
 
 
         var padding_right = 40;
-        if (left + modal.el.width() + padding_right > $(document).width()) {
+
+
+        modal.el.css({left: left, top: top});
+        if (left + modal.el.width() + padding_right > $('body').width()) {
             // slide it over
-            modal.el.css({left: left - 40, top: top});
-            modal.arrow.css({left: '72%'});
-        } else {
-            modal.el.css({left: left, top: top});
+
+            if (0) {
+                // this is the shit about the following dropdown
+                modal.el.css({left: left - 40, top: top});
+                modal.arrow.css({left: '72%'});
+            } else {
+                // console.log(left);
+                // console.log('should be around 1190');
+                // console.log(modal.el.width());
+                // console.log($('body').width());
+                // console.log('final: ' + ($('body').width() - modal.el.width() - padding_right));
+                var new_left = $('body').width() - modal.el.width() - padding_right;
+                console.log(left - new_left);
+                modal.el.css({left: new_left});
+                modal.arrow.css({left: left-new_left});
+
+
+
+
+            }
+
+
+
+
         }
 
 
