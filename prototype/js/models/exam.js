@@ -12,8 +12,8 @@ glasswing.models.exam = glasswing.models.abstract.extend({
 		// this.patient = options.patient;
 		this.on("change", this.change, this);
 
-		if (this.get('lock')===undefined) {
-			this.set('lock',false);
+		if (this.get('locked')===undefined) {
+			this.set('locked',false);
 		}
 		if (this.get('ready')===undefined) {
 			this.set('ready',true);

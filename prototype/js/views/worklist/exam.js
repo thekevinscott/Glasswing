@@ -71,7 +71,7 @@
 				end_time : this.model.getDate('end_time'),
 				end_timestamp : this.model.get('end_time').getTime(),
 				stat : ( (this.model.isStat()) ? 'stat' : null  ),
-				lock : this.model.get('lock'),
+				locked : this.model.get('locked'),
 				ready : this.model.get('ready'),
 				draft : this.model.get('draft')
 			};
@@ -109,7 +109,7 @@
 						this.$('.queue').attr('alt','You have queued this case.<br />Go to your Queue Folder to access all <br />queued cases. ');
 					} else {
 						this.$el.removeClass(key);
-						this.$('.queue').attr('alt','Park or queue this case for later.');
+						this.$('.queue').attr('alt','Add this case to my queue.');
 
 					}
 				break;

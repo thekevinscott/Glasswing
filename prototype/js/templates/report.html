@@ -124,9 +124,9 @@
 
 			<form class="row dictation">
 				<div class="row">
-					<% if (lock) { %><div class="locked"><p>Currently being read by <%= lock %></div><% } %>
+					<% if (locked) { %><div class="locked"><p>Currently being read by <%= locked %></div><% } %>
 					<div class="jazz"></div>
-					<textarea <% if (lock) { %>disabled="disabled"<% } %>hint="Dictate report here..."></textarea>
+					<textarea <% if (locked) { %>disabled="disabled"<% } %>hint="Dictate report here..."></textarea>
 				</div>
 				<div class="row submit">
 					<p class="autosave"></p>

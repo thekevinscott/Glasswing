@@ -68,7 +68,7 @@
 		if (attb.type) { type = attb.type; }
 		examModel = worklist.exams.getRandomExam(patientsCollection.generateRandomPatient(), priors, worklist.exams.length+1);
 		if (attb.priority) { examModel.set('priority',attb.priority); }
-		if (attb.lock !== undefined ) { examModel.set('lock',attb.lock); }
+		if (attb.locked !== undefined ) { examModel.set('locked',attb.locked); }
 		if (attb.ready !== undefined) { examModel.set('ready',attb.ready); }
 
 		examModel.set('exam_type',type);
@@ -99,7 +99,7 @@
 		body_part : 'Abdomen',
 		indication : 'Followup diverticulitis. Questionable abscess and enterovesical fistula.',
 		procedure: 'Oral contrast enhanced CT scan abdomen and pelvis was performed. Coronal and sagittal reconstructions were created.',
-		lock : 'Dr. McCarthy'
+		locked : 'Dr. McCarthy'
 	});
 	createexam({
 		priority : 2,

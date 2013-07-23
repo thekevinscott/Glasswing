@@ -271,7 +271,7 @@
 				referring_physician : this.model.get('referring_physician'),
 				images : this.model.get('images'),
 				status : this.model.get('status'),
-				lock : this.model.get('lock'),
+				locked : this.model.get('locked'),
 
 
 			}));
