@@ -28,7 +28,9 @@ glasswing.models.exam = glasswing.models.abstract.extend({
 		}
 
 
-
+		if (this.get('status')===undefined) {
+			this.set('status','unread'); // read, dictate, co-read, approve
+		}
 
 		this.priors = new glasswing.collections.priors();
 

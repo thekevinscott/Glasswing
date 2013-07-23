@@ -35,7 +35,7 @@
 
 		template : glasswing.template('report.html'),
 		events : {
-		  "click .actions input[type=button]" : "saveexam"
+		  "click input[type=button]" : "saveExam"
 		},
 		initialize : function(attributes) {
 			this.notification_elements = [];
@@ -226,15 +226,15 @@
 		setOptions : function(options) {
 
 		},
-		saveexam : function(event) {
+		saveExam : function(event) {
 			var button = $(event.currentTarget);
 
 			switch(button.val()) {
-				case 'Read' :
-				break;
-				case 'Co-Read' :
+				case 'Submit Report' :
+					this.model.set('status','for-approval');
 				break;
 				case 'Approve' :
+					this.model.set('status','approved');
 				break;
 			}
 
@@ -264,6 +264,7 @@
 				hospital_name : this.model.get('hospital_name'),
 				referring_physician : this.model.get('referring_physician'),
 				images : this.model.get('images'),
+				status : this.model.get('status')
 
 			}));
 			self.delegateEvents();
@@ -311,7 +312,7 @@
 
 						var patient = self.model.get('patient');
 						self.model.worklist.notifications.addNotification({view : self, message : '<strong>'+patient.get('last')+', '+patient.get('first')+'</strong><br />All images have been uploaded.'});
-					},10000);
+					},1000);
 
 				}
 			})

@@ -164,8 +164,8 @@
 
   $js = getJS($input,$prepend);
   $css = getCSS($input,$prepend);
-  file_put_contents($target.'/js/compiled.js', $js);
-  file_put_contents($target.'/css/compiled.css', $css);
+  // file_put_contents($target.'/js/compiled.js', $js);
+  // file_put_contents($target.'/css/compiled.css', $css);
   file_put_contents($target.'index-production.html', getProductionFile($input,$js,$css,$prepend));
   echo 'All done';//.<br /><a href="'.$target.'"></a>';
 
