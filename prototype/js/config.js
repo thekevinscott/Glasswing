@@ -77,6 +77,7 @@
 		examModel.set('procedure_information',attb.procedure);
 		examModel.set('findings',attb.findings);
 		examModel.set('impression',attb.impression);
+		examModel.set('attachments',Math.round(Math.random()*2));
 
 		// if (attb.priors) { examModel.priors = attb.priors };
 		examModel.worklist = worklist;
@@ -90,6 +91,7 @@
 		body_part : 'Chest',
 		indication : 'Right lower lobe lung mass seen on abdominal/pelvic CT scan.',
 		procedure: 'CT scan of the chest.'
+
 	});
 	createexam({
 		priority : 2,

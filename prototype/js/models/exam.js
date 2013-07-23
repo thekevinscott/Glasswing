@@ -32,6 +32,10 @@ glasswing.models.exam = glasswing.models.abstract.extend({
 			this.set('status','unread'); // read, dictate, co-read, approve
 		}
 
+		if (this.get('attachments')===undefined) {
+			this.set('attachments',0);
+		}
+
 		this.priors = new glasswing.collections.priors();
 
 		var self = this;
