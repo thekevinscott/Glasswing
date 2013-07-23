@@ -3,8 +3,15 @@
 		return $(this).each(function(){
 			var el = $(this);
 
-			el.data('placeholder',el.val());
-			el.addClass('hint');
+			var addHint = function() {
+				el.val(el.data('placeholder'));
+				el.addClass('hint');
+			}
+			el.data('placeholder',el.attr('hint'));
+
+			if (! el.val()) {
+				addHint();
+			}
 			el.focus(function(){
 				el.removeClass('hint');
 				if (el.val() === el.data('placeholder')) {
@@ -13,9 +20,7 @@
 				}
 			}).blur(function(){
 				if (el.val() == '') {
-
-					el.val(el.data('placeholder'));
-					el.addClass('hint');
+					addHint();
 				}
 			})
 		});

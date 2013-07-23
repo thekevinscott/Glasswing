@@ -4,7 +4,7 @@
 
 
 		<td class="info">
-			<div class="paper-curl"></div>
+			<% if (draft === true) { %><div class="paper-curl" alt="This is a draft."></div><% } %>
 			<% if (stat =='stat') { %>
 			<div class="stat"><div class="stat-shade"></div><strong>STAT: </strong><span class="end-time" rel="<%= end_timestamp %>"></span> </div>
 			<% } %>

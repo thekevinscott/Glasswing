@@ -19,6 +19,15 @@ glasswing.models.exam = glasswing.models.abstract.extend({
 			this.set('ready',true);
 		}
 
+		var localKey = 'procedure-'+this.get('id')+'-dictation';
+		var localDictation = localStorage[localKey];
+		if (localDictation) {
+			this.set('draft',true);
+		} else {
+			this.set('draft',false);
+		}
+
+
 
 
 		this.priors = new glasswing.collections.priors();

@@ -79,6 +79,7 @@
 
 		},
 		afterRender : function() {
+			var self = this;
 			while(this.notification_elements.length > 0) {
 
 				this.notify(this.notification_elements.shift());
@@ -201,8 +202,25 @@
 			//     }
 			// });
 
+			var dictation_textarea = $('.dictation textarea');
+			var localKey = 'procedure-'+self.model.get('id')+'-dictation';
+			var localDictation = localStorage[localKey];
+			if (localDictation) {
+				dictation_textarea.val(localDictation);
+			}
 
-			$('.dictation textarea').hint().autosave({notification : $('.dictation .autosave')});
+			var setDraft = function() {
+
+				if ($(this).val() == $(this).data('placeholder')) {
+					self.model.set('draft',false);
+					localStorage[localKey] = '';
+				} else {
+					self.model.set('draft',true);
+					localStorage[localKey] = $(this).val();
+				}
+
+			}
+			dictation_textarea.hint().autosave({notification : $('.dictation .autosave')}).keydown(setDraft).blur(setDraft);
 
 		},
 		setOptions : function(options) {
