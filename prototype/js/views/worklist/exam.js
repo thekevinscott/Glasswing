@@ -32,14 +32,14 @@
 	glasswing.views.exam = glasswing.views.abstract.extend({
 		events : {
 			"click" : "click",
-			"mouseover *" : "mouseover",
-			"mouseout *" : "mouseout",
+			// "mouseover *" : "mouseover",
+			// "mouseout *" : "mouseout",
 		},
 
 		initialize : function(attributes) {
 
 			this.model = attributes.model;
-			this.layout = 'table';
+			this.layout = 'grid';
 			this.name = this.model.get('name');
 
 
@@ -72,7 +72,8 @@
 				end_timestamp : this.model.get('end_time').getTime(),
 				stat : ( (this.model.isStat()) ? 'stat' : null  ),
 				lock : this.model.get('lock'),
-				ready : this.model.get('ready')
+				ready : this.model.get('ready'),
+				draft : this.model.get('draft')
 			};
 
 			this['$table'] = $(_.template(glasswing.template('worklist/row'),opts));
@@ -99,11 +100,13 @@
 			return this;
 		},
 		change : function(key) {
+
 			switch(key) {
 				case 'in-queue' :
+
 					if (this.model.get(key)) {
 						this.$el.addClass(key);
-						this.$('.queue').attr('alt','You have ______ (parked / queued) this case.<br />Go to ______ (folders location) to access all <br />_____ (parked / queued) cases. ');
+						this.$('.queue').attr('alt','You have queued this case.<br />Go to your Queue Folder to access all <br />queued cases. ');
 					} else {
 						this.$el.removeClass(key);
 						this.$('.queue').attr('alt','Park or queue this case for later.');

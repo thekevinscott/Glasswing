@@ -19,7 +19,18 @@ glasswing.models.exam = glasswing.models.abstract.extend({
 			this.set('ready',true);
 		}
 
+		var localKey = 'procedure-'+this.get('id')+'-dictation';
+		var localDictation = localStorage[localKey];
+		if (localDictation) {
+			this.set('draft',true);
+		} else {
+			this.set('draft',false);
+		}
 
+
+		if (this.get('status')===undefined) {
+			this.set('status','unread'); // read, dictate, co-read, approve
+		}
 
 		this.priors = new glasswing.collections.priors();
 
@@ -54,8 +65,9 @@ glasswing.models.exam = glasswing.models.abstract.extend({
 		// console.log(localStorage['exam-'+this.get('id')+'-inqueue']);
 
 		_.each(['in-queue','in-folder'],function(key){
-			if (localStorage['exam-'+self.get('id')+'-'+key]) {
-				self.toggle('in-queue',localStorage['exam-'+self.get('id')+'-'+key]);
+			if (localStorage['exam-'+self.get('id')+'-'+key]!==undefined) {
+				var val = (localStorage['exam-'+self.get('id')+'-'+key]==='true') ? true : false;
+				self.toggle('in-queue',val);
 			}
 		});
 
@@ -100,16 +112,16 @@ glasswing.models.exam = glasswing.models.abstract.extend({
 
 	},
 	toggle : function(key,val) {
-		if (val) {
+		if (val !== undefined) {
 			this.set(key,val);
 		} else {
-
 			if (this.get(key)) {
 				this.set(key,false);
 			} else {
 				this.set(key,true);
 			}
 		}
+		// console.log('in queue: '+this.get('id')+': ' + this.get(key));
 		localStorage['exam-'+this.get('id')+'-'+key] = this.get(key);
 	},
 

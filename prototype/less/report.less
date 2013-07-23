@@ -339,11 +339,12 @@ a {
 		.dictation {
 			top: 360px;
 			bottom: 0;
-			border-radius: @border-radius;
+
 			overflow: hidden;
 			.row:first-child {
 				top: 0;
-				bottom: @submit-height;
+				bottom: @submit-height+25px;
+				border-radius: @border-radius;
 			}
 
 			margin-bottom: 0;
@@ -539,7 +540,7 @@ a {
 }
 
 .check {
-	background: url('../images/check.png') no-repeat;
+	background: url(../images/check.png) no-repeat;
 	width: 24px;
 	height: 24px;
 	position: absolute;
@@ -656,11 +657,11 @@ a {
 }
 .close {
 	right: 4px;
-	background: url('../images/close.png') no-repeat center center;
+	background: url(../images/close.png) no-repeat center center;
 }
 .magnify {
 	right: 36px;
-	background: url('../images/zoom.png') no-repeat center center;
+	background: url(../images/zoom.png) no-repeat center center;
 }
 .full .magnify {
 
