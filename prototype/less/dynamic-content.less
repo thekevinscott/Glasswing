@@ -54,17 +54,7 @@
 				background: #414141;
 
 			}
-			table td {
-				border: none;
-				font-size: 14px;
-				span {
-					color: @dark-text;
-				}
-			}
-			table tr td:first-child {
-				padding-right: 10px;
-				min-width: 120px;
-			}
+
 			.header {
 				background: #343434;
 				padding: 10px 20px;
@@ -91,7 +81,15 @@
 				margin-bottom: 10px;
 			}
 			p {
-				margin: 0;
+				border: none;
+				font-size: 14px;
+				margin: 0 0 10px 0;
+				span {
+					color: @dark-text;
+				}
+			}
+			p.label {
+				margin-bottom: 0;
 			}
 
 			strong {
@@ -179,7 +177,7 @@
 			position: absolute;
 			top: @container-header-height;
 
-			overflow: scroll;
+			overflow: auto;
 			bottom: 0;
 		}
 
@@ -198,6 +196,10 @@
 			right: 0;
 			left: @container-padding;
 		}
+	}
+	.left p.field, .right p.field {
+		margin-left: 0;
+		clear: both;
 	}
 	.top {
 		.content {
@@ -237,4 +239,15 @@
 }
 .full .magnify {
 
+}
+.prior-info {
+	@label-width: 130px;
+	p.label {
+		float: left;
+		width: @label-width;
+	}
+	p.field {
+
+		margin-left: @label-width;
+	}
 }
