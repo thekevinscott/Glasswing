@@ -258,7 +258,7 @@
 				// patient_id : this.model.get('patient').get('patient-id'),
 				patient_risks : this.model.get('patient').get('risks'),
 				dob : this.model.get('patient').getDob(),
-				gender : (this.model.get('patient').get('gender') == 'f') ? 'FEMALE' : 'MALE',
+				gender : (this.model.get('patient').get('gender') == 'f') ? 'F' : 'M',
 
 				name : this.model.get('name'),
 				priority : this.model.get('priority'),
@@ -270,7 +270,9 @@
 				hospital_name : this.model.get('hospital_name'),
 				referring_physician : this.model.get('referring_physician'),
 				images : this.model.get('images'),
-				status : this.model.get('status')
+				status : this.model.get('status'),
+				lock : this.model.get('lock'),
+
 
 			}));
 			self.delegateEvents();
@@ -306,13 +308,13 @@
 
 
 					var overlay = $('<div class="follow-overlay" />');
-					$(overlay).html("<strong>You will be notified when this case is updated.</strong>");
+					$(overlay).html("<strong>You will be notified when this case is updated.</strong><a href='javascript:;'>View notification settings</a>");
 					$('body').append(overlay);
 					setTimeout(function(){
 						overlay.fadeOut(function(){
 							$(this).remove();
 						});
-					},4000);
+					},40000);
 
 					setTimeout(function(){
 

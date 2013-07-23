@@ -41,7 +41,7 @@
 			indication: 'Patient complains of abdominal pain which increases on palpation. No palpable mass.',
 			exam: 'Pelvic US',
 			findings: 'Transverse and longitudinal sector scans obtained reveal mild distention of the urinary bladder. There is an enlargd deformed uterus measuring 17 x 20 x 11 cm in size with an abnormal heterogenous ultrasound pattern of the myometruim and multiple poorly defined hypoechoic lesions. Adnexa is not enlarged. Ovarier could not be visualized. No evidence of the gree fluid in the cul-de-sac or in the pelvic cavity.',
-			impression: 'Severe enlarged uterus with deformities and abnormal muometruim pattern consistent with extensive leiomyomatosis most likely. The abnormal ultrasound pattern is most likely all related to the leiomyomas and fibromas. Endometrial contents could not be evaluated accurately. CT images or MRI images could render more accuurate information in this regard'
+			impression: 'Severe enlarged uterus with deformities and abnormal muometruim pattern consistent with extensive leiomyomatosis most likely. The abnormal ultrasound pattern is most likely all related to the leiomyomas and fibromas. Endometrial contents could not be evaluated accurately. CT images or MRI images could render more accurate information in this regard'
 		},
 		{
 			type : 'CT',
@@ -103,7 +103,7 @@
 		priority : 2,
 		type: 'CT',
 		body_part : 'head',
-		indication : 'Low-speed MVA, patient found prone with some confusion. A&O x3. Rule out cervical fractures',
+		indication : 'Low-speed MVA, patient found prone with some confusion. A&O x3. Rule out cervical and other fractures',
 		procedure: 'Volumetric scanning of head and next performed in 64 slices.',
 		ready : false
 	});

@@ -21,6 +21,6 @@ glasswing.models.patient = glasswing.models.abstract.extend({
 		}
 	},
 	getDob : function() {
-		return this.get('dob').getMonth()+'/'+this.get('dob').getDate()+'/'+this.get('dob').getFullYear();
+		return (this.get('dob').getMonth()+1)+'/'+this.get('dob').getDate()+'/'+this.get('dob').getFullYear();
 	}
 });
