@@ -240,7 +240,14 @@
 
 			pane.$el.remove();
 			delete this.panes[pane.pane_id - 1];
-
+			var panes = [];
+			_.each(this.panes,function(new_pane) {
+				panes.push(new_pane);
+			});
+			this.panes = panes;
+			var sister_pane = this.panes[this.panes.length - 1];
+			console.log(sister_pane);
+			this.positionPane({pane : sister_pane, position : 'full'});
 			// var newPanes = [];
 
 			// _.each(this.panes,function(p){
