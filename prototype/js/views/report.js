@@ -54,6 +54,12 @@
 
 				// console.log(self.model.get('images'));
 			},8000);
+			setTimeout(function(){
+				self.model.set('images',1);
+				// console.log('could update images here');
+
+				// console.log(self.model.get('images'));
+			},1000);
 
 			// var view = this;
 

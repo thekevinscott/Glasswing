@@ -91,10 +91,19 @@ glasswing.models.exam = glasswing.models.abstract.extend({
 					self.view.report.addNotification({key : key, val : val});
 				}
 			});
+			_.each(obj.changed,function(val,key){
+				var msg = 'Something has changed.';
+				switch(key) {
+					case 'images' :
+						msg = "Images have been updated.";
+					break;
+				}
 
+				// tab manager needs to be notified. but if the tab is active, then do nothing.
+				self.worklist.tabManager.notify(self.view.report, {alt : msg}); // pass in an optional attributes array
 
-			// tab manager needs to be notified. but if the tab is active, then do nothing.
-			self.worklist.tabManager.notify(self.view.report, {}); // pass in an optional attributes array
+			});
+
 
 		}
 
