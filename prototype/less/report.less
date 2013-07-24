@@ -411,18 +411,50 @@ a {
 				cursor: pointer;
 				display: none;
 			}
-			input[type=button] {
-				background: @green;
+			div.button-container {
+				width: 178px;
+				float: right;
+			}
+			a.button, a.button-options {
+				background: #6bb753;
 				font-size: 14px;
 				box-shadow: 0 5px 0 @green-border;
+				margin-top: 0;
+				display: inline-block;
+				padding: 20px 15px 20px 40px;
 			}
-			input[type=button]:hover {
-				margin-top: 5px;
+			a.button {
+				float: left;
+				padding-right: 15px;
+				border-radius: @border-radius 0 0 @border-radius;
+			}
+			a.button-options {
+				float: right;
+				border-radius: 0 @border-radius @border-radius 0;
+
+			}
+
+
+
+
+			a.button:hover {
+				margin-top: 2px;
 				box-shadow: 0 3px 0 @green-border;
 			}
-			input[type=button]:active {
-				margin-top: 8px;
+			a.button:active {
+				margin-top: 5px;
 				box-shadow: 0 0px 0 @green-border;
+			}
+			a.arrow-up {
+				display: block;
+
+				height: 56px;
+				padding: 0 15px;
+				float: right;
+				border-left: 2px groove #76c65a;
+				background-image: url(../images/arrow-up.png);
+				background-repeat: no-repeat;
+				background-position: center center;
 			}
 		}
 
@@ -532,4 +564,30 @@ a {
 }
 .hamburger {
 	background: url(../images/hamburger.png) no-repeat 0 center;
+}
+
+ul.button-drop-up {
+	list-style: none;
+
+	padding: 0;
+	margin: 0;
+	li {
+		padding: 0;
+		margin: 0;
+		border-bottom: 1px solid #CCC;
+
+	}
+	li:last-child {
+		border-bottom: none;
+	}
+	a {
+		padding: 10px 20px;
+		color: black;
+		text-decoration: none;
+		display: block;
+		border-radius: @border-radius;
+	}
+	a:hover {
+		background: #DDD;
+	}
 }

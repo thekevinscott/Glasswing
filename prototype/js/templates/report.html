@@ -130,7 +130,7 @@
 				</div>
 				<div class="row submit">
 					<p class="autosave"></p>
-					<input type="button" value="<% if (status == 'for-approval' ) { %>Approve<% } else { %>Submit Report<% } %>" />
+					<div class="button-container"><a href="javascript:;" class="submit-button button"><% if (status == 'for-approval' ) { %>Approve</a><% } else { %>Submit Report</a><a href="javascript:;" class='button button-options arrow-up'></a><% } %></div>
 				</div>
 			</form>
 
