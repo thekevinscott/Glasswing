@@ -35,7 +35,8 @@
 
 		template : glasswing.template('report.html'),
 		events : {
-		  "click input[type=button]" : "saveExam"
+		  "click a.submit-button" : "saveExam",
+		  "click a.button-options" : "saveContextMenu"
 		},
 		initialize : function(attributes) {
 			this.notification_elements = [];
@@ -231,9 +232,14 @@
 
 		},
 		saveExam : function(event) {
-			var button = $(event.currentTarget);
+			if (event && event.hasOwnProperty('currentTarget')) {
+				var button = $(event.currentTarget);
+				var val = button.val();
+			} else {
+				var val = event;
+			}
 
-			switch(button.val()) {
+			switch(val) {
 				case 'Submit Report' :
 					this.model.set('status','for-approval');
 				break;
@@ -243,10 +249,32 @@
 			}
 
 			this.tabManager.closeTab(this);
-			self.model.set('reading',false);
+			this.model.set('reading',false);
 
 
 			// how do I access tab manager in this scenario?
+		},
+		saveContextMenu : function(event) {
+			var self = this;
+			event.stopPropagation();
+			var currentTarget = $(event.currentTarget);
+			currentTarget.modal({content: '<ul class="button-drop-up"><li><a href="javascript:;">Save as Prelim Draft</a></li><li><a href="javascript:;">Park Case</a></li></ul>', position: 'top', close : false, overlay_opacity : 0, css : {padding: 0}, callback : function(button) {
+				var modal = currentTarget.data('modal-element');
+				modal.el.find('a').click(function(){
+
+					// self.mouseover(function(){
+					// 	self.modal({content : self.data('alt'), overlay : false, close : false, show : false});
+					// }).mouseout(function(){
+					// 	self.modal.close(self);
+					// });
+
+					currentTarget.modal.close(currentTarget);
+					self.saveExam('Draft');
+					// self.saveExam('Park');
+
+				})
+			} });
+
 		},
 		render : function() {
 			var self = this;
