@@ -8,7 +8,7 @@
 
 			var self = $(this);
 
-
+			self.addClass('tooltip');
 			self.data('alt',self.attr('alt'));
 			self.removeAttr('alt');
 
@@ -20,6 +20,9 @@
 				self.modal({content : self.data('alt'), overlay : false, close : false, show : false});
 			}).mouseout(function(){
 				self.modal.close(self);
+			});
+			self.click(function(e){
+				e.stopPropagation();
 			});
 
 		});

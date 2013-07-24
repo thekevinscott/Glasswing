@@ -80,6 +80,8 @@
 		notify : function(attributes) {
 			if (! this.$el.hasClass('selected')) {
 				this.$el.addClass('notify');
+
+				this.$notification.attr('alt',attributes.alt);
 				this.$notification.show().css({width: 0, height: 0, right: 12, bottom: 12}).animate({width : '18px', height: '18px', right: 3, bottom: 3},
 					{
 						duration : 400,

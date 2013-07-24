@@ -69,6 +69,7 @@ glasswing.collections.tabs = Backbone.Collection.extend({
     },
     // when a model has changed, we update our tab manager to display a notification
     notify : function(view, attributes) {
+        console.log(attributes);
         this.getPage(view,function(page){
             page.tab.notify(attributes);
         });

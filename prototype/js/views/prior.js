@@ -34,6 +34,17 @@
 				self.$dot.addClass('relevant');
 			}
 
+
+			_.each([self.$dot,self.$el],function(el){
+				el.mouseover(function(e){
+					self.$dot.addClass('hover');
+					self.$el.addClass('hover');
+				}).mouseout(function(){
+					self.$dot.removeClass('hover');
+					self.$el.removeClass('hover');
+				})
+			});
+
 			// console.log(this.$dot);
 			// self.delegateEvents();
 			// this.$dot.mouseover(this.mouseover).mouseout(this.mouseout);
@@ -88,6 +99,10 @@
 				collection : self.model.get('caregivers'),
 				button : view.$('.community-of-caregivers')
 			});
+
+
+
+
 
 		},
 

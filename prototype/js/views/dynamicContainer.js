@@ -132,7 +132,7 @@
 									var point = {x: left+click_offset.x, y : top+click_offset.y};
 									position = self.getPosition(point,self.content);
 								}
-								self.addPane({content : draggable.data('dynamic-content'), header : draggable.data('header'), clss : draggable.data('clss'), position: position, callback : draggable.data('callback')});
+								self.addPane({element : draggable, position: position});
 
 							}});
 
@@ -140,7 +140,7 @@
 							self.dragging = false;
 							clone.remove();
 						} else {
-							self.addPane({content : draggable.data('dynamic-content'), header : draggable.data('header'), clss : draggable.data('clss'), position: 'full', callback : draggable.data('callback')});
+							self.addPane({element : draggable, position: 'full', });
 						}
 
 
@@ -172,7 +172,21 @@
 		contains : function(point) {
 			return (cursor.x > self.content.offset().left && cursor.y > self.content.offset().top && cursor.x < self.content.offset().left + width && cursor.y < self.content.offset().top + height);
 		},
-		addPane : function(attributes) {
+		addPane : function(attributes)  {
+
+			// console.log(attributes);
+			var element = attributes.element;
+			console.log(element);
+			if (element) {
+				attributes = $.extend({content : element.data('dynamic-content'), header : element.data('header'), footer : element.data('footer'), clss : element.data('clss'), callback : element.data('callback')},attributes);
+
+			}
+			console.log(attributes);
+
+
+
+
+
 
 			var self = this;
 			// var contents = attributes.contents;
@@ -240,7 +254,14 @@
 
 			pane.$el.remove();
 			delete this.panes[pane.pane_id - 1];
-
+			var panes = [];
+			_.each(this.panes,function(new_pane) {
+				panes.push(new_pane);
+			});
+			this.panes = panes;
+			var sister_pane = this.panes[this.panes.length - 1];
+			console.log(sister_pane);
+			this.positionPane({pane : sister_pane, position : 'full'});
 			// var newPanes = [];
 
 			// _.each(this.panes,function(p){

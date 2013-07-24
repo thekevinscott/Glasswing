@@ -35,7 +35,8 @@
 
 		template : glasswing.template('report.html'),
 		events : {
-		  "click input[type=button]" : "saveExam"
+		  "click a.submit-button" : "saveExam",
+		  "click a.button-options" : "saveContextMenu"
 		},
 		initialize : function(attributes) {
 			this.notification_elements = [];
@@ -54,6 +55,12 @@
 
 				// console.log(self.model.get('images'));
 			},8000);
+			setTimeout(function(){
+				self.model.set('images',1);
+				// console.log('could update images here');
+
+				// console.log(self.model.get('images'));
+			},1000);
 
 			// var view = this;
 
@@ -104,7 +111,7 @@
 
 				$(this).find('.draggable').each(function(){
 					$(this).data('dynamic-content','<img src="images/scanned-documents/'+$(this).html()+'" />');
-					$(this).data('header','<h2><span>Scanned Document: '+$(this).html()+'</span> '+'August 12'+'</h2>');
+					$(this).data('header','<h2><span>'+$(this).html()+'</span> '+'August 12'+'</h2>');
 					$(this).data('clss','scanned-document');
 
 				});
@@ -120,9 +127,7 @@
 			var prior_el = prior.$el;
 			// console.log(prior);
 			this.dynamicPane.addPane({
-				content : prior_el.data('dynamic-content'),
-				header : prior_el.data('header'),
-				clss : prior_el.data('clss'),
+				element : prior_el,
 				callback : function(view){
 					prior.afterRender(view);
 				}
@@ -227,9 +232,14 @@
 
 		},
 		saveExam : function(event) {
-			var button = $(event.currentTarget);
+			if (event && event.hasOwnProperty('currentTarget')) {
+				var button = $(event.currentTarget);
+				var val = button.val();
+			} else {
+				var val = event;
+			}
 
-			switch(button.val()) {
+			switch(val) {
 				case 'Submit Report' :
 					this.model.set('status','for-approval');
 				break;
@@ -239,10 +249,32 @@
 			}
 
 			this.tabManager.closeTab(this);
-
+			this.model.set('reading',false);
 
 
 			// how do I access tab manager in this scenario?
+		},
+		saveContextMenu : function(event) {
+			var self = this;
+			event.stopPropagation();
+			var currentTarget = $(event.currentTarget);
+			currentTarget.modal({content: '<ul class="button-drop-up"><li><a href="javascript:;">Save as Prelim Draft</a></li><li><a href="javascript:;">Park Case</a></li></ul>', position: 'top', close : false, overlay_opacity : 0, css : {padding: 0}, callback : function(button) {
+				var modal = currentTarget.data('modal-element');
+				modal.el.find('a').click(function(){
+
+					// self.mouseover(function(){
+					// 	self.modal({content : self.data('alt'), overlay : false, close : false, show : false});
+					// }).mouseout(function(){
+					// 	self.modal.close(self);
+					// });
+
+					currentTarget.modal.close(currentTarget);
+					self.saveExam('Draft');
+					// self.saveExam('Park');
+
+				})
+			} });
+
 		},
 		render : function() {
 			var self = this;
@@ -251,8 +283,8 @@
 				patient_id : this.model.get('patient').get('id'),
 				// patient_id : this.model.get('patient').get('patient-id'),
 				patient_risks : this.model.get('patient').get('risks'),
-				dob : this.model.get('patient').getDob(),
-				gender : (this.model.get('patient').get('gender') == 'f') ? 'FEMALE' : 'MALE',
+				dob : this.model.get('patient').getDate('dob'),
+				gender : (this.model.get('patient').get('gender') == 'f') ? 'F' : 'M',
 
 				name : this.model.get('name'),
 				priority : this.model.get('priority'),
@@ -264,7 +296,9 @@
 				hospital_name : this.model.get('hospital_name'),
 				referring_physician : this.model.get('referring_physician'),
 				images : this.model.get('images'),
-				status : this.model.get('status')
+				status : this.model.get('status'),
+				locked : this.model.get('locked'),
+
 
 			}));
 			self.delegateEvents();
@@ -300,7 +334,7 @@
 
 
 					var overlay = $('<div class="follow-overlay" />');
-					$(overlay).html("<strong>You will be notified when this case is updated.</strong>");
+					$(overlay).html("<strong>You will be notified when this case is updated.</strong><a href='javascript:;'>View notification settings</a>");
 					$('body').append(overlay);
 					setTimeout(function(){
 						overlay.fadeOut(function(){
@@ -348,7 +382,7 @@
 			this.change('following');
 
 
-
+			self.model.set('reading',true);
 
 			return self;
 		},

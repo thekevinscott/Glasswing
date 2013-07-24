@@ -11,7 +11,7 @@
 			<!-- <p><%= end_time %></p> -->
 			<h2><%= exam_name %></h2>
 
-			<p>5 mins ago</p>
+			<p class="prettyDate" alt="<%= end_time %>" title="<%= end_timestamp %>"></p>
 		</td>
 		<td class="reason">
 			<p><%= clinical_indication %></p>
@@ -38,7 +38,7 @@
 
 			<p class="images-completion-status camera <% if (! ready) { %>not-ready<% } %>" alt="<% if (ready) { %>All images are completed<% } else { %>Images in progress<% } %>"><% if (ready) { %>All images are completed<% } else { %>Images in progress<% } %></p>
 			<!-- <p class="reporting-status lock on">Dr. Rebecca Whatley</p> -->
-			<p class="reporting-status lock <% if (lock) { %>on<% } %>" alt="<% if (lock) { %><%= lock %><% } else { %>Nobody is reporting<% } %>"><% if (lock) { %><%= lock%><% } else { %>Nobody is reporting<% } %></p>
+			<p class="reporting-status locked <% if (locked) { %>on<% } %>" alt="<% if (locked) { %><%= locked %> is reading this case.<% } else { %>Nobody is reporting<% } %>"><% if (locked) { %><%= locked %><% } else { %>Nobody is reporting<% } %></p>
 
 		</td>
 		<td class="queue-action">

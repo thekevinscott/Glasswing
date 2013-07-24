@@ -10,6 +10,7 @@
 <link rel="stylesheet/less" type="text/css" href="less/tabs.less?bust=2" />
 <link rel="stylesheet/less" type="text/css" href="less/worklist.less?bust=2" />
 <link rel="stylesheet/less" type="text/css" href="less/report.less?bust=2" />
+<link rel="stylesheet/less" type="text/css" href="less/dynamic-content.less?bust=2" />
 <link rel="stylesheet/less" type="text/css" href="less/notifications.less?bust=2" />
 <link rel="stylesheet/less" type="text/css" href="less/timeline.less?bust=2" />
 <link rel="stylesheet/less" type="text/css" href="less/caregivers.less?bust=2" />
@@ -20,7 +21,7 @@
 <div id="glasswing" class="glasswing loading">
 	<div class="header row">
 		<div class="tabs col"></div>
-		<div class="search col"><input type="text" value="Search accession #, MRN, patient name, MRN, referring physician, etc." /></div>
+		<div class="search col"><input type="text" hint="Search accession #, MRN, patient name, MRN, referring physician, etc." /></div>
 		<div class="system col">
 			<a href="javascript:;" class="preferences"></a>
 			<a href="javascript:;" class="my-profile">Dr. Lee</a>
@@ -29,13 +30,14 @@
 
 	</div>
 	<div class="page body row"></div>
-	<div class="footer row">&copy; 2013 Glasswing, GE, CMU</div>
+	<div class="footer row"><!-- &copy; 2013 Glasswing, GE, CMU --></div>
 </div><!-- glasswing -->
 
 		<script type="text/javascript" src="../js/lib/less.min.js"></script>
 		<script type="text/javascript" src="../js/lib/jquery.2.0.2.min.js"></script>
 		<script type="text/javascript" src="../js/lib/jquery-ui-1.10.3.custom.min.js"></script>
 		<script type="text/javascript" src="../js/lib/jquery.color.min.js"></script>
+
 		<script type="text/javascript" src="../js/lib/underscore.min.js"></script>
 		<script type="text/javascript" src="../js/lib/backbone.min.js"></script>
 		<script type="text/javascript" src="../js/lib/jquery.easing.min.js"></script>
@@ -43,11 +45,13 @@
 		<script type="text/javascript" src="../js/lib/tinymce/tinymce.min.js"></script>
 		<script type="text/javascript" src="../js/lib/tinymce/jquery.tinymce.min.js"></script>
 
+		<script type="text/javascript" src="../js/lib/jquery.pretty.js"></script>
 		<script type="text/javascript" src="../js/lib/jquery.hint.js"></script>
 		<script type="text/javascript" src="../js/lib/jquery.autosave.js"></script>
 		<script type="text/javascript" src="../js/lib/jquery.modal.js"></script>
 		<script type="text/javascript" src="../js/lib/jquery.tooltip.js"></script>
 		<script type="text/javascript" src="../js/lib/jquery.accordion.js"></script>
+
 
 		<script type="text/javascript" src="../js/glasswing.js"></script>
 
@@ -64,6 +68,8 @@
 		<script type="text/javascript" src="js/models/exam.js"></script>
 		<script type="text/javascript" src="js/models/patient.js"></script>
 		<script type="text/javascript" src="js/models/worklist.js"></script>
+		<script type="text/javascript" src="js/models/doctor.js"></script>
+		<script type="text/javascript" src="js/collections/doctors.js"></script>
 		<script type="text/javascript" src="js/collections/caregivers.js"></script>
 		<script type="text/javascript" src="js/collections/exams.js"></script>
 		<script type="text/javascript" src="js/collections/patients.js"></script>

@@ -10,7 +10,8 @@
             arrow : true,
             close : true,
             overlay : true,
-            content : ''
+            content : '',
+            overlay_opacity : 0.7
         },options);
 
 
@@ -50,11 +51,16 @@
             if (options.overlay) {
 
                 $('body').append(modal.overlay);
+                modal.overlay.css({opacity : options.overlay_opacity})
             }
             self.data('modal-element',modal);
             $('body').append(modal.el);
 
             modal.el.css({opacity: 0});
+            modal.el.addClass(options.position);
+            if (options.css) {
+                modal.content.css(options.css);
+            }
         }
 
         modal.el.show();
@@ -69,9 +75,20 @@
         if (modal.close) { modal.close.click(exit); }
 
 
-        left = offset.left;
 
-        top = offset.top + self.outerHeight() + modal.arrow.outerHeight();
+        switch (options.position) {
+            case 'top' :
+                left = offset.left;
+                top = offset.top + self.outerHeight() + modal.arrow.outerHeight();
+                top = offset.top - modal.el.height() - modal.arrow.outerHeight();
+
+            break;
+            default :
+                left = offset.left;
+                top = offset.top + self.outerHeight() + modal.arrow.outerHeight();
+            break;
+        }
+
 
 
         var padding_right = 40;
@@ -91,8 +108,8 @@
                 // console.log(modal.el.width());
                 // console.log($('body').width());
                 // console.log('final: ' + ($('body').width() - modal.el.width() - padding_right));
+
                 var new_left = $('body').width() - modal.el.width() - padding_right;
-                console.log(left - new_left);
                 modal.el.css({left: new_left});
                 modal.arrow.css({left: left-new_left});
 
@@ -108,9 +125,18 @@
 
 
 
+        switch(options.position) {
+            case 'top' :
+                modal.el.stop().animate({opacity: 1, marginTop: -3},{easing : 'easeOutQuad', duration: 200});
+            break;
+            default :
+                modal.el.stop().animate({opacity: 1, marginTop: 3},{easing : 'easeOutQuad', duration: 200});
+            break;
+        }
 
-        modal.el.stop().animate({opacity: 1, marginTop: 3},{easing : 'easeOutQuad', duration: 200});
-
+        if (options.callback) {
+            options.callback(self);
+        }
 
 
         // glasswing.modal = {modal : modal, overlay : overlay };

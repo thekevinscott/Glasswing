@@ -119,7 +119,7 @@
 	}
 
 	.container {
-		top: 120px;
+		top: 110px;
 		right: @filter_width + (@padding*2);
 		left: 0;
 		padding: 0 @padding;
@@ -156,6 +156,7 @@
 		width: 100%;
 
 		// overflow-x: auto;
+
 
 	}
 	table {
@@ -227,24 +228,65 @@
 
 		}
 
+
 		.card {
 			position: relative;
-			border-radius: 5px;
+
 			zoom: 1;
 			display: block;
-			overflow: hidden;
+
 
 			float: left;
 
 			margin-bottom: 20px;
 
 			cursor: pointer;
+			border-radius: @border-radius;
+			margin-top: 10px;
+			.stat {
+				position: absolute;
+				background: @red;
+				color: white;
+				padding: 5px 5px 5px 15px;
+
+				font-size: 12px;
+				top: -10px;
+				left: -10px;
+				z-index: 12;
+				text-shadow: none;
+				width: 100%;
+				span {
+					font-weight: bold;
+				}
+			}
+			@stat-border : 5px;
+			.stat-shade {
+
+				position: absolute;
+				border-left: @stat-border solid @background;
+				border-right: @stat-border solid @red-shade;
+				border-bottom: @stat-border solid @background;
+				border-top: @stat-border solid @red-shade;
+				left: 0;
+				bottom: -10px;
+			}
+			.stat-shade-right {
+				position: absolute;
+				border-right: @stat-border solid @background;
+				border-left: @stat-border solid @red-shade;
+				border-bottom: @stat-border solid @background;
+				border-top: @stat-border solid @red-shade;
+				right: 0;
+				bottom: -10px;
+
+			}
+
 			.accession-number span , .patient-status span {
 				color: @dark-text;
 				width: 90px;
 				display: inline-block;
 			}
-			.lock.on {
+			.locked.on {
 				background-image: url(../images/lock_on.png);
 				color: white;
 			}
@@ -295,6 +337,9 @@
 				width: 24px;
 				margin-right: 0;
 			}
+			.attachments.none {
+				opacity: 0.3;
+			}
 
 
 			.status {
@@ -332,6 +377,7 @@
 				}
 			}
 			footer {
+				border-radius: 0 0 @border-radius @border-radius;
 				background: #363737;
 				padding: 12px 20px 26px 20px;
 
@@ -340,11 +386,21 @@
 				font-size: 11px;
 				position: relative;
 
-				.camera, .eyeball, .lock {
+				.camera, .eyeball, .locked {
 
 					margin-right: 0;
 					margin-left: 5px;
 
+				}
+				.locked.on {
+					background-position: 0 -2px;
+					padding-left: 32px;
+					font-size: 13px;
+					line-height: 20px;
+					position: absolute;
+					left: 60px;
+					right: 42px;
+					width: auto;
 				}
 			}
 
@@ -398,6 +454,7 @@
 		.content {
 
 			background: @gray;
+			border-radius: @border-radius;
 
 		}
 
@@ -491,6 +548,7 @@ th.header.headerSortDown {
 .grid-worklist {
 	padding-left: 10px;
 	text-shadow: none;
+	margin-top: 10px;
 	td {
 		border: none;
 	}
@@ -519,22 +577,31 @@ th.header.headerSortDown {
 			margin-right: 5px;
 
 		}
+		.filter {
+			position: absolute;
+			background: transparent;
+			top: 20px;
+			right: 10px;
+			margin: 0;
+			padding: 0;
+		}
 	}
 	.image-status {
 
 		p {
-			margin: 10px 0;
+			margin: 0;
 			color: @gray-darker;
 			min-height: 22px;
+			line-height: 26px;
 		}
-		.camera, .lock {
+		.camera, .locked {
 			background-repeat: no-repeat;
 			padding-left: 32px;
 
 		}
-		.lock {
+		.locked {
 		}
-		.lock.on {
+		.locked.on {
 			background-image: url(../images/lock_on.png);
 			color: white;
 		}
@@ -716,7 +783,7 @@ th.header.headerSortDown {
 .queue {
 	background-image: url(../images/queue.png);
 }
-.lock {
+.locked {
 	background-image: url(../images/lock.png);
 	left: 33%;
 }

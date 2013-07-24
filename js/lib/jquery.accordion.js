@@ -51,16 +51,17 @@
 			}
 		}
 
-		var toggle = function(e) {
+		var toggle = function(e,arrow,duration) {
 			if (e) { e.preventDefault(); }
+			if (! arrow) { arrow = $(this);}
+			if (! duration) { duration = 300;}
 
-
-			var arrow = $(this);
-			var pane = $(this).parents('.pane');
+			// var arrow = $(el);
+			var pane = arrow.parents('.pane');
 			var accordion = pane.parents('.accordion');
 
 			var content = pane.find('.content');
-			var duration = 300;
+
 			var easing = 'linear';
 			if (pane.hasClass('collapsed')) {
 				// open
@@ -82,6 +83,7 @@
 
 		var panes = accordion.find('.pane');
 
+		var past_first = false;
 		panes.each(function(){
 			var arrow = $('<div class="arrow"></div>');
 			var pane = $(this);
@@ -89,6 +91,8 @@
 			var header = pane.find('.header');
 			header.prepend(arrow);
 			arrow.click(toggle);
+			if (! past_first) { past_first = true; }
+			else { toggle(null,$(arrow),1); }
 		});
 		setSlaveHeight({duration: 1});
 	}

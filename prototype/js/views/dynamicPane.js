@@ -4,6 +4,7 @@
 		initialize : function(attributes) {
 			this.content = attributes.content;
 			this.header = attributes.header;
+			this.footer = attributes.footer;
 			this.parent = attributes.parent;
 			this.clss = attributes.clss;
 
@@ -18,9 +19,11 @@
 			this.$magnify = $('<div class="magnify" />');
 			this.$header = $('<div class="header">'+this.header+'</div>');
 			this.$content = $('<div class="content">'+this.content+'</div>');
+			if (this.footer) { this.$footer = $('<div class="footer">'+this.footer+'</div>'); }
 			this.$el.addClass(this.clss);
 			this.$el.prepend(this.$header);
 			this.$el.append(this.$content);
+			if (this.$footer) { this.$el.append(this.$footer); }
 
 			this.$header.append(this.$close);
 			this.$header.append(this.$magnify);
@@ -45,12 +48,11 @@
 				if (self.state=='full') {
 					self.state = 'normal';
 					self.parent.positionPane({el : self.$el, position: self.position});
-					this.$el.addClass(this.position);
+					this.$el.addClass(this.position).removeClass('magnified');
 				} else {
-					console.log(self);
 					self.state = 'full';
 					self.parent.positionPane({el : self.$el, position: 'full'});
-					this.$el.removeClass(this.position);
+					this.$el.removeClass(this.position).addClass('magnified');
 				}
 			}
 		},

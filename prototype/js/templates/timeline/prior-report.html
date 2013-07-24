@@ -10,13 +10,14 @@
 	<a class="pacs" alt="View images"></a>
 </div>
 <p class="accession-number">Accession #: <%= accession_id %></p>
-<table>
-	<tr class="reason"><td><span>Reason for exam:</span></td><td><%= indication %></td></tr>
-	<tr class="technique"><td><span>Technique:</span></td><td> <%= exam %></td></tr>
-	<tr class="comparisons"><td><span>Comparisons:</span></td><td> Plain films of right ankle from 11/14/2008</td></tr>
-
-</table>
-
+<div class="prior-info">
+	<p class="reason-label label"><span>Reason for exam:</span></p>
+	<p class="reason field"><%= indication %></p>
+	<p class="technique-label label"><span>Technique:</span></p>
+	<p class="technique field"><%= exam %></p>
+	<p class="comparisons-label label"><span>Comparisons:</span></p>
+	<p class="comparisons field">Plain films of right ankle from 11/14/2008</p>
+</div>
 
 
 
@@ -25,7 +26,7 @@
 <p><strong>Findings:</strong> <%= findings %></p>
 
 
-<a class="community-of-caregivers" style="float: right;" href="javascript:;"><img src="images/coc.png" /></a>
+<!-- <a class="community-of-caregivers" style="float: right;" href="javascript:;"><img src="images/coc.png" /></a> -->
 
 <!--
 	<p class="exam-date"><span>Fri Nov 09 2012 21:24:34 GMT-0500 (EST)</span></p>

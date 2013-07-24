@@ -12,8 +12,10 @@ glasswing.models.exam = glasswing.models.abstract.extend({
 		// this.patient = options.patient;
 		this.on("change", this.change, this);
 
-		if (this.get('lock')===undefined) {
-			this.set('lock',false);
+		this.set('reading',false);
+
+		if (this.get('locked')===undefined) {
+			this.set('locked',false);
 		}
 		if (this.get('ready')===undefined) {
 			this.set('ready',true);
@@ -30,6 +32,10 @@ glasswing.models.exam = glasswing.models.abstract.extend({
 
 		if (this.get('status')===undefined) {
 			this.set('status','unread'); // read, dictate, co-read, approve
+		}
+
+		if (this.get('attachments')===undefined) {
+			this.set('attachments',0);
 		}
 
 		this.priors = new glasswing.collections.priors();
@@ -91,10 +97,19 @@ glasswing.models.exam = glasswing.models.abstract.extend({
 					self.view.report.addNotification({key : key, val : val});
 				}
 			});
+			_.each(obj.changed,function(val,key){
+				var msg = 'Something has changed.';
+				switch(key) {
+					case 'images' :
+						msg = "Images have been updated.";
+					break;
+				}
 
+				// tab manager needs to be notified. but if the tab is active, then do nothing.
+				self.worklist.tabManager.notify(self.view.report, {alt : msg}); // pass in an optional attributes array
 
-			// tab manager needs to be notified. but if the tab is active, then do nothing.
-			self.worklist.tabManager.notify(self.view.report, {}); // pass in an optional attributes array
+			});
+
 
 		}
 
@@ -154,10 +169,6 @@ glasswing.models.exam = glasswing.models.abstract.extend({
 	},
 	unfollow : function() {
 		this.following = false;
-	},
-	getDate : function(key) {
-		if (! key) { key = 'date';}
-		return (this.get(key).getMonth()+1)+'/'+this.get(key).getDate()+'/'+this.get(key).getFullYear();
 	},
 	getName : function() {
 		return this.get('exam_type').toUpperCase() + ' '+this.get('body_part').toUpperCase();

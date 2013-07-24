@@ -54,7 +54,7 @@
 				id : this.model.get('id'),
 				accession_id : Math.round(Math.random()*1000)+1000,
 				attachments : this.model.get('attachments'),
-				dob : this.model.get('patient').getDob(),
+				dob : this.model.get('patient').getDate('dob'),
 				first : this.model.get('patient').get('first'),
 				last : this.model.get('patient').get('last'),
 				gender : (this.model.get('patient').get('gender') == 'f') ? 'FEMALE' : 'MALE',
@@ -68,10 +68,10 @@
 				referring_physician : this.model.get('referring_physician'),
 				hospital_name : this.model.get('hospital_name'),
 				clinical_indication : this.model.get('clinical_indication'),
-				end_time : this.model.getDate('end_time'),
+				end_time : this.model.getDateAndTime('end_time'),
 				end_timestamp : this.model.get('end_time').getTime(),
 				stat : ( (this.model.isStat()) ? 'stat' : null  ),
-				lock : this.model.get('lock'),
+				locked : this.model.get('locked'),
 				ready : this.model.get('ready'),
 				draft : this.model.get('draft')
 			};
@@ -97,6 +97,7 @@
 				self.model.toggle('in-queue');
 			});
 			this.change('in-queue');
+
 			return this;
 		},
 		change : function(key) {
@@ -109,8 +110,18 @@
 						this.$('.queue').attr('alt','You have queued this case.<br />Go to your Queue Folder to access all <br />queued cases. ');
 					} else {
 						this.$el.removeClass(key);
-						this.$('.queue').attr('alt','Park or queue this case for later.');
-
+						this.$('.queue').attr('alt','Add this case to my queue.');
+					}
+				break;
+				case 'locked' :
+					if (this.model.get(key)) {
+						this.$('.locked').addClass('on');
+						this.$('.locked').html(this.model.get(key));
+						this.$('.locked').attr('alt',this.model.get(key)+' is reading this case');
+					} else {
+						this.$('.locked').removeClass('on');
+						this.$('.locked').html('Nobody is reporting');
+						this.$('.locked').attr('alt','Nobody is reporting');
 					}
 				break;
 			}
