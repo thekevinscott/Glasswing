@@ -245,7 +245,7 @@
 			}
 
 			this.tabManager.closeTab(this);
-
+			self.model.set('reading',false);
 
 
 			// how do I access tab manager in this scenario?
@@ -257,7 +257,7 @@
 				patient_id : this.model.get('patient').get('id'),
 				// patient_id : this.model.get('patient').get('patient-id'),
 				patient_risks : this.model.get('patient').get('risks'),
-				dob : this.model.get('patient').getDob(),
+				dob : this.model.get('patient').getDate('dob'),
 				gender : (this.model.get('patient').get('gender') == 'f') ? 'F' : 'M',
 
 				name : this.model.get('name'),
@@ -356,7 +356,7 @@
 			this.change('following');
 
 
-
+			self.model.set('reading',true);
 
 			return self;
 		},

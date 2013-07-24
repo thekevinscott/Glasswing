@@ -78,6 +78,7 @@
 		examModel.set('findings',attb.findings);
 		examModel.set('impression',attb.impression);
 		examModel.set('attachments',Math.round(Math.random()*2));
+		// examModel.set('end_time',new Date());
 
 		// if (attb.priors) { examModel.priors = attb.priors };
 		examModel.worklist = worklist;
@@ -99,7 +100,7 @@
 		body_part : 'Abdomen',
 		indication : 'Followup diverticulitis. Questionable abscess and enterovesical fistula.',
 		procedure: 'Oral contrast enhanced CT scan abdomen and pelvis was performed. Coronal and sagittal reconstructions were created.',
-		locked : 'Dr. McCarthy'
+		// locked : 'Dr. McCarthy'
 	});
 	createexam({
 		priority : 2,
@@ -119,75 +120,8 @@
 
 
 
-
-	// createexam({
-	// 	type : 'NUCLEAR',
-	// 	body_part: 'BACK',
-	// 	indication : 'Low back pain; remote history of cancer.',
-	// 	exam: 'After intravenous administration of x mCi of Tc-99m MDP, delayed total body images were obtained. Selected spot images as well as tomographic images (SPECT) images of the lumbosacral spine were also obtained.',
-	// 	findings : 'Focal areas of moderately increased tracer activity are present in the lateral aspects of the L4 vertebra. On tomographic imaging, these areas of abnormal tracer activity localize to the facet joints. Mildly increased focal tracer activity is also present in a symmetric pattern in the shoulders, sternoclavicular joints, hips, knees (right greater than left), and ankles. A focal area of mildly increased tracer activity is noted in the anteromedial aspect of  the left 2nd rib. Moderately increased focal tracer activity is present in the right maxilla. There is no abnormal tracer activity in the soft tissues or urinary tract.',
-	// 	impression : '1. No scan evidence of osteoblastic metastatic disease. 2. Extensive degenerative changes are present in multiple peripheral joints and the lumbar spine. 3. Scan findings in the right maxilla are most consistent with periodontal disease. 4. The focus of mild tracer activity in the anteromedial aspect of the left 2nd rib is likely related to a healing rib fracture. 5. No previous bone scans were available for comparison. '
-	// });
-
-
-	// for (var i=0;i<3;i++) {
-
-	// 	var examModel = worklist.exams.getRandomexam(patientsCollection.generateRandomPatient());
-
-	// 	examModel.worklist = worklist;
-
-	// 	//var examView = new glasswing.views.exam({model : examModel});
-
-	// 	worklist.exams.add(examModel);
-
-	// }
-
-
-
-
-
-
-
-
-
-	// var parseChapters = function(data) {
-	// 	var chapters = {
-
-	// 	}
-
-	// 	_.each([data],function(chapter){
-	// 		var key;
-	// 		// var pane_count;
-	// 		var pane_name;
-	// 		_.each(markdown.toHTMLTree(chapter),function(node){
-
-
-
-
-
-	// 			switch(node[0]) {
-	// 				case 'h1' :
-	// 					key = node[1].toURL();
-	// 					if ( ! chapters.hasOwnProperty(key)) { chapters[key] = {panes : {}, panes_by_order : [] }; }
-	// 					chapters[key].title = node[1];
-	// 				break;
-	// 				case 'h2' :
-	// 					// if (pane_count===undefined) { pane_count = 0;}
-	// 					// else { pane_count++; }
-	// 					pane_name = node[1].toURL();
-	// 					chapters[key].panes[pane_name] = {title : node[1], paragraphs : [] };
-	// 					chapters[key].panes_by_order.push(chapters[key].panes[pane_name]);
-	// 				break;
-	// 				case 'p' :
-	// 					chapters[key].panes[pane_name].paragraphs.push(node[1]);
-	// 				break;
-	// 			}
-	// 		});
-	// 	});
-	// 	return chapters;
-	// }
-
-	// glasswing.config = {worklist : worklist, chapters : parseChapters($('#guide-chapter1')) };
+	var doctors = new glasswing.collections.doctors();
+	doctors.generateDoctors(worklist);
 	glasswing.config = {worklist : worklist };
 
 
