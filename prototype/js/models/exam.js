@@ -12,6 +12,8 @@ glasswing.models.exam = glasswing.models.abstract.extend({
 		// this.patient = options.patient;
 		this.on("change", this.change, this);
 
+		this.set('reading',false);
+
 		if (this.get('locked')===undefined) {
 			this.set('locked',false);
 		}
@@ -167,10 +169,6 @@ glasswing.models.exam = glasswing.models.abstract.extend({
 	},
 	unfollow : function() {
 		this.following = false;
-	},
-	getDate : function(key) {
-		if (! key) { key = 'date';}
-		return (this.get(key).getMonth()+1)+'/'+this.get(key).getDate()+'/'+this.get(key).getFullYear();
 	},
 	getName : function() {
 		return this.get('exam_type').toUpperCase() + ' '+this.get('body_part').toUpperCase();

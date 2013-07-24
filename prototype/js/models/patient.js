@@ -20,7 +20,7 @@ glasswing.models.patient = glasswing.models.abstract.extend({
 			this.set('patient_id',patient_id);
 		}
 	},
-	getDob : function() {
-		return (this.get('dob').getMonth()+1)+'/'+this.get('dob').getDate()+'/'+this.get('dob').getFullYear();
-	}
+	// getDob : function() {
+	// 	return (this.get('dob').getMonth()+1)+'/'+this.get('dob').getDate()+'/'+this.get('dob').getFullYear();
+	// }
 });

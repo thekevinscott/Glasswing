@@ -34,7 +34,8 @@
 			// console.log("*** initialize our worklist");
 			glasswing.views.abstract.prototype.initialize.apply(this, arguments);
 
-			this.current_layout = (localStorage && localStorage['worklist-layout']) ? localStorage['worklist-layout'] : 'table';
+			this.default_layout = 'grid';
+			this.current_layout = (localStorage && localStorage['worklist-layout']) ? localStorage['worklist-layout'] : this.default_layout;
 
 			this.exams = new glasswing.collections.exams();
 			this.exams.view = this;
@@ -111,6 +112,8 @@
 			$('.tab-worklist').removeClass('grid');
 			$('.tab-worklist').removeClass('card');
 			$('.tab-worklist').addClass(self.current_layout);
+
+			this.$('.prettyDate').prettyDate();
 
 			return this;
 		},
