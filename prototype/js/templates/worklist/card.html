@@ -2,7 +2,9 @@
 
 
 	<div class="content">
-
+		<% if (stat =='stat') { %>
+		<div class="stat"><div class="stat-shade"></div><strong>STAT: </strong><span class="end-time" rel="<%= end_timestamp %>"></span><div class="stat-shade-right"></div></div>
+		<% } %>
 		<div class="exam">
 			<div class="attachments <% if (attachments === 0) { %>none<% } %>" alt="There <% if (attachments === 1) { %>is 1 attachment<% } else { %>are <%= attachments %> attachments<% } %>"></div>
 			<h3><span><%= exam_name %></span></h3>

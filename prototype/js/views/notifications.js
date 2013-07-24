@@ -26,14 +26,14 @@
 
 			self.$el.mouseover(function(){
 				self.$el.removeClass('new');
-				this.$el.find('img').attr('src','images/notification.png');
+				self.$el.find('img').attr('src','images/notification.png');
 				self.$content.html('No new notifications');
 				self.notifications = [];
 				self.$sheet.show();
 			}).mouseout(function(){
 				self.$sheet.hide();
 				self.$sheet.find('.new').removeClass('new');
-				this.$el.find('img').attr('src','images/notification.png');
+				self.$el.find('img').attr('src','images/notification.png');
 			})
 
 			// this.addNotification('<strong>Wise, Sam</strong><br />All images have been uploaded.');
