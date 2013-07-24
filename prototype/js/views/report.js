@@ -257,10 +257,19 @@
 		saveContextMenu : function(event) {
 			var self = this;
 			event.stopPropagation();
-			$(event.currentTarget).modal({content: '<ul class="button-drop-up"><li><a href="javascript:;">Save as Prelim Draft</a></li><li><a href="javascript:;">Park Case</a></li></ul>', position: 'top', close : false, overlay_opacity : 0, css : {padding: 0}, callback : function(modal) {
-				modal.find('a').click(function(){
+			var currentTarget = $(event.currentTarget);
+			currentTarget.modal({content: '<ul class="button-drop-up"><li><a href="javascript:;">Save as Prelim Draft</a></li><li><a href="javascript:;">Park Case</a></li></ul>', position: 'top', close : false, overlay_opacity : 0, css : {padding: 0}, callback : function(button) {
+				var modal = currentTarget.data('modal-element');
+				modal.el.find('a').click(function(){
 
-					// self.saveExam('Draft');
+					// self.mouseover(function(){
+					// 	self.modal({content : self.data('alt'), overlay : false, close : false, show : false});
+					// }).mouseout(function(){
+					// 	self.modal.close(self);
+					// });
+
+					currentTarget.modal.close(currentTarget);
+					self.saveExam('Draft');
 					// self.saveExam('Park');
 
 				})

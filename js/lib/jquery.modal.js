@@ -135,7 +135,7 @@
         }
 
         if (options.callback) {
-            options.callback(modal.el);
+            options.callback(self);
         }
 
 
