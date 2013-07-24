@@ -312,7 +312,7 @@
 						overlay.fadeOut(function(){
 							$(this).remove();
 						});
-					},40000);
+					},4000);
 
 					setTimeout(function(){
 

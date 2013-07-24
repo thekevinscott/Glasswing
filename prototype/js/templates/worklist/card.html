@@ -6,7 +6,7 @@
 		<div class="stat"><div class="stat-shade"></div><strong>STAT: </strong><span class="end-time" rel="<%= end_timestamp %>"></span><div class="stat-shade-right"></div></div>
 		<% } %>
 		<div class="exam">
-			<div class="attachments <% if (attachments === 0) { %>none<% } %>" alt="There <% if (attachments === 1) { %>is 1 attachment<% } else { %>are <%= attachments %> attachments<% } %>"></div>
+			<a href="javascript:;" class="attachments <% if (attachments === 0) { %>none<% } %>" alt="There <% if (attachments === 1) { %>is 1 attachment<% } else { %>are <%= attachments %> attachments<% } %>"></a>
 			<h3><span><%= exam_name %></span></h3>
 			<p><%= clinical_indication %></p>
 			<p class="accession-number"><span>Accession #:</span> <%= accession_id %></p>

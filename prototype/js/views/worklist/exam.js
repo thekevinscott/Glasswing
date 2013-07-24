@@ -97,6 +97,7 @@
 				self.model.toggle('in-queue');
 			});
 			this.change('in-queue');
+
 			return this;
 		},
 		change : function(key) {
