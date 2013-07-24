@@ -63,6 +63,7 @@
 				_.each([prior.view.$el,prior.view.$dot],function(el){
 					el.data('dynamic-content',prior.view.getReport());
 					el.data('header','<h2><span>'+prior.get('type')+' '+prior.get('body_part')+'</span> '+prior.getDate()+'</h2>');
+					el.data('footer','<div class="actions"><a href="javascript:;" class="folder">Add to folder</a><a href="javascript:;" class="community-of-caregivers">Related Caregivers</a><a href="javascript:;" class="hamburger"></a></div>');
 					el.data('clss','prior');
 					el.data('callback',function(view){
 						prior.view.afterRender(view);

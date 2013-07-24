@@ -155,6 +155,7 @@
 }
 @container-padding : 4px;
 @container-header-height : 40px;
+@container-footer-height : 30px;
 .container {
 	.pane {
 		width: 100%;
@@ -176,14 +177,66 @@
 			right: 0;
 			position: absolute;
 			top: @container-header-height;
+			bottom: @container-footer-height;
 
 			overflow: auto;
 			bottom: 0;
 		}
+		.footer {
+			height: @container-footer-height;
+			bottom: 0;
+			position: absolute;
+			left: 0;
+			right: 0;
+			background: #545454;
+			a {
+				color: #aaaaaa;
+				text-decoration: none;
+				position: absolute;
+				min-height: 24px;
+				line-height: 24px;
+				padding-top: 2px;
+			}
+
+			.community-of-caregivers {
+
+				padding-left: 24px;
+				background: url(../images/coc.png) no-repeat left center;
+				left: 120px;
+				width: 200px;
+				margin-right: 12px;
+			}
+			.folder {
+				background: url(../images/folder.png) no-repeat left center;
+				left: 10px;
+				width: 120px;
+				padding-left: 24px;
+
+				transition: 		all 0.3s;
+				-webkit-transition: all 0.3s; /* Safari */
+			}
+			.follow {
+				left: 0;
+				width: 20%;
+
+				padding-left: 24px;
+				margin-left: 12px;
+				background: url(../images/notification.png) no-repeat left center;
+			}
+			.follow.active {
+				background: url(../images/notification_selected.png) no-repeat left center;
+				color: white;
+			}
+			.hamburger {
+				right: 1%;
+				width: 24px;
+				background: url(../images/hamburger.png) no-repeat right center;
+			}
+		}
 
 	}
 	.left {
-		.content, .header {
+		.content, .header, .footer {
 			left: 0;
 			right: @container-padding;
 		}
@@ -192,7 +245,7 @@
 		}
 	}
 	.right {
-		.content, .header {
+		.content, .header, .footer {
 			right: 0;
 			left: @container-padding;
 		}
@@ -204,6 +257,9 @@
 	.top {
 		.content {
 			top: @container-header-height;
+			bottom: @container-footer-height+@container-padding;
+		}
+		.footer {
 			bottom: @container-padding;
 		}
 	}
@@ -214,8 +270,9 @@
 		}
 		.content {
 			top: @container-padding + @container-header-height;
-			bottom: 0;
+			bottom: @container-footer-height;
 		}
+
 	}
 
 
