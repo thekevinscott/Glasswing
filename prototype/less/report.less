@@ -302,22 +302,25 @@ a {
 					position: absolute;
 					display: block;
 					text-decoration: none;
-					padding: 5px 0;
+					padding: 1px 0;
 					font-size: 12px;
 					margin-top: 5px;
+					min-height: 24px;
+					line-height: 24px;
 				}
 
 				.community-of-caregivers {
 
 					padding-left: 24px;
 					background: url(../images/coc.png) no-repeat left center;
-					right: 0;
+					left: 50%;
+					width: 25%;
 					margin-right: 12px;
 				}
 				.folder {
 					background: url(../images/folder.png) no-repeat left center;
-					left: 37%;
-					width: 30%;
+					left: 25%;
+					width: 20%;
 					padding-left: 24px;
 
 					transition: 		all 0.3s;
@@ -325,7 +328,7 @@ a {
 				}
 				.follow {
 					left: 0;
-					width: 33%;
+					width: 20%;
 
 					padding-left: 24px;
 					margin-left: 12px;
@@ -334,6 +337,11 @@ a {
 				.follow.active {
 					background: url(../images/notification_selected.png) no-repeat left center;
 					color: white;
+				}
+				.hamburger {
+					right: 1%;
+					width: 5%;
+					background: url(../images/hamburger.png) no-repeat right center;
 				}
 			}
 
@@ -521,4 +529,7 @@ a {
 	background-image: url(../images/folder_on.png);
 	color: white;
 
+}
+.hamburger {
+	background: url(../images/hamburger.png) no-repeat 0 center;
 }

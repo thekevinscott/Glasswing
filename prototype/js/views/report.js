@@ -126,9 +126,7 @@
 			var prior_el = prior.$el;
 			// console.log(prior);
 			this.dynamicPane.addPane({
-				content : prior_el.data('dynamic-content'),
-				header : prior_el.data('header'),
-				clss : prior_el.data('clss'),
+				element : prior_el,
 				callback : function(view){
 					prior.afterRender(view);
 				}
