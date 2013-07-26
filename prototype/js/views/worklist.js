@@ -114,6 +114,8 @@
 			$('.tab-worklist').addClass(self.current_layout);
 
 			this.$('.prettyDate').prettyDate();
+			// console.log($('input[hint]')[0]);
+			this.$('input[hint]').hint();
 
 			return this;
 		},

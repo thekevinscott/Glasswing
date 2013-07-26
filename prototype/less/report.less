@@ -186,12 +186,14 @@ a {
 		}
 
 		.currents {
-			overflow: hidden;
+			overflow: visible;
 			top: @patients-height;
-			border-radius: @border-radius;
+
 			.pane:first-child .header {
 				border-top: none;
+				border-radius: @border-radius @border-radius 0 0;
 			}
+
 
 			.pane {
 				background: #2c425c;
@@ -297,6 +299,7 @@ a {
 				padding-bottom: 0px;
 				width: 100%;
 				background: #313131;
+				border-radius: 0 0 @border-radius @border-radius;
 				a {
 					color: @dark-text;
 					position: absolute;
