@@ -4,6 +4,7 @@ glasswing.models.exam = glasswing.models.abstract.extend({
 		associated_page_view : 'report'
 	},
 	initialize : function(attributes) {
+		var self = this;
 
 		if (! attributes || ! attributes.patient) {throw "No patient specified!";}
 		this.view = new glasswing.views.exam({model : this});
@@ -12,31 +13,24 @@ glasswing.models.exam = glasswing.models.abstract.extend({
 		// this.patient = options.patient;
 		this.on("change", this.change, this);
 
-		this.set('reading',false);
-
-		if (this.get('locked')===undefined) {
-			this.set('locked',false);
-		}
-		if (this.get('ready')===undefined) {
-			this.set('ready',true);
-		}
-
-		var localKey = 'procedure-'+this.get('id')+'-dictation';
-		var localDictation = localStorage[localKey];
-		if (localDictation) {
-			this.set('draft',true);
-		} else {
-			this.set('draft',false);
+		var defaults = {
+			reading : false,
+			locked : false,
+			ready : true,
+			status : 'unread', // read, dictate, co-read, approve
+			attachments : 0,
+			accession_id : Math.round(Math.random()*1000)+1000,
+			draft : false
 		}
 
+		_.each(defaults,function(val,key){
+			if (self.get(key)===undefined) {
+				self.set(key,val);
+			}
+		});
 
-		if (this.get('status')===undefined) {
-			this.set('status','unread'); // read, dictate, co-read, approve
-		}
 
-		if (this.get('attachments')===undefined) {
-			this.set('attachments',0);
-		}
+		if (localStorage['procedure-'+this.get('id')+'-dictation']) {this.set('draft',true);}
 
 		this.priors = new glasswing.collections.priors();
 
@@ -143,8 +137,19 @@ glasswing.models.exam = glasswing.models.abstract.extend({
 	// we overload our parent get function
 	get: function (attr) {
 		switch(attr) {
+			case 'exam_name' :
+				return this.getName();
+			break;
 			case 'name' :
 				return this.get('patient').getName();
+			break;
+			case 'gender' :
+				return this.get('patient').get(attr);
+			break;
+			case 'dob' :
+			break;
+			case 'patient_id' :
+				return this.get('patient').get('id');
 			break;
 			default :
 	  			return Backbone.Model.prototype.get.call(this, attr);

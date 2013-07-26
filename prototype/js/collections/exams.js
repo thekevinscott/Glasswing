@@ -33,9 +33,44 @@ glasswing.collections.exams = Backbone.Collection.extend({
 	getExam : function(exam_id) {
 		return this.get(exam_id);
 	},
-	getExams : function() {
+
+	getExams : function(options) {
 		// console.log('get exam!');
-		return this.models;
+		var self = this;
+		if (! options) {
+			return this.models;
+		} else {
+			var models = [];
+			_.each(this.models,function(model) {
+
+				// does it fit?
+				var valid = true;
+				_.each(options.search,function(arg, key) {
+					var model_val = model.get(key);
+					console.log(model_val);
+					console.log(arg);
+					if (valid == true && model_val && ! self.contains(model_val,arg)) {
+						valid = false;
+					}
+				});
+				if (valid) { models.push(model); }
+			});
+
+			if (options.sort) {
+				console.log('sort it');
+			}
+
+
+			return models;
+		}
+
+	},
+	contains : function(haystack,needle) {
+		haystack = "" + haystack;
+		needle = "" + needle;
+		return (haystack.toLowerCase().indexOf(needle.toLowerCase())!==-1) ? true : false;
+
+
 	},
 	getExamsByModality : function() {
 
@@ -75,6 +110,25 @@ glasswing.collections.exams = Backbone.Collection.extend({
 	},
 	getRandomIngredient : function(key) {
 		return this.ingredients[key][Math.round(Math.random()* (this.ingredients[key].length-1) )];
+	},
+	search : function(args) {
+		return this.getExams(args);
+		var valid_models = [];
+		_.each(this.models,function(model) {
+
+			// does it fit?
+			var valid = true;
+			_.each(args,function(arg, key) {
+				// console.log(key);
+				var model_val = model.get(key);
+				// console.log(model_val);
+				if (valid == true && model_val && ! model_val.contains(arg)) {
+					valid = false;
+				}
+			});
+			if (valid) { valid_models.push(model); }
+		});
+		return valid_models;
 	}
 
 });

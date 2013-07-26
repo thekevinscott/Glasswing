@@ -21,7 +21,8 @@
 		events : {
 		  // "click tbody tr" : "openexam",
 		  // "click .cards .card" : "openexam",
-		  "click .layouts a.button" : "setLayout"
+		  "click .layouts a.button" : "setLayout",
+
 		},
 
 		buttons : {},
@@ -305,18 +306,44 @@
 					// });
 				break;
 				case 'grid' :
-					self.$('.grid-header p').click(function(e){
-						var old = $(this).html();
-						var form = $('<form />');
-						var input = $('<input name="something" type="text" />');
-						$(this).html(form);
-						form.html(input);
-						input.focus();
-						form.submit(function(e){
-							e.preventDefault();
-							$(this).replaceWith(input.val());
-						});
+					// self.$('.grid-header p').click(function(e){
+					// 	var old = $(this).html();
+					// 	var form = $('<form />');
+					// 	var input = $('<input name="something" type="text" />');
+					// 	$(this).html(form);
+					// 	form.html(input);
+					// 	input.focus();
+					// 	form.submit(function(e){
+					// 		e.preventDefault();
+					// 		$(this).replaceWith(input.val());
+					// 	});
 
+					// });
+					self.$('.grid-header td').click(function(e){
+						$(this).find('input:first').focus();
+					});
+					self.$search_fields = self.$('.grid-header input');
+
+					self.$search_fields.click(function(e){
+						e.stopPropagation();
+					});
+					self.$search_fields.keydown(function(e){
+						if (e.keyCode == 13 ) {
+							var searched_models = self.search(e);
+							_.each(self.exams.models,function(exam){
+								// console.log(exam.view.$grid);
+								exam.view.$grid.hide();
+							});
+							console.log(searched_models);
+							_.each(searched_models,function(exam){
+								console.log(exam.view);
+								exam.view.$grid.show();
+							});
+							// console.log(self.exams.models[0]);
+							// self.$search_fields.slideUp();
+							// console.log(searched_models);
+
+						}
 					});
 				break;
 			}
@@ -418,6 +445,26 @@
 
 
 		},
+		search : function(event) {
+			var self = this;
+			event.preventDefault();
+			var search_fields = {};
+			self.$search_fields.each(function(){
+				var class_names = $(this).attr('class').split(' ');
+
+
+				if ($(this).value()) {
+					// console.log(class_names);
+					search_fields[$(this).attr('class')] = $(this).val();
+				}
+
+			});
+
+
+			return self.exams.getExams({ search : search_fields });
+
+			// console.log(exams);
+		}
 
 
 

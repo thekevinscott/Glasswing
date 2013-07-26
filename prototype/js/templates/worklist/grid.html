@@ -2,36 +2,38 @@
 <table class="grid-worklist">
 
 	<thead class="grid-header grid-row">
+
 		<tr>
+
 			<td class="info">
-				<input class="exam-type" type="text" hint="Exam Type" />
+				<input class="exam_name" type="text" hint="Exam Type" />
 				<!-- <select class="exam-type">
 					<option>exam Type</option>
 					<option>Abdomen</option>
 					<option>Leg</option>
 					<option>Head</option>
 				</select> -->
-				<input type="text" hint="Exam end time" />
+				<input type="text" hint="Exam end time" class="end_time" />
 			</td>
 			<td class="reason">
-				<input type="text" hint="Exam detailed description" />
+				<input type="text" hint="Exam detailed description" class="clinical_indication" />
 			</td>
 			<td class="patient-status">
-				<input type="text" hint="Accession Number" />
-				<input type="text" hint="Patient Type" />
+				<input type="text" hint="Accession Number" class="accession_id" />
+				<input type="text" hint="Patient Type" class="patient_type" />
 
 			</td>
 			<td class="patient" style="width: 20%">
-				<input type="text" hint="Patient Name" class="patient-name" /><br />
-				<input type="text" hint="Patient ID" class="patient-id" />
-				<input type="text" hint="Date of Birth" class="date-of-birth" />
+				<input type="text" hint="Patient Name" class="name" /><br />
+				<input type="text" hint="Patient ID" class="patient_id" />
+				<input type="text" hint="Date of Birth" class="dob" />
 				<input type="text" hint="Gender" class="gender" />
 
 
 			</td>
 			<td class="referring">
-				<input type="text" class="physician" hint="Referring Physician" />
-				<input type="text" class="hospital" hint="Referring Location" />
+				<input type="text" class="physician" hint="Referring Physician" class="referring-physician" />
+				<input type="text" class="hospital" hint="Referring Location" class="referring-locatioN" />
 			</td>
 			<td class="image-status" colspan="2">
 				<input type="text" class="images-completion-status camera" hint="Images Completion Status" />
@@ -40,6 +42,7 @@
 			</td>
 
 		</tr>
+
 	</thead>
 	<tbody class="grid-contents"></tbody>
 </table>

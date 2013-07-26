@@ -52,7 +52,7 @@
 
 			var opts = {
 				id : this.model.get('id'),
-				accession_id : Math.round(Math.random()*1000)+1000,
+				accession_id : this.model.get('accession_id'),
 				attachments : this.model.get('attachments'),
 				dob : this.model.get('patient').getDate('dob'),
 				first : this.model.get('patient').get('first'),
