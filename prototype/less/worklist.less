@@ -319,6 +319,9 @@
 					opacity: 0.5;
 					display: inline-block;
 				}
+				input {
+					width: 120px;
+				}
 			}
 			.exam {
 				padding: 20px 30px 10px 30px;
@@ -559,7 +562,7 @@ th.header.headerSortDown {
 		font-style: italic;
 		text-shadow: none;
 		td {
-			padding: 0 10px;
+			padding: 3px 10px 0 10px;
 		}
 		.image-status p {
 			color: @grid-text;
@@ -587,6 +590,7 @@ th.header.headerSortDown {
 			margin-right: 5px;
 
 		}
+
 		.filter {
 			position: absolute;
 			background: transparent;
@@ -596,8 +600,41 @@ th.header.headerSortDown {
 			padding: 0;
 		}
 	}
+	.info {
+		width: 10%;
+		input {
+			width: 120px;
+		}
+	}
+	.reason {
+		width: 20%;
+		input {
+			width: 190px;
+		}
+	}
+	.patient-status {
+		width: 13%;
+	}
+	.patient {
+		width: 25%;
+		input.patient-id {
+			width: 85px;
+		}
+		input.date-of-birth {
+			width: 100px;
+		}
+		input.gender {
+			width: 70px;
+		}
+		input.patient-name {
+			width: 274px;
+		}
+	}
 	.image-status {
-
+		width: 18%;
+		input {
+			width: 180px;
+		}
 		p {
 			margin: 0;
 			color: @gray-darker;
@@ -608,6 +645,9 @@ th.header.headerSortDown {
 			background-repeat: no-repeat;
 			padding-left: 32px;
 
+		}
+		input.camera  {
+			padding-left: 10px;
 		}
 		.locked {
 		}
