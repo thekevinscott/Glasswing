@@ -69,6 +69,7 @@
 			// alert('render');
 
 			self.$el.html(_.template(self.template, {}));
+
 			self.$list = self.$el.find('.list');
 
 
@@ -275,6 +276,9 @@
 		},
 		afterRender : function() {
 			var self = this;
+			// console.log(self.$el);
+
+
 			switch(this.current_layout) {
 				case 'table' :
 
@@ -326,6 +330,13 @@
 
 					self.$('.grid-header td').click(function(e){
 						$(this).find('input:first').focus();
+					}).each(function(){
+						var sort = $('<a href="javascript:;" class="sort"></a>');
+						$(this).append(sort);
+						sort.click(function(e){
+							e.stopPropagation();
+							console.log('sort');
+						});
 					});
 
 					var filterRows = function(e) {
@@ -368,6 +379,13 @@
 
 				break;
 			}
+			self.$('select').customSelect();
+			self.$('select').change(function(){
+				if (self.$('.grid-header').length) {
+					self.$('.grid-header .exam_name').val($(this).val());
+					filterRows();
+				}
+			});
 
 
 			if (this.selected_button != null) { this.selected_button.deselect(); }
@@ -468,7 +486,7 @@
 		},
 		search : function(event) {
 			var self = this;
-			event.preventDefault();
+			if (event) { event.preventDefault(); }
 			var search_fields = {};
 			self.$search_fields.each(function(){
 				var class_name = $(this).attr('class').split(' ').shift();

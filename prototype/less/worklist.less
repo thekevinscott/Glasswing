@@ -59,8 +59,14 @@
 		color: white;
 	}
 	h1 {
+		color: @dark-text;
 		span {
-			color: @dark-text;
+			color: white;
+			background: transparent url(../images/arrow.png) no-repeat right center;
+			padding-right: 16px;
+			span {
+				background: none;
+			}
 		}
 		margin-left: @padding;
 		img {
@@ -603,6 +609,23 @@ th.header.headerSortDown {
 			.lock {
 				padding-left: 10px;
 			}
+		}
+		td .sort {
+
+			background-image: url(../images/table-nosort.gif);
+			background-repeat: no-repeat;
+			background-position: center center;
+			width: 16px;
+			height: 16px;
+			display: inline-block;
+		}
+		td .sort.up {
+			background-image: url(../images/table-asc.gif);
+		}
+		td .sort.down {
+			background-image: url(../images/table-desc.gif);
+		}
+		td:hover sort {
 		}
 
 
