@@ -40,7 +40,7 @@ glasswing.collections.exams = Backbone.Collection.extend({
 		if (! options) {
 			return this.models;
 		} else {
-			console.log(options);
+			// console.log(options);
 			var models = [];
 			_.each(this.models,function(model) {
 
@@ -48,7 +48,7 @@ glasswing.collections.exams = Backbone.Collection.extend({
 				var valid = true;
 				_.each(options.search,function(arg, key) {
 					var model_val = model.get(key);
-					console.log('key: ' + key+ ', model val: ' + model_val+ ', arg: ' + arg);
+					// console.log('key: ' + key+ ', model val: ' + model_val+ ', arg: ' + arg);
 					if (valid == true && model_val !== undefined && ! self.contains(model_val,arg)) {
 						valid = false;
 					}
@@ -58,9 +58,16 @@ glasswing.collections.exams = Backbone.Collection.extend({
 
 			if (options.sort) {
 				console.log('sort it');
-			}
-			console.log(models);
+				console.log(options.sort);
+				models = models.sort(function(a,b){
+					return (a[options.sort.key] < b[options.sort.key]) ;
+					// if (options.dir=='asc') {
 
+					// } else {
+					// 	return (a[options.sort.key] > b[options.sort.key]) ;
+					// }
+				});
+			}
 
 			return models;
 		}
@@ -145,3 +152,15 @@ glasswing.collections.exams = Backbone.Collection.extend({
 Date.prototype.toDay = function() {
 	return new Date(this.getFullYear(), this.getMonth(), this.getDate());
 }
+
+
+Function.prototype.f = function() {
+  // preserve f
+  var f = this;
+  // construct g
+  return function() {
+    var args = Array.prototype.slice.call(arguments);
+    // flip arguments when called
+    return f.apply(this, args.reverse());
+  };
+};

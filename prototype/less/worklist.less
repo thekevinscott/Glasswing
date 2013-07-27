@@ -611,7 +611,7 @@ th.header.headerSortDown {
 			}
 		}
 		td .sort {
-
+			opacity: 0;
 			background-image: url(../images/table-nosort.gif);
 			background-repeat: no-repeat;
 			background-position: center center;
@@ -619,13 +619,16 @@ th.header.headerSortDown {
 			height: 16px;
 			display: inline-block;
 		}
-		td .sort.up {
+		td .sort.asc {
 			background-image: url(../images/table-asc.gif);
+			opacity: 1;
 		}
-		td .sort.down {
+		td .sort.desc {
 			background-image: url(../images/table-desc.gif);
+			opacity: 1;
 		}
-		td:hover sort {
+		td:hover .sort {
+			opacity: 1;
 		}
 
 
