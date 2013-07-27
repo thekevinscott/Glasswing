@@ -2,32 +2,50 @@
 <table class="grid-worklist">
 
 	<thead class="grid-header grid-row">
-
-		<tr>
-
+		<tr class="row-1">
 			<td class="info">
 				<input class="exam_name" type="text" hint="Exam Type" />
-				<!-- <select class="exam-type">
-					<option>exam Type</option>
-					<option>Abdomen</option>
-					<option>Leg</option>
-					<option>Head</option>
-				</select> -->
-				<input type="text" hint="Exam end time" class="end_time" />
 			</td>
-			<td class="reason">
+			<td class="reason" rowspan="2">
 				<input type="text" hint="Exam detailed description" class="clinical_indication" />
 			</td>
 			<td class="patient-status">
 				<input type="text" hint="Accession Number" class="accession_id" />
+
+
+			</td>
+			<td class="patient" style="width: 20%">
+				<input type="text" hint="Patient Name" class="name" /><br />
+			</td>
+
+			<td class="referring">
+				<input type="text" class="referring_physician" hint="Referring Physician" class="referring_physician" />
+			</td>
+			<td class="image-status" colspan="2">
+				<select class="ready images-completion-status camera">
+					<option value="">Images Completion Status</option>
+					<option value="1">All Images are Completed</option>
+					<option value="0">Images in Progress</option>
+				</select>
+
+			</td>
+		</tr>
+		<tr class="row-2">
+			<td class="info">
+				<input type="text" hint="Exam end time" class="end_time" />
+			</td>
+
+
+			<td class="patient-status">
 				<select class="patient_type">
 					<option value="">Patient Type</option>
 					<option value="In-patient">In-patient</option>
 				</select>
 
 			</td>
+
+
 			<td class="patient" style="width: 20%">
-				<input type="text" hint="Patient Name" class="name" /><br />
 				<input type="text" hint="Patient ID" class="patient_id" />
 				<input type="text" hint="Date of Birth" class="dob" />
 				<!-- <input type="text" hint="Gender" class="gender" /> -->
@@ -36,22 +54,12 @@
 					<option value="f">Female</option>
 					<option value="m">Male</option>
 				</select>
-
-
-
-
-
 			</td>
+
 			<td class="referring">
-				<input type="text" class="referring_physician" hint="Referring Physician" class="referring_physician" />
 				<input type="text" class="referring_location" hint="Referring Location" class="referring_location" />
 			</td>
 			<td class="image-status" colspan="2">
-				<select class="ready images-completion-status camera">
-					<option value="">Images Completion Status</option>
-					<option value="1">All Images are Completed</option>
-					<option value="0">Images in Progress</option>
-				</select>
 				<select class="lock reporting-status">
 					<option value="">Reporting Status</option>
 					<option value="1">Somebody is reporting</option>
