@@ -293,7 +293,7 @@
 				procedure_name : this.model.get('exam_name'),
 				report_status : this.model.get('report_status'),
 				clinical_indication : this.model.get('clinical_indication'),
-				hospital_name : this.model.get('hospital_name'),
+				referring_location : this.model.get('referring_location'),
 				referring_physician : this.model.get('referring_physician'),
 				images : this.model.get('images'),
 				status : this.model.get('status'),

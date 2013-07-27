@@ -52,7 +52,7 @@
 
 			var opts = {
 				id : this.model.get('id'),
-				accession_id : Math.round(Math.random()*1000)+1000,
+				accession_id : this.model.get('accession_id'),
 				attachments : this.model.get('attachments'),
 				dob : this.model.get('patient').getDate('dob'),
 				first : this.model.get('patient').get('first'),
@@ -66,7 +66,7 @@
 				report_status : this.model.get('report_status'),
 				exam_status : this.model.get('exam_status'),
 				referring_physician : this.model.get('referring_physician'),
-				hospital_name : this.model.get('hospital_name'),
+				referring_location : this.model.get('referring_location'),
 				clinical_indication : this.model.get('clinical_indication'),
 				end_time : this.model.getDateAndTime('end_time'),
 				end_timestamp : this.model.get('end_time').getTime(),

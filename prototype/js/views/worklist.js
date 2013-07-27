@@ -21,7 +21,8 @@
 		events : {
 		  // "click tbody tr" : "openexam",
 		  // "click .cards .card" : "openexam",
-		  "click .layouts a.button" : "setLayout"
+		  "click .layouts a.button" : "setLayout",
+
 		},
 
 		buttons : {},
@@ -305,19 +306,66 @@
 					// });
 				break;
 				case 'grid' :
-					self.$('.grid-header p').click(function(e){
-						var old = $(this).html();
-						var form = $('<form />');
-						var input = $('<input name="something" type="text" />');
-						$(this).html(form);
-						form.html(input);
-						input.focus();
-						form.submit(function(e){
-							e.preventDefault();
-							$(this).replaceWith(input.val());
+					// self.$('.grid-header p').click(function(e){
+					// 	var old = $(this).html();
+					// 	var form = $('<form />');
+					// 	var input = $('<input name="something" type="text" />');
+					// 	$(this).html(form);
+					// 	form.html(input);
+					// 	input.focus();
+					// 	form.submit(function(e){
+					// 		e.preventDefault();
+					// 		$(this).replaceWith(input.val());
+					// 	});
+
+					// });
+
+
+
+
+
+					self.$('.grid-header td').click(function(e){
+						$(this).find('input:first').focus();
+					});
+
+					var filterRows = function(e) {
+						var searched_models = self.search(e);
+						console.log(searched_models);
+						_.each(self.exams.models,function(exam){
+							// console.log(exam.view.$grid);
+							exam.view.$grid.hide();
 						});
 
+
+						// console.log(searched_models);
+						_.each(searched_models,function(exam){
+							// console.log(exam.view);
+							exam.view.$grid.show();
+						});
+					}
+					self.$search_fields = self.$('.grid-header input, .grid-header select');
+
+					self.$search_fields.click(function(e){
+						e.stopPropagation();
 					});
+					self.$search_fields.keydown(function(e){
+
+						if (e.keyCode == 13 ) {
+							filterRows(e);
+						}
+					}).focus(function(e){
+						// console.log(this);
+						// console.log($(this).attr('class'));
+						switch($(this).attr('class')) {
+							case 'gender' :
+							break;
+						}
+					}).change(function(e){
+						filterRows(e);
+					});
+					$('.grid-header select').customSelect();
+
+
 				break;
 			}
 
@@ -418,6 +466,33 @@
 
 
 		},
+		search : function(event) {
+			var self = this;
+			event.preventDefault();
+			var search_fields = {};
+			self.$search_fields.each(function(){
+				var class_name = $(this).attr('class').split(' ').shift();
+				var val = $(this).value();
+				if (val) {
+
+					// switch(class_name) {
+					// 	case 'end_time' : case 'dob' :
+					// 		val = Date.parse(val);
+					// 	break;
+
+					// }
+					// console.log(class_name);
+					// console.log(val);
+					search_fields[class_name] = val;
+				}
+
+			});
+
+
+			return self.exams.getExams({ search : search_fields });
+
+			// console.log(exams);
+		}
 
 
 

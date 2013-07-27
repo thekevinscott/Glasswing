@@ -281,7 +281,7 @@
 
 			}
 
-			.accession-number span , .patient-status span {
+			.accession_number span , .patient_status span {
 				color: @dark-text;
 				width: 90px;
 				display: inline-block;
@@ -318,6 +318,9 @@
 					width: 130px;
 					opacity: 0.5;
 					display: inline-block;
+				}
+				input {
+					width: 120px;
 				}
 			}
 			.exam {
@@ -404,9 +407,6 @@
 				}
 			}
 
-			.exam-name {
-				margin-bottom: 20px;
-			}
 			.dob {
 				margin-right: 15px;
 			}
@@ -559,7 +559,7 @@ th.header.headerSortDown {
 		font-style: italic;
 		text-shadow: none;
 		td {
-			padding: 0 10px;
+			padding: 3px 10px 0 10px;
 		}
 		.image-status p {
 			color: @grid-text;
@@ -571,10 +571,10 @@ th.header.headerSortDown {
 			outline: 0;
 			width: 150px;
 		}
-		input.exam-type, input.patient-name {
+		input.exam_name, input.name {
 			font-size: 18px;
 		}
-		p, h2, h3, .image-status p, input {
+		p, h2, h3, .image-status p, input, select, .customSelect {
 			background: #2a5d8f;
 			line-height: 26px;
 			padding: 0 10px;
@@ -587,6 +587,7 @@ th.header.headerSortDown {
 			margin-right: 5px;
 
 		}
+
 		.filter {
 			position: absolute;
 			background: transparent;
@@ -595,9 +596,53 @@ th.header.headerSortDown {
 			margin: 0;
 			padding: 0;
 		}
+		.image-status {
+			.camera {
+				padding-left: 10px;
+			}
+			.lock {
+				padding-left: 10px;
+			}
+		}
+
+
+	}
+	.info {
+		width: 10%;
+		input {
+			width: 120px;
+		}
+	}
+	.reason {
+		width: 20%;
+		input {
+			width: 190px;
+		}
+	}
+	.patient-status {
+		width: 13%;
+	}
+	.patient {
+		width: 25%;
+		input.patient_id {
+			width: 85px;
+		}
+		input.dob {
+			width: 100px;
+		}
+		input.gender {
+			width: 70px;
+		}
+		input.name {
+			width: 274px;
+		}
 	}
 	.image-status {
-
+		width: 18%;
+		input, select {
+			width: 200px;
+			padding-left: 10px;
+		}
 		p {
 			margin: 0;
 			color: @gray-darker;
@@ -609,8 +654,7 @@ th.header.headerSortDown {
 			padding-left: 32px;
 
 		}
-		.locked {
-		}
+
 		.locked.on {
 			background-image: url(../images/lock_on.png);
 			color: white;
@@ -765,9 +809,6 @@ th.header.headerSortDown {
 		right: @meta-width;
 		padding: 10px;
 	}
-}
-.exam-type {
-	font-size: 20px;
 }
 .meta {
 	right: 0;

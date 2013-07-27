@@ -25,4 +25,16 @@
 			})
 		});
 	}
+	$.fn.value = function() {
+		if ($(this).hasClass('hint')) {
+			if ($(this).data('placeholder')==$(this).val()) {
+				return null;
+			} else {
+				return $(this).val();
+			}
+		} else {
+			return $(this).val();
+		}
+
+	}
 })(jQuery);

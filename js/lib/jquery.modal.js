@@ -113,13 +113,16 @@
                 modal.el.css({left: new_left});
                 modal.arrow.css({left: left-new_left});
 
-
-
-
             }
-
-
-
+        } else if (top + modal.el.height() + 0 > $('body').height()) {
+            console.log('shit!');
+            left = offset.left;
+            // top = offset.top + self.outerHeight() + modal.arrow.outerHeight();
+            top = offset.top - modal.el.height() - modal.arrow.outerHeight();
+            options.position = 'top';
+            modal.el.css({top: top});
+            modal.el.addClass(options.position);
+            modal.arrow.css({top: 'auto', bottom: 0 - modal.arrow.outerHeight()});
 
         }
 
