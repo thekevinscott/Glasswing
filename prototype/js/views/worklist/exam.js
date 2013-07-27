@@ -66,7 +66,7 @@
 				report_status : this.model.get('report_status'),
 				exam_status : this.model.get('exam_status'),
 				referring_physician : this.model.get('referring_physician'),
-				hospital_name : this.model.get('hospital_name'),
+				referring_location : this.model.get('referring_location'),
 				clinical_indication : this.model.get('clinical_indication'),
 				end_time : this.model.getDateAndTime('end_time'),
 				end_timestamp : this.model.get('end_time').getTime(),

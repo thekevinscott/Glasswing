@@ -20,24 +20,43 @@
 			</td>
 			<td class="patient-status">
 				<input type="text" hint="Accession Number" class="accession_id" />
-				<input type="text" hint="Patient Type" class="patient_type" />
+				<select class="patient_type">
+					<option value="">Patient Type</option>
+					<option value="In-patient">In-patient</option>
+				</select>
 
 			</td>
 			<td class="patient" style="width: 20%">
 				<input type="text" hint="Patient Name" class="name" /><br />
 				<input type="text" hint="Patient ID" class="patient_id" />
 				<input type="text" hint="Date of Birth" class="dob" />
-				<input type="text" hint="Gender" class="gender" />
+				<!-- <input type="text" hint="Gender" class="gender" /> -->
+				<select class="gender" id="gender">
+					<option value="">Gender</option>
+					<option value="f">Female</option>
+					<option value="m">Male</option>
+				</select>
+
+
+
 
 
 			</td>
 			<td class="referring">
-				<input type="text" class="physician" hint="Referring Physician" class="referring-physician" />
-				<input type="text" class="hospital" hint="Referring Location" class="referring-locatioN" />
+				<input type="text" class="referring_physician" hint="Referring Physician" class="referring_physician" />
+				<input type="text" class="referring_location" hint="Referring Location" class="referring_location" />
 			</td>
 			<td class="image-status" colspan="2">
-				<input type="text" class="images-completion-status camera" hint="Images Completion Status" />
-				<input type="text" class="reporting-status lock" hint="Reporting Status" />
+				<select class="ready images-completion-status camera">
+					<option value="">Images Completion Status</option>
+					<option value="1">All Images are Completed</option>
+					<option value="0">Images in Progress</option>
+				</select>
+				<select class="lock reporting-status">
+					<option value="">Reporting Status</option>
+					<option value="1">Somebody is reporting</option>
+					<option value="0">Nobody is reporting</option>
+				</select>
 				<a class="filter" href="javascript:;" alt="Additional filter options"><img src="images/filter.png" /></a>
 			</td>
 

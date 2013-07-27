@@ -574,7 +574,7 @@ th.header.headerSortDown {
 		input.exam_name, input.name {
 			font-size: 18px;
 		}
-		p, h2, h3, .image-status p, input {
+		p, h2, h3, .image-status p, input, select, .customSelect {
 			background: #2a5d8f;
 			line-height: 26px;
 			padding: 0 10px;
@@ -596,6 +596,16 @@ th.header.headerSortDown {
 			margin: 0;
 			padding: 0;
 		}
+		.image-status {
+			.camera {
+				padding-left: 10px;
+			}
+			.lock {
+				padding-left: 10px;
+			}
+		}
+
+
 	}
 	.info {
 		width: 10%;
@@ -629,8 +639,9 @@ th.header.headerSortDown {
 	}
 	.image-status {
 		width: 18%;
-		input {
-			width: 180px;
+		input, select {
+			width: 200px;
+			padding-left: 10px;
 		}
 		p {
 			margin: 0;
@@ -643,11 +654,7 @@ th.header.headerSortDown {
 			padding-left: 32px;
 
 		}
-		input.camera  {
-			padding-left: 10px;
-		}
-		.locked {
-		}
+
 		.locked.on {
 			background-image: url(../images/lock_on.png);
 			color: white;

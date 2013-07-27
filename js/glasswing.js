@@ -44,3 +44,6 @@ var octopus = function(amount) {
 window['data'] = function(el,key) {
 	return $(el).data(key);
 };
+var typeOf = function(obj) {
+  return ({}).toString.call(obj).match(/\s([a-zA-Z]+)/)[1].toLowerCase();
+}

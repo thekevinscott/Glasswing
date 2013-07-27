@@ -137,6 +137,9 @@ glasswing.models.exam = glasswing.models.abstract.extend({
 	// we overload our parent get function
 	get: function (attr) {
 		switch(attr) {
+			case 'lock' :
+				return (this.get('locked')) ? true : false;
+			break;
 			case 'exam_name' :
 				return this.getName();
 			break;
@@ -147,6 +150,7 @@ glasswing.models.exam = glasswing.models.abstract.extend({
 				return this.get('patient').get(attr);
 			break;
 			case 'dob' :
+				return this.get('patient').get(attr);
 			break;
 			case 'patient_id' :
 				return this.get('patient').get('id');
