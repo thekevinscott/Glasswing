@@ -17,6 +17,8 @@
     border-right: 1px solid #0e1621;
     overflow-x: hidden;
     position: relative;
+
+
     #glasswing {
     	position: absolute;
     	top: 0;
@@ -80,6 +82,10 @@
     audio {
         margin: 20px;
     }
+
+
+
+
     .button {
     	padding: 10px 20px;
     	font-size: 14px;
@@ -246,7 +252,11 @@
 
 
 
-.button (@hue, @saturation, @lightness) {
+
+
+
+@border-radius: 5px;
+.make_button (@hue, @saturation, @lightness) {
     text-decoration: none;
     border-radius: @border-radius;
     font-size: 12px;
@@ -256,6 +266,7 @@
     cursor: pointer;
     border: none;
     padding: 20px 40px;
+
     background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.0));
     background: -moz-linear-gradient(   top, rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.0));
     background: -ms-linear-gradient(    top, rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.0));
@@ -272,6 +283,8 @@
 
     text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.5);
 
+
+
 }
 
 
@@ -280,4 +293,19 @@ input[type=button].selected, .button.selected, input[type=button]:hover, .button
     border: 1px solid #888;
     transition:         all 0.3s;
     -webkit-transition: all 0.3s;
+}
+
+
+input[type=button], .button {
+    .make_button(214,0.27,0.26);
+    padding: 5px 15px;
+}
+
+input[type=button], .button:hover {
+    .make_button(214,0.27,0.36);
+    transition:         all 0.1s;
+    -webkit-transition: all 0.1s; /* Safari */
+}
+input[type=button]:active, .button:active, input[type=button].selected, .button.selected {
+    .make_button(214,0.24,0.22);
 }
