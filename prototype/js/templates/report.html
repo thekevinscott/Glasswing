@@ -33,10 +33,10 @@
 			</div>
 			<div class="currents row">
 				<div class="accordion">
-
+					<% _.each(procedures, function(procedure) { %>
 					<div class="pane">
 						<div class="header">
-							<h2><span><%= procedure_name %></span> Today at 14:03</h2>
+							<h2><span><%= procedure.name %></span> Today at 14:03</h2>
 							<div class="buttons">
 								<div class="scanned-documents">
 									<a class="attachments">2</a>
@@ -49,7 +49,7 @@
 
 
 
-								<a class="pacs" alt="View images"></a>
+								<a class="pacs <% if (! ready) { %>not-ready<% } %>" alt="View images"></a>
 							</div>
 						</div>
 						<div class="content">
@@ -73,43 +73,8 @@
 							</table>
 						</div>
 					</div><!-- pane -->
-					<div class="pane">
-						<div class="header">
-							<h2><span>CT Femur</span> Today at 9:03</h2>
-							<div class="buttons">
-								<div class="scanned-documents">
-									<a class="attachments">2</a>
-									<ul class="scanned-documents-dropdown">
-										<li><a href="javascript:;" class="draggable">RequestForm.png</a></li>
-										<li><a href="javascript:;" class="draggable">TechNotes.png</a></li>
-									</ul>
-								</div>
+					<% }) %>
 
-
-								<a class="pacs" alt="View images"></a>
-							</div>
-						</div>
-						<div class="content">
-							<p class="accession-number">Accession #: 3911</p>
-							<h3 class="procedure-information">Procedure Information</h3>
-							<table>
-								<thead>
-									<tr>
-										<td>Consumables Description</td>
-										<td>Quantity</td>
-										<td>Unit Average Cost</td>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td>MRI Contrast Media-Gadolinium</td>
-										<td>1 Per ml</td>
-										<td>10</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-					</div><!-- pane -->
 				</div><!-- accordion -->
 
 				<div class="actions">

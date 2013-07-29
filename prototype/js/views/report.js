@@ -296,8 +296,11 @@
 				referring_location : this.model.get('referring_location'),
 				referring_physician : this.model.get('referring_physician'),
 				images : this.model.get('images'),
+				ready : this.model.get('ready'),
 				status : this.model.get('status'),
 				locked : this.model.get('locked'),
+
+				procedures : [{name : this.model.get('exam_name')}, {name : this.model.get('exam_name')}]
 
 
 			}));
