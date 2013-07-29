@@ -65,61 +65,31 @@
 			this.panes[section_title] = view_el;
 
 		},
-		play : function(file) {
+		play : function(section_title) {
 			var self = this;
-			//
-//			self.audio = self.$el.find('audio');
-			// console.log('file: ' + file);
-			self.parent.$audio.attr('src','audio/'+self.title+'/'+file+'.mp3');
+
+
+			self.parent.$audio.attr('src','audio/'+self.title+'/'+section_title+'.mp3');
+
+
 
 			self.parent.parent.addCallback(function(){
 				self.parent.$audio[0].play();
 			});
 
 
-
-
 			var config = glasswing.config.chapters.chapters[this.title];
 
-			// console.log(JSON.parse(this.model.events));
-			switch(this.title) {
-				case 'tabs' :
-				var events = {
-					9 : function(){
-						var tr = $p('table tbody tr:first');
-						//var view = $p('data',tr,'view')
-						tr.highlight({
-							content: "Click the highlighted procedure"
-						});
-						tr.click(function(e){
-							$(this).unbind('click');
-							self.nextSection();
-							$.dehighlight();
-						});
-					}
-				};
-			}
-
-			if (events) {
-
-
-				this.parent.$audio.audio(events);
-			}
-
-			/*
-			(function() {}
-		var tr = $p('table tbody tr:first');
-		//var view = $p('data',tr,'view')
-		tr.highlight({
-			content: "Click the highlighted procedure"
-		});
-		tr.click(function(e){
-			$(this).unbind('click');
-			self.nextSection();
 			$.dehighlight();
-		});
-	})
-*/
+
+
+			var events = this.getEvents(this.title, section_title);
+
+			// if (events.before !== undefined && typeOf(events.before)=='function') {
+			// 	events.before();
+			// 	delete events.before;
+			// }
+			this.parent.$audio.audio(events,self);
 		},
 		nextSection : function() {
 
@@ -132,6 +102,18 @@
 		navigate : function(path,options) {
 			// this.parent.navigate(this.$el.data('url')+'/'+path,options);
 			this.parent.navigate(path,options);
+		},
+		getEvents : function(title, section_title) {
+			console.log(this.title+': ' + section_title);
+
+			var chapters = glasswing.config.chapters.chapters;
+			// console.log(chapters[this.title].events);
+			if (chapters[this.title] && chapters[this.title].events && chapters[this.title].events[section_title]) {
+
+				return chapters[this.title].events[section_title];
+			} else {
+				return {};
+			}
 		}
 
 	});

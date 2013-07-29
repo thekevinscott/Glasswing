@@ -172,7 +172,7 @@ input[type=button]:active, .button:active, input[type=button].selected, .button.
 
 }
 .overlay {
-	pointer-events:none;
+
 }
 .overlay, .modal-overlay {
 	position: absolute;
@@ -191,10 +191,12 @@ input[type=button]:active, .button:active, input[type=button].selected, .button.
 	cursor: pointer;
 	z-index: 13;
 }
-.overlay .piece {
-	pointer-events:none;
+.piece {
+
 	position: absolute;
 	background: #000;
+	opacity: 0.0;
+	z-index: 40;
 }
 
 
@@ -271,4 +273,13 @@ body .modal .modal-content {
 body .glasswing .hint {
 	color: @dark-text;
 	font-style: italic;
+}
+
+.highlight.modal {
+    z-index: 41;
+    .content {
+
+        padding: 10px;
+        font-size: 12px;
+    }
 }

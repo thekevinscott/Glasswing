@@ -67,5 +67,8 @@
 		Backbone.history.start();
 
 		$('.loading').removeClass('loading');
-		if (window['glasswing-guide-callback']) { window['glasswing-guide-callback'](); }
+		setTimeout(function(){
+			if (window['glasswing-guide-callback']) { window['glasswing-guide-callback'](); }
+		},500); // half a second to load
+
 	})();
