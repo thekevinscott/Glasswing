@@ -5,7 +5,7 @@
 
 	var parseChapters = function(urls) {
 		// data =
-		glasswing.config = {};
+		if (! glasswing.config) { glasswing.config = {}; }
 		glasswing.config.chapters = {
 			chapters : {
 
@@ -47,6 +47,15 @@
 					break;
 				}
 			});
+
+			if (glasswing.config.guide_events.hasOwnProperty(key)) {
+				glasswing.config.chapters.chapters[key].events = glasswing.config.guide_events[key];
+			}
+
+			// var events = glasswing.template('views/guide/'+urls[i]+'.js');
+			// if (events) {
+			// 	console.log(events);
+			// }
 			// // do we have an associated js?
 			// var callback = function(data) {
 
@@ -76,12 +85,11 @@
 
 	parseChapters([
 		'tabs',
-		'double-grid',
-		'case-cards',
-
+		'expanded-worklist',
 		'caregivers',
-		'notifications',
-		'dynamic-content',
+		'following',
+		'content-panel',
+		'timeline',
 
 	]);
 
