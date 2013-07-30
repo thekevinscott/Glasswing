@@ -3,9 +3,11 @@ Expanded Worklist
 
 Opportunity
 -------------
-A radiologist's worklist is a table of information. Some tables we observed contained over 30 columns of data. This required horizontal scrolling to view relevant columns which slows down the radiologist.
+A radiologist's worklist is a table of information, often containing more columns than can fit on the screen at a time. This forces the radiologist to scroll horizontally, an action which slows down the radiologist.
 
-We propose a taller layout in order to present more relevant information on the screen without requiring horizontal scrolling.
+We propose a taller layout in order to present more relevant information on the screen without requiring horizontal scrolling. This layout can effectively integrate case indications along with buttons, such as Queue.
+
+You can queue a case here.
 
 Redesign
 -------------
