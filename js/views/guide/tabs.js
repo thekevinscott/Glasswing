@@ -43,7 +43,7 @@
 			});
 		});
 
-		guide_event.audio_prompt(16.0,chapter);
+		guide_event.audio_prompt(15.4,chapter);
 	};
 	var point_out_information_on_the_tab = function() {
 		var selected_tab = $p('.tab.selected');
