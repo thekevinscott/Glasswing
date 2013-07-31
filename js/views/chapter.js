@@ -95,8 +95,16 @@
 
 			var section_index = this.$sections.find('.active').index();
 			var panes = this.$sections.find('.pane');
+
 			if (section_index+1 < panes.length) {
-				$(panes[section_index+1]).data('view').open();
+				var pane = panes[section_index+1];
+
+				var view = $(pane).data('view');
+
+				view.open();
+			} else {
+				// next section
+				this.parent.nextChapter();
 			}
 		},
 		navigate : function(path,options) {

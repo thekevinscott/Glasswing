@@ -54,6 +54,25 @@
 
     		border: none;
 
+            position: relative;
+
+            .next {
+                position: absolute;
+                right: 20px;
+                bottom: -10px;
+
+                a {
+                    color: #999;
+                    font-size: 12px;
+                    text-decoration: none;
+
+                    transition:         all 0.25s;
+                    -webkit-transition: all 0.25s; /* Safari */
+                }
+                a:hover {
+                    color: white;
+                }
+            }
     	}
     	.pane.raised {
     		border-top: 1px solid hsl(@hue, percentage(@saturation+0.03), percentage(@lightness+.1));

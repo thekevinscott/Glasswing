@@ -31,9 +31,14 @@
 			this.$el.data('url',this.title);
 			this.$el.data('view',this);
 
+			var self = this;
+			this.$('.next a').click(function(e){
+				self.next(e);
+			});
 			return this;
 		},
 		open :function() {
+
 			if ($('.pane.active').length) {
 				$('.pane.active').data('view').close();
 			}
@@ -41,9 +46,9 @@
 			this.$el.addClass('active');
 			this.$el.find('p').stop().slideDown();
 
-			// todo: remove this if statement, should always have a parent
 
-			if (this.parent) { this.parent.navigate(this.$el.data('url')); }
+			this.parent.navigate(this.$el.data('url'));
+
 
 			this.parent.play(this.title);
 			return this;
@@ -55,6 +60,10 @@
 		},
 		click : function(callback) {
 			this.$el.click(callback);
+		},
+		next : function(e) {
+			if (e) { e.preventDefault(); e.stopPropagation(); }
+			this.parent.nextSection();
 		}
 
 	});

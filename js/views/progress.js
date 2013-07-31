@@ -93,6 +93,22 @@
 			// console.log(model.dot.position().left);
 			// this.$progress.animate({width: (model.dot.position().left / this.$el.width() * 100) + '%'});
 
+		},
+		nextChapter : function() {
+
+			var active = this.$('.dot-container.filled:last');
+
+			var dots = this.$('.dot');
+			if (active.index() +1 < dots.length) {
+				var next = dots[active.index()+1];
+				next.click();
+			} else {
+				var next = dots[0];
+				next.click();
+			}
+
+
+
 		}
 
 

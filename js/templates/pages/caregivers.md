@@ -3,14 +3,14 @@ Caregivers
 
 Opportunity
 -------------
-Information about healthcare professionals associated with a particular patient is currently scattered across various databases and locations. We observed radiologists struggle to locate contact information of their colleagues.
+We observed radiologists struggle to find contact information of healthcare professionals involved with a particular patient. Information is currently scattered across various databases and locations in the system.
 
-We propose a feature that lists all related caregivers and their contact information. This list is accessible in current and prior exams. The Related Caregivers feature can shave time off of the radiologist’s workflow by providing immediate access to the person that she wants to contact.
+We propose a feature to list contact information of related caregivers. Click on the Related Caregivers button for an example.
 
-How it Works
+Easy Access
 -------------
-Radiologists, technologists, and referring physicians associated with a particular patient are listed in an unobtrusive modal dialog.
+Radiologists, technologists, and referring physicians associated with a particular patient are listed in a modal dialog.
 
-A user can easily the last time a particular caregiver saw a patient, and can easily locate contact information for that caregiver.
+A user can view the last time a particular caregiver saw a patient, and can easily locate contact information for that caregiver.
 
 If a particular phone or pager number is no longer accurate, the record can be flagged for later review and update.

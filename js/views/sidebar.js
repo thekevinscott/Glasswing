@@ -54,8 +54,8 @@
 		route : function(arguments, options) {
 			var self = this;
 			var setChapter = function(arguments) {
-				console.log(self.chapters);
-				console.log(arguments);
+				// console.log(self.chapters);
+				// console.log(arguments);
 				if (self.chapters[arguments[0]]) {
 					self.bookmark = [arguments[0],self.chapters[arguments[0]].panes_by_order[0].title.toURL()];
 					//setChapter();
@@ -138,6 +138,9 @@
 		navigate : function(path,options) {
 
 			this.parent.navigate(path,options);
+		},
+		nextChapter : function() {
+			this.progress.nextChapter();
 		}
 
 	});

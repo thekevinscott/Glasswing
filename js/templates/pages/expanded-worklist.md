@@ -3,17 +3,15 @@ Expanded Worklist
 
 Opportunity
 -------------
-A radiologist's worklist is a table of information, often containing more columns than can fit on the screen at a time. This forces the radiologist to scroll horizontally, an action which slows down the radiologist.
+A radiologist's worklist is a table of information, often containing more columns than can fit on the screen at a time. This forces the radiologist to scroll horizontally, which can slow down the radiologist.
 
-We propose a taller layout in order to present more relevant information on the screen without requiring horizontal scrolling. This layout can effectively integrate case indications along with buttons, such as Queue.
+We propose a taller layout in order to present more relevant information on the screen without requiring horizontal scrolling. This layout can effectively integrate case indications along with active buttons, such as the Queue button. Try queueing a case now.
 
-You can queue a case here.
-
-Redesign
+Focus on Patients
 -------------
-We redesigned the worklist to put focus on the patient cases.
+Building on the traditional data grid, this redesign applies visual variances to distinguish between attributes and group related attributes together.
 
-Building on the traditional data grid, the redesign applies visual variances to distinguish between attributes and group related attributes together.
+Stats are indicated by a banner. The exam date is formatted to show how long it has been in the system, and can be hovered over for additional information. Referring physician and location are available for quick reference, along with indications concerning whether images are ready, and whether another radiologist is currently reading the exam.
 
 The worklist can also be switched to a card view layout, known as "Case Cards".
 
