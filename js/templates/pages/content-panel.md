@@ -24,15 +24,3 @@ Machine Learning
 Over time, the system can learn a particular radiologist's preferences for layouts. For instance, a radiologist might have a particular process for reading a CT vs. an MRI.
 
 Mimicing the Smart Reading protocol in PACS, the Content Panel will determine the most relevant information to display for a particular modality based on a radiologist's past history. The panel will automatically display that information and will improve over time as it learns a radiologist's preferences.
-
-
-“Thats a good idea, especially if I can switch between different priors when I work, and if I can see the referral information” Asmussen
-44:12?
-
-
-
-
-
-
-
-38:20 - "its brought the two reports together for me. that's nice" -- christine

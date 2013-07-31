@@ -24,6 +24,7 @@
 			self.$el.html(_.template(self.template, {
 
 			}));
+			self.$el.data('view',this);
 			self.$bar = this.$el.find('.bar');
 			self.$barContainer = this.$el.find('.bar-container');
 			self.$priors = this.$el.find('.priors');
@@ -109,27 +110,10 @@
 
 			this.renderBar();
 
-			var bar_priors = $('.timeline .bar .prior:not(.relevant)');
-			var prior_priors = $('.timeline .priors .prior:not(.relevant)');
+
 			$('.timeline-buttons a').click(function(e){
 				e.preventDefault();
-				if ($(this).hasClass('selected')) {return;}
-				$('.timeline-buttons a.selected').removeClass('selected');
-
-
-
-				switch($(this).attr('class')) {
-					case 'relevant-priors' :
-						bar_priors.fadeOut();
-						prior_priors.slideUp();
-					break;
-					default :
-						bar_priors.fadeIn();
-						prior_priors.slideDown();
-					break;
-				}
-				$(this).addClass('selected');
-				self.renderBar();
+				self.switchTimelineView(this);
 			});
 
 
@@ -145,6 +129,28 @@
 
 
 		},
+		switchTimelineView : function(el) {
+			var self = this;
+			if ($(el).hasClass('selected')) {return;}
+			var bar_priors = $('.timeline .bar .prior:not(.relevant)');
+			var prior_priors = $('.timeline .priors .prior:not(.relevant)');
+			$('.timeline-buttons a.selected').removeClass('selected');
+
+
+
+			switch($(el).attr('class')) {
+				case 'relevant-priors' :
+					bar_priors.fadeOut();
+					prior_priors.slideUp();
+				break;
+				default :
+					bar_priors.fadeIn();
+					prior_priors.slideDown();
+				break;
+			}
+			$(el).addClass('selected');
+			self.renderBar();
+		},
 		getFirstRelevant : function() {
 			var self = this;
 			if (! self.firstRelevant) {
@@ -156,8 +162,9 @@
 			}
 
 			return self.firstRelevant.view;
-
-
+		},
+		getFirst : function() {
+			return this.priors[0].view;
 		},
 		mouseover : function() {
 			if ( this.collapsed ) {

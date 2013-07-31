@@ -1,38 +1,22 @@
-
-if (! glasswing) { glasswing = {}; }
-if (! glasswing.config) { glasswing.config = {}; }
-if (! glasswing.config.guide_events) { glasswing.config.guide_events = {}; }
 (function($){
-	var open_first_exam = function() {
-		var exam;
-		if ($p('table.grid-worklist').length) {
-			// table
-			exam = $p('table.grid-worklist tbody tr:first');
-		} else {
-			// cards
-			exam = $p('.cards .card:first');
-		}
-		console.log(exam);
-		if (exam && exam.length) {
-			exam.click();
-		}
+	var get_coc = function() {
+		return $p('.current-report .community-of-caregivers:first');
+	}
+	var ensure_no_coc = function() {
 
-
+		$pa('.community-of-caregivers','modal_close');
+		// $p('.modal').remove();
+		// $p('.modal-overlay').remove();
 	}
 	var opportunity_setup = function() {
-		$.dehighlight();
-		open_first_exam();
-
-		// $p('.tab').each(function(){
-		// 	var view = $pd(this,'view');
-		// 	view.closeTab();
-		// });
-
-
+		guide_event.clearAll();
+		guide_event.ensure_open_exam();
+		ensure_no_coc();
 	};
 	var highlight_related_caregivers = function(chapter) {
-		$.dehighlight();
-		var coc = $p('.current-report .community-of-caregivers');
+		guide_event.clearAll();
+		// $pa(get_coc(),'modal');
+		var coc = get_coc();
 
 
 		coc.highlight({
@@ -44,13 +28,23 @@ if (! glasswing.config.guide_events) { glasswing.config.guide_events = {}; }
 			chapter.nextSection();
 			$.dehighlight();
 		});
+
+		guide_event.audio_prompt(17,chapter);
 	}
 	var easy_access_setup = function(chapter) {
-		open_first_exam();
-		var coc = $p('.current-report .community-of-caregivers');
+		guide_event.clearAll();
+		guide_event.ensure_open_exam();
+		// $pa('.community-of-caregivers','modal_close');
+		// get_coc
+
+
+
 		setTimeout(function(e){
-			$pa(coc,'click');
-		},100);
+			var view = $pd(get_coc(),'view');
+			view.open();
+			// var coc = get_coc();
+			// $(coc).modal({content: self.render().$el, position: 'right'});
+		},350);
 
 
 	};
@@ -70,12 +64,12 @@ if (! glasswing.config.guide_events) { glasswing.config.guide_events = {}; }
 	glasswing.config.guide_events['caregivers'] = {
 		'opportunity' : {
 			0 : opportunity_setup,
-			10 : highlight_related_caregivers
+			16 : highlight_related_caregivers
 		},
 		'easy-access' : {
 			0 : easy_access_setup,
-			2 : highlight_last_saw_patient,
-			5 : flag_a_caregiver
+			9 : highlight_last_saw_patient,
+			16 : flag_a_caregiver
 		}
 
 	};

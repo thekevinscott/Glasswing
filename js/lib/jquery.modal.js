@@ -34,6 +34,7 @@
         modal = self.data('modal-element');
 
         if (! modal || options.content !== modal.alt) {
+            // console.log('create it again!');
             modal = {};
             modal.alt = options.content;
             modal.el = $('<div class="modal" />');
@@ -93,7 +94,7 @@
 
         var padding_right = 40;
 
-
+        if (modal.overlay) { modal.overlay.show(); }
         modal.el.css({left: left, top: top});
         if (left + modal.el.width() + padding_right > $('body').width()) {
             // slide it over
@@ -115,7 +116,7 @@
 
             }
         } else if (top + modal.el.height() + 0 > $('body').height()) {
-            console.log('shit!');
+            // console.log('shit!');
             left = offset.left;
             // top = offset.top + self.outerHeight() + modal.arrow.outerHeight();
             top = offset.top - modal.el.height() - modal.arrow.outerHeight();
@@ -146,14 +147,32 @@
     }
     $.fn.modal.close = function(el) {
         var modal = $(el).data("modal-element");
-        modal.el.stop().animate({opacity: 0, marginTop : 6}, {easing : 'easeInQuad',duration: 200, complete : function() {
-            modal.el.css({marginTop : 0});
-            modal.el.hide();
-        }});
+        if (modal) {
+            console.log('clear that modal');
+            modal.el.stop().animate({opacity: 0, marginTop : 6}, {easing : 'easeInQuad',duration: 200, complete : function() {
+                modal.el.css({marginTop : 0});
+                modal.el.hide();
+            }});
+            if (modal.overlay) {
+                modal.overlay.hide();
+
+                // console.log('modal overlay');
+
+            }
+        } else {
+            console.log('no modal');
+        }
+
         // self.data("modal-element").remove();
         // self.data("modal-element").stop().fadeOut(function(){
         //     this.remove();
         //     self.data('modal-element',null);
         // });
+    };
+
+    $.fn.modal_close = function() {
+        return $(this).each(function(){
+            $(this).modal.close(this);
+        });
     }
 })(jQuery);

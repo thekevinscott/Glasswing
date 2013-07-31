@@ -54,9 +54,11 @@
 				}
 				// return contentWindow['jQuery'](selector).data(key,val);
 			}
-			window['$pa'] = function(selector,action) {
+			window['$pa'] = function(selector,action,args) {
 				var contentWindow = self.$glasswing[0].contentWindow;
-				contentWindow['jQuery'](selector)[action]();
+				contentWindow['jQuery'](selector)[action](args);
+				// console.log(contentWindow['jQuery'](selector));
+				// console.log(contentWindow['jQuery'](selector)[action]);
 			}
 			self.$glasswing[0].contentWindow['allow_doctors'] = false;
 

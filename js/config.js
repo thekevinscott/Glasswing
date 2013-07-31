@@ -88,8 +88,9 @@
 		'expanded-worklist',
 		'caregivers',
 		'following',
-		'content-panel',
 		'timeline',
+		'content-panel',
+
 
 	]);
 

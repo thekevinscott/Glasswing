@@ -52,6 +52,8 @@
 				self.setupSection(section.view.$el);
 			});
 
+			self.$('.next:last a').html('Next Section');
+
 
 
 			return this;
@@ -68,28 +70,37 @@
 		play : function(section_title) {
 			var self = this;
 
-
-			self.parent.$audio.attr('src','audio/'+self.title+'/'+section_title+'.mp3');
-
-
-
-			self.parent.parent.addCallback(function(){
-				self.parent.$audio[0].play();
-			});
+			if (typeOf(section_title) == 'string') {
+				self.parent.$audio.attr('src','audio/'+self.title+'/'+section_title+'.mp3');
 
 
-			var config = glasswing.config.chapters.chapters[this.title];
 
-			$.dehighlight();
+				self.parent.parent.addCallback(function(){
+					self.parent.$audio[0].play();
+				});
 
 
-			var events = this.getEvents(this.title, section_title);
+				var config = glasswing.config.chapters.chapters[this.title];
 
-			// if (events.before !== undefined && typeOf(events.before)=='function') {
-			// 	events.before();
-			// 	delete events.before;
-			// }
-			this.parent.$audio.audio(events,self);
+				$.dehighlight();
+
+
+				var events = this.getEvents(this.title, section_title);
+
+				// if (events.before !== undefined && typeOf(events.before)=='function') {
+				// 	events.before();
+				// 	delete events.before;
+				// }
+				this.parent.$audio.audio(events,self);
+			} else {
+				if (this.parent.$audio.audio) {
+					console.log(this.parent.$audio);
+					this.parent.$audio[0].currentTime = section_title;
+					this.parent.$audio[0].play();
+				}
+				//$('audio')[0].currentTime = 12.8;$('audio')[0].play();
+			}
+
 		},
 		nextSection : function() {
 
