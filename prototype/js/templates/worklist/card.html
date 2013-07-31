@@ -9,12 +9,12 @@
 			<a href="javascript:;" class="attachments <% if (attachments === 0) { %>none<% } %>" alt="There <% if (attachments === 1) { %>is 1 attachment<% } else { %>are <%= attachments %> attachments<% } %>"></a>
 			<h3><span><%= exam_name %></span></h3>
 			<p><%= clinical_indication %></p>
-			<p class="accession-number"><span>Accession #:</span> <%= accession_id %></p>
+			<p class="accession_id"><span>Accession #:</span> <%= accession_id %></p>
 			<p class="patient-status"><span>Patient Status:</span> In-patient</p>
 		</div>
 		<div class="patient">
 			<h3 class="name"><%= last %>, <%= first %></h3>
-			<p class="patient-id"><span>Patient ID:</span><%= patient_id %></p>
+			<p class="patient_id"><span>Patient ID:</span><%= patient_id %></p>
 			<p class="dob"><span>Date of Birth:</span><%= dob %></p>
 			<p class="gender"><span>Gender:</span><%= gender %></p>
 		</div>

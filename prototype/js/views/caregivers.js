@@ -13,10 +13,19 @@
 			this.button = attributes.button;
 
         	var self = this;
+        	// console.log('button');
+        	// console.log(self.button);
         	self.button.unbind('click').click(function(){
-        		$(self.button).modal({content: self.render().$el, position: 'right'});
-        		self.afterRender();
+        		// console.log('click!');
+        		self.open();
         	});
+
+        	self.button.data('view',self);
+		},
+		open : function() {
+			var self = this;
+			$(self.button).modal({content: self.render().$el, position: 'right'});
+			self.afterRender();
 		},
 		render : function() {
 			console.log('render');

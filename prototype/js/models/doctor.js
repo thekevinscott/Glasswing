@@ -18,9 +18,9 @@ glasswing.models.doctor = glasswing.models.abstract.extend({
 		setTimeout(function(){
 			var index = Math.floor(Math.random()*self.worklist.exams.length) ;
 			var exam = self.worklist.exams.get(index);
-			console.log(self.worklist.exams);
-			console.log(index);
-			console.log(exam);
+			// console.log(self.worklist.exams);
+			// console.log(index);
+			// console.log(exam);
 			if (exam && exam.get('locked')==false && exam.get('reading')==false) {
 				exam.set('locked',self.getName());
 				self.exam = exam;

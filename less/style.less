@@ -29,6 +29,9 @@ body,html{
 	font-family: "Helvetica Neue", sans-serif;
 
 }
+body {
+	overflow: hidden;
+}
 h1,h2,h3,h4,h5,h6 {
 	margin: 0;
 	font-weight: normal;
@@ -123,6 +126,15 @@ body .loading {
 
 }
 
+/*
+input[type=button].selected, .button.selected, input[type=button]:hover, .button:hover {
+	background: #555;
+	border: 1px solid #888;
+	transition: 		all 0.3s;
+	-webkit-transition: all 0.3s;
+}
+
+*/
 input[type=button], .button {
 	.button(214,0.27,0.26);
 	padding: 5px 15px;
@@ -135,14 +147,6 @@ input[type=button], .button:hover {
 }
 input[type=button]:active, .button:active, input[type=button].selected, .button.selected {
 	.button(214,0.24,0.22);
-}
-
-/*
-input[type=button].selected, .button.selected, input[type=button]:hover, .button:hover {
-	background: #555;
-	border: 1px solid #888;
-	transition: 		all 0.3s;
-	-webkit-transition: all 0.3s;
 }
 
 /* Start of "Micro clearfix" */
@@ -171,7 +175,7 @@ input[type=button].selected, .button.selected, input[type=button]:hover, .button
 
 }
 .overlay {
-	pointer-events:none;
+
 }
 .overlay, .modal-overlay {
 	position: absolute;
@@ -190,10 +194,12 @@ input[type=button].selected, .button.selected, input[type=button]:hover, .button
 	cursor: pointer;
 	z-index: 13;
 }
-.overlay .piece {
-	pointer-events:none;
+.piece {
+
 	position: absolute;
 	background: #000;
+	opacity: 0.0;
+	z-index: 40;
 }
 
 
@@ -270,4 +276,13 @@ body .modal .modal-content {
 body .glasswing .hint {
 	color: @dark-text;
 	font-style: italic;
+}
+
+.highlight.modal {
+    z-index: 41;
+    .content {
+
+        padding: 10px;
+        font-size: 12px;
+    }
 }

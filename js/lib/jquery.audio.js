@@ -1,30 +1,30 @@
 (function($){
-
-	$.fn.audio = function(events){
-		console.log('events!');
-		console.log(events);
+	var log = function(msg) {
+		if (0) { console.log(msg); }
+	}
+	$.fn.audio = function(events,caller){
+		log('events!');
+		log(events);
 		return $(this).each(function(){
 			var audio = $(this)[0];
 			var currentTime = audio.currentTime;
 			var start_seek = null;
 
-			// audiojs.events.ready(function() {
-			//     var as = audiojs.createAll();
-			// });
+			var getCurrentTimeInterval;
 
-			// this is fucked on chrome
-			// this.addEventListener('progress',function(){
-			// 	console.log(this);
-			// });
+			if ($(this).data('getCurrentTimeInterval')) {
+				clearInterval($(this).data('getCurrentTimeInterval'));
+			}
 
 
 			var getCurrentTime = function() {
 
 				for (var time in events) {
 					time = parseFloat(time);
-					if (currentTime < time && audio.currentTime > time && typeof events[time] == 'function') {
 
-						events[time]();
+					if (currentTime <= time && audio.currentTime > time && typeof events[time] == 'function') {
+
+						events[time](caller);
 					}
 					if (time > audio.currentTime) { break; }
 				}
@@ -32,21 +32,23 @@
 
 				currentTime = audio.currentTime;
 
-				setTimeout(getCurrentTime,100);
+
 			}
 			getCurrentTime();
+			getCurrentTimeInterval = setInterval(getCurrentTime,100);
+
+			$(this).data('getCurrentTimeInterval',getCurrentTimeInterval);
 
 
-			this.addEventListener('seeked',function(e){
-				start_seek = audio.currentTime;
-				console.log('seeked');
-				console.log(e);
-			});
-			this.addEventListener('seeking',function(e){
-
-				console.log('seeking');
-				console.log(e);
-			});
+			// this.removeEventListener('seeked').addEventListener('seeked',function(e){
+			// 	start_seek = audio.currentTime;
+			// 	log('seeked');
+			// 	log(e);
+			// });
+			// this.removeEventListener('seeking').addEventListener('seeking',function(e){
+			// 	log('seeking');
+			// 	log(e);
+			// });
 
 		});
 	}

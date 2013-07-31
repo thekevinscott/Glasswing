@@ -15,7 +15,7 @@
 		events : {
 		  "click #home .button" : "click"
 		},
-		active : true,
+		active : false,
 		current_view : null,
 
 		initialize : function(attributes) {
@@ -41,8 +41,26 @@
 			}
 			window['$pd'] = function(selector,key,val) {
 				var contentWindow = self.$glasswing[0].contentWindow;
-				return contentWindow['jQuery'](selector,key,val);
+				if (val) {
+					return contentWindow['jQuery'](selector).data(key,val);
+				} else {
+
+					// console.log(contentWindow['jQuery']('.tab:first'));
+					// console.log(contentWindow['jQuery']('.tab:first')[0]);
+					// contentWindow['jQuery']('.tab:first').data('model','test');
+					// console.log(contentWindow['jQuery']('.tab:first').data('model'));
+					// console.log(contentWindow['jQuery'](selector)[0]);
+					return contentWindow['jQuery'](selector).data(key);
+				}
+				// return contentWindow['jQuery'](selector).data(key,val);
 			}
+			window['$pa'] = function(selector,action,args) {
+				var contentWindow = self.$glasswing[0].contentWindow;
+				contentWindow['jQuery'](selector)[action](args);
+				// console.log(contentWindow['jQuery'](selector));
+				// console.log(contentWindow['jQuery'](selector)[action]);
+			}
+			self.$glasswing[0].contentWindow['allow_doctors'] = false;
 
 
 		},
@@ -147,35 +165,13 @@
 			this.sidebar.route(arguments);
 		},
 		isActive : function() { return this.active; },
-		// // sets whether the guide is active or not.
-		// // the event will propagate to sidebar, which is, after all, the thing that's mostly changing.
-		// setActive : function(is_active) {
-		// 	this.active = is_active;
-		// },
-		// activate : function() {
-		// 	// alert('activate!');
-		// 	if (! this.router.initial_route) {
-		// 		this.$glasswing.animate({left: '0%', marginLeft: this.sidebar.$el.data('width')+'%', width: (100-this.sidebar.$el.data('width'))+'%'}, this.animation.page, 'easeInOutQuad');
-		// 	} else{
-		// 		this.$glasswing.animate({left: '0%', marginLeft: this.sidebar.$el.data('width')+'%', width: (100-this.sidebar.$el.data('width'))+'%'});
-		// 	}
-		// 	this.sidebar.open();
-		// },
-		// deactivate : function() {
-		// 	// alert('deactivate!');
-		// 	if (! this.router.initial_route) {
-		// 		this.$glasswing.stop().animate({left: '0%', marginLeft: 0, width: '100%'}, this.animation.page, 'easeInOutQuad');
-		// 	} else{
 
-		// 		this.$glasswing.css({left: '0%', marginLeft: 0, width: '100%'});
-		// 	}
-		// 	this.sidebar.close();
-		// },
 		navigate : function(path, options) {
 
 			this.router.navigate(path,options);
 		},
 		loaded : function() {
+			console.log('loaded');
 			this.active = true;
 			if (this.callbacks.length) {
 				while(this.callbacks.length) {

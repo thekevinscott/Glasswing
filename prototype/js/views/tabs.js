@@ -22,7 +22,11 @@
 				name : this.page.name
 			}));
 
+			// this.$el.attr('id','tab-'+this.page.url);
+			// console.log(this.$el[0]);
 			this.$el.data('model',this.model);
+			this.$el.data('view',this);
+			// console.log(this.$el.data('view'));
 
 			this.$a = this.$el.find('a');
 			this.$notification = this.$el.find('.notification');
@@ -41,7 +45,7 @@
 
 			});
 			this.$('.close-tab').click(function(e){
-				self.parent.closeTab(self.page);
+				self.closeTab();
 			});
 
 
@@ -60,6 +64,12 @@
 		deselect : function() {
 			this.$el.removeClass('selected');
 			return this;
+		},
+		closeTab : function() {
+			if (this.page.name !== 'Worklist') {
+				this.parent.closeTab(this.page);
+			}
+
 		},
 		close : function(callback) {
 			this.$el.css({height : 0});

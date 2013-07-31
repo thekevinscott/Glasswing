@@ -140,7 +140,7 @@
 		priority : 4,
 		type : 'CT',
 		body_part : 'Chest',
-		indication : 'Right lower lobe lung mass seen on abdominal/pelvic CT scan.',
+		indication : 'MVA',
 		procedure: 'CT scan of the chest.'
 
 	});
@@ -170,8 +170,12 @@
 
 
 
-	var doctors = new glasswing.collections.doctors();
-	doctors.generateDoctors(worklist);
+
+	if (window.hasOwnProperty('allow_doctors') === undefined) {
+		var doctors = new glasswing.collections.doctors();
+		doctors.generateDoctors(worklist);
+
+	}
 	glasswing.config = {worklist : worklist };
 
 

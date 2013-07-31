@@ -21,7 +21,8 @@
 		events : {
 		  // "click tbody tr" : "openexam",
 		  // "click .cards .card" : "openexam",
-		  "click .layouts a.button" : "setLayout"
+
+
 		},
 
 		buttons : {},
@@ -68,6 +69,7 @@
 			// alert('render');
 
 			self.$el.html(_.template(self.template, {}));
+
 			self.$list = self.$el.find('.list');
 
 
@@ -114,6 +116,13 @@
 			$('.tab-worklist').addClass(self.current_layout);
 
 			this.$('.prettyDate').prettyDate();
+			// console.log($('input[hint]')[0]);
+			this.$('input[hint]').hint();
+
+
+			this.$('.layouts a.button').click(function(e){
+				self.setLayout(e);
+			});
 
 			return this;
 		},
@@ -272,6 +281,9 @@
 		},
 		afterRender : function() {
 			var self = this;
+			// console.log(self.$el);
+
+
 			switch(this.current_layout) {
 				case 'table' :
 
@@ -303,21 +315,110 @@
 					// });
 				break;
 				case 'grid' :
-					self.$('.grid-header p').click(function(e){
-						var old = $(this).html();
-						var form = $('<form />');
-						var input = $('<input name="something" type="text" />');
-						$(this).html(form);
-						form.html(input);
-						input.focus();
-						form.submit(function(e){
-							e.preventDefault();
-							$(this).replaceWith(input.val());
+					// self.$('.grid-header p').click(function(e){
+					// 	var old = $(this).html();
+					// 	var form = $('<form />');
+					// 	var input = $('<input name="something" type="text" />');
+					// 	$(this).html(form);
+					// 	form.html(input);
+					// 	input.focus();
+					// 	form.submit(function(e){
+					// 		e.preventDefault();
+					// 		$(this).replaceWith(input.val());
+					// 	});
+
+					// });
+
+
+
+
+
+					self.$('.grid-header td').click(function(e){
+						$(this).find('input:first').focus();
+					}).each(function(){
+						var inputs = $(this).find('input, select');
+						inputs.each(function() {
+							var sort = $('<a href="javascript:;" class="sort"></a>');
+							$(this).after(sort);
+							sort.click(function(e){
+								e.stopPropagation();
+
+
+								if ($(this).hasClass('desc')) {
+									$(this).addClass('asc');
+									$(this).removeClass('desc');
+								} else if ($(this).hasClass('asc')) {
+									// $(this).addClass('desc');
+									$(this).removeClass('asc');
+								} else {
+									if (self.sort_el) {
+										self.sort_el.next().removeClass('asc').removeClass('desc');
+									}
+
+									$(this).addClass('desc');
+								}
+								self.sort_el = $(this).prev();
+								self.search();
+								// console.log('sort');
+
+							});
 						});
 
 					});
+
+					var filterRows = function(e) {
+						var searched_models = self.search(e);
+
+						console.log(searched_models);
+						_.each(self.exams.models,function(exam){
+							// console.log(exam.view.$grid);
+							exam.view.$grid.hide();
+						});
+
+
+						// console.log(searched_models);
+						_.each(searched_models,function(exam){
+							// console.log(exam.view);
+							exam.view.$grid.show();
+						});
+					}
+					self.$search_fields = self.$('.grid-header input, .grid-header select');
+
+					self.$search_fields.click(function(e){
+						e.stopPropagation();
+					});
+					self.$search_fields.keydown(function(e){
+
+						if (e.keyCode == 13 ) {
+							filterRows(e);
+						}
+					}).focus(function(e){
+						// console.log(this);
+						// console.log($(this).attr('class'));
+						switch($(this).attr('class')) {
+							case 'gender' :
+							break;
+						}
+					}).change(function(e){
+						filterRows(e);
+					});
+					$('.grid-header select').customSelect();
+
+
+
+
 				break;
 			}
+			var changeWorklist = function() {
+				if (self.$('.grid-header').length) {
+					self.$('.grid-header .exam_name').val($(this).val());
+					filterRows();
+				}
+			}
+			self.$('select').customSelect();
+			self.$('select').change(changeWorklist);
+
+
 
 
 			if (this.selected_button != null) { this.selected_button.deselect(); }
@@ -366,7 +467,7 @@
 		setLayout : function(layout) {
 
 
-
+			// alert(layout);
 			layout = (typeof layout == 'string') ? layout : $(layout.currentTarget).attr('rel').toLowerCase();
 			if (layout) {
 				switch(layout) {
@@ -416,6 +517,38 @@
 
 
 		},
+		search : function(event) {
+			var self = this;
+			if (event) { event.preventDefault(); }
+			var search_fields = {};
+			self.$search_fields.each(function(){
+				var class_name = $(this).attr('class').split(' ').shift();
+				var val = $(this).value();
+				if (val) {
+
+					// switch(class_name) {
+					// 	case 'end_time' : case 'dob' :
+					// 		val = Date.parse(val);
+					// 	break;
+
+					// }
+					// console.log(class_name);
+					// console.log(val);
+					search_fields[class_name] = val;
+				}
+
+			});
+
+			var options = { search : search_fields };
+			if (self.sort_el) {
+				var next = self.sort_el.next();
+				options.sort = { key : self.sort_el.attr('class').split(' ').shift(), dir : (next.hasClass('asc')) ? 'asc' : 'desc' };
+			}
+			console.log(options);
+			return self.exams.getExams(options);
+
+			// console.log(exams);
+		}
 
 
 

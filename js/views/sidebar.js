@@ -36,15 +36,18 @@
 				chapter_count++;
 			}
 			this.$el.data('width',this.$el.width() / $('body').width() * 100);
-
+			this.$audio_container = $('<div class="audio-container" />');
 			this.$audio = $('<audio controls></audio>');
-			this.$el.prepend(this.$audio);
+			this.$audio_container.html(this.$audio);
+			this.$el.prepend(this.$audio_container);
 			// var chapter_progress = $('<div class="chapter-progress" />');
 			// this.$el.prepend(chapter_progress);
 			// chapter_progress.progressBar({pages : chapter_count});
 
 			this.progress = new glasswing.views.progress({sidebar : this });
 
+
+			self.$('.chapter:last .next:last a').html('Back to Beginning');
 
 			return this;
 		},
@@ -54,8 +57,8 @@
 		route : function(arguments, options) {
 			var self = this;
 			var setChapter = function(arguments) {
-				console.log(self.chapters);
-				console.log(arguments);
+				// console.log(self.chapters);
+				// console.log(arguments);
 				if (self.chapters[arguments[0]]) {
 					self.bookmark = [arguments[0],self.chapters[arguments[0]].panes_by_order[0].title.toURL()];
 					//setChapter();
@@ -138,8 +141,12 @@
 		navigate : function(path,options) {
 
 			this.parent.navigate(path,options);
+		},
+		nextChapter : function() {
+			this.progress.nextChapter();
 		}
 
 	});
 
 })(jQuery);
+var yeah = function() { $('audio').attr('src','audio/misc/yeah.mp3')[0].play(); }

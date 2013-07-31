@@ -37,5 +37,6 @@ glasswing.models.worklist = glasswing.models.abstract.extend({
 			exams[exam_name].push(this);
 		});
 		return exams;
-	}
+	},
+
 });

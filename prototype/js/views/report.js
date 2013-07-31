@@ -293,11 +293,14 @@
 				procedure_name : this.model.get('exam_name'),
 				report_status : this.model.get('report_status'),
 				clinical_indication : this.model.get('clinical_indication'),
-				hospital_name : this.model.get('hospital_name'),
+				referring_location : this.model.get('referring_location'),
 				referring_physician : this.model.get('referring_physician'),
 				images : this.model.get('images'),
+				ready : this.model.get('ready'),
 				status : this.model.get('status'),
 				locked : this.model.get('locked'),
+
+				procedures : [{name : this.model.get('exam_name')}, {name : this.model.get('exam_name')}]
 
 
 			}));
@@ -305,51 +308,10 @@
 
 			self.$followButton = this.$el.find('.follow');
 			self.$followButton.click(function(e){
+				self.follow_action();
 				e.preventDefault();
-				if ($(this).hasClass('active')) {
-					self.model.unfollow();
-					$(this).removeClass('active');
-					$(this).html('Follow Case');
-
-					// var duration = 60;
-					// $(this).stop().animate({width: '35px'},{duration: duration});
-					// $(this).find('.check').animate({opacity: 0},{duration: 200, complete : function() {
-					// 	this.remove();
-					// }});
-					// var text = $(this).find('.text');
-					// var span = text.find('span');
-
-					// text.stop().animate({
-					// 	width : text.data('width')
-					// },{duration : 120, complete : function(){
-					// 	span.html('Follow');
-					// }});
-
-					$(this).parent().find('p.helper').stop().animate({opacity: 0});
-				} else {
-
-					self.model.follow();
-					var button = this;
-					self.setFollowingButton(button);
-
-
-					var overlay = $('<div class="follow-overlay" />');
-					$(overlay).html("<strong>You will be notified when this case is updated.</strong><a href='javascript:;'>View notification settings</a>");
-					$('body').append(overlay);
-					setTimeout(function(){
-						overlay.fadeOut(function(){
-							$(this).remove();
-						});
-					},4000);
-
-					setTimeout(function(){
-
-						var patient = self.model.get('patient');
-						self.model.worklist.notifications.addNotification({view : self, message : '<strong>'+patient.get('last')+', '+patient.get('first')+'</strong><br />All images have been uploaded.'});
-					},1000);
-
-				}
-			})
+			});
+			self.$followButton.data('view',self);
 
 			if (self.model.isFollowing()) {
 				self.setFollowingButton(self.$followButton,1);
@@ -385,6 +347,48 @@
 			self.model.set('reading',true);
 
 			return self;
+		},
+		follow_action : function() {
+
+
+			var self = this;
+
+			var fade_overlay = function(overlay) {
+				overlay.fadeOut(function(){
+					$(this).remove();
+				});
+			}
+
+			if (self.$follow.hasClass('active')) {
+				self.model.unfollow();
+				self.$follow.removeClass('active');
+				self.$follow.html('Follow Case');
+
+				self.$follow.parent().find('p.helper').stop().animate({opacity: 0});
+				if (self.$('.follow-overlay')) {
+					fade_overlay(self.$('.follow-overlay'));
+				}
+			} else {
+
+				self.model.follow();
+				var button = self.$follow;
+				self.setFollowingButton(button);
+
+
+				var overlay = $('<div class="follow-overlay" />');
+				$(overlay).html("<strong>You will be notified when this case is updated.</strong><a href='javascript:;'>View notification settings</a>");
+				$('body').append(overlay);
+				setTimeout(function(){
+					fade_overlay(overlay);
+				},4000);
+
+				setTimeout(function(){
+
+					var patient = self.model.get('patient');
+					self.model.worklist.notifications.addNotification({view : self, message : '<strong>'+patient.get('last')+', '+patient.get('first')+'</strong><br />All images have been uploaded.'});
+				},1000);
+
+			}
 		},
 		change : function(key,val) {
 

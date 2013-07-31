@@ -52,6 +52,8 @@
 				self.setupSection(section.view.$el);
 			});
 
+			self.$('.next:last a').html('Next Section');
+
 
 
 			return this;
@@ -65,73 +67,72 @@
 			this.panes[section_title] = view_el;
 
 		},
-		play : function(file) {
+		play : function(section_title) {
 			var self = this;
-			//
-//			self.audio = self.$el.find('audio');
-			// console.log('file: ' + file);
-			self.parent.$audio.attr('src','audio/'+self.title+'/'+file+'.mp3');
 
-			self.parent.parent.addCallback(function(){
-				self.parent.$audio[0].play();
-			});
+			if (typeOf(section_title) == 'string') {
+				self.parent.$audio.attr('src','audio/'+self.title+'/'+section_title+'.mp3');
 
 
 
+				self.parent.parent.addCallback(function(){
+					self.parent.$audio[0].play();
+				});
 
-			var config = glasswing.config.chapters.chapters[this.title];
 
-			// console.log(JSON.parse(this.model.events));
-			switch(this.title) {
-				case 'tabs' :
-				var events = {
-					9 : function(){
-						var tr = $p('table tbody tr:first');
-						//var view = $p('data',tr,'view')
-						tr.highlight({
-							content: "Click the highlighted procedure"
-						});
-						tr.click(function(e){
-							$(this).unbind('click');
-							self.nextSection();
-							$.dehighlight();
-						});
-					}
-				};
+				var config = glasswing.config.chapters.chapters[this.title];
+
+				$.dehighlight();
+
+
+				var events = this.getEvents(this.title, section_title);
+
+				// if (events.before !== undefined && typeOf(events.before)=='function') {
+				// 	events.before();
+				// 	delete events.before;
+				// }
+				this.parent.$audio.audio(events,self);
+			} else {
+				if (this.parent.$audio.audio) {
+					console.log(this.parent.$audio);
+					this.parent.$audio[0].currentTime = section_title;
+					this.parent.$audio[0].play();
+				}
+				//$('audio')[0].currentTime = 12.8;$('audio')[0].play();
 			}
 
-			if (events) {
-
-
-				this.parent.$audio.audio(events);
-			}
-
-			/*
-			(function() {}
-		var tr = $p('table tbody tr:first');
-		//var view = $p('data',tr,'view')
-		tr.highlight({
-			content: "Click the highlighted procedure"
-		});
-		tr.click(function(e){
-			$(this).unbind('click');
-			self.nextSection();
-			$.dehighlight();
-		});
-	})
-*/
 		},
 		nextSection : function() {
 
 			var section_index = this.$sections.find('.active').index();
 			var panes = this.$sections.find('.pane');
+
 			if (section_index+1 < panes.length) {
-				$(panes[section_index+1]).data('view').open();
+				var pane = panes[section_index+1];
+
+				var view = $(pane).data('view');
+
+				view.open();
+			} else {
+				// next section
+				this.parent.nextChapter();
 			}
 		},
 		navigate : function(path,options) {
 			// this.parent.navigate(this.$el.data('url')+'/'+path,options);
 			this.parent.navigate(path,options);
+		},
+		getEvents : function(title, section_title) {
+			console.log(this.title+': ' + section_title);
+
+			var chapters = glasswing.config.chapters.chapters;
+			// console.log(chapters[this.title].events);
+			if (chapters[this.title] && chapters[this.title].events && chapters[this.title].events[section_title]) {
+
+				return chapters[this.title].events[section_title];
+			} else {
+				return {};
+			}
 		}
 
 	});

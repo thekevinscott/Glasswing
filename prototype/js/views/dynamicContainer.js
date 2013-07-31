@@ -28,6 +28,7 @@
 
 			this.content = $('.dynamic-content .container');
 			var droppable = $('.dynamic-content .droppable');
+
 			droppable.hide();
 
 			this.draggables.each(function(){
@@ -149,6 +150,7 @@
 
 				});
 			});
+			$('.dynamic-content').data('view',this);
 		},
 		getPosition : function(point, content) {
 			var position;

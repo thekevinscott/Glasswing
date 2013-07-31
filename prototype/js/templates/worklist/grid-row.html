@@ -9,30 +9,30 @@
 			<div class="stat"><div class="stat-shade"></div><strong>STAT: </strong><span class="end-time" rel="<%= end_timestamp %>"></span> </div>
 			<% } %>
 			<!-- <p><%= end_time %></p> -->
-			<h2><%= exam_name %></h2>
+			<h2 class="exam_name"><%= exam_name %></h2>
 
-			<p class="prettyDate" alt="<%= end_time %>" title="<%= end_timestamp %>"></p>
+			<p class="prettyDate end_time" alt="<%= end_time %>" title="<%= end_timestamp %>"></p>
 		</td>
 		<td class="reason">
-			<p><%= clinical_indication %></p>
+			<p class="clinical_indication"><%= clinical_indication %></p>
 		</td>
 		<td class="patient-status">
-			<p><%= accession_id %></p>
-			<p>In-patient</p>
+			<p class="accession_id"><%= accession_id %></p>
+			<p class="patient_type">In-patient</p>
 		</td>
 		<td class="patient">
 
-			<h3><%= first %> <%= last %></h3>
+			<h3 class="name"><%= first %> <%= last %></h3>
 			<p>
-				<span><%= patient_id %></span>
-				<span><%= dob %></span>
-				<span><%= gender %></span>
+				<span class="patient_id"><%= patient_id %></span>
+				<span class="dob"><%= dob %></span>
+				<span class="gender"><%= gender %></span>
 			</p>
 
 		</td>
 		<td class="referring">
-			<p class="physician"><%= referring_physician %></p>
-			<p class="hospital"><%= hospital_name %></p>
+			<p class="referring_physician"><%= referring_physician %></p>
+			<p class="referring_location"><%= referring_location %></p>
 		</td>
 		<td class="image-status">
 

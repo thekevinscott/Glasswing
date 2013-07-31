@@ -33,9 +33,73 @@ glasswing.collections.exams = Backbone.Collection.extend({
 	getExam : function(exam_id) {
 		return this.get(exam_id);
 	},
-	getExams : function() {
+
+	getExams : function(options) {
 		// console.log('get exam!');
-		return this.models;
+		var self = this;
+		if (! options) {
+			return this.models;
+		} else {
+			// console.log(options);
+			var models = [];
+			_.each(this.models,function(model) {
+
+				// does it fit?
+				var valid = true;
+				_.each(options.search,function(arg, key) {
+					var model_val = model.get(key);
+					// console.log('key: ' + key+ ', model val: ' + model_val+ ', arg: ' + arg);
+					if (valid == true && model_val !== undefined && ! self.contains(model_val,arg)) {
+						valid = false;
+					}
+				});
+				if (valid) { models.push(model); }
+			});
+
+			if (options.sort) {
+				console.log('sort it');
+				console.log(options.sort);
+				models = models.sort(function(a,b){
+					return (a[options.sort.key] < b[options.sort.key]) ;
+					// if (options.dir=='asc') {
+
+					// } else {
+					// 	return (a[options.sort.key] > b[options.sort.key]) ;
+					// }
+				});
+			}
+
+			return models;
+		}
+
+	},
+	contains : function(haystack,needle) {
+
+		switch(typeOf(haystack)) {
+			case 'date' :
+
+				needle = Date.parse(needle);
+				console.log(haystack);
+				console.log(needle);
+				// return haystack.equals(new Date(needle.getFullYear(), needle.getMonth(), needle.getDate()), new Date(2014, 11, 25)); // day specifity
+				return haystack.toDay().equals(needle.toDay());
+			break;
+			case 'boolean' :
+				// console.log('bool');
+				// console.log(needle);
+				// console.log(haystack);
+				return haystack == needle;
+			break;
+			default :
+				haystack = "" + haystack;
+				needle = "" + needle;
+				return (haystack.toLowerCase().indexOf(needle.toLowerCase())!==-1) ? true : false;
+			break;
+
+		}
+
+
+
 	},
 	getExamsByModality : function() {
 
@@ -59,7 +123,7 @@ glasswing.collections.exams = Backbone.Collection.extend({
 			id : id,
 			patient : patient,
 			scanned_documents : Math.round(Math.random()*10),
-			referring_physician : 'Thompson',
+			// referring_physician : 'Thompson',
 			date : glasswing.randomDate(new Date()),
 			end_time : new Date((new Date()).getTime() - Math.round(Math.random()*1000*360)),
 			exam_name : this.getRandomIngredient('exam_type') + ' ' + this.getRandomIngredient('body_part'),
@@ -68,7 +132,7 @@ glasswing.collections.exams = Backbone.Collection.extend({
 			report_status : 'Unread',
 			exam_status : 'Comp.',
 			referring_physician : p.getRandomIngredient('first')+ ' ' + p.getRandomIngredient('last'),
-			hospital_name : this.getRandomIngredient('hospital'),
+			referring_location : this.getRandomIngredient('hospital'),
 			caregivers : caregivers,
 			priors : priors
 		});
@@ -76,7 +140,6 @@ glasswing.collections.exams = Backbone.Collection.extend({
 	getRandomIngredient : function(key) {
 		return this.ingredients[key][Math.round(Math.random()* (this.ingredients[key].length-1) )];
 	}
-
 });
 
 
@@ -86,3 +149,18 @@ glasswing.collections.exams = Backbone.Collection.extend({
 
 
 
+Date.prototype.toDay = function() {
+	return new Date(this.getFullYear(), this.getMonth(), this.getDate());
+}
+
+
+Function.prototype.f = function() {
+  // preserve f
+  var f = this;
+  // construct g
+  return function() {
+    var args = Array.prototype.slice.call(arguments);
+    // flip arguments when called
+    return f.apply(this, args.reverse());
+  };
+};
