@@ -1,5 +1,6 @@
 (function($){
 
+
 	var click_the_higlighted_procedure = function(chapter) {
 		guide_event.clearAll();
 		var tr = $p('table tbody tr:first');

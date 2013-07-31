@@ -3,7 +3,7 @@ if (! glasswing.config) { glasswing.config = {}; }
 if (! glasswing.config.guide_events) { glasswing.config.guide_events = {}; }
 
 var guide_event = new function() {
-	this.timeout = 12000;
+	this.timeout = 18000;
 	this.prompt_timer;
 	this.clearAll = function() {
 		jQuery.dehighlight();

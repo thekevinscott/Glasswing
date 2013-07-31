@@ -41,8 +41,9 @@
 								<div class="scanned-documents">
 									<a class="attachments">2</a>
 									<ul class="scanned-documents-dropdown">
-										<li><a href="javascript:;" class="draggable">RequestForm.png</a></li>
-										<li><a href="javascript:;" class="draggable">TechNotes.png</a></li>
+										<% _.each(procedure.scanned_documents, function(document) { %>
+										<li><a href="javascript:;" class="draggable"><%= document %></a></li>
+										<% }) %>
 									</ul>
 								</div>
 

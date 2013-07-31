@@ -31,7 +31,7 @@
         // echo strpos($url,'min').' ';
         if (strpos($url,'min')===false) {
 
-          $js = JSMin::minify($js);
+          // $js = JSMin::minify($js);
         }
 
         $compiled_js .= ' '.$js.';';
@@ -46,7 +46,7 @@
 
   function getCSS($input,$prepend) {
     $less = new lessc;
-    $regexp = '/<link rel="stylesheet\/less" type="text\/css" href="(.*)?bust=2" \/>/iU';
+    $regexp = '/<link rel="stylesheet\/less" type="text\/css" href="(.*)" \/>/iU';
     $compiled_less = '';
     if(preg_match_all($regexp, $input, $matches, PREG_SET_ORDER)) {
       foreach($matches as $match) {
@@ -129,6 +129,9 @@
     $templates = writeTemplates(dirToArray($dir),$dir);
     return $templates;
   }
+  function includeGuideTemplates($dir) {
+
+  }
   function getProductionFile($input,$js,$css,$prepend) {
     $regexp = '/<link rel="stylesheet\/less" type="text\/css" href="(.*)?bust=2" \/>/iU';
     $input = preg_replace($regexp,'',$input);
@@ -136,14 +139,22 @@
     $input = preg_replace($regexp,'',$input);
     $input = preg_replace('/<\/body><\/html>/','',$input);
 
+    // if ($is_guide) {
+    //   // we have different types of templates
+    //   $input .= includeGuideTemplates($prepend.'js/templates');
+    // } else {
+    //   $input .= includeTemplates($prepend.'js/templates');
+    // }
 
-    $input .= includeTemplates($prepend.'js/templates');
+
 
     $input = explode('
 ',$input);
     $input = implode(' ',$input);
     $input = explode('  ',$input);
     $input = implode('',$input);
+        $input .= includeTemplates($prepend.'js/templates');
+
     if (0) {
       $input .= '<link rel="stylesheet" type="text/css" href="css/compiled.css" />';
       $input .= '<script type="text/javascript" src="js/compiled.js"></script>';

@@ -300,7 +300,22 @@
 				status : this.model.get('status'),
 				locked : this.model.get('locked'),
 
-				procedures : [{name : this.model.get('exam_name')}, {name : this.model.get('exam_name')}]
+				procedures : [
+					{
+						name : this.model.get('exam_name'),
+						scanned_documents : [
+							'RequestForm_img.png',
+							'RequestForm_docu.png'
+						]
+					},
+					{
+						name : this.model.get('exam_name'),
+						scanned_documents : [
+							'RequestForm_2.png',
+							'RequestForm_doc.png'
+						]
+					}
+				]
 
 
 			}));
