@@ -64,6 +64,7 @@ if (! glasswing.config.guide_events) { glasswing.config.guide_events = {}; }
 			var view = $pd(this,'view');
 			view.closeTab();
 		});
+		$pa('.layouts .grid:not(.selected)','click'); // click the grid button
 	};
 	var handling_interruptions_setup = function() {
 		// check to see if we have at least two tabs and the active one is not the worklist
@@ -105,10 +106,6 @@ if (! glasswing.config.guide_events) { glasswing.config.guide_events = {}; }
 		'design' : {
 			2 : point_out_information_on_the_tab,
 			18.5 : show_feedback_on_the_tab_modality
-		},
-
-		'alerts' : {
-
 		}
 
 	}

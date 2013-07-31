@@ -54,6 +54,11 @@
 				}
 				// return contentWindow['jQuery'](selector).data(key,val);
 			}
+			window['$pa'] = function(selector,action) {
+				var contentWindow = self.$glasswing[0].contentWindow;
+				contentWindow['jQuery'](selector)[action]();
+			}
+			self.$glasswing[0].contentWindow['allow_doctors'] = false;
 
 
 		},

@@ -9,6 +9,8 @@ We propose a notification system to alert a radiologist when an update to a case
 
 Alerts
 -------------
-The system informs the radiologist they are now following the case and can freely close the case.
+The system informs the radiologist they are now following the case. The radiologist can close the tab and continue reading other cases.
 
-When there is an update to a case being followed, a notification appears in the notification center. Hovering over  will reveal a list of updates, and a radiologist can click the relevant update and be taken directly to that case.
+When there is a relevant update to a followed case, a notification appears in the notification center. Hovering over the icon will reveal a list of updates, and a radiologist can click the relevant update and be taken directly to that case.
+
+45:50 (itry)

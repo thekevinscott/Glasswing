@@ -9,4 +9,10 @@ A user can easily switch between relevant and all priors. Click on the All Prior
 
 Implementation
 -------------
-The timeline PIVotal designed contains a condensed timeline next to a tabular list of priors. The timeline helps provide the context of the patient’s medical history, while the scrollable list view displays consistent information for each priors.
+The timeline PIVotal designed contains a condensed timeline next to a tabular list of priors. The timeline helps provide the context of the patient’s medical history, while the scrollable list view displays consistent information for each prior.
+
+
+
+
+
+Tommy: 51:00-51:20

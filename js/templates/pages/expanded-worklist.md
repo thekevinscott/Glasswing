@@ -3,17 +3,22 @@ Expanded Worklist
 
 Opportunity
 -------------
-A radiologist's worklist is a table of information, often containing more columns than can fit on the screen at a time. This forces the radiologist to scroll horizontally, which can slow down the radiologist.
+The worklist is a table of information that ofte contains more columns than can fit on the screen at one time, forcing the radiologist to scroll horizontally.
 
-We propose a taller layout in order to present more relevant information on the screen without requiring horizontal scrolling. This layout can effectively integrate case indications along with active buttons, such as the Queue button. Try queueing a case now.
+We propose a taller layout in order to present more information at a glance. This layout can effectively integrate case indications along with active buttons. Try queueing a case now.
 
 Focus on Patients
 -------------
-Building on the traditional data grid, this redesign applies visual variances to distinguish between attributes and group related attributes together.
+This redesign applies visual variances to distinguish between attributes and group related attributes together.
 
-Stats are indicated by a banner. The exam date is formatted to show how long it has been in the system, and can be hovered over for additional information. Referring physician and location are available for quick reference, along with indications concerning whether images are ready, and whether another radiologist is currently reading the exam.
+Stat cases are indicated by a banner icon, and the exam date is formatted to show duration from entry.
 
-The worklist can also be switched to a card view layout, known as "Case Cards".
+[[ downloading ]]
+“Having a countdown/up could be intimidating, but delivers a sense of urgency.” -- Tommy Olesen
+
+The user can see referring physician and location, along with whether images are ready, and whether another radiologist is currently reading the exam.
+
+The worklist can also be switched to a card view layout, known as "Case Cards". Click on the Case Card button now.
 
 Case Cards
 -------------

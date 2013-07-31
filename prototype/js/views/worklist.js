@@ -21,7 +21,7 @@
 		events : {
 		  // "click tbody tr" : "openexam",
 		  // "click .cards .card" : "openexam",
-		  "click .layouts a.button" : "setLayout",
+
 
 		},
 
@@ -118,6 +118,11 @@
 			this.$('.prettyDate').prettyDate();
 			// console.log($('input[hint]')[0]);
 			this.$('input[hint]').hint();
+
+
+			this.$('.layouts a.button').click(function(e){
+				self.setLayout(e);
+			});
 
 			return this;
 		},
@@ -462,7 +467,7 @@
 		setLayout : function(layout) {
 
 
-
+			// alert(layout);
 			layout = (typeof layout == 'string') ? layout : $(layout.currentTarget).attr('rel').toLowerCase();
 			if (layout) {
 				switch(layout) {

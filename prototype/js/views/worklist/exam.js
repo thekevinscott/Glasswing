@@ -124,6 +124,15 @@
 						this.$('.locked').attr('alt','Nobody is reporting');
 					}
 				break;
+				case 'ready' :
+					if (this.model.get(key)) {
+						this.$('.image-status .camera').removeClass('not-ready');
+						this.$('.image-status .camera').html('All images are completed');
+					} else {
+						this.$('.image-status .camera').addClass('not-ready');
+						this.$('.image-status .camera').html('Images in progress');
+					}
+				break;
 			}
 
 		},

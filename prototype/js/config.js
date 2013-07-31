@@ -170,8 +170,12 @@
 
 
 
-	var doctors = new glasswing.collections.doctors();
-	doctors.generateDoctors(worklist);
+
+	if (window.hasOwnProperty('allow_doctors') === undefined) {
+		var doctors = new glasswing.collections.doctors();
+		doctors.generateDoctors(worklist);
+
+	}
 	glasswing.config = {worklist : worklist };
 
 
