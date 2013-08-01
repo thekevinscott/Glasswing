@@ -22,12 +22,8 @@
 
 			// var pane_count;
 			var pane_name;
+
 			_.each(markdown.toHTMLTree(chapter),function(node){
-
-
-
-
-
 				switch(node[0]) {
 					case 'h1' :
 						key = node[1].toURL();

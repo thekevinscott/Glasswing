@@ -137,13 +137,14 @@
     $input = preg_replace('/<\/body><\/html>/','',$input);
 
 
-    $input .= includeTemplates($prepend.'js/templates');
+
 
     $input = explode('
 ',$input);
     $input = implode(' ',$input);
     $input = explode('  ',$input);
     $input = implode('',$input);
+    $input .= includeTemplates($prepend.'js/templates');
     if (0) {
       $input .= '<link rel="stylesheet" type="text/css" href="css/compiled.css" />';
       $input .= '<script type="text/javascript" src="js/compiled.js"></script>';

@@ -402,7 +402,7 @@
 					}).change(function(e){
 						filterRows(e);
 					});
-					$('.grid-header select').customSelect();
+
 
 
 
@@ -415,8 +415,9 @@
 					filterRows();
 				}
 			}
+			self.$('.grid-header select').customSelect();
 			self.$('select').customSelect();
-			self.$('select').change(changeWorklist);
+			// self.$('select').change(changeWorklist);
 
 
 
@@ -495,7 +496,7 @@
 			}
 
 			this.setFilters();
-
+			self.$('select').customSelect();
 
 
 

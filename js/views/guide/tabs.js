@@ -1,5 +1,6 @@
 (function($){
 
+
 	var click_the_higlighted_procedure = function(chapter) {
 		guide_event.clearAll();
 		var tr = $p('table tbody tr:first');
@@ -42,7 +43,7 @@
 			});
 		});
 
-		guide_event.audio_prompt(16.0,chapter);
+		guide_event.audio_prompt(15.4,chapter);
 	};
 	var point_out_information_on_the_tab = function() {
 		var selected_tab = $p('.tab.selected');
