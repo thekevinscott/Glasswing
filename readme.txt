@@ -20,3 +20,4 @@ Compiling
 To minify the Prototype files, navigate to: http://localhost/glasswing/compiler/compile.php?url=../prototype/index.html&target=../prototype/&prepend=../prototype/
 
 To minify the Interactive Guide, navigate to: http://localhost/glasswing/compiler/compile.php?url=../index.html&target=../&prepend=../
+
